@@ -1,0 +1,78 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("../styles/roboto/Roboto-Black.ttf");
+}
+
+body {
+    font-family: "Roboto";
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.app-header {
+    background-color: rgb(92 92 255);
+    color: white;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.back-home {
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.back-home:hover {
+    background-color: #4f4fffba;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.container {
+    margin: 0px auto;
+    width: 1200px;
+}
+
+.home-list li {
+    border-bottom: 1px solid gray;
+    padding: 20px 20px;
+}
+
+.home-list li:hover {
+    background-color: #fdfdfd;
+}
+
+
+/* Страница одной инвентарной позиции */
+
+.item-page {
+    padding: 40px 0px;
+}
