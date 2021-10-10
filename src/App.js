@@ -10,12 +10,14 @@ function App() {
     {
       uid: 1,
       name: "My name",
-      place: "Офис 1"
+      place: "Офис 1",
+      person: "Иванов И."
     },
     {
       uid: 2,
       name: "My name2",
-      place: "Офис 2"
+      place: "Офис 2",
+      person: "Иванов И."
     },
   ]
 

@@ -8,7 +8,7 @@ function ItemPages(props) {
         props.data.map(item=>{
             return(
                 <Route path={`/${item.uid}`}>
-                    <ItemPage name={item.name} place={item.place} />
+                    <ItemPage item={item} key={item.uid} />
                 </Route>
             );
         })

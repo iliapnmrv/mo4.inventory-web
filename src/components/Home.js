@@ -7,8 +7,8 @@ function Home(props) {
         <ul className="home-list">
             {props.data.map(item=>{
                 return(
-                    <Link to={`/${item.uid}`}>
-                        <li key={item.uid}>{item.name}</li> 
+                    <Link to={`/${item.uid}`} key={item.uid}>
+                        <li >{item.name}</li> 
                     </Link>
                 );
             })}
