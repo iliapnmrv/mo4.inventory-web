@@ -1,0 +1,17 @@
+.btn {
+    padding: 7px 15px;
+    border-radius: 3px;
+    font-size: 17px;
+    border: 0px;
+    cursor: pointer;
+}
+
+.form-inputs {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn.success {
+    background-color: rgba(19, 160, 19, 0.76);
+    color: white;
+}
