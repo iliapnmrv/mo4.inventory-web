@@ -8,12 +8,28 @@ app.use(express.json())
 
 app.get('/', async(req, res) => {
     try {
-        const all = await pool.query('SELECT * FROM total')
+        const all = await pool.query(`
+        SELECT * FROM total 
+            LEFT JOIN types
+                ON total.type_id = types.type_id
+            LEFT JOIN sredstva
+                ON total.sredstvo = sredstva.sredstvo_id
+            ORDER BY total.qr ASC`)
         res.json(all.rows)
     } catch (e) {
         console.error(e.message);
     }
 })
+
+app.get('/types', async(req, res) => {
+    try {
+        const all = await pool.query(`SELECT * FROM types`)
+        res.json(all.rows)
+    } catch (e) {
+        console.error(e.message);
+    }
+})
+
 
 app.get('/:id', async(req, res) => {
     try {

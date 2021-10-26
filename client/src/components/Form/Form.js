@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './Form.css'
 import Input from './Input/Input'
-import Select from './Select/Select'
+import SelectInput from './Select/Select'
 
 export default function CreateItem(props) {
 
@@ -22,16 +22,22 @@ export default function CreateItem(props) {
         });
     }
 
+    const onSelectChange = (e) => {
+        setValues({
+          ...values,
+          [e.name]: e.value
+        });
+    }
+
     const onSubmitForm = async (e) => {
         e.preventDefault()
         try {
-            // let {qr, name, sredstvo, month, year, model, sernom} = values
             const response = await fetch("http://localhost:8000/", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(values)
             })
-            console.log(response);
+            window.location = "/"
         } catch (e) {
             console.error(e.message);
         }
@@ -39,12 +45,12 @@ export default function CreateItem(props) {
 
     return (
         <div>
-            <h2>Добавить новый элемент</h2>
+            <h2 onClick={()=>{}}>Добавить новый элемент</h2>
             <form onSubmit={onSubmitForm}>
                 <div className="form-inputs">
                     <Input span="Введите номер QR кода" name="qr" width="20" onInputChange={onInputChange}/>
                     <Input span="Введите наименование" name="name" width="50" onInputChange={onInputChange} />
-                    <Select span="Выберите средство" name="sredstvo" table="" />
+                    <SelectInput span="Выберите средство" name="sredstvo" onSelectChange={onSelectChange} />
                 </div>
                 <div className="form-inputs">
                     <Input span="Месяц ввода" name="month" width="20" onInputChange={onInputChange} />
