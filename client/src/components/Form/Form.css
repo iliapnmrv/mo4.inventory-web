@@ -1,9 +1,34 @@
+h2 {
+    height: unset;
+    margin: 0;
+}
+
 .btn {
     padding: 7px 15px;
     border-radius: 3px;
     font-size: 17px;
     border: 0px;
     cursor: pointer;
+}
+
+.header {
+    cursor: pointer;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form {
+    overflow: hidden;
+    max-height: 0px;
+    position: relative;
+    transition: max-height 0.5s cubic-bezier(0, 0.65, 0, 1.04);
+}
+
+.form.slide {
+    max-height: 1000px;
+    transition: max-height 1s;
 }
 
 .form-inputs {

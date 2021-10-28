@@ -30,6 +30,15 @@ app.get('/types', async(req, res) => {
     }
 })
 
+app.get('/sredstva', async(req, res) => {
+    try {
+        const all = await pool.query(`SELECT * FROM sredstva`)
+        res.json(all.rows)
+    } catch (e) {
+        console.error(e.message);
+    }
+})
+
 
 app.get('/:id', async(req, res) => {
     try {
@@ -44,6 +53,7 @@ app.get('/:id', async(req, res) => {
 app.post('/', async(req, res) => {
     try {
         const { qr, sredstvo, type_id, month, year, name, model, sernom } = req.body
+        console.log(qr, sredstvo, type_id, month, year, name, model, sernom);
         const newInventory = await pool.query(
             'INSERT INTO total(qr, sredstvo, type_id, month, year, name, model, sernom) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [qr, sredstvo, type_id, month, year, name, model, sernom]
         )

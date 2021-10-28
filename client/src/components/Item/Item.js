@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import './Item.css'
@@ -19,13 +19,15 @@ export default function Item(props) {
                 <td>{props.data.name}</td>
                 <td>{props.data.model}</td>
                 <td>{props.data.sernom}</td>
-                <td>
-                <FontAwesomeIcon 
-                    icon={faEdit} 
-                    className="icon" 
-                    onClick={()=>props.openModal(props.data.qr)} 
-                />
-                </td>
+                <span 
+                    className="icon"
+                    onClick={()=>props.openModal(props.data.qr)}
+                >
+                    <FontAwesomeIcon 
+                        icon={faEdit}
+                    />
+                </span>
+                
             </tr> 
         </>
     )

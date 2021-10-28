@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './Input.css'
 
 export default function Input(props) {
@@ -9,9 +9,13 @@ export default function Input(props) {
         setValue(e.target.value)
     }
 
+    useEffect(() => {
+        setValue(props.value)
+    }, [props.value])
+
     return (
-        <Fragment>
-            <label className={`w-${props.width} form-item`}>
+        <>
+            <label className='form-item'>
                 <span>{props.span}</span>
                 <input 
                     type="text" 
@@ -23,6 +27,6 @@ export default function Input(props) {
                     }}
                 />
             </label>
-        </Fragment>
+        </>
     )
 }

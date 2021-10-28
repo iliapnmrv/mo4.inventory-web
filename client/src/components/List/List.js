@@ -22,8 +22,14 @@ export default function List() {
     }
 
     const openModal = (id) => {
+        document.body.style.overflow = 'hidden'
         setVisible(true)
         setEditId(id)
+    }
+
+    const closeModal = () => {
+        document.body.style.overflow = 'auto'
+        setVisible(false)
     }
     
 
@@ -35,7 +41,7 @@ export default function List() {
         <div className="flex">
             <table>
                 <thead>
-                    <tr>
+                    <tr key={9999}>
                         <th>Номер QR</th>
                         <th>Ср-во</th>
                         <th>Тип</th>
@@ -54,7 +60,7 @@ export default function List() {
                     })}
                 </tbody>
             </table>
-            <Modal visible={visible} editId={editId} />
+            <Modal visible={visible} closeModal={closeModal} editId={editId} />
         </div>
     )
 }
