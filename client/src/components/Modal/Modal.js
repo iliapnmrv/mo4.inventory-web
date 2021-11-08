@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Input from '../Form/Input/Input'
 import SelectInput from '../Form/Select/Select'
+import Textarea from '../Form/Textarea/Textarea'
 import './Modal.css'
 
 export default function Modal(props) {
@@ -10,6 +11,7 @@ export default function Modal(props) {
     const [sredstva, setSredstva] = useState()
     const [typesDefault, setTypesDefault] = useState()
     const [sredstvaDefault, setSredstvaDefault] = useState()
+    const [info, setInfo] = useState()
 
     const getTypes = async (type) => {
         try {
@@ -71,6 +73,13 @@ export default function Modal(props) {
         });
     }
 
+    const onInfoChange = (e) => {
+        setInfo({
+            ...info,
+            [e.target.name]: e.target.value
+        });
+    }
+
     const onSelectChange = (e) => {
         setValues({
           ...values,
@@ -78,14 +87,23 @@ export default function Modal(props) {
         });
     }
 
+    console.log(info);
+
     const onSubmitForm = async (e) => {
         console.log(values);
         e.preventDefault()
         try {
-            const response = await fetch("http://localhost:8000/", {
-                method: "POST",
+            await fetch(`http://localhost:8000/${props.editId}`, {
+                method: "PUT",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(values)
+            })
+            await fetch(`http://localhost:8000/info/${props.editId}`, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    ...info
+                })
             })
             window.location = "/"
         } catch (e) {
@@ -109,22 +127,39 @@ export default function Modal(props) {
     useEffect(() => {
         getData()
     }, [props.visible])
-    
+
+    const deleteItem = async () => {
+        try {
+            const response = await fetch(`http://localhost:8000/${props.editId}`, {
+                method: "DELETE",
+                headers: {"Content-Type": "application/json"},
+            })
+            window.location = "/"
+            props.closeModal()
+        } catch (e) {
+           console.error(e.message); 
+        }
+    }
 
     return (
         props.visible ? (
             <>
-                <div className="modal-container">
+                <div 
+                    className="modal-container" 
+                    onClick={e=>(
+                        e.target.className === 'modal-container' ? props.closeModal() : null
+                    )}
+                >
                     <div className="md-modal">
                         <div className="md-content">
                             <h2>Изменить информацию о позиции с QR номером: {props.editId}</h2>
-                            <form onSubmit={onSubmitForm}>
+                            <form onSubmit={e=>onSubmitForm(e)}>
                                 <div className="form-inputs">
                                     <Input span="Введите номер QR кода" name="qr" value={data?.qr} onInputChange={onInputChange}/>
                                     <Input span="Введите наименование" name="name" value={data?.name} onInputChange={onInputChange} />
                                     {typesDefault ? 
                                         <SelectInput 
-                                            span="Выберите тип устройства"  
+                                            span="Выберите тип"  
                                             name="type_id"
                                             data={types} 
                                             default={typesDefault}
@@ -133,7 +168,7 @@ export default function Modal(props) {
                                     
                                     {sredstvaDefault ? 
                                         <SelectInput 
-                                            span="Выберите средство устройства" 
+                                            span="Выберите средство" 
                                             name="sredstvo" 
                                             data={sredstva} 
                                             default={sredstvaDefault}
@@ -148,8 +183,13 @@ export default function Modal(props) {
                                     <Input span="Модель" name="model" value={data?.model} onInputChange={onInputChange} />
                                     <Input span="Серийный номер" name="sernom" value={data?.sernom} onInputChange={onInputChange} />
                                 </div>
-                                <input type="submit" className="btn success" onClick={props.closeModal} value="Сохранить" />
+                                <Textarea  span="Информация о предмете" name="info" value={data?.info} onInputChange={onInfoChange} />
+                                <div className="buttons">
+                                    <input type="button" className="btn success" onClick={e=>onSubmitForm(e)} value="Сохранить" />
+                                    <input type="button" className="btn warning" onClick={()=>deleteItem(data?.qr)} value="Удалить" />
+                                </div>
                             </form>
+                            <div className="close-btn" onClick={props.closeModal}>&times;</div>
                         </div>
                     </div>
                 </div>

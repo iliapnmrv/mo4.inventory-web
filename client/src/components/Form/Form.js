@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react'
 import './Form.css'
 import Input from './Input/Input'
 import SelectInput from './Select/Select'
+import Textarea from './Textarea/Textarea'
 
 
 export default function CreateItem(props) {
@@ -11,6 +12,7 @@ export default function CreateItem(props) {
     const [open, setOpen] = useState(false)
     const [types, setTypes] = useState()
     const [sredstva, setSredstva] = useState()
+    const [info, setInfo] = useState()
 
     const getTypes = async () => {
         try {
@@ -61,6 +63,13 @@ export default function CreateItem(props) {
         });
     }
 
+    const onInfoChange = (e) => {
+        setInfo({
+            ...info,
+            [e.target.name]: e.target.value
+        });
+    }
+
     const onSelectChange = (e) => {
         setValues({
           ...values,
@@ -71,11 +80,19 @@ export default function CreateItem(props) {
     const onSubmitForm = async (e) => {
         e.preventDefault()
         try {
-            console.log(values);
-            const response = await fetch("http://localhost:8000/", {
+            
+            await fetch("http://localhost:8000/", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(values)
+            })
+            await fetch("http://localhost:8000/info", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    ...info, 
+                    'qr': values.qr
+                })
             })
             window.location = "/"
         } catch (e) {
@@ -94,34 +111,33 @@ export default function CreateItem(props) {
                 <h2>Добавить новый элемент</h2>
                 <FontAwesomeIcon icon={open ? faChevronDown : faChevronUp}/>
             </div>
-            <form onSubmit={onSubmitForm}>
-                <div className="form">
-                    <div className="form-inputs">
-                        <Input span="Введите номер QR кода" name="qr" onInputChange={onInputChange}/>
-                        <Input span="Введите наименование" name="name" onInputChange={onInputChange} />
-                        <SelectInput 
-                            span="Выберите тип устройства"  
-                            name="type_id"
-                            data={types} 
-                            onSelectChange={onSelectChange} 
-                        />
-                        <SelectInput 
-                            span="Выберите средство устройства" 
-                            name="sredstvo" 
-                            data={sredstva} 
-                            onSelectChange={onSelectChange} 
-                        />
-                    </div>
-                    <div className="form-inputs">
-                        <Input span="Месяц ввода" name="month" onInputChange={onInputChange} />
-                        <Input span="Год ввода в эксплуатацию" name="year" onInputChange={onInputChange} />
-                    </div>
-                    <div className="form-inputs">
-                        <Input span="Модель" name="model" onInputChange={onInputChange} />
-                        <Input span="Серийный номер" name="sernom" onInputChange={onInputChange} />
-                    </div>
-                    <button className="btn success" >Добавить</button>
+            <form  className="form" onSubmit={(e)=>onSubmitForm(e)}>
+                <div className="form-inputs">
+                    <Input span="Введите номер QR кода" name="qr" onInputChange={onInputChange}/>
+                    <Input span="Введите наименование" name="name" onInputChange={onInputChange} />
+                    <SelectInput 
+                        span="Выберите тип устройства"  
+                        name="type_id"
+                        data={types} 
+                        onSelectChange={onSelectChange} 
+                    />
+                    <SelectInput 
+                        span="Выберите средство устройства" 
+                        name="sredstvo" 
+                        data={sredstva} 
+                        onSelectChange={onSelectChange} 
+                    />
                 </div>
+                <div className="form-inputs">
+                    <Input span="Месяц ввода" name="month" onInputChange={onInputChange} />
+                    <Input span="Год ввода в эксплуатацию" name="year" onInputChange={onInputChange} />
+                </div>
+                <div className="form-inputs">
+                    <Input span="Модель" name="model" onInputChange={onInputChange} />
+                    <Input span="Серийный номер" name="sernom" onInputChange={onInputChange} />
+                    <Textarea  span="Информация о предмете" name="info" onInputChange={onInfoChange} />
+                </div>
+                <button className="btn success" >Добавить</button>
             </form> 
         </div>
     )

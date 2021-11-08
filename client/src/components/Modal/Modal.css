@@ -13,4 +13,25 @@
 .md-modal {
     background-color: white;
     padding: 50px 100px;
+    position: relative;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-btn {
+    cursor: pointer;
+    position: absolute;
+    right: 16px;
+    top: 5px;
+    font-size: 39px;
+}
+
+.btn.warning {
+    background-color: #ff4e4e;
+    color: white;
 }
