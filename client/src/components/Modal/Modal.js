@@ -3,57 +3,57 @@ import Input from '../Form/Input/Input'
 import SelectInput from '../Form/Select/Select'
 import Textarea from '../Form/Textarea/Textarea'
 import './Modal.css'
+import useFetch from '../../hooks/useFetch'
+
 
 export default function Modal(props) {
 
     const [data, setData] = useState()
     const [types, setTypes] = useState()
     const [sredstva, setSredstva] = useState()
+    const [statuses, setStatuses] = useState()
+    const [status, setStatus] = useState()
     const [typesDefault, setTypesDefault] = useState()
     const [sredstvaDefault, setSredstvaDefault] = useState()
+    const [statusesDefault, setStatusesDefault] = useState()
     const [info, setInfo] = useState()
 
-    const getTypes = async (type) => {
-        try {
-            const response = await fetch("http://localhost:8000/types")
-            const jsonData = await response.json()
-            setTypes(jsonData.map(row => ({ 
-                label: `${row.type_id} - ${row.type_name}`,
-                value: row.type_id
-            })))
-            for (const i in jsonData) {
-                if (jsonData[i].type_id === type) {
-                    setTypesDefault({
-                        label: `${type} - ${jsonData[i].type_name}`,
-                        value: type
-                    })
-                }
-            }
-        } catch (e) {
-           console.error(e.message); 
-        }
-    } 
+    const { data: fetchTypes, isPending: isPendingTypes } = useFetch('http://localhost:8000/api/types')
+    const { data: fetchSredstva, isPending: isPendingSredstva } = useFetch('http://localhost:8000/api/sredstva')
+    const { data: fetchStatuses, isPending: isPendingStatuses } = useFetch('http://localhost:8000/api/statuses')
 
-    const getSredstva = async (sredstvo) => {
-        try {
-            const response = await fetch("http://localhost:8000/sredstva")
-            const jsonData = await response.json()
-            setSredstva(jsonData.map(row => ({ 
-                label: `${row.sredstvo_id} - ${row.sredstvo_name}`,
-                value: row.sredstvo_id
-            })))
-            for (const i in jsonData) {
-                if (jsonData[i].sredstvo_id === sredstvo) {
-                    setSredstvaDefault({
-                        label: `${sredstvo} - ${jsonData[i].sredstvo_name}`,
-                        value: sredstvo
-                    })
+    useEffect(() => {
+        setTypes(fetchTypes.map(row => ({
+            label: `${row.type_id} - ${row.type_name}`,
+            value: row.type_id
+        })))
+        setSredstva(fetchSredstva.map(row => ({
+            label: `${row.sredstvo_id} - ${row.sredstvo_name}`,
+            value: row.sredstvo_id
+        })))
+        setStatuses(fetchStatuses.map(row => ({
+            label: `${row.status_id} - ${row.status_name}`,
+            value: row.status_id
+        })))
+    }, [fetchTypes, fetchSredstva, fetchStatuses])
+
+    const getDefault = async(value, obj, name) => {
+        // console.log(value, obj, name);
+        var itemId = `${name}_id`
+        var itemName = `${name}_name`
+        let res 
+        obj.forEach(elem => {
+            if (elem[itemId] === value) {
+                res = {
+                    label: `${value} - ${elem[itemName]}`,
+                    value: value
                 }
+                return
             }
-        } catch (e) {
-           console.error(e.message); 
-        }
-    } 
+        });
+        console.log(res);
+        return res
+    }
 
     const [values, setValues] = useState({
         qr: "",
@@ -68,8 +68,8 @@ export default function Modal(props) {
 
     const onInputChange = (e) => {
         setValues({
-          ...values,
-          [e.target.name]: e.target.value
+            ...values,
+            [e.target.name]: e.target.value
         });
     }
 
@@ -80,29 +80,42 @@ export default function Modal(props) {
         });
     }
 
-    const onSelectChange = (e) => {
-        setValues({
-          ...values,
-          [e.name]: e.value
+    const onStatusChange = (e) => {
+        setStatus({
+            ...status,
+            [e.name]: e.value
         });
     }
 
-    console.log(info);
 
-    const onSubmitForm = async (e) => {
+    const onSelectChange = (e) => {
+        setValues({
+            ...values,
+            [e.name]: e.value
+        });
+    }
+
+    const onSubmitForm = async(e) => {
         console.log(values);
         e.preventDefault()
         try {
-            await fetch(`http://localhost:8000/${props.editId}`, {
+            await fetch(`http://localhost:8000/api/total/${props.editId}`, {
                 method: "PUT",
-                headers: {"Content-Type": "application/json"},
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(values)
             })
-            await fetch(`http://localhost:8000/info/${props.editId}`, {
-                method: "PUT",
-                headers: {"Content-Type": "application/json"},
+            await fetch(`http://localhost:8000/api/info/${props.editId}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     ...info
+                })
+            })
+            await fetch(`http://localhost:8000/api/status/${props.editId}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    ...status
                 })
             })
             window.location = "/"
@@ -111,33 +124,43 @@ export default function Modal(props) {
         }
     }
 
-    const getData = async () => {
+    const getData = async() => {
         try {
-            const response = await fetch(`http://localhost:8000/${props.editId}`)
+            const response = await fetch(`http://localhost:8000/api/total/${props.editId}`)
             const jsonData = await response.json()
             setData(...jsonData)
             setValues(...jsonData)
-            getTypes(jsonData[0].type_id)
-            getSredstva(jsonData[0].sredstvo)
+            getDefault(jsonData[0].type_id, fetchTypes, 'type')
+            .then(res=>setTypesDefault(res))
+            getDefault(jsonData[0].sredstvo, fetchSredstva, 'sredstvo')
+            .then(res=>setSredstvaDefault(res))
+            if (jsonData[0].status) {
+                getDefault(jsonData[0].status, fetchStatuses, 'status')
+                    .then(res=>setStatusesDefault(res))
+            }
+           
         } catch (e) {
-           console.error(e.message); 
+            console.error(e.message);
         }
     }
 
     useEffect(() => {
+        setStatusesDefault('')
+        setSredstvaDefault('')
+        setTypesDefault('')
         getData()
-    }, [props.visible])
+    }, [props.open])
 
-    const deleteItem = async () => {
+    const deleteItem = async() => {
         try {
-            const response = await fetch(`http://localhost:8000/${props.editId}`, {
+            const response = await fetch(`http://localhost:8000/api/total/${props.editId}`, {
                 method: "DELETE",
-                headers: {"Content-Type": "application/json"},
+                headers: { "Content-Type": "application/json" },
             })
             window.location = "/"
             props.closeModal()
         } catch (e) {
-           console.error(e.message); 
+            console.error(e.message);
         }
     }
 
@@ -173,6 +196,14 @@ export default function Modal(props) {
                                             data={sredstva} 
                                             default={sredstvaDefault}
                                             onSelectChange={onSelectChange} 
+                                        /> : null}
+                                    {statusesDefault ? 
+                                        <SelectInput 
+                                            span="Выберите статус" 
+                                            name="status" 
+                                            data={statuses} 
+                                            default={statusesDefault}
+                                            onSelectChange={onStatusChange} 
                                         /> : null}
                                 </div>
                                 <div className="form-inputs">

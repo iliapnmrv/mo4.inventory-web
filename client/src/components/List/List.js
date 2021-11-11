@@ -2,41 +2,29 @@ import React, {useEffect, useState} from 'react'
 import './List.css'
 import Item from '../Item/Item'
 import Modal from '../Modal/Modal'
-
+import useFetch from '../../hooks/useFetch'
 
 export default function List() {
 
-    const [data, setData] = useState([])
     const [visible, setVisible] = useState(false)
     const [editId, setEditId] = useState()
+    const [open, setOpen] = useState(false)
 
-
-    const getData = async () => {
-        try {
-            const response = await fetch("http://localhost:8000/")
-            const jsonData = await response.json()
-            setData(jsonData)
-        } catch (e) {
-           console.error(e.message); 
-        }
-    }
 
     const openModal = (id) => {
         document.body.style.overflow = 'hidden'
         setVisible(true)
         setEditId(id)
+        setOpen(!open)
     }
 
     const closeModal = () => {
         document.body.style.overflow = 'auto'
         setVisible(false)
-    }
-    
+    }    
 
-    useEffect(() => {
-        getData()
-    }, [])
-    
+    const {data, isPending} = useFetch('http://localhost:8000/api/total')
+
     return (
         <div className="flex">
             <table>
@@ -60,7 +48,7 @@ export default function List() {
                     })}
                 </tbody>
             </table>
-            <Modal visible={visible} closeModal={closeModal} editId={editId} />
+            <Modal visible={visible} open={open} closeModal={closeModal} editId={editId} />
         </div>
     )
 }

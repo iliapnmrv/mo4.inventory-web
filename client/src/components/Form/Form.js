@@ -5,47 +5,23 @@ import './Form.css'
 import Input from './Input/Input'
 import SelectInput from './Select/Select'
 import Textarea from './Textarea/Textarea'
+import useFetch from '../../hooks/useFetch'
+import usePostFetch from '../../hooks/usePostFetch'
+import useForm from '../../hooks/useForm'
+
+
 
 
 export default function CreateItem(props) {
 
     const [open, setOpen] = useState(false)
-    const [types, setTypes] = useState()
-    const [sredstva, setSredstva] = useState()
+    const [types, setTypes] = useState([])
+    const [sredstva, setSredstva] = useState([])
+    const [statuses, setStatuses] = useState([])
     const [info, setInfo] = useState()
+    const [status, setStatus] = useState()
 
-    const getTypes = async () => {
-        try {
-            const response = await fetch("http://localhost:8000/types")
-            const jsonData = await response.json()
-            setTypes(jsonData.map(row => ({ 
-                label: `${row.type_id} - ${row.type_name}`,
-                value: row.type_id
-            })))
-        } catch (e) {
-           console.error(e.message); 
-        }
-    } 
-
-    const getSredstva = async () => {
-        try {
-            const response = await fetch("http://localhost:8000/sredstva")
-            const jsonData = await response.json()
-            setSredstva(jsonData.map(row => ({ 
-                label: `${row.sredstvo_id} - ${row.sredstvo_name}`,
-                value: row.sredstvo_id
-            })))
-        } catch (e) {
-           console.error(e.message); 
-        }
-    } 
-
-    useEffect(() => {
-        getTypes()
-        getSredstva()
-    }, [])
-
-    const [values, setValues] = useState({
+    const {values, changeHandler} = useForm({
         qr: "",
         name: "",
         sredstvo: "",
@@ -56,11 +32,33 @@ export default function CreateItem(props) {
         sernom: "",
     })
 
+    console.log(values);
+    
+    const {data: fetchTypes, isPending: isPendingTypes} = useFetch('http://localhost:8000/api/types')
+    const {data: fetchSredstva, isPending: isPendingSredstva} = useFetch('http://localhost:8000/api/sredstva')
+    const {data: fetchStatuses, isPending: isPendingStatuses} = useFetch('http://localhost:8000/api/statuses')
+
+    useEffect(() => {
+        setTypes(fetchTypes.map(row => ({
+            label: `${row.type_id} - ${row.type_name}`,
+            value: row.type_id
+        })))
+        setSredstva(fetchSredstva.map(row => ({
+            label: `${row.sredstvo_id} - ${row.sredstvo_name}`,
+            value: row.sredstvo_id
+        })))
+        setStatuses(fetchStatuses.map(row => ({
+            label: `${row.status_id} - ${row.status_name}`,
+            value: row.status_id
+        })))
+    }, [fetchTypes, fetchSredstva, fetchStatuses])
+
+   
     const onInputChange = (e) => {
-        setValues({
-          ...values,
-          [e.target.name]: e.target.value
-        });
+        // setValues({
+        //   ...values,
+        //   [e.target.name]: e.target.value
+        // });
     }
 
     const onInfoChange = (e) => {
@@ -69,29 +67,46 @@ export default function CreateItem(props) {
             [e.target.name]: e.target.value
         });
     }
+  
+    const onStatusChange = (e) => {
+        setStatus({
+            ...status,
+            [e.name]: e.value
+        });
+    }
 
     const onSelectChange = (e) => {
-        setValues({
-          ...values,
-          [e.name]: e.value
-        });
+        // setValues({
+        //   ...values,
+        //   [e.name]: e.value
+        // });
     }
 
     const onSubmitForm = async (e) => {
         e.preventDefault()
         try {
-            
-            await fetch("http://localhost:8000/", {
+            // const {message : newItemMessage, isSuccess : newItemSuccess} = usePostFetch('http://localhost:8000/api/total/', values)
+            // const {message : newInfoMessage, isSuccess : newInfoSuccess} = usePostFetch(
+            //     `http://localhost:8000/api/info/${values.qr}`, 
+            //     {...info})
+
+            await fetch("http://localhost:8000/api/total/", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(values)
             })
-            await fetch("http://localhost:8000/info", {
+            await fetch(`http://localhost:8000/api/info/${values.qr}`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
-                    ...info, 
-                    'qr': values.qr
+                    ...info
+                })
+            })
+            await fetch(`http://localhost:8000/api/status/${values.qr}`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    ...status
                 })
             })
             window.location = "/"
@@ -113,8 +128,69 @@ export default function CreateItem(props) {
             </div>
             <form  className="form" onSubmit={(e)=>onSubmitForm(e)}>
                 <div className="form-inputs">
-                    <Input span="Введите номер QR кода" name="qr" onInputChange={onInputChange}/>
-                    <Input span="Введите наименование" name="name" onInputChange={onInputChange} />
+                    <label className='form-item'>
+                        <span>Введите номер QR кода</span>
+                        <input 
+                            type="text"
+                            id="qr"
+                            value={values.qr}
+                            onChange={e=>changeHandler(e)}
+                        />
+                    </label>
+                    <label className='form-item'>
+                        <span>Введите наименование</span>
+                        <input 
+                            type="text"
+                            id="name"
+                            value={values.name}
+                            onChange={e=>changeHandler(e)}
+                        />
+                    </label>
+                    <label className='form-item'>
+                        <span>Месяц ввода</span>
+                        <input 
+                            type="text"
+                            id="month"
+                            value={values.month}
+                            onChange={e=>changeHandler(e)}
+                        />
+                    </label>
+                    <label className='form-item'>
+                        <span>Год ввода в эксплуатацию</span>
+                        <input 
+                            type="text"
+                            id="year"
+                            value={values.year}
+                            onChange={e=>changeHandler(e)}
+                        />
+                    </label>
+                    <label className='form-item'>
+                        <span>Модель</span>
+                        <input 
+                            type="text"
+                            id="model"
+                            value={values.model}
+                            onChange={e=>changeHandler(e)}
+                        />
+                    </label>
+                    <label className='form-item'>
+                        <span>Серийный номер</span>
+                        <input 
+                            type="text"
+                            id="model"
+                            value={values.sernom}
+                            onChange={e=>changeHandler(e)}
+                        />
+                    </label>
+                    <label className='form-item'>
+                        <span>Информация о предмете</span>
+                        <textarea 
+                            type="text"
+                            id="info"
+                            value={values.info}
+                            onChange={e=>changeHandler(e)}
+                        />
+                    </label>
                     <SelectInput 
                         span="Выберите тип устройства"  
                         name="type_id"
@@ -127,15 +203,12 @@ export default function CreateItem(props) {
                         data={sredstva} 
                         onSelectChange={onSelectChange} 
                     />
-                </div>
-                <div className="form-inputs">
-                    <Input span="Месяц ввода" name="month" onInputChange={onInputChange} />
-                    <Input span="Год ввода в эксплуатацию" name="year" onInputChange={onInputChange} />
-                </div>
-                <div className="form-inputs">
-                    <Input span="Модель" name="model" onInputChange={onInputChange} />
-                    <Input span="Серийный номер" name="sernom" onInputChange={onInputChange} />
-                    <Textarea  span="Информация о предмете" name="info" onInputChange={onInfoChange} />
+                    <SelectInput 
+                        span="Выберите статус" 
+                        name="status" 
+                        data={statuses} 
+                        onSelectChange={onStatusChange} 
+                    />
                 </div>
                 <button className="btn success" >Добавить</button>
             </form> 

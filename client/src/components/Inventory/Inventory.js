@@ -2,26 +2,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import React, {useState, useEffect} from 'react'
 import './Inventory.css'
-
+import useFetch from '../../hooks/useFetch'
 
 export default function Inventory() {
 
-    const [data, setData] = useState([])
     const [open, setOpen] = useState(false)
 
-    const getData = async () => {
-        try {
-            const response = await fetch("http://localhost:8000/inventory")
-            const jsonData = await response.json()
-            setData(jsonData)
-        } catch (e) {
-           console.error(e.message); 
-        }
-    }
-
-    useEffect(() => {
-        getData()
-    }, [])
+    const {data, isPending} = useFetch('http://localhost:8000/api/inventory')
 
     const handleUpload = (e) => {
         const files = e.target.files
@@ -29,7 +16,7 @@ export default function Inventory() {
         formData.append('csv', files[0])
 
         fetch('http://localhost:8000/upload/inventory', {
-            method: 'POST',
+            method: "POST",
             body: formData
         })
     }
