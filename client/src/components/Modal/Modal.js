@@ -1,22 +1,33 @@
 import React, {useState, useEffect} from 'react'
 import Input from '../Form/Input/Input'
 import SelectInput from '../Form/Select/Select'
-import Textarea from '../Form/Textarea/Textarea'
 import './Modal.css'
 import useFetch from '../../hooks/useFetch'
-
+import useForm from '../../hooks/useForm'
 
 export default function Modal(props) {
 
-    const [data, setData] = useState()
+    const [data, setData] = useState()   
     const [types, setTypes] = useState()
     const [sredstva, setSredstva] = useState()
     const [statuses, setStatuses] = useState()
-    const [status, setStatus] = useState()
     const [typesDefault, setTypesDefault] = useState()
     const [sredstvaDefault, setSredstvaDefault] = useState()
     const [statusesDefault, setStatusesDefault] = useState()
-    const [info, setInfo] = useState()
+    
+    const {values: {qr, name, sredstvo, type_id, month, year, model, sernom, info, status}, changeHandler, selectChangeHandler, setDefault} = useForm({
+        qr: "",
+        name: "",
+        sredstvo: "",
+        type_id: '',
+        month: "",
+        year: "",
+        model: "",
+        sernom: "",
+        info: "",
+        status:"",
+    })
+
 
     const { data: fetchTypes, isPending: isPendingTypes } = useFetch('http://localhost:8000/api/types')
     const { data: fetchSredstva, isPending: isPendingSredstva } = useFetch('http://localhost:8000/api/sredstva')
@@ -38,7 +49,6 @@ export default function Modal(props) {
     }, [fetchTypes, fetchSredstva, fetchStatuses])
 
     const getDefault = async(value, obj, name) => {
-        // console.log(value, obj, name);
         var itemId = `${name}_id`
         var itemName = `${name}_name`
         let res 
@@ -55,68 +65,23 @@ export default function Modal(props) {
         return res
     }
 
-    const [values, setValues] = useState({
-        qr: "",
-        name: "",
-        sredstvo: "",
-        type_id: '',
-        month: "",
-        year: "",
-        model: "",
-        sernom: "",
-    })
-
-    const onInputChange = (e) => {
-        setValues({
-            ...values,
-            [e.target.name]: e.target.value
-        });
-    }
-
-    const onInfoChange = (e) => {
-        setInfo({
-            ...info,
-            [e.target.name]: e.target.value
-        });
-    }
-
-    const onStatusChange = (e) => {
-        setStatus({
-            ...status,
-            [e.name]: e.value
-        });
-    }
-
-
-    const onSelectChange = (e) => {
-        setValues({
-            ...values,
-            [e.name]: e.value
-        });
-    }
-
     const onSubmitForm = async(e) => {
-        console.log(values);
         e.preventDefault()
         try {
             await fetch(`http://localhost:8000/api/total/${props.editId}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(values)
+                body: JSON.stringify({qr, name, sredstvo, type_id, month, year, model, sernom})
             })
             await fetch(`http://localhost:8000/api/info/${props.editId}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    ...info
-                })
+                body: JSON.stringify({info})
             })
             await fetch(`http://localhost:8000/api/status/${props.editId}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    ...status
-                })
+                body: JSON.stringify({status})
             })
             window.location = "/"
         } catch (e) {
@@ -128,8 +93,7 @@ export default function Modal(props) {
         try {
             const response = await fetch(`http://localhost:8000/api/total/${props.editId}`)
             const jsonData = await response.json()
-            setData(...jsonData)
-            setValues(...jsonData)
+            setDefault(...jsonData)
             getDefault(jsonData[0].type_id, fetchTypes, 'type')
             .then(res=>setTypesDefault(res))
             getDefault(jsonData[0].sredstvo, fetchSredstva, 'sredstvo')
@@ -178,15 +142,28 @@ export default function Modal(props) {
                             <h2>Изменить информацию о позиции с QR номером: {props.editId}</h2>
                             <form onSubmit={e=>onSubmitForm(e)}>
                                 <div className="form-inputs">
-                                    <Input span="Введите номер QR кода" name="qr" value={data?.qr} onInputChange={onInputChange}/>
-                                    <Input span="Введите наименование" name="name" value={data?.name} onInputChange={onInputChange} />
+                                    <Input 
+                                        span="Введите номер QR кода" 
+                                        name="qr" 
+                                        type="number" 
+                                        value={qr} 
+                                        onChange={changeHandler} 
+                                    />              
+                                    <Input 
+                                        span="Введите наименование" 
+                                        name="name" 
+                                        value={name} 
+                                        onChange={changeHandler} 
+                                    />
+                                </div>
+                                <div className="form-inputs">
                                     {typesDefault ? 
                                         <SelectInput 
                                             span="Выберите тип"  
                                             name="type_id"
                                             data={types} 
                                             default={typesDefault}
-                                            onSelectChange={onSelectChange} 
+                                            onSelectChange={selectChangeHandler} 
                                         /> : null}
                                     
                                     {sredstvaDefault ? 
@@ -195,7 +172,7 @@ export default function Modal(props) {
                                             name="sredstvo" 
                                             data={sredstva} 
                                             default={sredstvaDefault}
-                                            onSelectChange={onSelectChange} 
+                                            onSelectChange={selectChangeHandler} 
                                         /> : null}
                                     {statusesDefault ? 
                                         <SelectInput 
@@ -203,21 +180,48 @@ export default function Modal(props) {
                                             name="status" 
                                             data={statuses} 
                                             default={statusesDefault}
-                                            onSelectChange={onStatusChange} 
+                                            onSelectChange={selectChangeHandler} 
                                         /> : null}
                                 </div>
                                 <div className="form-inputs">
-                                    <Input span="Месяц ввода" name="month" value={data?.month} onInputChange={onInputChange} />
-                                    <Input span="Год ввода в эксплуатацию" name="year" value={data?.year} onInputChange={onInputChange} />
+                                    <Input 
+                                        span="Месяц ввода"
+                                        type="number" 
+                                        name="month" 
+                                        value={month} 
+                                        onChange={changeHandler} 
+                                    />
+                                     <Input 
+                                        span="Год ввода в эксплуатацию"
+                                        type="number" 
+                                        name="year" 
+                                        value={year} 
+                                        onChange={changeHandler} 
+                                    />
                                 </div>
                                 <div className="form-inputs">
-                                    <Input span="Модель" name="model" value={data?.model} onInputChange={onInputChange} />
-                                    <Input span="Серийный номер" name="sernom" value={data?.sernom} onInputChange={onInputChange} />
+                                    <Input 
+                                        span="Модель"
+                                        name="model" 
+                                        value={model} 
+                                        onChange={changeHandler} 
+                                    />
+                                    <Input 
+                                        span="Серийный номер"
+                                        name="sernom" 
+                                        value={sernom} 
+                                        onChange={changeHandler} 
+                                    />
                                 </div>
-                                <Textarea  span="Информация о предмете" name="info" value={data?.info} onInputChange={onInfoChange} />
+                                <Input 
+                                    span="Информация о предмете"
+                                    name="info" 
+                                    value={info} 
+                                    onChange={changeHandler} 
+                                />
                                 <div className="buttons">
                                     <input type="button" className="btn success" onClick={e=>onSubmitForm(e)} value="Сохранить" />
-                                    <input type="button" className="btn warning" onClick={()=>deleteItem(data?.qr)} value="Удалить" />
+                                    <input type="button" className="btn warning" onClick={()=>deleteItem(qr)} value="Удалить" />
                                 </div>
                             </form>
                             <div className="close-btn" onClick={props.closeModal}>&times;</div>

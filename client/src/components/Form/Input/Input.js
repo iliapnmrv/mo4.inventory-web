@@ -1,30 +1,17 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import './Input.css'
 
-export default function Input(props) {
-    const [value, setValue] = useState('')
-
-    const onValueChange = async (e) => {
-        props.onInputChange(e)
-        setValue(e.target.value)
-    }
-
-    useEffect(() => {
-        setValue(props.value)
-    }, [props.value])
+export default function Input({span, type = 'text', name, value, onChange}) {
 
     return (
         <>
-            <label className='form-item'>
-                <span>{props.span}</span>
+             <label className='form-item'>
+                <span>{span}</span>
                 <input 
-                    type="text" 
-                    name={props.name} 
-                    className='form-control' 
-                    value={value} 
-                    onChange={e => {
-                        onValueChange(e)
-                    }}
+                    type={type}
+                    name={name}
+                    value={value}
+                    onChange={onChange}
                 />
             </label>
         </>

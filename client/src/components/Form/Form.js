@@ -4,12 +4,9 @@ import React, {useState, useEffect} from 'react'
 import './Form.css'
 import Input from './Input/Input'
 import SelectInput from './Select/Select'
-import Textarea from './Textarea/Textarea'
 import useFetch from '../../hooks/useFetch'
 import usePostFetch from '../../hooks/usePostFetch'
 import useForm from '../../hooks/useForm'
-
-
 
 
 export default function CreateItem(props) {
@@ -18,10 +15,8 @@ export default function CreateItem(props) {
     const [types, setTypes] = useState([])
     const [sredstva, setSredstva] = useState([])
     const [statuses, setStatuses] = useState([])
-    const [info, setInfo] = useState()
-    const [status, setStatus] = useState()
 
-    const {values, changeHandler} = useForm({
+    const {values: {qr, name, sredstvo, type_id, month, year, model, sernom, info, status}, changeHandler, selectChangeHandler} = useForm({
         qr: "",
         name: "",
         sredstvo: "",
@@ -30,9 +25,9 @@ export default function CreateItem(props) {
         year: "",
         model: "",
         sernom: "",
+        info: "",
+        status:"",
     })
-
-    console.log(values);
     
     const {data: fetchTypes, isPending: isPendingTypes} = useFetch('http://localhost:8000/api/types')
     const {data: fetchSredstva, isPending: isPendingSredstva} = useFetch('http://localhost:8000/api/sredstva')
@@ -53,36 +48,8 @@ export default function CreateItem(props) {
         })))
     }, [fetchTypes, fetchSredstva, fetchStatuses])
 
-   
-    const onInputChange = (e) => {
-        // setValues({
-        //   ...values,
-        //   [e.target.name]: e.target.value
-        // });
-    }
-
-    const onInfoChange = (e) => {
-        setInfo({
-            ...info,
-            [e.target.name]: e.target.value
-        });
-    }
-  
-    const onStatusChange = (e) => {
-        setStatus({
-            ...status,
-            [e.name]: e.value
-        });
-    }
-
-    const onSelectChange = (e) => {
-        // setValues({
-        //   ...values,
-        //   [e.name]: e.value
-        // });
-    }
-
     const onSubmitForm = async (e) => {
+        
         e.preventDefault()
         try {
             // const {message : newItemMessage, isSuccess : newItemSuccess} = usePostFetch('http://localhost:8000/api/total/', values)
@@ -93,21 +60,17 @@ export default function CreateItem(props) {
             await fetch("http://localhost:8000/api/total/", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(values)
+                body: JSON.stringify({qr, name, sredstvo, type_id, month, year, model, sernom})
             })
-            await fetch(`http://localhost:8000/api/info/${values.qr}`, {
+            await fetch(`http://localhost:8000/api/info/${qr}`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
-                    ...info
-                })
+                body: JSON.stringify({info})
             })
-            await fetch(`http://localhost:8000/api/status/${values.qr}`, {
+            await fetch(`http://localhost:8000/api/status/${qr}`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
-                    ...status
-                })
+                body: JSON.stringify({status})
             })
             window.location = "/"
         } catch (e) {
@@ -126,91 +89,80 @@ export default function CreateItem(props) {
                 <h2>Добавить новый элемент</h2>
                 <FontAwesomeIcon icon={open ? faChevronDown : faChevronUp}/>
             </div>
-            <form  className="form" onSubmit={(e)=>onSubmitForm(e)}>
+            <form  className="form"  onSubmit={(e)=>onSubmitForm(e)} >
                 <div className="form-inputs">
-                    <label className='form-item'>
-                        <span>Введите номер QR кода</span>
-                        <input 
-                            type="text"
-                            id="qr"
-                            value={values.qr}
-                            onChange={e=>changeHandler(e)}
-                        />
-                    </label>
-                    <label className='form-item'>
-                        <span>Введите наименование</span>
-                        <input 
-                            type="text"
-                            id="name"
-                            value={values.name}
-                            onChange={e=>changeHandler(e)}
-                        />
-                    </label>
-                    <label className='form-item'>
-                        <span>Месяц ввода</span>
-                        <input 
-                            type="text"
-                            id="month"
-                            value={values.month}
-                            onChange={e=>changeHandler(e)}
-                        />
-                    </label>
-                    <label className='form-item'>
-                        <span>Год ввода в эксплуатацию</span>
-                        <input 
-                            type="text"
-                            id="year"
-                            value={values.year}
-                            onChange={e=>changeHandler(e)}
-                        />
-                    </label>
-                    <label className='form-item'>
-                        <span>Модель</span>
-                        <input 
-                            type="text"
-                            id="model"
-                            value={values.model}
-                            onChange={e=>changeHandler(e)}
-                        />
-                    </label>
-                    <label className='form-item'>
-                        <span>Серийный номер</span>
-                        <input 
-                            type="text"
-                            id="model"
-                            value={values.sernom}
-                            onChange={e=>changeHandler(e)}
-                        />
-                    </label>
-                    <label className='form-item'>
-                        <span>Информация о предмете</span>
-                        <textarea 
-                            type="text"
-                            id="info"
-                            value={values.info}
-                            onChange={e=>changeHandler(e)}
-                        />
-                    </label>
                     <SelectInput 
                         span="Выберите тип устройства"  
                         name="type_id"
                         data={types} 
-                        onSelectChange={onSelectChange} 
+                        onSelectChange={selectChangeHandler} 
                     />
                     <SelectInput 
                         span="Выберите средство устройства" 
                         name="sredstvo" 
                         data={sredstva} 
-                        onSelectChange={onSelectChange} 
+                        onSelectChange={selectChangeHandler} 
                     />
                     <SelectInput 
                         span="Выберите статус" 
                         name="status" 
                         data={statuses} 
-                        onSelectChange={onStatusChange} 
+                        onSelectChange={selectChangeHandler} 
                     />
                 </div>
-                <button className="btn success" >Добавить</button>
+                <div className="form-inputs">
+                    <Input 
+                        span="Введите номер QR кода" 
+                        name="qr" 
+                        type="number" 
+                        value={qr} 
+                        onChange={changeHandler} 
+                    />
+                    <Input 
+                        span="Введите наименование" 
+                        name="name" 
+                        value={name} 
+                        onChange={changeHandler} 
+                    />
+                
+                    <Input 
+                        span="Месяц ввода"
+                        type="number" 
+                        name="month" 
+                        value={month} 
+                        onChange={changeHandler} 
+                    />
+                </div>
+                <div className="form-inputs">
+                    <Input 
+                        span="Год ввода в эксплуатацию"
+                        type="number" 
+                        name="year" 
+                        value={year} 
+                        onChange={changeHandler} 
+                    />
+                    <Input 
+                        span="Модель"
+                        name="model" 
+                        value={model} 
+                        onChange={changeHandler} 
+                    />
+                    <Input 
+                        span="Серийный номер"
+                        name="sernom" 
+                        value={sernom} 
+                        onChange={changeHandler} 
+                    />
+                </div>
+                <div className="form-inputs">
+                    <Input 
+                        span="Информация о предмете"
+                        name="info" 
+                        value={info} 
+                        onChange={changeHandler} 
+                    />
+                </div>
+                <button className="btn success" type="submit" >Добавить</button>
             </form> 
         </div>
     )

@@ -1,31 +1,30 @@
 import { useEffect, useState } from "react"
 
-const useFetch = (url) => {
+const useMessage = (msg) => {
     const [data, setData] = useState([])
     const [isPending, setIsPending] = useState(true)
-    const [error, setError] = useState()
+    const [error, setError] = useState('')
 
     useEffect(() => {
         fetch(url)
             .then(res => {
                 if (!res.ok) {
-                    throw new Error(`Произошла ошибка при получении данных: ${url}`)
+                    throw new Error('Произошла ошибка при получении данных: ', url)
                 }
                 return res.json()
             })
             .then(data => {
                 setData(data)
                 setIsPending(false)
-                setError(null)
             })
             .catch(e => {
-                setIsPending(false)
-                setError(e.message)
-                console.log(e.message);
+                setError(e)
+                console.log(e);
             })
-    }, [url])
+            // console.log(url);
+    }, [msg])
 
-    return { data, isPending, error }
+    return { data, isPending }
 }
 
-export default useFetch
+export default useMessage

@@ -6,7 +6,8 @@
 .form-item {
     margin: 10px 20px 10px 0px;
     flex-direction: column;
-    display: flex
+    display: flex;
+    width: 100%;
 }
 
 .w-20 {
@@ -24,4 +25,15 @@
 .form-item span {
     font-size: 18px;
     margin: 0px 10px 0px 0px;
+}
+
+.form-item input {
+    font-size: 16px;
+    padding: 7px 5px;
+    border-radius: 4px;
+    border: 1px solid #cccccc;
+}
+
+.form-item input:focus {
+    border: 1px solid black;
 }
