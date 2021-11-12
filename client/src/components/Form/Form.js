@@ -15,6 +15,7 @@ export default function CreateItem(props) {
     const [types, setTypes] = useState([])
     const [sredstva, setSredstva] = useState([])
     const [statuses, setStatuses] = useState([])
+    const [error, setError] = useState()
 
     const {values: {qr, name, sredstvo, type_id, month, year, model, sernom, info, status}, changeHandler, selectChangeHandler} = useForm({
         qr: "",
@@ -57,21 +58,43 @@ export default function CreateItem(props) {
             //     `http://localhost:8000/api/info/${values.qr}`, 
             //     {...info})
 
-            await fetch("http://localhost:8000/api/total/", {
+            fetch("http://localhost:8000/api/total/", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({qr, name, sredstvo, type_id, month, year, model, sernom})
             })
-            await fetch(`http://localhost:8000/api/info/${qr}`, {
+            .then(res=>{
+                if (!res.ok) {
+                    throw new Error(res.json())
+                }
+                return res.json()
+            })
+            .then(data=>console.log(data))
+            fetch(`http://localhost:8000/api/info/${qr}`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({info})
             })
-            await fetch(`http://localhost:8000/api/status/${qr}`, {
+            .then(res=>{
+                if (!res.ok) {
+                    throw new Error(res.json())
+                }
+                return res.json()
+            })
+            .then(data=>console.log(data))
+            fetch(`http://localhost:8000/api/status/${qr}`, {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({status})
             })
+            .then(res=>{
+                if (!res.ok) {
+                    throw new Error(res.json())
+                }
+                return res.json()
+            })
+            .then(data=>console.log(data))
+            .then(console.log(12))
             window.location = "/"
         } catch (e) {
             console.error(e.message);
@@ -124,11 +147,11 @@ export default function CreateItem(props) {
                         value={name} 
                         onChange={changeHandler} 
                     />
-                
                     <Input 
                         span="Месяц ввода"
                         type="number" 
                         name="month" 
+                        max='12'
                         value={month} 
                         onChange={changeHandler} 
                     />
@@ -139,6 +162,7 @@ export default function CreateItem(props) {
                         type="number" 
                         name="year" 
                         value={year} 
+                        max='40'
                         onChange={changeHandler} 
                     />
                     <Input 
@@ -158,6 +182,7 @@ export default function CreateItem(props) {
                     <Input 
                         span="Информация о предмете"
                         name="info" 
+                        required={false}
                         value={info} 
                         onChange={changeHandler} 
                     />

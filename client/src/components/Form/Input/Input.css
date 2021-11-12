@@ -37,3 +37,8 @@
 .form-item input:focus {
     border: 1px solid black;
 }
+
+.form-item span.required::after {
+    content: '*';
+    color: #ff6d6d;
+}

@@ -1,5 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react'
-import './Select.css'
+import React, {useEffect, useState} from 'react'
 import Select from 'react-select'
 
 export default function SelectInput(props) {
@@ -11,6 +10,7 @@ export default function SelectInput(props) {
             name: props.name,
             value: e.value
         }
+        setValue(e.value)
         props.onSelectChange(out)
     }
 
@@ -19,16 +19,23 @@ export default function SelectInput(props) {
     }, [props.value])
 
     return (
-        <Fragment>
+        <>
             <label className='form-item'>
-                <span>{props.span}</span>
+                <span className='required'>{props.span}</span>
                 <Select 
                     options={props.data} 
                     placeholder={props.span} 
                     defaultValue={ props.default } 
                     onChange={(e)=>{onItemSelect(e)}}
                 />
+                <input
+                    tabIndex={-1}
+                    autoComplete="off"
+                    style={{ opacity: 0, height: 0 }}
+                    value={value}
+                    required={true}
+                />
             </label>
-        </Fragment>
+        </>
     )
 }

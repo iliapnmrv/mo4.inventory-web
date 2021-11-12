@@ -3,18 +3,33 @@ import pool from "../db.js"
 class inventoryController {
     async getInventory(req, res) {
         const inv = await pool.query('SELECT * FROM inventory')
-        res.json(inv.rows)
+        if (inv.rows.length) {
+            res.json(inv.rows)
+        } else {
+            res.json(null)
+        }
     }
     async deleteInventory(req, res) {
-        const inv = await pool.query('DELETE FROM inventory')
-        res.json(inv.rows)
+        try {
+            const inv = await pool.query('TRUNCATE TABLE inventory')
+            res.json("Успешно удалено")
+        } catch (e) {
+            console.log(e)
+        }
+
     }
     async createInventory(req, res) {
-        const { id, vedPos, name, place, kolvo, placePriority } = req.body
-        const newInventory = await pool.query(
-            'INSERT INTO inventory( id, vedPos, name, place, kolvo, placePriority ) VALUES($1, $2, $3, $4, $5, $6) RETURNING *', [id, vedPos, name, place, kolvo, placePriority]
-        )
-        res.json(newInventory.rows)
+        try {
+            const { vedPos, name, place, kolvo, placePriority } = req.body
+            const newInventory = await pool.query(
+                `INSERT INTO inventory( vedPos, name, place, kolvo, placePriority ) 
+                                VALUES($1, $2, $3, $4, $5) RETURNING *`, [vedPos, name, place, kolvo, placePriority]
+            )
+            res.json(`Загружено`)
+        } catch (e) {
+            res.json(e.message)
+        }
+
     }
 }
 

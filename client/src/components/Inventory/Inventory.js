@@ -10,16 +10,41 @@ export default function Inventory() {
 
     const {data, isPending} = useFetch('http://localhost:8000/api/inventory')
 
-    const handleUpload = (e) => {
-        const files = e.target.files
-        const formData = new FormData()
-        formData.append('csv', files[0])
-
-        fetch('http://localhost:8000/upload/inventory', {
-            method: "POST",
-            body: formData
-        })
+    const handleUpload = async(e) => {
+        try {
+            const truncate = new Promise((resolve, reject)=>{
+                fetch("http://localhost:8000/api/inventory", {
+                    method: "DELETE",
+                })
+                .then(res=>res.json())
+                .then(data=>resolve(data))
+            })
+            truncate.then(res=>{
+                const files = e.target.files
+                const formData = new FormData()
+                formData.append('csv', files[0])
+    
+                fetch('http://localhost:8000/upload/inventory', {
+                    method: "POST",
+                    body: formData
+                })
+                .then(res=>{
+                    if (!res.ok) {
+                        throw new Error(res.json())
+                    }
+                    return res.json()
+                })
+                .catch(e=>{
+                    console.log(e.message);
+                })
+            })
+        } catch (e) {
+            console.log(e.message)   
+        }
+        
     }
+
+    console.log(data);
 
     const toggleForm = () => {
         document.querySelector('.form').classList.toggle('slide')
@@ -49,7 +74,7 @@ export default function Inventory() {
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map(row => {
+                        {data !== null && data.map(row => {
                             return(
                                 <tr 
                                     key={row.id}

@@ -1,0 +1,31 @@
+.notification-wrapper {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 300px;
+}
+
+.notification-item {
+    box-shadow: 0px 3px 6px 0px rgb(0 0 0 / 24%);
+    border-radius: 3px;
+    overflow: hidden;
+    background-color: white;
+    margin-bottom: 20px;
+}
+
+.notification-item p {
+    margin: 0px;
+    padding: 10px 15px;
+}
+
+.notification-item .bar {
+    height: 5px;
+}
+
+.notification-item.success .bar {
+    background-color: #a4ff9c;
+}
+
+.notification-item.error .bar {
+    background-color: tomato;
+}

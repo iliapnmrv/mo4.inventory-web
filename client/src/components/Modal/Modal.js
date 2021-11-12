@@ -220,7 +220,7 @@ export default function Modal(props) {
                                     onChange={changeHandler} 
                                 />
                                 <div className="buttons">
-                                    <input type="button" className="btn success" onClick={e=>onSubmitForm(e)} value="Сохранить" />
+                                    <input type="submit" className="btn success" onClick={e=>onSubmitForm(e)} value="Сохранить" />
                                     <input type="button" className="btn warning" onClick={()=>deleteItem(qr)} value="Удалить" />
                                 </div>
                             </form>
