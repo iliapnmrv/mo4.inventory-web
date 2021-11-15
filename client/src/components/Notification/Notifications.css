@@ -11,6 +11,32 @@
     overflow: hidden;
     background-color: white;
     margin-bottom: 20px;
+    animation: SlideLeft 0.4s;
+    animation-fill-mode: forwards;
+    width: 300px;
+}
+
+@keyframes SlideRight {
+    0% {
+        margin-left: 200%;
+    }
+    100% {
+        margin-left: 0px;
+    }
+}
+
+@keyframes SlideRight {
+    100% {
+        margin-left: 200%;
+    }
+    0% {
+        margin-left: 0px;
+    }
+}
+
+.notification-item.exit {
+    animation: SlideRight 0.4s;
+    animation-fill-mode: forwards;
 }
 
 .notification-item p {
@@ -19,7 +45,7 @@
 }
 
 .notification-item .bar {
-    height: 5px;
+    height: 7px;
 }
 
 .notification-item.success .bar {

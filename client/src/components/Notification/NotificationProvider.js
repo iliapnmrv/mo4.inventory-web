@@ -1,34 +1,33 @@
-import React from 'react'
-import {v4} from 'uuid'
-import Notification from './Notification';
-import './Notifications.css'
+import React, { createContext, useReducer } from "react";
+import Notification from "./Notification";
+import "./Notifications.css";
 
+export const NotificationContext = createContext();
 
 export default function NotificationProvider(props) {
+  const [state, dispatch] = useReducer((state, action) => {
+    switch (action.type) {
+      case "ADD_NOTIFICATION":
+        return [...state, { ...action.payload }];
 
-    const notifications = [
-        {
-            id: v4(),
-            type: "SUCCESS",
-            message: "Hellow world"
-        },
-        {
-            id: v4(),
-            type: "SUCCESS",
-            message: "Hellow world"
-        }
-    ]
+      case "REMOVE_NOTIFICATION":
+        return state.filter((el) => el.id !== action.id);
 
-    console.log(notifications);
+      default:
+        return state;
+    }
+  }, []);
 
-    return (
-        <div>
-            <div className="notification-wrapper">
-                {notifications.map(note=>{
-                    return <Notification key={note.id} {...note} />
-                })}
-            </div>
-            {props.children}
+  return (
+    <NotificationContext.Provider value={dispatch}>
+      <div>
+        <div className="notification-wrapper">
+          {state.map((note) => {
+            return <Notification dispatch={dispatch} key={note.id} {...note} />;
+          })}
         </div>
-    )
+        {props.children}
+      </div>
+    </NotificationContext.Provider>
+  );
 }

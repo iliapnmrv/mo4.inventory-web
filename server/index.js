@@ -19,7 +19,8 @@ app.use(multer({ dest: "uploads" }).single("csv"));
 app.post("/upload/inventory", async(req, res) => {
     let filedata = req.file;
     const csvFilePath = filedata.path
-    csv()
+
+    let length = await csv()
         .fromFile(csvFilePath)
         .then(async(json) => {
             for (let i = 0; i < json.length; i++) {
@@ -30,8 +31,9 @@ app.post("/upload/inventory", async(req, res) => {
                     body: JSON.stringify(obj)
                 })
             }
+            return json.length
         })
-    res.send("Файл успешно загружен");
+    res.send(`Успешно загружено ${length} строк`);
 });
 
 app.listen(8000, () => {
