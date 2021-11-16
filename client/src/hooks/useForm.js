@@ -9,10 +9,12 @@ const useForm = (initial) => {
             ...values,
             [e.target.name]: e.target.value
         }),
-        selectChangeHandler: e => setValues({
-            ...values,
-            [e.name]: e.value
-        }),
+        selectChangeHandler: e => {
+            setValues({
+                ...values,
+                [e.name]: e.value
+            })
+        },
         setDefault: data => data ? setValues(data) : null
     }
 }

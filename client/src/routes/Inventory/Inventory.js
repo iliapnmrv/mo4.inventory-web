@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import "./Inventory.css";
 import useFetch from "../../hooks/useFetch";
 import useNotification from "../../hooks/useNotification";
-import Loading from "../Loading/Loading";
+import Loading from "../../components/Loading/Loading";
 
 export default function Inventory() {
   const [open, setOpen] = useState(false);
@@ -37,7 +37,6 @@ export default function Inventory() {
             return res.text();
           })
           .then((data) => {
-            console.log(data);
             dispatch({
               type: "SUCCESS",
               message: data,

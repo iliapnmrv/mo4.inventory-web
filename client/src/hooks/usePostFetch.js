@@ -1,22 +1,26 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
-const usePostFetch = (url, data) => {
-    const [isSuccess, setIsSuccess] = useState(false)
-    const [message, setMessage] = useState('')
+const usePostFetch = () => {
 
-    useEffect(() => {
-        fetch(url, {
-                method: "POST",
+    const fetchData = async(url, data, method = 'POST') => {
+        console.log(data, url);
+        let message = await fetch(url, {
+                method: method,
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
             })
-            .then(res => {
-                setIsSuccess(true)
-                setMessage(res.json())
+            .then(res => res.json())
+            .then(data => data)
+            .catch(e => {
+                console.log(e);
             })
-    }, [url])
+        const isSuccess = true
+        console.log(message);
 
-    return { message, isSuccess }
+        return { message, isSuccess }
+    }
+
+    return fetchData
 }
 
 export default usePostFetch

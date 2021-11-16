@@ -44,3 +44,13 @@ table tbody tr td:last-child {
 table tbody tr:nth-child(even) {
     background: #f3f3f3;
 }
+
+.table {
+    position: relative;
+}
+
+.table .table-info {
+    position: absolute;
+    top: -20px;
+    right: 0px;
+}

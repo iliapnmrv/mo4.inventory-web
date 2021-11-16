@@ -1,0 +1,13 @@
+.filters-wrapper {
+    position: fixed;
+    margin: 40px -270px -35px;
+    top: 0px;
+    width: 240px;
+    background-color: #fbfbfb;
+    padding: 0px 15px;
+}
+
+.filters .form-item span {
+    font-size: 15px;
+    margin: 0px 10px 0px 0px;
+}

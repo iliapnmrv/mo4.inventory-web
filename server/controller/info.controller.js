@@ -13,7 +13,28 @@ class infoController {
                     ON CONFLICT (info_qr) DO UPDATE 
                     SET info = $2 RETURNING *`, [id, info]
                 )
-                res.json(newInfo.rows)
+                return res.json(newInfo.rows)
+            }
+            res.json('Отсутствует дополнительная информация')
+            res.status(200)
+        } catch (e) {
+            res.json(e.message)
+        }
+    }
+
+    async setPerson(req, res) {
+        try {
+            const { id } = req.params
+            const { person } = req.body
+
+            if (person) {
+                const newPerson = await pool.query(
+                    `INSERT INTO persons (person_qr, person) 
+                    VALUES ($1, $2)
+                    ON CONFLICT (person_qr) DO UPDATE 
+                    SET person = $2 RETURNING *`, [id, person]
+                )
+                return res.json(newPerson.rows)
             }
             res.status(200)
         } catch (e) {
@@ -25,7 +46,8 @@ class infoController {
         try {
             const { id } = req.params
             const { status } = req.body
-            if (!status) {
+
+            if (status) {
                 const newStatus = await pool.query(
                     `INSERT INTO statuses (status_qr, status) 
                     VALUES ($1, $2)
@@ -49,6 +71,10 @@ class infoController {
     }
     async getStatuses(req, res) {
         const all = await pool.query(`SELECT * FROM status_catalog`)
+        res.json(all.rows)
+    }
+    async getPersons(req, res) {
+        const all = await pool.query(`SELECT * FROM person_catalog`)
         res.json(all.rows)
     }
 }

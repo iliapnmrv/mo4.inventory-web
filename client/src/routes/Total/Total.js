@@ -1,14 +1,17 @@
-import React, { useState } from "react";
-import "./List.css";
-import Item from "../Item/Item";
-import Modal from "../Modal/Modal";
+import React, { useEffect, useState } from "react";
+import "./Total.css";
+import Item from "../../components/Item/Item";
+import Modal from "../../components/Modal/Modal";
 import useFetch from "../../hooks/useFetch";
-import Loading from "../Loading/Loading";
+import Loading from "../../components/Loading/Loading";
+import Form from "../../components/Form/Form";
+import Filters from "../../components/Filters/Filters";
 
-export default function List() {
+export default function Total() {
   const [visible, setVisible] = useState(false);
   const [editId, setEditId] = useState();
   const [open, setOpen] = useState(false);
+  const [total, setTotal] = useState([]);
 
   const openModal = (id) => {
     document.body.style.overflow = "hidden";
@@ -26,9 +29,21 @@ export default function List() {
     "http://localhost:8000/api/total"
   );
 
+  useEffect(() => {
+    setTotal(data);
+  }, [data]);
+
   return (
     <>
-      <div className="flex">
+      <Filters />
+      <Form total={total} setTotal={setTotal} />
+      <div className="table">
+        {total[total.length - 1]?.qr && (
+          <p className="table-info">
+            Последняя позиция QR : {total[total.length - 1]?.qr}
+          </p>
+        )}
+
         {isPending ? (
           <Loading />
         ) : (
@@ -46,7 +61,7 @@ export default function List() {
               </tr>
             </thead>
             <tbody>
-              {data.map((row) => {
+              {total.map((row) => {
                 return <Item openModal={openModal} data={row} />;
               })}
             </tbody>
@@ -57,6 +72,8 @@ export default function List() {
           open={open}
           closeModal={closeModal}
           editId={editId}
+          total={total}
+          setTotal={setTotal}
         />
       </div>
     </>
