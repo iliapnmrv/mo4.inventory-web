@@ -1,4 +1,6 @@
 import pool from "../db.js"
+import csv from 'csvtojson'
+import fetch from 'node-fetch';
 
 class inventoryController {
     async getInventory(req, res) {
@@ -13,6 +15,30 @@ class inventoryController {
         try {
             const inv = await pool.query('TRUNCATE TABLE inventory')
             res.json("Успешно удалено")
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+    async uploadInventory(req, res) {
+        try {
+            let filedata = req.file;
+            const csvFilePath = filedata.path
+
+            let length = await csv()
+                .fromFile(csvFilePath)
+                .then(async(json) => {
+                    for (let i = 0; i < json.length; i++) {
+                        let obj = json[i]
+                        const response = await fetch("http://localhost:8000/api/inventory", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(obj)
+                        })
+                    }
+                    return json.length
+                })
+            res.send(`Успешно загружено ${length} строк`);
         } catch (e) {
             console.log(e)
         }

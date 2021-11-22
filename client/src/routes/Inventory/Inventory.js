@@ -26,7 +26,7 @@ export default function Inventory() {
         const formData = new FormData();
         formData.append("csv", files[0]);
 
-        fetch("http://localhost:8000/upload/inventory", {
+        fetch("http://localhost:8000/api/inventory/upload", {
           method: "POST",
           body: formData,
         })
