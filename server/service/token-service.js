@@ -1,8 +1,5 @@
 import jwt from "jsonwebtoken"
 import pool from "../db.js"
-
-
-
 class TokenService {
     generateTokens(payload) {
         const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, { expiresIn: '1h' })

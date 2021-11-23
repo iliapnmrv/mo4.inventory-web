@@ -6,20 +6,29 @@ import Header from "./components/Header/Header";
 import Inventory from "./routes/Inventory/Inventory";
 import Navbar from "./components/Navbar/Navbar";
 import Total from "./routes/Total/Total";
+import Login from "./routes/Auth/Login/Login";
+import Registration from "./routes/Auth/Registration/Registration";
 
 function App() {
   return (
     <Router>
-      <Navbar />
       <div className="container">
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
+          <Route path="/login">
+            <Header name="Войдите" />
+            <Login />
+          </Route>
+          <Route path="/registration">
+            <Header name="Зарегистрируйтесь" />
+            <Registration />
+          </Route>
           <Route path="/inventory">
+            <Navbar />
             <Header name="Инвентаризация" />
             <Inventory />
           </Route>
           <Route path="/">
+            <Navbar />
             <Header name="Документооборот" />
             <Total />
           </Route>

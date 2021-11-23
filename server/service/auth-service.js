@@ -45,7 +45,6 @@ class AuthService {
     }
 
     async refresh(refreshToken) {
-        console.log(refreshToken);
         if (!refreshToken) {
             throw new Error('Пользователь не авторизован')
         }
@@ -54,9 +53,8 @@ class AuthService {
         if (!userData || !tokenFromDb) {
             throw new Error('Пользователь не авторизован')
         }
-        console.log(tokenFromDb);
-        const user = await pool.query(`SELECT * FROM users WHERE login = $1`, [tokenFromDb.id])
-        const { id } = user.rows[0]
+        const user = await pool.query(`SELECT * FROM users WHERE id = $1`, [tokenFromDb.user_id])
+        const { id, login } = user.rows[0]
         const tokens = tokenService.generateTokens({ id, login })
         await tokenService.saveToken(id, tokens.refreshToken)
 
