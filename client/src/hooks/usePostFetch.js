@@ -7,6 +7,8 @@ const usePostFetch = () => {
         let message = await fetch(url, {
                 method: method,
                 headers: { "Content-Type": "application/json" },
+                credentials: 'include',
+                mode: 'cors',
                 body: JSON.stringify(data)
             })
             .then(res => res.json())
