@@ -36,7 +36,6 @@ class TokenService {
         return newToken
     }
     async removeToken(refreshToken) {
-        console.log(refreshToken);
         const tokenData = await pool.query(
             `DELETE FROM tokens WHERE refresh_token = $1 RETURNING *`, [refreshToken])
         return tokenData.rows[0]

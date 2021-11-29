@@ -25,8 +25,24 @@ class AuthService {
     }
     async logout() {
         const { message: logoutMessage, isSuccess: logoutSuccess } = await fetchData(
-            "http://localhost:8000/api/auth/logout/", {}
+            "http://localhost:8000/api/auth/logout/"
         );
+        localStorage.removeItem('token');
+    }
+    async chechAuth() {
+
+        let message = await fetch("http://localhost:8000/api/auth/refresh/", {
+                method: 'GET',
+                headers: { "Content-Type": "application/json" },
+                credentials: 'include',
+                mode: 'cors',
+            })
+            .then(res => res.json())
+            .then(data => data)
+            .catch(e => {
+                console.log(e);
+            })
+        console.log(message);
     }
 
 }

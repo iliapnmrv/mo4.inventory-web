@@ -6,7 +6,7 @@ class authController {
         try {
             const { login, password } = req.body
             const userData = await authService.registration(login, password)
-            res.cookie('refreshToken', userData.refreshToken, { maxAge: 60 * 24 * 60 * 60 * 1000, httpOnly: true })
+            res.cookie('refresh', userData.refreshToken, { maxAge: 60 * 24 * 60 * 60 * 1000, httpOnly: true })
             res.json(userData)
         } catch (e) {
             res.json(e.message)
@@ -17,7 +17,7 @@ class authController {
         try {
             const { login, password } = req.body
             const userData = await authService.login(login, password)
-            res.cookie('refreshToken', userData.refreshToken, { maxAge: 60 * 24 * 60 * 60 * 1000, httpOnly: true })
+            res.cookie('refresh', userData.refreshToken, { maxAge: 1000 * 60 * 15, httpOnly: true })
             res.json(userData)
         } catch (e) {
             res.json(e.message)
@@ -25,9 +25,9 @@ class authController {
     }
     async logout(req, res) {
         try {
-            const { refreshToken } = req.cookies
-            const token = await authService.logout(refreshToken)
-            res.clearCookie('refreshToken')
+            const { refresh } = req.cookies
+            const token = await authService.logout(refresh)
+            res.clearCookie('refresh')
             res.json(token)
         } catch (e) {
             res.json(e.message)
@@ -35,9 +35,9 @@ class authController {
     }
     async refresh(req, res) {
         try {
-            const { refreshToken } = req.cookies
-            const userData = await authService.refresh(refreshToken)
-            res.cookie('refreshToken', userData.refreshToken, { maxAge: 60 * 24 * 60 * 60 * 1000, httpOnly: true })
+            const { refresh } = req.cookies
+            const userData = await authService.refresh(refresh)
+            res.cookie('refresh', userData.refreshToken, { maxAge: 60 * 24 * 60 * 60 * 1000, httpOnly: true })
             res.json(userData)
         } catch (e) {
             res.json(e.message)
