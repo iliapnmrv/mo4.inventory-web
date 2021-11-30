@@ -8,8 +8,11 @@ import useFetch from "../../hooks/useFetch";
 import usePostFetch from "../../hooks/usePostFetch";
 import useForm from "../../hooks/useForm";
 import useNotification from "../../hooks/useNotification";
+import { useSelector } from "react-redux";
 
 export default function Form(props) {
+  const username = useSelector((state) => state.user.username);
+
   const [open, setOpen] = useState(false);
   const [types, setTypes] = useState([]);
   const [sredstva, setSredstva] = useState([]);
@@ -110,6 +113,13 @@ export default function Form(props) {
       const { message: newPersonMessage, isSuccess: newPersonSuccess } =
         await fetchData(`http://localhost:8000/api/person/${qr}`, { person });
 
+      const { message: newLogMessage, isSuccess: newLogSuccess } =
+        await fetchData(`http://localhost:8000/api/logs/`, {
+          qr,
+          user: username,
+          text: "Ура",
+        });
+
       dispatch({
         type: "SUCCESS",
         message: newItemMessage,
@@ -154,7 +164,7 @@ export default function Form(props) {
             onSelectChange={selectChangeHandler}
           />
           <SelectInput
-            span="Выберите средство устройства"
+            span="Выберите средство"
             name="sredstvo"
             data={sredstva}
             onSelectChange={selectChangeHandler}

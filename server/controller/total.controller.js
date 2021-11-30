@@ -1,4 +1,5 @@
 import pool from "../db.js"
+import totalService from "../service/total-service.js"
 class totalController {
 
 
@@ -20,7 +21,6 @@ class totalController {
         } catch (e) {
             res.json(e.message)
         }
-
     }
 
     async createOne(req, res) {
@@ -60,13 +60,8 @@ class totalController {
 
     async filterTotal(req, res) {
         try {
-            console.log(req.query)
-            for (const key in req.query) {
-                req.query[key] = req.query[key].split(',')
-            }
-            const { sredstvo = null, type_id = null, status = null, person = null } = req.query;
-            console.log(sredstvo, type_id, status, person);
-            // console.log(req.query)
+            const whereClause = totalService.createFilters(req.query)
+
             const filtered = await pool.query(`
             SELECT * FROM total 
                 LEFT JOIN info
@@ -75,12 +70,9 @@ class totalController {
                     ON total.qr = statuses.status_qr
                 LEFT JOIN persons
                     ON total.qr = persons.person_qr
-                WHERE (total.sredstvo = $1 OR $1 is NULL) AND 
-                    (total.type_id = $2 OR $2 is NULL) AND 
-                    (statuses.status = $3 OR $3 is NULL) AND
-                    (persons.person = $4 OR $4 is NULL)
+                ${whereClause}
                 ORDER BY total.qr ASC
-            `, [sredstvo, type_id, status, person])
+            `)
             res.json(filtered.rows)
         } catch (e) {
             console.log(e.message);

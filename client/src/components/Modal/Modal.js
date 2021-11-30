@@ -6,8 +6,14 @@ import useFetch from "../../hooks/useFetch";
 import useForm from "../../hooks/useForm";
 import usePostFetch from "../../hooks/usePostFetch";
 import useNotification from "../../hooks/useNotification";
+import Loading from "../Loading/Loading";
+import { useSelector } from "react-redux";
 
 export default function Modal(props) {
+  const username = useSelector((state) => state.user.username);
+
+  const [isPending, setIsPending] = useState(true);
+  const [logs, setLogs] = useState([]);
   const [types, setTypes] = useState();
   const [sredstva, setSredstva] = useState();
   const [statuses, setStatuses] = useState();
@@ -126,6 +132,12 @@ export default function Modal(props) {
           },
           "PUT"
         );
+      const { message: updatedLogs, isSuccess: updatedLogsSuccess } =
+        await fetchData(`http://localhost:8000/api/log/`, {
+          qr,
+          user: username,
+          text: "Обновлена информация",
+        });
       const { message: updatedInfo, isSuccess: updatedInfoSuccess } =
         await fetchData(`http://localhost:8000/api/info/${props.editId}`, {
           info,
@@ -161,26 +173,33 @@ export default function Modal(props) {
 
   const getData = async () => {
     try {
+      setIsPending(true);
       const response = await fetch(
         `http://localhost:8000/api/total/${props.editId}`
-      );
-      const jsonData = await response.json();
-      setDefault(...jsonData);
-      getDefault(jsonData[0].type_id, fetchTypes, "type").then((res) =>
+      ).then((res) => res.json());
+
+      fetch(`http://localhost:8000/api/logs/${props.editId}`)
+        .then((res) => res.json())
+        .then((data) => setLogs(data))
+        .finally(setIsPending(false));
+
+      setDefault(...response);
+
+      getDefault(response[0].type_id, fetchTypes, "type").then((res) =>
         setTypesDefault(res)
       );
-      getDefault(jsonData[0].sredstvo, fetchSredstva, "sredstvo").then((res) =>
+      getDefault(response[0].sredstvo, fetchSredstva, "sredstvo").then((res) =>
         setSredstvaDefault(res)
       );
-      if (jsonData[0].status) {
-        getDefault(jsonData[0].status, fetchStatuses, "status").then((res) =>
+      if (response[0].status) {
+        getDefault(response[0].status, fetchStatuses, "status").then((res) =>
           setStatusesDefault(res)
         );
       } else {
         setStatusesDefault("Not found", fetchPersons);
       }
-      if (jsonData[0].person) {
-        getDefault(jsonData[0].person, fetchPersons, "person").then((res) =>
+      if (response[0].person) {
+        getDefault(response[0].person, fetchPersons, "person").then((res) =>
           setPersonsDefault(res)
         );
       } else {
@@ -198,14 +217,18 @@ export default function Modal(props) {
     getData();
   }, [props.open]);
 
-  //   console.log(statusesDefault);
-
   const deleteItem = async () => {
     try {
       const { message: deleteMessage, isSuccess: deleteSuccess } =
         await fetchData(
           `http://localhost:8000/api/total/${props.editId}`,
           { status },
+          "DELETE"
+        );
+      const { message: deleteLogMessage, isSuccess: deleteLogSuccess } =
+        await fetchData(
+          `http://localhost:8000/api/logs/${props.editId}`,
+          {},
           "DELETE"
         );
 
@@ -234,137 +257,173 @@ export default function Modal(props) {
         }
       >
         <div className="md-modal">
-          <div className="md-content">
-            <h2>Изменить информацию о позиции с QR номером: {props.editId}</h2>
-            <form onSubmit={(e) => onSubmitForm(e)}>
-              <div className="form-inputs">
+          {isPending ? (
+            <Loading />
+          ) : (
+            <div className="md-content">
+              <h2>
+                Изменить информацию о позиции с QR номером: {props.editId}
+              </h2>
+              <form onSubmit={(e) => onSubmitForm(e)}>
+                <div className="form-inputs">
+                  <Input
+                    span="Введите номер QR кода"
+                    name="qr"
+                    type="number"
+                    value={qr}
+                    onChange={changeHandler}
+                  />
+                  <Input
+                    span="Введите наименование"
+                    name="name"
+                    value={name}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="form-inputs">
+                  {typesDefault ? (
+                    <SelectInput
+                      span="Выберите тип"
+                      name="type_id"
+                      data={types}
+                      default={typesDefault}
+                      onSelectChange={selectChangeHandler}
+                    />
+                  ) : null}
+                  {sredstvaDefault ? (
+                    <SelectInput
+                      span="Выберите средство"
+                      name="sredstvo"
+                      data={sredstva}
+                      default={sredstvaDefault}
+                      onSelectChange={selectChangeHandler}
+                    />
+                  ) : null}
+                  {statusesDefault !== "Not found" &&
+                  statusesDefault != null &&
+                  statusesDefault !== "" ? (
+                    <SelectInput
+                      span="Выберите статус"
+                      name="status"
+                      data={statuses}
+                      default={statusesDefault}
+                      onSelectChange={selectChangeHandler}
+                    />
+                  ) : null}
+                  {statusesDefault === "Not found" ? (
+                    <SelectInput
+                      span="Выберите статус"
+                      name="status"
+                      data={statuses}
+                      onSelectChange={selectChangeHandler}
+                    />
+                  ) : null}
+                  {personsDefault !== "Not found" &&
+                  personsDefault != null &&
+                  personsDefault !== "" ? (
+                    <SelectInput
+                      span="Выберите МОЛ"
+                      name="person"
+                      data={persons}
+                      default={personsDefault}
+                      onSelectChange={selectChangeHandler}
+                    />
+                  ) : null}
+                  {personsDefault === "Not found" ? (
+                    <SelectInput
+                      span="Выберите МОЛ"
+                      name="person"
+                      data={persons}
+                      onSelectChange={selectChangeHandler}
+                    />
+                  ) : null}
+                </div>
+                <div className="form-inputs">
+                  <Input
+                    span="Месяц ввода"
+                    type="number"
+                    name="month"
+                    value={month}
+                    onChange={changeHandler}
+                  />
+                  <Input
+                    span="Год ввода в эксплуатацию"
+                    type="number"
+                    name="year"
+                    value={year}
+                    onChange={changeHandler}
+                  />
+                </div>
+                <div className="form-inputs">
+                  <Input
+                    span="Модель"
+                    name="model"
+                    value={model}
+                    onChange={changeHandler}
+                  />
+                  <Input
+                    span="Серийный номер"
+                    name="sernom"
+                    value={sernom}
+                    onChange={changeHandler}
+                  />
+                </div>
                 <Input
-                  span="Введите номер QR кода"
-                  name="qr"
-                  type="number"
-                  value={qr}
+                  span="Информация о предмете"
+                  name="info"
+                  value={info}
                   onChange={changeHandler}
                 />
-                <Input
-                  span="Введите наименование"
-                  name="name"
-                  value={name}
-                  onChange={changeHandler}
-                />
+                <div className="buttons">
+                  <input
+                    type="submit"
+                    className="btn success"
+                    onClick={(e) => onSubmitForm(e)}
+                    value="Сохранить"
+                  />
+                  <input
+                    type="button"
+                    className="btn warning"
+                    onClick={() => deleteItem(qr)}
+                    value="Удалить"
+                  />
+                </div>
+              </form>
+              {logs.length ? (
+                <>
+                  <div className="logs">
+                    <h3>Журнал действий</h3>
+                  </div>
+                  <table>
+                    <tbody>
+                      {logs.map((log, index) => {
+                        return (
+                          <tr>
+                            <td> {index + 1}</td>
+                            <td>{log.user}</td>
+                            <td>{log.text}</td>
+                            <td>
+                              {new Date(log.time).toLocaleTimeString([], {
+                                year: "numeric",
+                                month: "numeric",
+                                day: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </>
+              ) : null}
+
+              <div className="close-btn" onClick={props.closeModal}>
+                &times;
               </div>
-              <div className="form-inputs">
-                {typesDefault ? (
-                  <SelectInput
-                    span="Выберите тип"
-                    name="type_id"
-                    data={types}
-                    default={typesDefault}
-                    onSelectChange={selectChangeHandler}
-                  />
-                ) : null}
-                {sredstvaDefault ? (
-                  <SelectInput
-                    span="Выберите средство"
-                    name="sredstvo"
-                    data={sredstva}
-                    default={sredstvaDefault}
-                    onSelectChange={selectChangeHandler}
-                  />
-                ) : null}
-                {statusesDefault !== "Not found" &&
-                statusesDefault != null &&
-                statusesDefault !== "" ? (
-                  <SelectInput
-                    span="Выберите статус"
-                    name="status"
-                    data={statuses}
-                    default={statusesDefault}
-                    onSelectChange={selectChangeHandler}
-                  />
-                ) : null}
-                {statusesDefault === "Not found" ? (
-                  <SelectInput
-                    span="Выберите статус"
-                    name="status"
-                    data={statuses}
-                    onSelectChange={selectChangeHandler}
-                  />
-                ) : null}
-                {personsDefault !== "Not found" &&
-                personsDefault != null &&
-                personsDefault !== "" ? (
-                  <SelectInput
-                    span="Выберите МОЛ"
-                    name="person"
-                    data={persons}
-                    default={personsDefault}
-                    onSelectChange={selectChangeHandler}
-                  />
-                ) : null}
-                {personsDefault === "Not found" ? (
-                  <SelectInput
-                    span="Выберите МОЛ"
-                    name="person"
-                    data={persons}
-                    onSelectChange={selectChangeHandler}
-                  />
-                ) : null}
-              </div>
-              <div className="form-inputs">
-                <Input
-                  span="Месяц ввода"
-                  type="number"
-                  name="month"
-                  value={month}
-                  onChange={changeHandler}
-                />
-                <Input
-                  span="Год ввода в эксплуатацию"
-                  type="number"
-                  name="year"
-                  value={year}
-                  onChange={changeHandler}
-                />
-              </div>
-              <div className="form-inputs">
-                <Input
-                  span="Модель"
-                  name="model"
-                  value={model}
-                  onChange={changeHandler}
-                />
-                <Input
-                  span="Серийный номер"
-                  name="sernom"
-                  value={sernom}
-                  onChange={changeHandler}
-                />
-              </div>
-              <Input
-                span="Информация о предмете"
-                name="info"
-                value={info}
-                onChange={changeHandler}
-              />
-              <div className="buttons">
-                <input
-                  type="submit"
-                  className="btn success"
-                  onClick={(e) => onSubmitForm(e)}
-                  value="Сохранить"
-                />
-                <input
-                  type="button"
-                  className="btn warning"
-                  onClick={() => deleteItem(qr)}
-                  value="Удалить"
-                />
-              </div>
-            </form>
-            <div className="close-btn" onClick={props.closeModal}>
-              &times;
             </div>
-          </div>
+          )}
         </div>
       </div>
     </>

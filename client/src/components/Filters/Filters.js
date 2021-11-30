@@ -66,6 +66,11 @@ export default function Filters(props) {
 
   const handleFilter = async () => {
     console.log({ sredstvo, type_id, status, person });
+    let query = `sredstvo=1&person=2&type_id=1&person=1`;
+    console.log(query);
+    const { message: filteredMessage, isSuccess: filteredSuccess } =
+      await fetchData(`http://localhost:8000/api/total/filter?${query}`);
+    console.log(filteredMessage);
   };
 
   return (

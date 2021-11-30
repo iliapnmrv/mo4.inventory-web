@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 const usePostFetch = () => {
 
     const fetchData = async(url, data, method = 'POST') => {

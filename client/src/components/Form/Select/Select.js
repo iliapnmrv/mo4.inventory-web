@@ -50,6 +50,7 @@ export default function SelectInput(props) {
           onChange={(e) => {
             props.multi ? handleMultiple(e) : handleSelect(e);
           }}
+          maxMenuHeight={210}
         />
         <input
           tabIndex={-1}

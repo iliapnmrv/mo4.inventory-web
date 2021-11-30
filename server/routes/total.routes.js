@@ -3,7 +3,7 @@ const router = Router()
 
 import totalController from "../controller/total.controller.js";
 
-router.get('/filter/', totalController.filterTotal)
+router.post('/filter/', totalController.filterTotal)
 router.get('/', totalController.getAll)
 router.get('/:id', totalController.getOne)
 router.post('/', totalController.createOne)
