@@ -8,10 +8,12 @@ import useFetch from "../../hooks/useFetch";
 import usePostFetch from "../../hooks/usePostFetch";
 import useForm from "../../hooks/useForm";
 import useNotification from "../../hooks/useNotification";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Form(props) {
   const username = useSelector((state) => state.user.username);
+  const data = useSelector((state) => state.total.data);
+  const dispatchTotal = useDispatch();
 
   const [open, setOpen] = useState(false);
   const [types, setTypes] = useState([]);
@@ -53,16 +55,16 @@ export default function Form(props) {
   });
 
   const { data: fetchTypes, isPending: isPendingTypes } = useFetch(
-    "http://localhost:8000/api/types"
+    `${process.env.REACT_APP_SERVER_URL}api/types`
   );
   const { data: fetchSredstva, isPending: isPendingSredstva } = useFetch(
-    "http://localhost:8000/api/sredstva"
+    `${process.env.REACT_APP_SERVER_URL}api/sredstva`
   );
   const { data: fetchStatuses, isPending: isPendingStatuses } = useFetch(
-    "http://localhost:8000/api/statuses"
+    `${process.env.REACT_APP_SERVER_URL}api/statuses`
   );
   const { data: fetchPersons, isPending: isPendingPersons } = useFetch(
-    "http://localhost:8000/api/persons"
+    `${process.env.REACT_APP_SERVER_URL}api/persons`
   );
 
   useEffect(() => {
@@ -96,7 +98,7 @@ export default function Form(props) {
     e.preventDefault();
     try {
       const { message: newItemMessage, isSuccess: newItemSuccess } =
-        await fetchData("http://localhost:8000/api/total/", {
+        await fetchData(`${process.env.REACT_APP_SERVER_URL}api/total/`, {
           qr,
           name,
           sredstvo,
@@ -107,14 +109,20 @@ export default function Form(props) {
           sernom,
         });
       const { message: newInfoMessage, isSuccess: newInfoSuccess } =
-        await fetchData(`http://localhost:8000/api/info/${qr}`, { info });
+        await fetchData(`${process.env.REACT_APP_SERVER_URL}api/info/${qr}`, {
+          info,
+        });
       const { message: newStatusMessage, isSuccess: newStatusSuccess } =
-        await fetchData(`http://localhost:8000/api/status/${qr}`, { status });
+        await fetchData(`${process.env.REACT_APP_SERVER_URL}api/status/${qr}`, {
+          status,
+        });
       const { message: newPersonMessage, isSuccess: newPersonSuccess } =
-        await fetchData(`http://localhost:8000/api/person/${qr}`, { person });
+        await fetchData(`${process.env.REACT_APP_SERVER_URL}api/person/${qr}`, {
+          person,
+        });
 
       const { message: newLogMessage, isSuccess: newLogSuccess } =
-        await fetchData(`http://localhost:8000/api/logs/`, {
+        await fetchData(`${process.env.REACT_APP_SERVER_URL}api/logs/`, {
           qr,
           user: username,
           text: "Ура",
@@ -123,15 +131,16 @@ export default function Form(props) {
       dispatch({
         type: "SUCCESS",
         message: newItemMessage,
-        title: "Успех",
+        title: "Успешно",
       });
       let obj = { qr, name, sredstvo, type_id, month, year, model, sernom };
-      let newArr = [...props.total, obj];
+      let newArr = [...data, obj];
       function sortArr(arr) {
         return arr.sort((a, b) => (a.qr > b.qr ? 1 : -1));
       }
       sortArr(newArr);
-      props.setTotal(newArr);
+      dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: newArr });
+
       toggleForm();
       document.getElementById("newItem").reset();
     } catch (e) {

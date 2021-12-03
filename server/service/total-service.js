@@ -1,5 +1,8 @@
 class TotalService {
     createFilters(query) {
+        if (Object.keys(query).length === 0) {
+            return ''
+        }
         let whereClause = 'WHERE ('
         let last = Object.keys(query)[Object.keys(query).length - 1];
         for (const key in query) {

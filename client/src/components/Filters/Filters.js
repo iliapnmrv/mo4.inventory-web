@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import useFetch from "../../hooks/useFetch";
 import useForm from "../../hooks/useForm";
 import useNotification from "../../hooks/useNotification";
 import usePostFetch from "../../hooks/usePostFetch";
+import Button from "../Button/Button";
 import SelectInput from "../Form/Select/Select";
 import "./Filters.css";
 
 export default function Filters(props) {
+  const dispatchTotal = useDispatch();
+
   const [types, setTypes] = useState([]);
   const [sredstva, setSredstva] = useState([]);
   const [statuses, setStatuses] = useState([]);
@@ -25,16 +29,16 @@ export default function Filters(props) {
   });
 
   const { data: fetchTypes, isPending: isPendingTypes } = useFetch(
-    "http://localhost:8000/api/types"
+    `${process.env.REACT_APP_SERVER_URL}api/types`
   );
   const { data: fetchSredstva, isPending: isPendingSredstva } = useFetch(
-    "http://localhost:8000/api/sredstva"
+    `${process.env.REACT_APP_SERVER_URL}api/sredstva`
   );
   const { data: fetchStatuses, isPending: isPendingStatuses } = useFetch(
-    "http://localhost:8000/api/statuses"
+    `${process.env.REACT_APP_SERVER_URL}api/statuses`
   );
   const { data: fetchPersons, isPending: isPendingPersons } = useFetch(
-    "http://localhost:8000/api/persons"
+    `${process.env.REACT_APP_SERVER_URL}api/persons`
   );
 
   useEffect(() => {
@@ -66,11 +70,23 @@ export default function Filters(props) {
 
   const handleFilter = async () => {
     console.log({ sredstvo, type_id, status, person });
-    let query = `sredstvo=1&person=2&type_id=1&person=1`;
-    console.log(query);
-    const { message: filteredMessage, isSuccess: filteredSuccess } =
-      await fetchData(`http://localhost:8000/api/total/filter?${query}`);
-    console.log(filteredMessage);
+    let filters = { sredstvo, type_id, status, person };
+    let query = "";
+    for (const key in filters) {
+      for (let i = 0; i < filters[key].length; i++) {
+        const value = filters[key][i];
+        query = `${query}${key}=${value}&`;
+      }
+    }
+    const { message: filteredData, isSuccess: filteredSuccess } =
+      await fetchData(
+        `${process.env.REACT_APP_SERVER_URL}api/total/filter?${query.slice(
+          0,
+          -1
+        )}`
+      );
+    console.log(filteredData);
+    dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: filteredData });
   };
 
   return (
@@ -110,9 +126,7 @@ export default function Filters(props) {
             required={false}
           />
         </div>
-        <button className="filter-btn" onClick={handleFilter}>
-          Отфильтровать
-        </button>
+        <Button text="Отфильтровать" style="info" action={handleFilter} />
       </div>
     </>
   );

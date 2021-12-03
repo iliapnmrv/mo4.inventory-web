@@ -7,10 +7,13 @@ import useForm from "../../hooks/useForm";
 import usePostFetch from "../../hooks/usePostFetch";
 import useNotification from "../../hooks/useNotification";
 import Loading from "../Loading/Loading";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "../Button/Button";
 
 export default function Modal(props) {
   const username = useSelector((state) => state.user.username);
+  const data = useSelector((state) => state.total.data);
+  const dispatchTotal = useDispatch();
 
   const [isPending, setIsPending] = useState(true);
   const [logs, setLogs] = useState([]);
@@ -58,17 +61,17 @@ export default function Modal(props) {
   });
 
   const { data: fetchTypes, isPending: isPendingTypes } = useFetch(
-    "http://localhost:8000/api/types"
+    `${process.env.REACT_APP_SERVER_URL}api/types`
   );
   const { data: fetchSredstva, isPending: isPendingSredstva } = useFetch(
-    "http://localhost:8000/api/sredstva"
+    `${process.env.REACT_APP_SERVER_URL}api/sredstva`
   );
   const { data: fetchStatuses, isPending: isPendingStatuses } = useFetch(
-    "http://localhost:8000/api/statuses"
+    `${process.env.REACT_APP_SERVER_URL}api/statuses`
   );
 
   const { data: fetchPersons, isPending: isPendingPersons } = useFetch(
-    "http://localhost:8000/api/persons"
+    `${process.env.REACT_APP_SERVER_URL}api/persons`
   );
 
   useEffect(() => {
@@ -119,7 +122,7 @@ export default function Modal(props) {
     try {
       const { message: updatedTotal, isSuccess: updatedTotalSuccess } =
         await fetchData(
-          `http://localhost:8000/api/total/${props.editId}`,
+          `${process.env.REACT_APP_SERVER_URL}api/total/${props.editId}`,
           {
             qr,
             name,
@@ -133,23 +136,32 @@ export default function Modal(props) {
           "PUT"
         );
       const { message: updatedLogs, isSuccess: updatedLogsSuccess } =
-        await fetchData(`http://localhost:8000/api/log/`, {
+        await fetchData(`${process.env.REACT_APP_SERVER_URL}api/logs/`, {
           qr,
           user: username,
           text: "Обновлена информация",
         });
       const { message: updatedInfo, isSuccess: updatedInfoSuccess } =
-        await fetchData(`http://localhost:8000/api/info/${props.editId}`, {
-          info,
-        });
+        await fetchData(
+          `${process.env.REACT_APP_SERVER_URL}api/info/${props.editId}`,
+          {
+            info,
+          }
+        );
       const { message: updatedStatus, isSuccess: updatedStatusSuccess } =
-        await fetchData(`http://localhost:8000/api/status/${props.editId}`, {
-          status,
-        });
+        await fetchData(
+          `${process.env.REACT_APP_SERVER_URL}api/status/${props.editId}`,
+          {
+            status,
+          }
+        );
       const { message: updatedPerson, isSuccess: updatedPersonSuccess } =
-        await fetchData(`http://localhost:8000/api/person/${props.editId}`, {
-          person,
-        });
+        await fetchData(
+          `${process.env.REACT_APP_SERVER_URL}api/person/${props.editId}`,
+          {
+            person,
+          }
+        );
       dispatch({
         type: "SUCCESS",
         message: updatedTotal,
@@ -157,7 +169,7 @@ export default function Modal(props) {
       });
       props.closeModal();
       let obj = { qr, name, sredstvo, type_id, month, year, model, sernom };
-      let filtered = props.total.filter((data) => {
+      let filtered = data.filter((data) => {
         return data.qr !== props.editId;
       });
       let newArr = [...filtered, obj];
@@ -165,7 +177,7 @@ export default function Modal(props) {
         return arr.sort((a, b) => (a.qr > b.qr ? 1 : -1));
       }
       sortArr(newArr);
-      props.setTotal(newArr);
+      dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: newArr });
     } catch (e) {
       console.error(e.message);
     }
@@ -175,10 +187,10 @@ export default function Modal(props) {
     try {
       setIsPending(true);
       const response = await fetch(
-        `http://localhost:8000/api/total/${props.editId}`
+        `${process.env.REACT_APP_SERVER_URL}api/total/${props.editId}`
       ).then((res) => res.json());
 
-      fetch(`http://localhost:8000/api/logs/${props.editId}`)
+      fetch(`${process.env.REACT_APP_SERVER_URL}api/logs/${props.editId}`)
         .then((res) => res.json())
         .then((data) => setLogs(data))
         .finally(setIsPending(false));
@@ -221,13 +233,13 @@ export default function Modal(props) {
     try {
       const { message: deleteMessage, isSuccess: deleteSuccess } =
         await fetchData(
-          `http://localhost:8000/api/total/${props.editId}`,
+          `${process.env.REACT_APP_SERVER_URL}api/total/${props.editId}`,
           { status },
           "DELETE"
         );
       const { message: deleteLogMessage, isSuccess: deleteLogSuccess } =
         await fetchData(
-          `http://localhost:8000/api/logs/${props.editId}`,
+          `${process.env.REACT_APP_SERVER_URL}api/logs/${props.editId}`,
           {},
           "DELETE"
         );
@@ -238,11 +250,12 @@ export default function Modal(props) {
         title: "Успех",
       });
       props.closeModal();
-      props.setTotal(
-        props.total.filter((data) => {
+      dispatchTotal({
+        type: "CHANGE_TOTAL_DATA",
+        payload: data.filter((data) => {
           return data.qr !== props.editId;
-        })
-      );
+        }),
+      });
     } catch (e) {
       console.error(e.message);
     }
@@ -375,17 +388,15 @@ export default function Modal(props) {
                   onChange={changeHandler}
                 />
                 <div className="buttons">
-                  <input
+                  <Button
+                    text="Сохранить"
                     type="submit"
-                    className="btn success"
-                    onClick={(e) => onSubmitForm(e)}
-                    value="Сохранить"
+                    action={(e) => onSubmitForm(e)}
                   />
-                  <input
-                    type="button"
-                    className="btn warning"
-                    onClick={() => deleteItem(qr)}
-                    value="Удалить"
+                  <Button
+                    text="Удалить"
+                    style="warning"
+                    action={() => deleteItem(qr)}
                   />
                 </div>
               </form>

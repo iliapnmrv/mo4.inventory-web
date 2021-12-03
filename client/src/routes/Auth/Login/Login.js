@@ -46,7 +46,6 @@ export default function Login() {
     dispatch({
       type: "SUCCESS",
       message: `Добро пожаловать, ${loginMessage.user.login}`,
-      title: "Успех",
     });
   };
 

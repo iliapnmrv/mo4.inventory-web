@@ -9,13 +9,15 @@ import Loading from "../../components/Loading/Loading";
 export default function Inventory() {
   const [open, setOpen] = useState(false);
 
-  const { data, isPending } = useFetch("http://localhost:8000/api/inventory");
+  const { data, isPending } = useFetch(
+    `${process.env.REACT_APP_SERVER_URL}api/inventory`
+  );
   const dispatch = useNotification();
 
   const handleUpload = async (e) => {
     try {
       const truncate = new Promise((resolve, reject) => {
-        fetch("http://localhost:8000/api/inventory", {
+        fetch(`${process.env.REACT_APP_SERVER_URL}api/inventory`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -26,7 +28,7 @@ export default function Inventory() {
         const formData = new FormData();
         formData.append("csv", files[0]);
 
-        fetch("http://localhost:8000/api/inventory/upload", {
+        fetch(`${process.env.REACT_APP_SERVER_URL}api/inventory/upload`, {
           method: "POST",
           body: formData,
         })
@@ -40,7 +42,7 @@ export default function Inventory() {
             dispatch({
               type: "SUCCESS",
               message: data,
-              title: "Успех",
+              title: "Обновлено",
             });
           })
           .catch((e) => {

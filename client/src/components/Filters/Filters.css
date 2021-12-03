@@ -1,10 +1,13 @@
 .filters-wrapper {
     position: fixed;
-    margin: 40px -270px -35px;
+    margin: 54px -270px -35px;
     top: 0px;
     width: 240px;
     background-color: #fbfbfb;
-    padding: 0px 15px;
+    padding: 10px 15px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .filters .form-item span {

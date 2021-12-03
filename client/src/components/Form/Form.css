@@ -3,14 +3,6 @@ h2 {
     margin: 0;
 }
 
-.btn {
-    padding: 7px 15px;
-    border-radius: 3px;
-    font-size: 17px;
-    border: 0px;
-    cursor: pointer;
-}
-
 .header {
     cursor: pointer;
     padding: 10px 0px;
@@ -34,9 +26,4 @@ h2 {
 .form-inputs {
     display: flex;
     flex-direction: row;
-}
-
-.btn.success {
-    background-color: rgba(19, 160, 19, 0.76);
-    color: white;
 }

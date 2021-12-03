@@ -45,7 +45,6 @@ export default function Registration() {
     dispatch({
       type: "SUCCESS",
       message: `Добро пожаловать, ${regMessage.user.login}`,
-      title: "Успех",
     });
   };
 

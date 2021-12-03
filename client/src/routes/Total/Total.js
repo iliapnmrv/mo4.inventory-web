@@ -6,12 +6,15 @@ import useFetch from "../../hooks/useFetch";
 import Loading from "../../components/Loading/Loading";
 import Form from "../../components/Form/Form";
 import Filters from "../../components/Filters/Filters";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Total() {
+  const data = useSelector((state) => state.total.data);
+  const dispatchTotal = useDispatch();
+
   const [visible, setVisible] = useState(false);
   const [editId, setEditId] = useState();
   const [open, setOpen] = useState(false);
-  const [total, setTotal] = useState([]);
 
   const openModal = (id) => {
     document.body.style.overflow = "hidden";
@@ -25,55 +28,57 @@ export default function Total() {
     setVisible(false);
   };
 
-  const { data, isPending, error } = useFetch(
-    "http://localhost:8000/api/total"
-  );
+  const {
+    data: fetchedData,
+    isPending,
+    error,
+  } = useFetch(`${process.env.REACT_APP_SERVER_URL}api/total`);
 
   useEffect(() => {
-    setTotal(data);
-  }, [data]);
+    dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: fetchedData });
+  }, [fetchedData]);
 
   return (
     <>
       <Filters />
-      <Form total={total} setTotal={setTotal} />
+      <Form data={data} />
       <div className="table">
-        {total[total.length - 1]?.qr && (
-          <p className="table-info">
-            Последняя позиция QR : {total[total.length - 1]?.qr}
-          </p>
-        )}
-
         {isPending ? (
           <Loading />
         ) : (
-          <table>
-            <thead>
-              <tr key={9999}>
-                <th>Номер QR</th>
-                <th>Ср-во</th>
-                <th>Тип</th>
-                <th>Месяц ввода</th>
-                <th>Год ввода</th>
-                <th>Наименование</th>
-                <th>Модель</th>
-                <th>Серийный номер</th>
-              </tr>
-            </thead>
-            <tbody>
-              {total.map((row) => {
-                return <Item openModal={openModal} data={row} />;
-              })}
-            </tbody>
-          </table>
+          <>
+            {data[data.length - 1]?.qr && (
+              <p className="table-info">
+                Последняя позиция QR : {data[data.length - 1]?.qr}
+              </p>
+            )}
+            <table>
+              <thead>
+                <tr key={9999}>
+                  <th>Номер QR</th>
+                  <th>Ср-во</th>
+                  <th>Тип</th>
+                  <th>Месяц ввода</th>
+                  <th>Год ввода</th>
+                  <th>Наименование</th>
+                  <th>Модель</th>
+                  <th>Серийный номер</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((row) => {
+                  return <Item openModal={openModal} data={row} />;
+                })}
+              </tbody>
+            </table>
+          </>
         )}
         <Modal
           visible={visible}
           open={open}
           closeModal={closeModal}
           editId={editId}
-          total={total}
-          setTotal={setTotal}
+          data={data}
         />
       </div>
     </>

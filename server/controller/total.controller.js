@@ -64,8 +64,10 @@ class totalController {
 
             const filtered = await pool.query(`
             SELECT * FROM total 
-                LEFT JOIN info
-                    ON total.qr = info.info_qr
+                LEFT JOIN types
+                    ON total.type_id = types.type_id
+                LEFT JOIN sredstva
+                    ON total.sredstvo = sredstva.sredstvo_id
                 LEFT JOIN statuses
                     ON total.qr = statuses.status_qr
                 LEFT JOIN persons
@@ -86,8 +88,6 @@ class totalController {
                 ON total.type_id = types.type_id
             LEFT JOIN sredstva
                 ON total.sredstvo = sredstva.sredstvo_id
-            LEFT JOIN info
-                ON total.qr = info.info_qr
             ORDER BY total.qr ASC`)
         res.json(all.rows)
     }
