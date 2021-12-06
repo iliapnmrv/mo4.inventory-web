@@ -1,13 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import NotificationProvider from "./components/Notification/NotificationProvider";
-
-import dotenv from "dotenv";
-dotenv.config();
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import useFetch from "../../hooks/useFetch";
-import useForm from "../../hooks/useForm";
-import useNotification from "../../hooks/useNotification";
-import usePostFetch from "../../hooks/usePostFetch";
-import Button from "../Button/Button";
-import SelectInput from "../Form/Select/Select";
+import useFetch from "hooks/useFetch";
+import useForm from "hooks/useForm";
+import useNotification from "hooks/useNotification";
+import usePostFetch from "hooks/usePostFetch";
+import Button from "components/Button/Button";
+import SelectInput from "components/Form/Select/Select";
+import { SERVER } from "constants/constants";
 import "./Filters.css";
 
 export default function Filters(props) {
@@ -29,16 +30,16 @@ export default function Filters(props) {
   });
 
   const { data: fetchTypes, isPending: isPendingTypes } = useFetch(
-    `${process.env.REACT_APP_SERVER_URL}api/types`
+    `${SERVER}api/types`
   );
   const { data: fetchSredstva, isPending: isPendingSredstva } = useFetch(
-    `${process.env.REACT_APP_SERVER_URL}api/sredstva`
+    `${SERVER}api/sredstva`
   );
   const { data: fetchStatuses, isPending: isPendingStatuses } = useFetch(
-    `${process.env.REACT_APP_SERVER_URL}api/statuses`
+    `${SERVER}api/statuses`
   );
   const { data: fetchPersons, isPending: isPendingPersons } = useFetch(
-    `${process.env.REACT_APP_SERVER_URL}api/persons`
+    `${SERVER}api/persons`
   );
 
   useEffect(() => {
@@ -79,12 +80,7 @@ export default function Filters(props) {
       }
     }
     const { message: filteredData, isSuccess: filteredSuccess } =
-      await fetchData(
-        `${process.env.REACT_APP_SERVER_URL}api/total/filter?${query.slice(
-          0,
-          -1
-        )}`
-      );
+      await fetchData(`${SERVER}api/total/filter?${query.slice(0, -1)}`);
     console.log(filteredData);
     dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: filteredData });
   };

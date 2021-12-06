@@ -1,9 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import AuthService from "../../services/AuthService";
-
-import "./Navbar.css";
+import AuthService from "services/AuthService";
 
 export default function Navbar() {
   const dispatchUser = useDispatch();

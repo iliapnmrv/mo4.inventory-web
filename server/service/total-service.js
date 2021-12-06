@@ -21,6 +21,7 @@ class TotalService {
                 whereClause = `${whereClause}${key} = ${query[key][i]}${con}`
             }
         }
+        console.log(whereClause);
         return whereClause
     }
 }

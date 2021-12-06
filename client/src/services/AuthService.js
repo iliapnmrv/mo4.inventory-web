@@ -1,4 +1,6 @@
-import usePostFetch from "../hooks/usePostFetch";
+import { SERVER } from "constants/constants";
+import usePostFetch from "hooks/usePostFetch";
+
 const fetchData = usePostFetch();
 
 
@@ -6,7 +8,7 @@ class AuthService {
 
     async registration(login, password) {
         const { message: regMessage, isSuccess: regSuccess } = await fetchData(
-            `${process.env.REACT_APP_SERVER_URL}api/auth/registration/`, {
+            `${SERVER}api/auth/registration/`, {
                 login,
                 password,
             }
@@ -16,7 +18,7 @@ class AuthService {
     }
     async login(login, password) {
         const { message: loginMessage, isSuccess: loginSuccess } = await fetchData(
-            `${process.env.REACT_APP_SERVER_URL}api/auth/login/`, {
+            `${SERVER}api/auth/login/`, {
                 login,
                 password,
             }
@@ -25,13 +27,13 @@ class AuthService {
     }
     async logout() {
         const { message: logoutMessage, isSuccess: logoutSuccess } = await fetchData(
-            `${process.env.REACT_APP_SERVER_URL}api/auth/logout/`
+            `${SERVER}api/auth/logout/`
         );
         localStorage.removeItem('token');
     }
     async chechAuth() {
 
-        let message = await fetch(`${process.env.REACT_APP_SERVER_URL}api/auth/refresh/`, {
+        let message = await fetch(`${SERVER}api/auth/refresh/`, {
                 method: 'GET',
                 headers: { "Content-Type": "application/json" },
                 credentials: 'include',

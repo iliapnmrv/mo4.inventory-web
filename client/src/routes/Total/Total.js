@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./Total.css";
-import Item from "../../components/Item/Item";
-import Modal from "../../components/Modal/Modal";
-import useFetch from "../../hooks/useFetch";
-import Loading from "../../components/Loading/Loading";
-import Form from "../../components/Form/Form";
-import Filters from "../../components/Filters/Filters";
+import Item from "components/Item/Item";
+import Modal from "components/Modal/Modal";
+import useFetch from "hooks/useFetch";
+import Loading from "components/Loading/Loading";
+import Form from "components/Form/Form";
+import Filters from "components/Filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
+import { SERVER } from "constants/constants";
 
 export default function Total() {
   const data = useSelector((state) => state.total.data);
@@ -32,7 +33,7 @@ export default function Total() {
     data: fetchedData,
     isPending,
     error,
-  } = useFetch(`${process.env.REACT_APP_SERVER_URL}api/total`);
+  } = useFetch(`${SERVER}api/total`);
 
   useEffect(() => {
     dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: fetchedData });

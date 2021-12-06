@@ -4,10 +4,12 @@ import React, { useState, useEffect } from "react";
 import "./Form.css";
 import Input from "./Input/Input";
 import SelectInput from "./Select/Select";
-import useFetch from "../../hooks/useFetch";
-import usePostFetch from "../../hooks/usePostFetch";
-import useForm from "../../hooks/useForm";
-import useNotification from "../../hooks/useNotification";
+import useFetch from "hooks/useFetch";
+import usePostFetch from "hooks/usePostFetch";
+import useForm from "hooks/useForm";
+import useNotification from "hooks/useNotification";
+import { SERVER } from "constants/constants";
+
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Form(props) {
@@ -55,16 +57,16 @@ export default function Form(props) {
   });
 
   const { data: fetchTypes, isPending: isPendingTypes } = useFetch(
-    `${process.env.REACT_APP_SERVER_URL}api/types`
+    `${SERVER}api/types`
   );
   const { data: fetchSredstva, isPending: isPendingSredstva } = useFetch(
-    `${process.env.REACT_APP_SERVER_URL}api/sredstva`
+    `${SERVER}api/sredstva`
   );
   const { data: fetchStatuses, isPending: isPendingStatuses } = useFetch(
-    `${process.env.REACT_APP_SERVER_URL}api/statuses`
+    `${SERVER}api/statuses`
   );
   const { data: fetchPersons, isPending: isPendingPersons } = useFetch(
-    `${process.env.REACT_APP_SERVER_URL}api/persons`
+    `${SERVER}api/persons`
   );
 
   useEffect(() => {
@@ -98,7 +100,7 @@ export default function Form(props) {
     e.preventDefault();
     try {
       const { message: newItemMessage, isSuccess: newItemSuccess } =
-        await fetchData(`${process.env.REACT_APP_SERVER_URL}api/total/`, {
+        await fetchData(`${SERVER}api/total/`, {
           qr,
           name,
           sredstvo,
@@ -109,20 +111,20 @@ export default function Form(props) {
           sernom,
         });
       const { message: newInfoMessage, isSuccess: newInfoSuccess } =
-        await fetchData(`${process.env.REACT_APP_SERVER_URL}api/info/${qr}`, {
+        await fetchData(`${SERVER}api/info/${qr}`, {
           info,
         });
       const { message: newStatusMessage, isSuccess: newStatusSuccess } =
-        await fetchData(`${process.env.REACT_APP_SERVER_URL}api/status/${qr}`, {
+        await fetchData(`${SERVER}api/status/${qr}`, {
           status,
         });
       const { message: newPersonMessage, isSuccess: newPersonSuccess } =
-        await fetchData(`${process.env.REACT_APP_SERVER_URL}api/person/${qr}`, {
+        await fetchData(`${SERVER}api/person/${qr}`, {
           person,
         });
 
       const { message: newLogMessage, isSuccess: newLogSuccess } =
-        await fetchData(`${process.env.REACT_APP_SERVER_URL}api/logs/`, {
+        await fetchData(`${SERVER}api/logs/`, {
           qr,
           user: username,
           text: "Ура",

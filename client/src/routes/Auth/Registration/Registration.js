@@ -1,12 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Input from "../../../components/Form/Input/Input";
-import Header from "../../../components/Header/Header";
-import useForm from "../../../hooks/useForm";
-import useNotification from "../../../hooks/useNotification";
-
-import AuthService from "../../../services/AuthService";
+import Input from "components/Form/Input/Input";
+import Header from "components/Header/Header";
+import useForm from "hooks/useForm";
+import useNotification from "hooks/useNotification";
+import AuthService from "services/AuthService";
 
 export default function Registration() {
   const dispatch = useNotification();

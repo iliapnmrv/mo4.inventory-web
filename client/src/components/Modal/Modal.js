@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Input from "../Form/Input/Input";
-import SelectInput from "../Form/Select/Select";
-import "./Modal.css";
-import useFetch from "../../hooks/useFetch";
-import useForm from "../../hooks/useForm";
-import usePostFetch from "../../hooks/usePostFetch";
-import useNotification from "../../hooks/useNotification";
-import Loading from "../Loading/Loading";
+import Input from "components/Form/Input/Input";
+import SelectInput from "components/Form/Select/Select";
+import useFetch from "hooks/useFetch";
+import useForm from "hooks/useForm";
+import usePostFetch from "hooks/usePostFetch";
+import useNotification from "hooks/useNotification";
+import Loading from "components/Loading/Loading";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "../Button/Button";
+import { SERVER } from "constants/constants";
+import Button from "components/Button/Button";
 
 export default function Modal(props) {
   const username = useSelector((state) => state.user.username);
@@ -61,17 +61,17 @@ export default function Modal(props) {
   });
 
   const { data: fetchTypes, isPending: isPendingTypes } = useFetch(
-    `${process.env.REACT_APP_SERVER_URL}api/types`
+    `${SERVER}api/types`
   );
   const { data: fetchSredstva, isPending: isPendingSredstva } = useFetch(
-    `${process.env.REACT_APP_SERVER_URL}api/sredstva`
+    `${SERVER}api/sredstva`
   );
   const { data: fetchStatuses, isPending: isPendingStatuses } = useFetch(
-    `${process.env.REACT_APP_SERVER_URL}api/statuses`
+    `${SERVER}api/statuses`
   );
 
   const { data: fetchPersons, isPending: isPendingPersons } = useFetch(
-    `${process.env.REACT_APP_SERVER_URL}api/persons`
+    `${SERVER}api/persons`
   );
 
   useEffect(() => {
@@ -122,7 +122,7 @@ export default function Modal(props) {
     try {
       const { message: updatedTotal, isSuccess: updatedTotalSuccess } =
         await fetchData(
-          `${process.env.REACT_APP_SERVER_URL}api/total/${props.editId}`,
+          `${SERVER}api/total/${props.editId}`,
           {
             qr,
             name,
@@ -136,32 +136,23 @@ export default function Modal(props) {
           "PUT"
         );
       const { message: updatedLogs, isSuccess: updatedLogsSuccess } =
-        await fetchData(`${process.env.REACT_APP_SERVER_URL}api/logs/`, {
+        await fetchData(`${SERVER}api/logs/`, {
           qr,
           user: username,
           text: "Обновлена информация",
         });
       const { message: updatedInfo, isSuccess: updatedInfoSuccess } =
-        await fetchData(
-          `${process.env.REACT_APP_SERVER_URL}api/info/${props.editId}`,
-          {
-            info,
-          }
-        );
+        await fetchData(`${SERVER}api/info/${props.editId}`, {
+          info,
+        });
       const { message: updatedStatus, isSuccess: updatedStatusSuccess } =
-        await fetchData(
-          `${process.env.REACT_APP_SERVER_URL}api/status/${props.editId}`,
-          {
-            status,
-          }
-        );
+        await fetchData(`${SERVER}api/status/${props.editId}`, {
+          status,
+        });
       const { message: updatedPerson, isSuccess: updatedPersonSuccess } =
-        await fetchData(
-          `${process.env.REACT_APP_SERVER_URL}api/person/${props.editId}`,
-          {
-            person,
-          }
-        );
+        await fetchData(`${SERVER}api/person/${props.editId}`, {
+          person,
+        });
       dispatch({
         type: "SUCCESS",
         message: updatedTotal,
@@ -186,11 +177,11 @@ export default function Modal(props) {
   const getData = async () => {
     try {
       setIsPending(true);
-      const response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}api/total/${props.editId}`
-      ).then((res) => res.json());
+      const response = await fetch(`${SERVER}api/total/${props.editId}`).then(
+        (res) => res.json()
+      );
 
-      fetch(`${process.env.REACT_APP_SERVER_URL}api/logs/${props.editId}`)
+      fetch(`${SERVER}api/logs/${props.editId}`)
         .then((res) => res.json())
         .then((data) => setLogs(data))
         .finally(setIsPending(false));
@@ -233,16 +224,12 @@ export default function Modal(props) {
     try {
       const { message: deleteMessage, isSuccess: deleteSuccess } =
         await fetchData(
-          `${process.env.REACT_APP_SERVER_URL}api/total/${props.editId}`,
+          `${SERVER}api/total/${props.editId}`,
           { status },
           "DELETE"
         );
       const { message: deleteLogMessage, isSuccess: deleteLogSuccess } =
-        await fetchData(
-          `${process.env.REACT_APP_SERVER_URL}api/logs/${props.editId}`,
-          {},
-          "DELETE"
-        );
+        await fetchData(`${SERVER}api/logs/${props.editId}`, {}, "DELETE");
 
       dispatch({
         type: "SUCCESS",

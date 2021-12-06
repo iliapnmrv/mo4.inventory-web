@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Header from "./components/Header/Header";
@@ -10,6 +9,7 @@ import Login from "./routes/Auth/Login/Login";
 import Registration from "./routes/Auth/Registration/Registration";
 import { useDispatch, useSelector } from "react-redux";
 import AuthService from "./services/AuthService";
+import "./styles/main.sass";
 
 function App() {
   const username = useSelector((state) => state.user.username);

@@ -2,22 +2,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import "./Inventory.css";
-import useFetch from "../../hooks/useFetch";
-import useNotification from "../../hooks/useNotification";
-import Loading from "../../components/Loading/Loading";
+import useFetch from "hooks/useFetch";
+import useNotification from "hooks/useNotification";
+import Loading from "components/Loading/Loading";
+import { SERVER } from "constants/constants";
 
 export default function Inventory() {
   const [open, setOpen] = useState(false);
 
-  const { data, isPending } = useFetch(
-    `${process.env.REACT_APP_SERVER_URL}api/inventory`
-  );
+  const { data, isPending } = useFetch(`${SERVER}api/inventory`);
   const dispatch = useNotification();
 
   const handleUpload = async (e) => {
     try {
       const truncate = new Promise((resolve, reject) => {
-        fetch(`${process.env.REACT_APP_SERVER_URL}api/inventory`, {
+        fetch(`${SERVER}api/inventory`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -28,7 +27,7 @@ export default function Inventory() {
         const formData = new FormData();
         formData.append("csv", files[0]);
 
-        fetch(`${process.env.REACT_APP_SERVER_URL}api/inventory/upload`, {
+        fetch(`${SERVER}api/inventory/upload`, {
           method: "POST",
           body: formData,
         })
