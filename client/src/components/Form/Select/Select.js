@@ -1,7 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useRef } from "react";
 import Select from "react-select";
 
 export default function SelectInput(props) {
+  const selectInputRef = useRef();
+
+  const {
+    name,
+    onSelectChange,
+    data,
+    multi,
+    span,
+    required,
+    default: defaultValue,
+    onSelectReset,
+  } = props;
+
   const multiStyles = {
     placeholder: (styles) => ({ ...styles, fontSize: 14 }),
   };
@@ -11,11 +25,11 @@ export default function SelectInput(props) {
 
   const handleSelect = (e) => {
     let out = {
-      name: props.name,
+      name: name,
       value: e.value,
     };
     setValue(e.value);
-    props.onSelectChange(out);
+    onSelectChange(out);
   };
 
   const handleMultiple = (e) => {
@@ -24,31 +38,26 @@ export default function SelectInput(props) {
       values = [...values, elem.value];
     });
     let out = {
-      name: props.name,
+      name: name,
       value: values,
     };
     setMultiple(values);
-    props.onSelectChange(out);
+    onSelectChange(out);
   };
-
-  useEffect(() => {
-    setValue(props.value);
-  }, [props.value]);
 
   return (
     <>
       <label className="form-item">
-        <span className={props?.required ? "required" : null}>
-          {props.span}
-        </span>
+        <span className={required ? "required" : null}>{span}</span>
         <Select
-          styles={props.multi ? multiStyles : ""}
-          options={props.data}
-          placeholder={props.span}
-          defaultValue={props.default}
-          isMulti={props.multi ? "false" : null}
+          ref={selectInputRef}
+          styles={multi ? multiStyles : ""}
+          options={data}
+          placeholder={span}
+          defaultValue={defaultValue}
+          isMulti={multi ? "false" : null}
           onChange={(e) => {
-            props.multi ? handleMultiple(e) : handleSelect(e);
+            multi ? handleMultiple(e) : handleSelect(e);
           }}
           maxMenuHeight={210}
         />
@@ -57,7 +66,7 @@ export default function SelectInput(props) {
           autoComplete="off"
           style={{ opacity: 0, height: 0 }}
           value={value || multiple}
-          required={props?.required ? true : props.required}
+          required={required ? true : required}
         />
       </label>
     </>

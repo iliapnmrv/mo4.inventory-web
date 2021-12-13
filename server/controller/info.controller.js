@@ -36,6 +36,7 @@ class infoController {
                 )
                 return res.json(newPerson.rows)
             }
+            res.json('Отсутствует информация о МОЛ')
             res.status(200)
         } catch (e) {
             res.json(e.message)
@@ -56,6 +57,28 @@ class infoController {
                 )
                 res.json(newStatus.rows)
             }
+            res.json('Отсутствует информация о статусе')
+            res.status(200)
+        } catch (e) {
+            res.json(e.message)
+        }
+    }
+
+    async setStorage(req, res) {
+        try {
+            const { id } = req.params
+            const { storage } = req.body
+
+            if (storage) {
+                const newStorage = await pool.query(
+                    `INSERT INTO storages (storage_qr, storage) 
+                    VALUES ($1, $2)
+                    ON CONFLICT (storage_qr) DO UPDATE 
+                    SET storage = $2 RETURNING *`, [id, storage]
+                )
+                res.json(newStorage.rows)
+            }
+            res.json('Отсутствует информация о месте хранения')
             res.status(200)
         } catch (e) {
             res.json(e.message)
@@ -71,6 +94,10 @@ class infoController {
     }
     async getStatuses(req, res) {
         const all = await pool.query(`SELECT * FROM status_catalog`)
+        res.json(all.rows)
+    }
+    async getStorages(req, res) {
+        const all = await pool.query(`SELECT * FROM storage_catalog`)
         res.json(all.rows)
     }
     async getPersons(req, res) {

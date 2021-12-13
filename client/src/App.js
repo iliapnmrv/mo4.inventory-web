@@ -10,11 +10,38 @@ import Registration from "./routes/Auth/Registration/Registration";
 import { useDispatch, useSelector } from "react-redux";
 import AuthService from "./services/AuthService";
 import "./styles/main.sass";
+import { SERVER } from "constants/constants";
+import useFetch from "hooks/useFetch";
 
 function App() {
   const username = useSelector((state) => state.user.username);
   const dispatchUser = useDispatch();
   const dispatchAuth = useDispatch();
+  const dispatchInfo = useDispatch();
+
+  const { data: fetchTypes, isPending: isPendingTypes } = useFetch(
+    `${SERVER}api/types`
+  );
+  const { data: fetchSredstva, isPending: isPendingSredstva } = useFetch(
+    `${SERVER}api/sredstva`
+  );
+  const { data: fetchStatuses, isPending: isPendingStatuses } = useFetch(
+    `${SERVER}api/statuses`
+  );
+  const { data: fetchPersons, isPending: isPendingPersons } = useFetch(
+    `${SERVER}api/persons`
+  );
+  const { data: fetchStorages, isPending: isPendingStorages } = useFetch(
+    `${SERVER}api/storages`
+  );
+
+  useEffect(() => {
+    dispatchInfo({ type: "CHANGE_STORAGES_DATA", payload: fetchStorages });
+    dispatchInfo({ type: "CHANGE_STATUSES_DATA", payload: fetchStatuses });
+    dispatchInfo({ type: "CHANGE_SREDSTVA_DATA", payload: fetchSredstva });
+    dispatchInfo({ type: "CHANGE_PERSONS_DATA", payload: fetchPersons });
+    dispatchInfo({ type: "CHANGE_TYPES_DATA", payload: fetchTypes });
+  }, [fetchTypes, fetchSredstva, fetchStatuses, fetchPersons, fetchStorages]);
 
   const checkLogin = () => {
     AuthService.chechAuth();

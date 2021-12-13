@@ -1,10 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./Form.css";
 import Input from "./Input/Input";
 import SelectInput from "./Select/Select";
-import useFetch from "hooks/useFetch";
 import usePostFetch from "hooks/usePostFetch";
 import useForm from "hooks/useForm";
 import useNotification from "hooks/useNotification";
@@ -12,16 +11,13 @@ import { SERVER } from "constants/constants";
 
 import { useDispatch, useSelector } from "react-redux";
 
-export default function Form(props) {
-  const username = useSelector((state) => state.user.username);
-  const data = useSelector((state) => state.total.data);
+export default function Form({ close }) {
+  const { storages, statuses, sredstva, persons, types } = useSelector(
+    (state) => state.info
+  );
+  const { username } = useSelector((state) => state.user);
+  const { data } = useSelector((state) => state.total);
   const dispatchTotal = useDispatch();
-
-  const [open, setOpen] = useState(false);
-  const [types, setTypes] = useState([]);
-  const [sredstva, setSredstva] = useState([]);
-  const [statuses, setStatuses] = useState([]);
-  const [persons, setPersons] = useState([]);
 
   const fetchData = usePostFetch();
   const dispatch = useNotification();
@@ -31,7 +27,7 @@ export default function Form(props) {
       qr,
       name,
       sredstvo,
-      type_id,
+      type,
       month,
       year,
       model,
@@ -39,14 +35,16 @@ export default function Form(props) {
       info,
       status,
       person,
+      storage,
     },
     changeHandler,
     selectChangeHandler,
+    resetForm,
   } = useForm({
     qr: "",
     name: "",
     sredstvo: "",
-    type_id: "",
+    type: "",
     month: "",
     year: "",
     model: "",
@@ -54,57 +52,19 @@ export default function Form(props) {
     info: "",
     status: "",
     person: "",
+    storage: "",
   });
-
-  const { data: fetchTypes, isPending: isPendingTypes } = useFetch(
-    `${SERVER}api/types`
-  );
-  const { data: fetchSredstva, isPending: isPendingSredstva } = useFetch(
-    `${SERVER}api/sredstva`
-  );
-  const { data: fetchStatuses, isPending: isPendingStatuses } = useFetch(
-    `${SERVER}api/statuses`
-  );
-  const { data: fetchPersons, isPending: isPendingPersons } = useFetch(
-    `${SERVER}api/persons`
-  );
-
-  useEffect(() => {
-    setTypes(
-      fetchTypes.map((row) => ({
-        label: `${row.type_id} - ${row.type_name}`,
-        value: row.type_id,
-      }))
-    );
-    setSredstva(
-      fetchSredstva.map((row) => ({
-        label: `${row.sredstvo_id} - ${row.sredstvo_name}`,
-        value: row.sredstvo_id,
-      }))
-    );
-    setStatuses(
-      fetchStatuses.map((row) => ({
-        label: `${row.status_id} - ${row.status_name}`,
-        value: row.status_id,
-      }))
-    );
-    setPersons(
-      fetchPersons.map((row) => ({
-        label: `${row.person_id} - ${row.person_name}`,
-        value: row.person_id,
-      }))
-    );
-  }, [fetchTypes, fetchSredstva, fetchStatuses, fetchPersons]);
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
+      close();
       const { message: newItemMessage, isSuccess: newItemSuccess } =
         await fetchData(`${SERVER}api/total/`, {
           qr,
           name,
           sredstvo,
-          type_id,
+          type,
           month,
           year,
           model,
@@ -122,12 +82,16 @@ export default function Form(props) {
         await fetchData(`${SERVER}api/person/${qr}`, {
           person,
         });
+      const { message: newStorageMessage, isSuccess: newStorageSuccess } =
+        await fetchData(`${SERVER}api/storage/${qr}`, {
+          storage,
+        });
 
       const { message: newLogMessage, isSuccess: newLogSuccess } =
         await fetchData(`${SERVER}api/logs/`, {
           qr,
           user: username,
-          text: "Ура",
+          text: "Предмет создан",
         });
 
       dispatch({
@@ -135,44 +99,31 @@ export default function Form(props) {
         message: newItemMessage,
         title: "Успешно",
       });
-      let obj = { qr, name, sredstvo, type_id, month, year, model, sernom };
-      let newArr = [...data, obj];
-      function sortArr(arr) {
-        return arr.sort((a, b) => (a.qr > b.qr ? 1 : -1));
-      }
+      let newItem = { qr, name, sredstvo, type, month, year, model, sernom };
+      let newArr = [...data, newItem];
+
       sortArr(newArr);
       dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: newArr });
-
-      toggleForm();
-      document.getElementById("newItem").reset();
+      resetForm();
     } catch (e) {
       console.error(e.message);
     }
   };
 
-  const toggleForm = () => {
-    document.querySelector(".form").classList.toggle("slide");
-    setOpen(!open);
-  };
+  function sortArr(arr) {
+    return arr.sort((a, b) => (a.qr > b.qr ? 1 : -1));
+  }
 
   return (
-    <div>
-      <div
-        className="header"
-        onClick={() => {
-          toggleForm();
-        }}
-      >
-        <h2>Добавить новый элемент</h2>
-        <FontAwesomeIcon icon={open ? faChevronDown : faChevronUp} />
-      </div>
+    <div className="new_item__form">
       <form className="form" id="newItem" onSubmit={(e) => onSubmitForm(e)}>
         <div className="form-inputs">
           <SelectInput
             span="Выберите тип устройства"
-            name="type_id"
+            name="type"
             data={types}
             onSelectChange={selectChangeHandler}
+            onSelectReset={type}
           />
           <SelectInput
             span="Выберите средство"
@@ -186,10 +137,18 @@ export default function Form(props) {
             data={statuses}
             onSelectChange={selectChangeHandler}
           />
+        </div>
+        <div className="form-inputs">
           <SelectInput
             span="Выберите МОЛ"
             name="person"
             data={persons}
+            onSelectChange={selectChangeHandler}
+          />
+          <SelectInput
+            span="Выберите место хранения"
+            name="storage"
+            data={storages}
             onSelectChange={selectChangeHandler}
           />
         </div>

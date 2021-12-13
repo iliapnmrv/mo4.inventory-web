@@ -15,7 +15,8 @@ const useForm = (initial) => {
                 [e.name]: e.value
             })
         },
-        setDefault: data => data ? setValues(data) : null
+        setDefault: data => data ? setValues(data) : null,
+        resetForm: e => setValues(initial)
     }
 }
 

@@ -7,17 +7,33 @@ class totalController {
         try {
             const { id } = req.params
             const el = await pool.query(`
-            SELECT * FROM total 
+            SELECT 
+                total.qr,
+                total.name,
+                total.sredstvo,
+                total.type,
+                total.month,
+                total.year,
+                total.model, 
+                total.sernom,
+                persons.person,
+                storages.storage,
+                statuses.status,
+                info.info
+            FROM total 
                 LEFT JOIN info
                     ON total.qr = info.info_qr
                 LEFT JOIN statuses
                     ON total.qr = statuses.status_qr
+                LEFT JOIN storages
+                    ON total.qr = storages.storage_qr
                 LEFT JOIN persons
                     ON total.qr = persons.person_qr
                 WHERE total.qr = $1
                 ORDER BY total.qr ASC
             `, [id])
-            res.json(el.rows)
+                // console.log(el.rows);
+            res.json(el.rows[0])
         } catch (e) {
             res.json(e.message)
         }
@@ -27,7 +43,7 @@ class totalController {
         try {
             const { qr, sredstvo, type_id, month, year, name, model, sernom } = req.body
             const item = await pool.query(
-                `INSERT INTO total(qr, sredstvo, type_id, month, year, name, model, sernom) 
+                `INSERT INTO total(qr, sredstvo, type, month, year, name, model, sernom) 
                             VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`, [qr, sredstvo, type_id, month, year, name, model, sernom]
             )
             res.json(`Успешно добавлено, QR код: ${item.rows[0].qr}`)
@@ -48,9 +64,9 @@ class totalController {
 
     async updateOne(req, res) {
         try {
-            const { qr, sredstvo, type_id, month, year, name, model, sernom } = req.body
+            const { qr, sredstvo, type, month, year, name, model, sernom } = req.body
             const item = await pool.query(
-                'UPDATE total SET qr = $1, sredstvo = $2, type_id = $3, month = $4, year = $5, name = $6, model = $7, sernom = $8 WHERE qr = $1 RETURNING *', [qr, sredstvo, type_id, month, year, name, model, sernom]
+                'UPDATE total SET qr = $1, sredstvo = $2, type = $3, month = $4, year = $5, name = $6, model = $7, sernom = $8 WHERE qr = $1 RETURNING *', [qr, sredstvo, type, month, year, name, model, sernom]
             )
             res.json(`Успешно обновлено, QR код: ${item.rows[0].qr}`)
         } catch (e) {
@@ -64,10 +80,14 @@ class totalController {
 
             const filtered = await pool.query(`
             SELECT * FROM total 
+                LEFT JOIN types
+                    ON total.type = types.type_id
                 LEFT JOIN sredstva
                     ON total.sredstvo = sredstva.sredstvo_id
                 LEFT JOIN statuses
                     ON total.qr = statuses.status_qr
+                LEFT JOIN storages
+                    ON total.qr = storages.storage_qr
                 LEFT JOIN persons
                     ON total.qr = persons.person_qr
                 ${whereClause}
@@ -83,7 +103,7 @@ class totalController {
         const all = await pool.query(`
         SELECT * FROM total 
             LEFT JOIN types
-                ON total.type_id = types.type_id
+                ON total.type = types.type_id
             LEFT JOIN sredstva
                 ON total.sredstvo = sredstva.sredstvo_id
             ORDER BY total.qr ASC`)

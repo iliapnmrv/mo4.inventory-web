@@ -6,10 +6,16 @@ class TotalService {
         let whereClause = 'WHERE ('
         let last = Object.keys(query)[Object.keys(query).length - 1];
         for (const key in query) {
-            for (let i = 0; i < query[key].length; i++) {
-                const elem = query[key][i];
+            let objectKey = []
+            if (!Array.isArray(query[key])) {
+                objectKey.push(query[key])
+            } else {
+                objectKey = query[key]
+            }
+            for (let i = 0; i < objectKey.length; i++) {
+                const elem = objectKey[i];
                 let con
-                if (query[key][query[key].length - 1] == query[key][i]) {
+                if (objectKey[objectKey.length - 1] == objectKey[i]) {
                     if (key == last) {
                         con = ')'
                     } else {
@@ -18,7 +24,7 @@ class TotalService {
                 } else {
                     con = ' OR '
                 }
-                whereClause = `${whereClause}${key} = ${query[key][i]}${con}`
+                whereClause = `${whereClause}${key} = ${objectKey[i]}${con}`
             }
         }
         console.log(whereClause);

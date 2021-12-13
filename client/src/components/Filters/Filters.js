@@ -1,77 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import useFetch from "hooks/useFetch";
 import useForm from "hooks/useForm";
-import useNotification from "hooks/useNotification";
 import usePostFetch from "hooks/usePostFetch";
 import Button from "components/Button/Button";
 import SelectInput from "components/Form/Select/Select";
 import { SERVER } from "constants/constants";
 import "./Filters.css";
+import { useSelector } from "react-redux";
 
-export default function Filters(props) {
+export default function Filters({ close }) {
+  const { storages, statuses, sredstva, persons, types } = useSelector(
+    (state) => state.info
+  );
   const dispatchTotal = useDispatch();
-
-  const [types, setTypes] = useState([]);
-  const [sredstva, setSredstva] = useState([]);
-  const [statuses, setStatuses] = useState([]);
-  const [persons, setPersons] = useState([]);
-
   const fetchData = usePostFetch();
-  const dispatch = useNotification();
   const {
-    values: { sredstvo, type_id, status, person },
+    values: { sredstvo, type_id, status, person, storage },
     selectChangeHandler,
   } = useForm({
     sredstvo: "",
     type_id: "",
     status: "",
     person: "",
+    storage: "",
   });
 
-  const { data: fetchTypes, isPending: isPendingTypes } = useFetch(
-    `${SERVER}api/types`
-  );
-  const { data: fetchSredstva, isPending: isPendingSredstva } = useFetch(
-    `${SERVER}api/sredstva`
-  );
-  const { data: fetchStatuses, isPending: isPendingStatuses } = useFetch(
-    `${SERVER}api/statuses`
-  );
-  const { data: fetchPersons, isPending: isPendingPersons } = useFetch(
-    `${SERVER}api/persons`
-  );
-
-  useEffect(() => {
-    setTypes(
-      fetchTypes.map((row) => ({
-        label: `${row.type_id} - ${row.type_name}`,
-        value: row.type_id,
-      }))
-    );
-    setSredstva(
-      fetchSredstva.map((row) => ({
-        label: `${row.sredstvo_id} - ${row.sredstvo_name}`,
-        value: row.sredstvo_id,
-      }))
-    );
-    setStatuses(
-      fetchStatuses.map((row) => ({
-        label: `${row.status_id} - ${row.status_name}`,
-        value: row.status_id,
-      }))
-    );
-    setPersons(
-      fetchPersons.map((row) => ({
-        label: `${row.person_id} - ${row.person_name}`,
-        value: row.person_id,
-      }))
-    );
-  }, [fetchTypes, fetchSredstva, fetchStatuses, fetchPersons]);
-
   const handleFilter = async () => {
-    console.log({ sredstvo, type_id, status, person });
-    let filters = { sredstvo, type_id, status, person };
+    let filters = { sredstvo, type_id, status, person, storage };
     let query = "";
     for (const key in filters) {
       for (let i = 0; i < filters[key].length; i++) {
@@ -79,9 +34,9 @@ export default function Filters(props) {
         query = `${query}${key}=${value}&`;
       }
     }
+    close();
     const { message: filteredData, isSuccess: filteredSuccess } =
       await fetchData(`${SERVER}api/total/filter?${query.slice(0, -1)}`);
-    console.log(filteredData);
     dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: filteredData });
   };
 
@@ -118,6 +73,14 @@ export default function Filters(props) {
             span="Выберите МОЛ"
             name="person"
             data={persons}
+            onSelectChange={selectChangeHandler}
+            required={false}
+          />
+          <SelectInput
+            multi={true}
+            span="Выберите место хранения"
+            name="storage"
+            data={storages}
             onSelectChange={selectChangeHandler}
             required={false}
           />

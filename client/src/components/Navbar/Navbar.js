@@ -23,7 +23,7 @@ export default function Navbar() {
             <Link to="/inventory">Инвентаризация</Link>
           </li>
         </ul>
-        <button className="btn" onClick={handleLogout}>
+        <button className="btn logout" onClick={handleLogout}>
           Выйти
         </button>
       </nav>

@@ -8,25 +8,52 @@ import Form from "components/Form/Form";
 import Filters from "components/Filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
 import { SERVER } from "constants/constants";
+import ItemInfo from "routes/ItemInfo/ItemInfo";
+import Button from "components/Button/Button";
 
 export default function Total() {
   const data = useSelector((state) => state.total.data);
+  const { filters, newItem, itemInfo, itemInfoId } = useSelector(
+    (state) => state.modal
+  );
+
   const dispatchTotal = useDispatch();
 
-  const [visible, setVisible] = useState(false);
-  const [editId, setEditId] = useState();
-  const [open, setOpen] = useState(false);
-
-  const openModal = (id) => {
+  const openItemModal = (id) => {
     document.body.style.overflow = "hidden";
-    setVisible(true);
-    setEditId(id);
-    setOpen(!open);
+    dispatchTotal({
+      type: "CHANGE_ITEMINFOID",
+      payload: id,
+    });
+    dispatchTotal({
+      type: "TOGGLE_ITEMINFO_MODAL",
+      payload: true,
+    });
   };
 
-  const closeModal = () => {
+  const closeItemModal = () => {
     document.body.style.overflow = "auto";
-    setVisible(false);
+    dispatchTotal({
+      type: "CHANGE_ITEMINFOID",
+      payload: 0,
+    });
+    dispatchTotal({
+      type: "TOGGLE_ITEMINFO_MODAL",
+      payload: false,
+    });
+  };
+
+  const toggleFiltersVisible = () => {
+    dispatchTotal({
+      type: "TOGGLE_FILTERS_MODAL",
+      payload: !filters,
+    });
+  };
+  const toggleNewItemVisible = () => {
+    dispatchTotal({
+      type: "TOGGLE_NEWITEM_MODAL",
+      payload: !newItem,
+    });
   };
 
   const {
@@ -41,8 +68,25 @@ export default function Total() {
 
   return (
     <>
-      <Filters />
-      <Form data={data} />
+      <div className="filters-bar">
+        <Button text="Фильтры" style="filters" action={toggleFiltersVisible} />
+        <Button
+          text="Новый элемент"
+          style="filters"
+          action={toggleNewItemVisible}
+        />
+      </div>
+      <Modal
+        visible={newItem}
+        close={toggleNewItemVisible}
+        header={"Добавить новый предмет"}
+      >
+        <Form close={toggleNewItemVisible} />
+      </Modal>
+      <Modal visible={filters} close={toggleFiltersVisible} header={"Фильтры"}>
+        <Filters close={toggleFiltersVisible} />
+      </Modal>
+
       <div className="table">
         {isPending ? (
           <Loading />
@@ -68,19 +112,19 @@ export default function Total() {
               </thead>
               <tbody>
                 {data.map((row) => {
-                  return <Item openModal={openModal} data={row} />;
+                  return <Item openModal={openItemModal} data={row} />;
                 })}
               </tbody>
             </table>
           </>
         )}
         <Modal
-          visible={visible}
-          open={open}
-          closeModal={closeModal}
-          editId={editId}
-          data={data}
-        />
+          visible={itemInfo}
+          close={closeItemModal}
+          header={`Изменить информацию о позиции с QR номером: ${itemInfoId}`}
+        >
+          <ItemInfo editId={itemInfoId} close={closeItemModal} />
+        </Modal>
       </div>
     </>
   );
