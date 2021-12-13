@@ -45,8 +45,9 @@ class authController {
     }
     async getUsers(req, res) {
         try {
-            const users = await pool.query('SELECT * FROM users')
-            res.json(users.rows)
+            const [users] = await pool.execute('SELECT * FROM users')
+            console.log(users);
+            res.json(users)
         } catch (e) {
             res.json(e.message)
         }

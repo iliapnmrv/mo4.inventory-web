@@ -5,7 +5,6 @@ import usePostFetch from "hooks/usePostFetch";
 import Button from "components/Button/Button";
 import SelectInput from "components/Form/Select/Select";
 import { SERVER } from "constants/constants";
-import "./Filters.css";
 import { useSelector } from "react-redux";
 
 export default function Filters({ close }) {

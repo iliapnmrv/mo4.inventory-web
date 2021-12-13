@@ -117,7 +117,9 @@ export default function ItemInfo({ close, editId }) {
       }, {});
       let logs = "";
       for (const key in updatedData) {
-        logs = ` ${logs} ${LOGS_CATALOG[key]}: ${initialItemData[key]} -> ${updatedData[key]},`;
+        logs = ` ${logs} ${LOGS_CATALOG[key]}: ${
+          initialItemData[key] == null ? "" : initialItemData[key]
+        } -> ${updatedData[key]},`;
       }
 
       const { message: updatedLogs, isSuccess: updatedLogsSuccess } =

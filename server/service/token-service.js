@@ -23,27 +23,27 @@ class TokenService {
         }
     }
     async saveToken(userId, refreshToken) {
-        const tokenData = await pool.query(
-            `SELECT * FROM tokens WHERE user_id = $1`, [userId]
+        const [tokenData] = await pool.query(
+            `SELECT * FROM tokens WHERE user_id = ?`, [userId]
         )
-        if (tokenData.rows.length) {
-            await pool.query(`UPDATE tokens SET refresh_token = $1 WHERE user_id = $2`, [refreshToken, userId])
+        if (tokenData.length) {
+            await pool.query(`UPDATE tokens SET refresh_token = ? WHERE user_id = ?`, [refreshToken, userId])
             return null
         }
-        const newToken = await pool.query(
+        const [newToken] = await pool.query(
             `INSERT INTO tokens(user_id, refresh_token) 
-                VALUES($1, $2) RETURNING *`, [userId, refreshToken])
+                VALUES(?, ?)`, [userId, refreshToken])
         return newToken
     }
     async removeToken(refreshToken) {
-        const tokenData = await pool.query(
-            `DELETE FROM tokens WHERE refresh_token = $1 RETURNING *`, [refreshToken])
-        return tokenData.rows[0]
+        const [tokenData] = await pool.query(
+            `DELETE FROM tokens WHERE refresh_token = ?`, [refreshToken])
+        return tokenData[0]
     }
     async findToken(refreshToken) {
-        const tokenData = await pool.query(
-            `SELECT * FROM tokens WHERE refresh_token = $1`, [refreshToken])
-        return tokenData.rows[0]
+        const [tokenData] = await pool.query(
+            `SELECT * FROM tokens WHERE refresh_token = ?`, [refreshToken])
+        return tokenData[0]
     }
 }
 

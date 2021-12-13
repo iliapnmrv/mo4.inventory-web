@@ -4,16 +4,16 @@ import fetch from 'node-fetch';
 
 class inventoryController {
     async getInventory(req, res) {
-        const inv = await pool.query('SELECT * FROM inventory')
-        if (inv.rows.length) {
-            res.json(inv.rows)
+        const [inv] = await pool.query('SELECT * FROM inventory')
+        if (inv.length) {
+            res.json(inv)
         } else {
             res.json(null)
         }
     }
     async deleteInventory(req, res) {
         try {
-            const inv = await pool.query('TRUNCATE TABLE inventory')
+            await pool.query('TRUNCATE TABLE inventory')
             res.json("Успешно удалено")
         } catch (e) {
             console.log(e)
@@ -47,9 +47,9 @@ class inventoryController {
     async createInventory(req, res) {
         try {
             const { vedPos, name, place, kolvo, placePriority } = req.body
-            const newInventory = await pool.query(
+            await pool.query(
                 `INSERT INTO inventory( vedPos, name, place, kolvo, placePriority ) 
-                                VALUES($1, $2, $3, $4, $5) RETURNING *`, [vedPos, name, place, kolvo, placePriority]
+                        VALUES(?, ?, ?, ?, ?)`, [vedPos, name, place, kolvo, placePriority]
             )
             res.json(`Загружено`)
         } catch (e) {

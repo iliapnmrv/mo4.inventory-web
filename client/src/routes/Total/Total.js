@@ -4,7 +4,7 @@ import Item from "components/Item/Item";
 import Modal from "components/Modal/Modal";
 import useFetch from "hooks/useFetch";
 import Loading from "components/Loading/Loading";
-import Form from "components/Form/Form";
+import Form from "components/Form/NewItem";
 import Filters from "components/Filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
 import { SERVER } from "constants/constants";
@@ -92,11 +92,6 @@ export default function Total() {
           <Loading />
         ) : (
           <>
-            {data[data.length - 1]?.qr && (
-              <p className="table-info">
-                Последняя позиция QR : {data[data.length - 1]?.qr}
-              </p>
-            )}
             <table>
               <thead>
                 <tr key={9999}>

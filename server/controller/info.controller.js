@@ -7,13 +7,12 @@ class infoController {
             const { info } = req.body
 
             if (info) {
-                const newInfo = await pool.query(
+                const [newInfo] = await pool.query(
                     `INSERT INTO info (info_qr, info) 
-                    VALUES ($1, $2)
-                    ON CONFLICT (info_qr) DO UPDATE 
-                    SET info = $2 RETURNING *`, [id, info]
+                    VALUES (?, ?)
+                    ON DUPLICATE KEY UPDATE info = ?`, [id, info, info]
                 )
-                return res.json(newInfo.rows)
+                return res.json(newInfo)
             }
             res.json('Отсутствует дополнительная информация')
             res.status(200)
@@ -26,15 +25,14 @@ class infoController {
         try {
             const { id } = req.params
             const { person } = req.body
-
+            console.log(person);
             if (person) {
-                const newPerson = await pool.query(
+                const [newPerson] = await pool.query(
                     `INSERT INTO persons (person_qr, person) 
-                    VALUES ($1, $2)
-                    ON CONFLICT (person_qr) DO UPDATE 
-                    SET person = $2 RETURNING *`, [id, person]
+                    VALUES (?, ?)
+                    ON DUPLICATE KEY UPDATE person = ?`, [id, person, person]
                 )
-                return res.json(newPerson.rows)
+                return res.json(newPerson)
             }
             res.json('Отсутствует информация о МОЛ')
             res.status(200)
@@ -49,13 +47,12 @@ class infoController {
             const { status } = req.body
 
             if (status) {
-                const newStatus = await pool.query(
+                const [newStatus] = await pool.query(
                     `INSERT INTO statuses (status_qr, status) 
-                    VALUES ($1, $2)
-                    ON CONFLICT (status_qr) DO UPDATE 
-                    SET status = $2 RETURNING *`, [id, status]
+                    VALUES (?, ?)
+                    ON DUPLICATE KEY UPDATE status = ?`, [id, status, status]
                 )
-                res.json(newStatus.rows)
+                return res.json(newStatus)
             }
             res.json('Отсутствует информация о статусе')
             res.status(200)
@@ -70,13 +67,12 @@ class infoController {
             const { storage } = req.body
 
             if (storage) {
-                const newStorage = await pool.query(
+                const [newStorage] = await pool.query(
                     `INSERT INTO storages (storage_qr, storage) 
-                    VALUES ($1, $2)
-                    ON CONFLICT (storage_qr) DO UPDATE 
-                    SET storage = $2 RETURNING *`, [id, storage]
+                    VALUES (?, ?)
+                    ON DUPLICATE KEY UPDATE storage = ?`, [id, storage, storage]
                 )
-                res.json(newStorage.rows)
+                return res.json(newStorage)
             }
             res.json('Отсутствует информация о месте хранения')
             res.status(200)
@@ -85,24 +81,24 @@ class infoController {
         }
     }
     async getSredstva(req, res) {
-        const all = await pool.query(`SELECT * FROM sredstva`)
-        res.json(all.rows)
+        const [all] = await pool.query(`SELECT * FROM sredstva`)
+        res.json(all)
     }
     async getTypes(req, res) {
-        const all = await pool.query(`SELECT * FROM types`)
-        res.json(all.rows)
+        const [all] = await pool.query(`SELECT * FROM types`)
+        res.json(all)
     }
     async getStatuses(req, res) {
-        const all = await pool.query(`SELECT * FROM status_catalog`)
-        res.json(all.rows)
+        const [all] = await pool.query(`SELECT * FROM status_catalog`)
+        res.json(all)
     }
     async getStorages(req, res) {
-        const all = await pool.query(`SELECT * FROM storage_catalog`)
-        res.json(all.rows)
+        const [all] = await pool.query(`SELECT * FROM storage_catalog`)
+        res.json(all)
     }
     async getPersons(req, res) {
-        const all = await pool.query(`SELECT * FROM person_catalog`)
-        res.json(all.rows)
+        const [all] = await pool.query(`SELECT * FROM person_catalog`)
+        res.json(all)
     }
 }
 

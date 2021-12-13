@@ -4,35 +4,35 @@ import pool from "../db.js"
 
 class AuthService {
     async registration(login, password) {
-        const candidate = await pool.query(
-            `SELECT * FROM users WHERE login = $1`, [login]
+        const [candidate] = await pool.query(
+            `SELECT * FROM users WHERE login = ?`, [login]
         )
-        if (candidate.rows.length) {
+        if (candidate.length) {
             throw new Error(`Пользователь с логином ${login} уже существует`)
         }
         const hashPassword = await hash(password, 3)
-        const user = await pool.query(
+        const [user] = await pool.query(
             `INSERT INTO users( login, password ) 
-                VALUES($1, $2) RETURNING *`, [login, hashPassword])
-        const { id } = user.rows[0]
+                VALUES(?, ?)`, [login, hashPassword])
+        const { insertId: id } = user
         const tokens = tokenService.generateTokens({ id, login })
         await tokenService.saveToken(id, tokens.refreshToken)
 
         return {...tokens, user: { id, login } }
     }
     async login(login, password) {
-        const candidate = await pool.query(
-            `SELECT * FROM users WHERE login = $1`, [login]
+        const [candidate] = await pool.query(
+            `SELECT * FROM users WHERE login = ?`, [login]
         )
-        if (!candidate.rows.length) {
+        if (!candidate.length) {
             throw new Error(`Пользователя с логином ${login} не существует`)
         }
 
-        const isPassEquals = await compare(password, candidate.rows[0].password)
+        const isPassEquals = await compare(password, candidate[0].password)
         if (!isPassEquals) {
             throw new Error(`Неверный пароль`)
         }
-        const { id } = candidate.rows[0]
+        const { insertId: id } = candidate
         const tokens = tokenService.generateTokens({ id, login })
         await tokenService.saveToken(id, tokens.refreshToken)
 
@@ -53,8 +53,8 @@ class AuthService {
         if (!userData || !tokenFromDb) {
             throw new Error('Пользователь не авторизован')
         }
-        const user = await pool.query(`SELECT * FROM users WHERE id = $1`, [tokenFromDb.user_id])
-        const { id, login } = user.rows[0]
+        const [user] = await pool.query(`SELECT * FROM users WHERE id = ?`, [tokenFromDb.user_id])
+        const { id, login } = user
         const tokens = tokenService.generateTokens({ id, login })
         await tokenService.saveToken(id, tokens.refreshToken)
 

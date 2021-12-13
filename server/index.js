@@ -8,9 +8,11 @@ import cors from 'cors'
 import multer from 'multer'
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv'
+
 dotenv.config()
 
 const app = express()
+
 
 app.use(cors({
     origin: 'http://localhost:3000',
