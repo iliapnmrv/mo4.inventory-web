@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { SERVER, LOGS_CATALOG } from "constants/constants";
 import Button from "components/Button/Button";
 import QRcode from "qrcode.react";
+import "./ItemInfo.css";
 
 export default function ItemInfo({ close, editId }) {
   const { storages, statuses, sredstva, persons, types } = useSelector(
@@ -250,6 +251,20 @@ export default function ItemInfo({ close, editId }) {
       console.error(e.message);
     }
   };
+
+  const downloadQR = () => {
+    const qrCodeURL = document
+      .querySelector(".qr canvas")
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+    let aEl = document.createElement("a");
+    aEl.href = qrCodeURL;
+    aEl.download = "QR_Code.png";
+    document.body.appendChild(aEl);
+    aEl.click();
+    document.body.removeChild(aEl);
+  };
+  const printQR = () => {};
   return (
     <div>
       {isPending ? (
@@ -399,7 +414,17 @@ export default function ItemInfo({ close, editId }) {
             </div>
           </form>
 
-          <div className="qr">
+          <div
+            className="qr"
+            title={`${sredstvo}${("0" + type).slice(
+              -2
+            )}${month}${year}${qr}\n${name}\n${model}\n${sernom}`}
+          >
+            <div className="qr-buttons">
+              <Button text="Скачать" action={downloadQR} style="info" />
+              <Button text="Распечатать" action={printQR} style="info" />
+            </div>
+
             <QRcode
               value={`${sredstvo}${("0" + type).slice(
                 -2
@@ -418,7 +443,7 @@ export default function ItemInfo({ close, editId }) {
                     {logs.map(({ user, text, time }, index) => {
                       return (
                         <tr>
-                          <td> {index + 1}</td>
+                          <td>{index + 1}</td>
                           <td>{user}</td>
                           <td>{text}</td>
                           <td>
