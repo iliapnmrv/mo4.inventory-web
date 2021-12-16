@@ -14,7 +14,7 @@ import { SERVER } from "constants/constants";
 import useFetch from "hooks/useFetch";
 
 function App() {
-  const username = useSelector((state) => state.user.username);
+  const { login, role } = useSelector((state) => state.user.username);
   const dispatchUser = useDispatch();
   const dispatchAuth = useDispatch();
   const dispatchInfo = useDispatch();
@@ -48,7 +48,7 @@ function App() {
     const token = localStorage.getItem("token");
     const username = localStorage.getItem("username");
 
-    dispatchUser({ type: "CHANGE_USER_DATA", payload: username });
+    dispatchUser({ type: "CHANGE_USER_DATA", payload: JSON.parse(username) });
 
     if (!token) {
       dispatchAuth({ type: "TOGGLE_REG_MODAL", payload: true });

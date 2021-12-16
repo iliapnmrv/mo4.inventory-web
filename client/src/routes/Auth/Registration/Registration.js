@@ -38,9 +38,9 @@ export default function Registration() {
       return;
     }
     dispatchAuth({ type: "TOGGLE_REG_MODAL", payload: false });
-
     localStorage.setItem("token", regMessage.accessToken);
-    dispatchUser({ type: "CHANGE_USER_DATA", payload: regMessage.user.login });
+    localStorage.setItem("username", JSON.stringify(regMessage.user));
+    dispatchUser({ type: "CHANGE_USER_DATA", payload: regMessage.user });
     dispatch({
       type: "SUCCESS",
       message: `Добро пожаловать, ${regMessage.user.login}`,

@@ -23,6 +23,8 @@ class TokenService {
         }
     }
     async saveToken(userId, refreshToken) {
+        console.log(123);
+        console.log(userId, refreshToken);
         const [tokenData] = await pool.query(
             `SELECT * FROM tokens WHERE user_id = ?`, [userId]
         )

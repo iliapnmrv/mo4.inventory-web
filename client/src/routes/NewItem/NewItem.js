@@ -1,20 +1,21 @@
-import React from "react";
-import Input from "./Input/Input";
-import SelectInput from "./Select/Select";
+import React, { useEffect, useState } from "react";
+import Input from "components/Form/Input/Input";
+import SelectInput from "components/Form/Select/Select";
 import usePostFetch from "hooks/usePostFetch";
 import useForm from "hooks/useForm";
 import useNotification from "hooks/useNotification";
 import { SERVER } from "constants/constants";
-
 import { useDispatch, useSelector } from "react-redux";
+import QR from "components/QR/QR";
 
 export default function NewItem({ close }) {
   const { storages, statuses, sredstva, persons, types } = useSelector(
     (state) => state.info
   );
-  const { username } = useSelector((state) => state.user);
+  const { login, role } = useSelector((state) => state.user.username);
   const { data } = useSelector((state) => state.total);
   const dispatchTotal = useDispatch();
+  const [sernomExists, setSernomExists] = useState(false);
 
   const fetchData = usePostFetch();
   const dispatch = useNotification();
@@ -52,6 +53,14 @@ export default function NewItem({ close }) {
     storage: "",
   });
 
+  useEffect(() => {
+    fetch(`${SERVER}api/total/checkSerialNum/${sernom}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setSernomExists(data);
+      });
+  }, [sernom]);
+
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
@@ -87,7 +96,7 @@ export default function NewItem({ close }) {
       const { message: newLogMessage, isSuccess: newLogSuccess } =
         await fetchData(`${SERVER}api/logs/`, {
           qr,
-          user: username,
+          user: login,
           text: "Предмет создан",
         });
 
@@ -149,7 +158,7 @@ export default function NewItem({ close }) {
               onSelectChange={selectChangeHandler}
             />
             <SelectInput
-              span="Выберите место хранения"
+              span="Выберите местоположение"
               name="storage"
               data={storages}
               onSelectChange={selectChangeHandler}
@@ -164,7 +173,7 @@ export default function NewItem({ close }) {
               onChange={changeHandler}
             />
             <Input
-              span="Введите наименование"
+              span="Наименование по бухучету"
               name="name"
               value={name}
               onChange={changeHandler}
@@ -188,7 +197,7 @@ export default function NewItem({ close }) {
               onChange={changeHandler}
             />
             <Input
-              span="Модель"
+              span="Модель реальная"
               name="model"
               value={model}
               onChange={changeHandler}
@@ -199,10 +208,11 @@ export default function NewItem({ close }) {
               value={sernom}
               onChange={changeHandler}
             />
+            {sernomExists && <p>{sernomExists}</p>}
           </div>
           <div className="form-inputs">
             <Input
-              span="Информация о предмете"
+              span="Примечания"
               name="info"
               required={false}
               value={info}
@@ -213,6 +223,16 @@ export default function NewItem({ close }) {
             Добавить
           </button>
         </form>
+        <QR
+          month={month}
+          year={year}
+          name={name}
+          qr={qr}
+          model={model}
+          sernom={sernom}
+          sredstvo={sredstvo}
+          type={type}
+        />
       </div>
     </>
   );

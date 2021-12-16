@@ -30,6 +30,7 @@ class AuthService {
             `${SERVER}api/auth/logout/`
         );
         localStorage.removeItem('token');
+        localStorage.removeItem('username');
     }
     async chechAuth() {
 

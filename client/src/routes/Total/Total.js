@@ -4,7 +4,7 @@ import Item from "components/Item/Item";
 import Modal from "components/Modal/Modal";
 import useFetch from "hooks/useFetch";
 import Loading from "components/Loading/Loading";
-import Form from "components/Form/NewItem";
+import Form from "routes/NewItem/NewItem";
 import Filters from "components/Filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
 import { SERVER } from "constants/constants";

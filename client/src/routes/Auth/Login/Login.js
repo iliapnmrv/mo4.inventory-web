@@ -39,9 +39,10 @@ export default function Login() {
     }
     dispatchAuth({ type: "TOGGLE_LOGIN_MODAL", payload: false });
     localStorage.setItem("token", loginMessage.accessToken);
+    localStorage.setItem("username", JSON.stringify(loginMessage.user));
     dispatchUser({
       type: "CHANGE_USER_DATA",
-      payload: loginMessage.user.login,
+      payload: loginMessage.user,
     });
     dispatch({
       type: "SUCCESS",

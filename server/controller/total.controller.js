@@ -1,6 +1,14 @@
 import pool from "../db.js"
 import totalService from "../service/total-service.js"
 class totalController {
+    async analyzeTotal(req, res) {
+        const [inv] = await pool.query('SELECT qr, name, model, sernom FROM total')
+        if (inv.length) {
+            res.json(inv)
+        } else {
+            res.json(null)
+        }
+    }
     async getOne(req, res) {
         try {
             const { id } = req.params
@@ -41,7 +49,7 @@ class totalController {
             const { qr, sredstvo, type, month, year, name, model, sernom } = req.body
             const data = await pool.query(
                 `INSERT INTO total(qr, sredstvo, type, month, year, name, model, sernom) 
-                            VALUES(?, ?, ?, ?, ?, ?, ?, ?)`, [qr, sredstvo, type_id, month, year, name, model, sernom]
+                            VALUES(?, ?, ?, ?, ?, ?, ?, ?)`, [qr, sredstvo, type, month, year, name, model, sernom]
             )
             res.json(`Успешно добавлено, QR код: ${qr}`)
         } catch (e) {
@@ -94,6 +102,23 @@ class totalController {
         } catch (e) {
             console.log(e.message);
         }
+    }
+
+    async checkSerialNum(req, res) {
+        const { num } = req.params
+        const [item] = await pool.query(`
+        SELECT * FROM total
+            WHERE sernom = ?
+        `, [num])
+        if (item.length) {
+            res.status(200)
+            res.json("Предмет с таким серийным номером уже существует!")
+        } else {
+            res.status(404)
+            res.json(false)
+        }
+
+
     }
 
     async getAll(req, res) {

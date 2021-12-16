@@ -6,6 +6,7 @@ import useFetch from "hooks/useFetch";
 import useNotification from "hooks/useNotification";
 import Loading from "components/Loading/Loading";
 import { SERVER } from "constants/constants";
+import Button from "components/Button/Button";
 
 export default function Inventory() {
   const [open, setOpen] = useState(false);
@@ -62,8 +63,30 @@ export default function Inventory() {
     setOpen(!open);
   };
 
+  const analyzeInventory = () => {
+    fetch(`${SERVER}api/inventory/analyze`)
+      .then((res) => res.json())
+      .then((inv) => {
+        console.log(inv);
+        inv.sort((a, b) => (a.name > b.name ? 1 : -1));
+        let result = Object.values(
+          inv.reduce((a, c) => {
+            // console.log(a[c.name], a[c.kolvo], c.kolvo);
+            console.log(a);
+            // return (
+            //   (a[c.name] || (a[c.name] = { ...c, kolvo: c.kolvo })).kolvo +
+            //   c.kolvo
+            // );
+            return a;
+          }, Object.create(null))
+        );
+        console.log(result);
+      });
+  };
+
   return (
     <>
+      <Button text="Проанализировать" action={analyzeInventory} />
       <div
         className="header"
         onClick={() => {

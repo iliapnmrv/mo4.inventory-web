@@ -1,10 +1,19 @@
 import pool from "../db.js"
 import csv from 'csvtojson'
 import fetch from 'node-fetch';
+import { SERVER } from "../constaints/constaints.js";
 
 class inventoryController {
     async getInventory(req, res) {
         const [inv] = await pool.query('SELECT * FROM inventory')
+        if (inv.length) {
+            res.json(inv)
+        } else {
+            res.json(null)
+        }
+    }
+    async analyzeInventory(req, res) {
+        const [inv] = await pool.query('SELECT name, kolvo FROM inventory')
         if (inv.length) {
             res.json(inv)
         } else {
@@ -30,7 +39,7 @@ class inventoryController {
                 .then(async(json) => {
                     for (let i = 0; i < json.length; i++) {
                         let obj = json[i]
-                        const response = await fetch("http://localhost:8000/api/inventory", {
+                        const response = await fetch(`${SERVER}/api/inventory`, {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify(obj)

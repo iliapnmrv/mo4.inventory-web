@@ -1,0 +1,922 @@
+qr;sredstvo;type_id;month;year;name;model;sernom
+00001;1;01;09;20;"Монитор, Samsung 23""";Samsung S23C200B;3122HLPCB00195L
+00002;1;02;12;20;Компьютер, системный блок, Dell Vostro 3681 Core i3-10100, 8GB, 1 Tb, Windows 10 Professional,;DEL Vostro 3681;HR27P63
+00003;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;3IATE026785
+00004;1;06;09;20;МФУ (принтер, копир, факс), KYOCERA Ecosys M5526cdn,;Kyocera ECOSYS M5526cdn;VE59131243
+00005;1;07;11;09;Принтер, HP, LaserJet P2055dn CE459A;HP LJ P2055dn CE495A;CNCKC50209
+00006;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1LASB011278
+00007;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;2DACD015864
+00008;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;2FBCD017755
+00009;1;02;09;20;Компьютер, персональный компьютер, HP ProDesk 490 G3 MT i7-6700, 8GB, 1 Tb, Windows 10,;HP 500B MT;RUA0525QP6
+00010;1;02;09;20;Компьютер, персональный компьютер, HP 6300 i3-3220 Windows 7,;HP Compaq Pro 6300 Microtower;RUA24809HG
+00011;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;Compaq 500B MT;CZC9473MZZ
+00012;1;01;12;07;Не в учете;Samsung 931C;ME19HVMPC00372Z
+00013;1;01;09;20;"Монитор, Samsung S22E450B 21.5""";Samsung S22E450B;ZZK6H4LJ500039P
+00014;1;01;10;15;"Монитор, Samsung S24D300H 24""";Samsung S24D300H;0AJHHLLGA02065H
+00015;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA21001ZN
+00016;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1228X03524
+00017;1;01;08;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLOZ801955Z
+00018;1;27;09;20;Не в учете;Panasonic KX-DT333RU;2BACE012840
+00019;1;27;09;20;Не в учете;Panasonic KX-DT333RU;2BACE012815
+00020;2;01;04;11;Не в учете;HP Compaq LA2306x;CNC1160C5T
+00021;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA13704CN
+00022;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1228X03582
+00023;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0525RKP
+00024;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1228X03540
+00025;1;01;09;20;"Монитор, Samsung 22""";Samsung E2220NW;0515HLB200094T
+00026;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;3KBTE028614
+00027;1;01;08;12;Не в учете;ViewSonic VX2451mph-LED;SR5121920909
+00028;2;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA41201P6
+00029;1;27;09;20;Не в учете;Panasonic KX-DT333RU;2BACE012834
+00030;1;10;09;20;Не в учете;Swordfish 1500XCD;1500XCD051200025
+00031;1;01;09;20;Не в учете;HP ZR2740w;EF41435900
+00032;1;27;09;20;Не в учете;Panasonic KX-DT333RU-B;1LBCD004673
+00033;1;02;09;20;Не в учете;HP Z210 SFF Workstation;CZC2077R4B
+00034;1;01;09;18;"Монитор, Samsung S24E390HL 23.6""";Samsung S24E390HL;0ATNHLLK900457X
+00035;1;02;07;19;Компьютер, персональный компьютер, Dell 3470 Dos,;DEL Vostro 3470;7XKVQX2
+00036;1;07;10;10;Не в учете;HP LJ p1566;VNC3Y22487
+00037;1;27;09;20;Не в учете;Panasonic KX-DT333RU;2BACE012750
+00038;1;04;09;20;Сканер, Canon, P-215 II;Canon ImageFormula P-215II;GY414811
+00039;1;27;09;20;Телефон стационарный, системный Panasonic KX-DT521RU;Panasonic KX-DT521RU;6JBTE007682
+00040;1;02;09;20;Компьютер, персональный компьютер, HP 280 G1 MT Dos,;HP 280 G1 MT Business PC;CZC53830SM
+00041;1;01;09;19;"Монитор(8528599009), Dell SE2416H 23.8""";Dell SE2416H/SE2416HX;82K54V2
+00042;1;07;06;20;МФУ (принтер, копир, факс), HP LaserJet Pro M426fdn, А4,;HP LJ Pro MFP m426fdn;PHBLN6K14D
+00043;1;01;09;20;Не в учете;Samsung 931C;ME19HVBLC26798A
+00044;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1IBVA011793
+00045;1;02;09;20;Компьютер, персональный компьютер, HP, Compaq dx2400  Windows 7,;HP Compaq dx2400 Microtower;CZC91539D6
+00046;1;01;12;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLJZC01437J
+00047;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0525RK8
+00048;1;27;09;20;Не в учете;Panasonic KX-TS2365RUW;4IAKB591143
+00049;1;07;09;20;Не в учете;HP LJ 1300;CNCKD74774
+00050;1;01;09;05;Не в учете;Samsung 913VN;GS19HMEY613563D
+00051;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;3BACE022337
+00052;1;01;05;18;"Монитор, Samsung S22D300HY 21.5""";Samsung S22D300HY;0AJDHLLK500108D
+00053;1;27;09;20;Не в учете;Panasonic KX-T7230X;7HCVJ126364
+00054;1;02;09;20;Компьютер, персональный компьютер, HP 7300 Windows 7 Professional,;HP Elite 7300 Series MT;CZC130896L
+00055;1;02;09;20;Компьютер, Системный блок, HP 280 G1 MT HP Care Pack,;HP 280 G1 MT Business PC;CZC5490X19
+00056;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0505CDS
+00057;1;01;03;11;"Монитор, Samsung 23""";Samsung BX2340;1015HLOB300347P
+00058;1;27;09;20;Не в учете;Panasonic KX-T7230X;7JCVJ138039
+00059;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0505CG8
+00060;1;27;09;20;Не в учете;Panasonic KX-FT934RU - Fax;
+00061;1;06;12;2019;МФУ (принтер, копир, факс), HP LaserJet Pro M426fdn, А4,;HP LJ Pro MFP m426fdn;PHBLMDL50R
+00062;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1AASA004608
+00063;1;01;03;04;Не в учете;Samsung 192V S;GY19HJGX302022E
+00064;1;04;09;20;Сканер, Canon, P-215 II;Canon ImageFormula P-215II;GY416754
+00065;1;02;09;20;Не в учете;HP Compaq dx2420 Microtower;CZC9311S46
+00066;1;01;09;08;Не в учете;Samsung 943N;MY19HMBQ900394X
+00067;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1FASA008274
+00068;1;02;09;20;Компьютер, персональный компьютер, HP, dx2300 MT  DualCore PE-2160, Windows 7,;HP Compaq dx2300 Microtower;HUB74812M1
+00069;1;07;11;05;Не в учете;HP LJ 1022;CNBV5CKK7L
+00070;1;06;07;20;МФУ (принтер, копир, факс), HP LaserJet Pro M426fdn, А4,;HP LJ Pro MFP m426fdn;PHBLN7R2RY
+00071;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1JASA008936
+00072;1;01;07;07;Не в учете;NEC 1970NX-BK-2(L);77B46034YB
+00073;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0525RKD
+00074;1;01;04;15;"Монитор(8528521000), HP 24""";HP ZR2740w 27'';CNT201W0S0
+00075;1;01;04;15;"Монитор(8528521000), HP 24""";HP ZR2740w 27'';CNT327Y0J4
+00076;1;03;09;20;Клавиатура, USB Apple Magic Keyboard,;Apple A1843;DTMKN-C0A53E07185B
+00077;1;04;09;20;Сканер, Canon, P 215 DMS;Canon ImageFormula P-215;FUR05017
+00078;1;10;09;20;Оборудование для резки и уничтожения бумаги, уничтожитель бумаги(шредер) HSM ShredStar X5-4.5x30;ShredStar X5;510176442
+00079;1;07;11;11;Принтер, HP, LaserJet P2055dn CE459A;HP LJ P2055dn CE495A;CNC1C11018
+00080;1;02;09;20;Компьютер, персональный компьютер, HP Z220 Xeon E3-1240 Windows 7 Professional,;HPZ220 Workstation CMT;CZC248BQS6
+00081;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1333X03512
+00082;1;03;09;20;Клавиатура, USB CHERRY G86-63400,;Cherry SPOS G86;052859 1388AS
+00083;1;27;09;20;Не в учете;Panasonic KX-DT343RU;1LBCF006691
+00084;1;08;09;20;ИБП, CyberPower, OR1000ELCDRM1U,;Powerman BackPro 600;1306001611020000411
+00085;1;04;09;20;Принтер, Canon, PIXMA IX6840;Canon PIXMA iX6840;ADHN32350
+00086;1;09;09;20;Не в учете;HP Folio 13-1001er;CND204KWK0
+00087;1;01;03;10;"Монитор, Samsung 22""";Samsung 2243NW;MY22HLJZ300593T
+00088;1;27;09;20;Не в учете;Panasonic KX-T7433RU;0EASA001478
+00089;1;02;09;20;Компьютер, системный блок, HP 400 ProDesk G2 MT Core i5-4590S, 4 Gb, 500 Gb, Dos,;HP ProDesk 405 G2 MT Business PC ;CZC4322TC4
+00090;1;08;09;20;Не в учете;APC BR800I;5B1026T13620
+00091;1;01;01;15;"Монитор(8528521000), HP E241i 24""";HP Elite E241i;CN450418V7
+00092;1;27;09;20;Не в учете;Panasonic KX-DT343RU;2FACF008181
+00093;1;02;05;21;Компьютер, системный блок, Dell Vostro 3888 i3, 8GB, 256Gb SSD, Windows 10,;DELL Vostro 3888;JW0K0D3
+00094;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1225X25939
+00095;1;01;10;12;"Монитор(8528521000), HP 24""";HP LA2405x;CN42420ZCM
+00096;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA41201K7
+00097;1;27;09;20;Телефон стационарный, аппарат телефонный Panasonic KX-DT521RU;Panasonic KX-DT521RU;6FATE006112
+00098;1;06;09;20;Не в учете;MP Rico Aficio 161;L9779502076
+00099;1;01;09;20;Не в учете;IIYAMA ProLite E2483HS-B1;1127842703516
+00100;1;01;09;20;Не в учете;IIYAMA ProLite E2483HS-B1;1127842703507
+00101;1;01;12;13;Не в учете;HP Pavilion 22xi 21.5 IPS LED;3CM3480NVJ
+00102;1;14;09;20;Сетевое оборудование, коммутатор, HP, 1920-48G,;HPE OfficeConnect 1920S JL386A;CN05K3R2BL
+00103;1;14;09;20;Сетевое оборудование, коммутатор, HP, 1920-48G,;HPE OfficeConnect 1920S JL386A;CN05K3R1K9
+00104;1;07;12;07;Не в учете;HP LJ Pro P1505;VNC3K00227
+00105;1;01;04;05;Не в учете;Samsung 710V C;GS17HSCY409765H
+00106;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;0HCKD131164
+00107;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA04950RS
+00108;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;4HBKA412945
+00109;1;06;09;20;Не в учете;Panasonic KX-MB2030RU;3HAFQ012511
+00110;1;01;12;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLJC02240D
+00111;1;02;12;18;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;95FWZS2
+00112;1;01;09;20;Не в учете;NEC LCD1904M;54302639NB
+00113;1;02;12;20;Компьютер, системный блок, Dell Vostro 3681 Core i3-10100, 8GB, 1 Tb, Windows 10 Professional,;Vostro 3681;6NQHF73
+00114;1;27;09;20;Телефон стационарный, аппарат телефонный Panasonic KX-DT521RU;Panasonic KX-DT521RU;7CBTE005248
+00115;1;02;08;18;Компьютер, системный блок, Lenovo IdeaCentre 90hx001brs Без предустановленного ПО,;Lenovo Ideacentre 310S-08IGM 90HX001URS;R305VHAR
+00116;1;01;06;09;Не в учете;Samsung 923NW;HA19H9CS608097A
+00117;1;27;09;20;Не в учете;Panasonic KX-TS2350RUB;9IAMF442598
+00118;1;27;09;20;Не в учете;Panasonic KX-T2310;8DBTF401229
+00119;1;27;09;20;Не в учете;Panasonic KX-T2355;5LCZC046562
+00120;1;01;09;20;Не в учете;Samsung 931C;ME19HVMPC00432R
+00121;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA31501NC
+00122;1;01;07;12;"Монитор, Samsung S22B300B 21.5""";Samsung S22B300N;2114HLNC702755N
+00123;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA21001ZV
+00124;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA24807FG
+00125;1;01;11;12;Не в учете;Samsung S20C200B;3121HLPCB00207L
+00126;1;02;08;18;Компьютер, системный блок, Lenovo IdeaCentre 90hx001brs Без предустановленного ПО,;Lenovo Ideacentre 310S-08IGM 90HX001URS;R305VHB2
+00127;1;27;09;20;Не в учете;Panasonic KX-T2365;7GATB367289
+00128;1;01;02;14;Не в учете;HP Pavilion 22xi 21.5 IPS LED;3CM4060CJQ
+00129;1;09;09;20;Не в учете;HP Essential 630 B7B23EA;5CB2261N28
+00130;1;27;09;20;Не в учете;Panasonic KX-T2365;0HALB125128
+00131;1;01;06;11;"Монитор, Samsung E2220N 21.5""";Samsung E2220NW;0515HLPB600450Z
+00132;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;3IATE026997
+00133;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;CZC12357Y0
+00134;1;27;09;20;Не в учете;Panasonic KX-T2365;41BTA021003
+00135;1;06;09;20;МФУ (принтер, копир, факс), KYOCERA Ecosys M2540dn,;Kyocera ECOSYS M2540dn;VCG7743457
+00136;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;Compaq 500B MT;RUA0220V3W
+00137;1;01;09;20;"Монитор, Samsung 22""";Samsung LS22A350H;1397HLPC101712B
+00138;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;Compaq 500B MT;CZC9473MTT
+00139;1;27;09;20;Не в учете;Panasonic KX-T2365;сер.№ номер стерт
+00140;1;04;09;20;Не в учете;HP Scanjet G3110;CN03TA50WH
+00141;1;01;09;20;Не в учете;Samsung 943N;MY19HMDS702436P
+00142;1;07;05;15;Принтер, HP, LaserJet Enterprise M601dn;HP LJ Enterprise 600 M601dn (CE990A);CDNVH141HM
+00143;2;07;05;09;Принтер лазерный НР3005NA4;HP LJ P3005DN (Q7815A);CNS2P47768 (4534)
+00144;1;27;09;20;Не в учете;Panasonic KX-TS388RUW;1LAKD014375
+00145;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA230014Y
+00146;1;01;07;13;"Монитор(8528521000), Samsung S23E200B 23""";Samsung S23C200B;3122HLND700603M
+00147;1;27;09;20;Не в учете;Panasonic KX-FT31RS Fax;0ECRB017909
+00148;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA33501NW
+00149;1;04;09;20;Не в учете;HP Scanjet G3110;CN03TA50TH
+00150;1;06;11;04;Не в учете;Xerox WorkCentre 415;ZZE-3502810137
+00151;1;01;11;16;"Монитор, Samsung S22E200NY 21.5""";Samsung S22E200NY;0AZVHLLHB01302R
+00152;1;02;09;20;Компьютер, персональный компьютер, HP 400 G3PD MT i56500 Dos,;HP ProDesk 400 G3 MT Business PC;CZC64372GT
+00153;1;27;09;20;Телефон стационарный, аппарат телефонный Panasonic KX-TS2352RU;Panasonic KX-TS2352RUB;8AAKF180022
+00154;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1326X08085
+00155;1;01;10;09;Не в учете;Samsung 943NW;MY19H9FSA44599L
+00156;1;02;09;20;Компьютер, персональный компьютер, HP 6300 i3-3220 Windows 7,;HP Compaq Pro 6300 Microtower;RUA24809GJ
+00157;1;07;04;13;МФУ (принтер, копир, факс), HP LaserJet Pro 400 M425dn,;HP LaserJet Pro 400 MFP M425dn (CF286A);CND8F4TH15
+00158;1;01;10;2011;"Монитор, Samsung E2220N 21.5""";Samsung EX2220;1744HLPBA01694R
+00159;1;02;12;20;Компьютер, системный блок, Dell Vostro 3681 Core i3-10100, 8GB, 1 Tb, Windows 10 Professional,;Vostro 3681;5NQHF73
+00160;1;27;09;20;Не в учете;Panasonic KX-T2365;6JATB045963
+00161;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;6ABKA643316
+00162;1;02;02;21;Компьютер, системный блок, Dell Vostro 3681 Core i3-10100, 8GB, 1 Tb, Windows 10 Professional,;Vostro 3681;GMQHF73
+00163;1;01;03;10;"Монитор, Samsung 22""";Samsung 2243NW;MY22HLJZ300942K
+00164;1;27;09;20;Не в учете;Panasonic KX-TS2350RUW;5ABKL642486
+00165;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA313044N
+00166;1;01;07;08;Не в учете;Samsung 943SN;MY19HMGS700446N
+00167;1;02;09;20;Компьютер, персональный компьютер, HP, Compaq dx2400  Windows 7,;HP Compaq dx2420 Microtower;CZC9430CCR
+00168;1;01;04;06;Не в учете;Samsung 940N;HA19H9NL402788R
+00169;1;27;09;20;Не в учете;Panasonic KX-TS2388RUW;2ABKD015862
+00170;1;02;09;20;Компьютер, персональный компьютер, HP, Compaq dx2400  Windows 7,;HP Compaq dx2400 Microtower;CZC8404132
+00171;1;04;09;20;Не в учете;HP Scanjet G3110;CN01BA52W3
+00172;1;01;07;08;Не в учете;Samsung 943N;MY19HMBQ719572B
+00173;1;07;08;12;МФУ (принтер, копир, факс), HP LaserJet Pro 400 M425dn,;HP LaserJet Pro 400 M401dw CF285A;VNC3M16654
+00174;1;01;06;21;"Монитор, Samsung 27""";Samsung F27T700QQI;4JC8H9PR100562L
+00175;1;02;11;17;Компьютер, персональный компьютер, Dell Optiplex 3050 MT Windows 10,;OptiPlex 3050;G2QMCM2
+00176;1;27;09;20;Не в учете;Panasonic KX-TS2350RUB;1HCKI303119
+00177;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;0HCKD131159
+00178;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0372YHQ
+00179;1;04;09;20;Не в учете;Canon ImageFormula P-215;FUA77889
+00180;1;01;03;19;"Монитор(8528521000), Dell E2218HN 21.5""";Dell E2218HN;7R5D4T2
+00181;1;01;04;21;"Монитор(8528599009), Dell E2420HS 23.8""";Dell E2420H;2CNK5C3
+00182;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;0HCKD131074
+00183;1;04;09;20;Сканер, Canon, CanoScan LiDE 400;Canon CanoScan Lide700F;KDUB50107
+00184;1;02;12;18;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;HLDWZS2
+00185;1;01;11;11;"Монитор, Samsung E2220N 21.5""";Samsung EX2220;1744HLPBB01592E
+00186;1;01;03;19;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;3P2D4T2
+00187;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA313045M
+00188;1;07;11;18;Принтер, Xerox, Phaser 3260DNI;Xerox Phaser 3260;3363490467
+00189;1;04;09;20;Сканер, Canon, CanoScan LiDE 400;Canon CanoScan Lide700F;KDUB67089
+00190;1;27;09;20;Не в учете;Panasonic KX-TS2350RUS;1BAKD044562
+00191;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;4CCKA33862*
+00192;1;01;11;23;"Монитор(8528521000), Samsung S23E200B 23""";Samsung S23C200B;3122HLNDB00198L
+00193;1;02;10;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA33501NR
+00194;1;01;12;12;"Монитор, Samsung 22""";Samsung S20C200B;3121HLPCC00124H
+00195;1;27;09;20;Не в учете;Panasonic KX-T2365;41BTA021010
+00196;1;01;09;19;"Монитор, Samsung S22E200NY 21.5""";Samsung S22E200NY;0AZVHLLH900856H
+00197;1;02;09;20;Компьютер, системный блок, HP 400 ProDesk G2 MT Core i5-4590S, 4 Gb, 500 Gb, Dos,;HP ProDesk 400 G3 MT Business PC;CZC6327QJ9
+00198;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;5GCKA560169
+00199;1;01;11;12;"Монитор, Samsung 22""";Samsung S20C200B;312HLPCB00209R
+00200;1;02;09;20;Компьютер, персональный компьютер, HP 6300 i3-3220 Windows 7,;HP Compaq Pro 6300 Microtower;RUA24807FH
+00201;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA315041B
+00202;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;Compaq 500B MT;CZC0050KTB
+00203;1;06;09;20;МФУ (принтер, копир, факс), Panasonic KX-MB2030RU,;Panasonic KX-MB2030RU;0HCFB005980
+00204;1;01;09;15;"Монитор, Samsung S22E200NY 21.5""";Samsung S22E200NY;0AZVHLLG900254T
+00205;1;06;09;20;Не в учете;HP Color LaserJet CM1015 (личный, не трогать);CNF87BKGD0
+00206;1;27;09;20;Телефон стационарный, системный Panasonic KX-DT521RU;Panasonic KX-DT521RU-B;7CBTE005249
+00207;1;04;09;20;Сканер, Canon, CanoScan LiDE 220;Canon CanoScan Lide700F;KDUB40446
+00208;1;01;09;06;Не в учете;Samsung 940N;HA19HMDL928222T
+00209;1;02;09;20;Компьютер, персональный компьютер, HP, Compaq dx2400  Windows 7,;HP Compaq dx2400 Microtower;CZC8404992
+00210;1;27;09;20;Телефон стационарный, IP-телефон Panasonic KX-NT511ARUW;Panasonic KX-NT511ARUW;5BATB004614
+00211;1;27;09;20;Не в учете;Panasonic KX-TS2388RUW;2BAKD017205
+00212;1;27;09;20;Не в учете;Panasonic KX-TS2388RUW;2ABKD015944
+00213;1;27;09;20;Не в учете;Panasonic KX-TS2388RUW;1LAKD014376
+00214;1;01;07;13;"Монитор, Samsung S22D300HY 21.5""";Samsung S22C200N;3128HLND700512V
+00215;1;06;03;15;МФУ (принтер, копир, факс), HP LaserJet Pro M225 (CF485A), А4,;HP LaserJet Pro MFP M225dn (CF484A);CNB9H3M33B
+00216;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA34107DF
+00217;1;01;02;06;Не в учете;Samsung SyncMaster 730BF;BI17HMEL207101T
+00218;1;02;11;20;Компьютер, системный блок, Dell Vostro 3681 Core i3-10100, 8GB, 1 Tb, Windows 10 Professional,;Vostro 3681;2NQHF73
+00219;1;01;09;13;"Монитор, Samsung 23""";Samsung S23C200B;3122HLND901907R
+00220;1;02;09;20;Компьютер, персональный компьютер, HP 400G1PD DM Windows 7 Professional,;HP ProDesk 400 G1 DM Business PC;CZC5103YCP
+00221;1;07;08;12;Принтер, HP, LaserJet Pro 400 M401d;HP LaserJet Pro 400 M401dw CF285A;VNC3M16655
+00222;1;02;09;20;Компьютер, системный блок, Dell Vostro 3681 Core i3-10100, 8GB, 1 Tb, Windows 10 Professional,;Vostro 3681;BR27P63
+00223;1;01;09;08;Не в учете;Samsung 943N;MY19HMBQA01123N
+00224;1;14;09;20;Не в учете;HP ProCurve Switch 408 8-Ports 10Base-T 100Base-TX Fast Ethernet switch;CN902ZN0XJ
+00225;1;04;09;20;Сканер, Canon, CanoScan LiDE 400;Canon CanoScan Lide700F;KDUB23144
+00226;1;07;09;20;Принтер, Brother, QL-570;Brother QL-570;E70239-M6Z324343
+00227;1;01;12;13;"Монитор, Samsung 23""";Samsung S23C200B;3122HLNDC00336V
+00228;1;02;09;20;Компьютер, персональный компьютер, HP 280 G1 MT Dos,;HP 280 G1 MT Business PC;CZC534092X
+00229;1;14;09;20;;HP Switch 1810-24G, J9801-60101;CN50FRR09Z
+00230;1;19;09;20;Сетевое оборудование, шкаф серверный, Hyperline, TWB-0945-GP-RAL9004,;Hyperline;187/340
+00231;1;07;04;15;Не в учете;HP LaserJet Pro P1102 RU (CE651A);VNF5W50277
+00232;1;01;11;00;Не в учете;Samsung 570BTFT;CN15H4VNBO4967Z
+00233;1;02;09;20;Компьютер, системный блок, HP 400 ProDesk G2 MT Core i5-4590S, 4 Gb, 500 Gb, Dos,;HP ProDesk 400 G2 MT;CZC44342KX
+00234;1;27;09;20;Телефон стационарный, IP-телефон Panasonic KX-NT511ARUW;Panasonic KX-NT511ARUB;6JATC007722
+00235;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0352KCX
+00236;1;01;09;10;"Монитор, Samsung E2220N 21.5""";Samsung E2220NW;0515HLOZ901584K
+00237;1;27;09;2;Не в учете;Panasonic KX-TS2388RUW;2ABKD015292
+00238;1;01;11;01;Не в учете;Samsung 151S;GH15HVFRB00901X
+00239;1;27;09;20;Не в учете;Panasonic KX-T2365;8JCTB921579
+00240;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0352K9J
+00241;1;27;09;20;Не в учете;Panasonic KX-FT934RU - Fax;8DAWA083270
+00242;1;01;08;13;"Монитор, Samsung 22""";Samsung S22C200N;LS22C20KNS/CI
+00243;1;02;09;20;Компьютер, персональный компьютер, HP 400G1PD DM Windows 7 Professional,;HP ProDesk 400 G1 DM Business PC;CZC5103YCN
+00244;1;01;11;19;"Монитор(8528599009), Samsung S27E390H 27""";Samsung S27E390H;BZPRH4ZMB00128D
+00245;1;02;09;20;Компьютер, персональный компьютер, HP 7300 Windows 7 Professional,;HP Elite 7300 Series MT;CZC130896Y
+00246;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;2IACD020991
+00247;1;07;07;11;Принтер, HP, LaserJet P2055dn CE459A;HP LaserJet P2055dn(CE495A);CNCF812618
+00248;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;2IACD007058
+00249;1;01;09;18;"Монитор(8528599009), Dell SE2416H 23.8""";Dell SE2416H/SE2416HX;JZYVNL2
+00250;1;02;11;20;Компьютер, системный блок, Dell Vostro 3681 Core i3-10100, 8GB, 1 Tb, Windows 10 Professional,;Vostro 3681;FMQHF73
+00251;1;27;09;20;Не в учете;Panasonic KX-T2365;9KBLB001329
+00252;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0352KD2
+00253;1;01;07;09;Не в учете;Samsung 943N;MY19HMDS713255L
+00254;1;01;09;18;"Монитор(8528521000), Dell 23""";Dell E2318H;GR4GZP2
+00255;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU-B;2IACD007059
+00256;1;07;05;06;Не в учете;HP LaserJet 1160;CNM1H40537
+00257;2;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA34601X4
+00258;1;01;04;18;"Монитор, Samsung 22""";Samsung S22D300HY;0AJDHLLK400773F
+00259;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA230011V
+00260;1;07;08;12;МФУ (принтер, копир, факс), HP LaserJet Pro 400 M425dn,;HP LaserJet Pro 400 Printer M401dn (CF278A);VNC3J43857
+00261;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;2IACD020987
+00262;1;04;09;20;Не в учете;HP Scanjet G3110;CN08GA501T
+00263;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA31503YF
+00264;1;01;06;09;Не в учете;Samsung 923NW;HA19H9CS607669B
+00265;1;27;09;20;Телефон стационарный, аппарат телефонный Panasonic KX-TS2352RU;Pasonic KX-TS2352RUB;1LAKA053912
+00266;1;02;04;20;Компьютер, системный блок, Dell Vostro 3671 i3-9100, 4 Gb, 1 Tb, Dos,;Vostro 3671;86Y8933
+00267;1;01;07;21;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;FQKFV33
+00268;1;02;04;18;Компьютер, персональный компьютер, Dell Vostro 3268, Intel Core i57400/DDR4 4GB/500GB Dos,;Vostro 3268;FGM57P2
+00269;1;01;01;11;"Монитор, Samsung 23""";Samsung F2380;0918HLOB100160A
+00270;1;06;04;10;МФУ (принтер, копир, факс), HP LaserJet M1536 , принтер+сканер+копир А4,;HP LJ 1536dfn MFP;CND9D49BGN
+00271;1;02;09;20;Не в учете;ПК DNS Office (Ростов);F5LEA006962-0M
+00272;1;01;07;13;"Монитор, Samsung 23""";Samsung S23C200B;3122HLND700611N
+00273;1;01;09;20;Компьютер, Системный блок, HP 280 G1 MT HP Care Pack,;HP 280 G1 MT Business PC;CZC5522D7K
+00274;1;01;06;10;"Монитор, Samsung E2220N 21.5""";Samsung E2220NW;0515HLJZ601076R
+00275;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0505CF4
+00276;1;01;07;20;"Монитор(8528599009), Dell E2420HS 23.8""";Dell E2420HS;31NNV33
+00277;1;02;04;20;Компьютер, системный блок, Dell Vostro 3671 i3-9100, 4 Gb, 1 Tb, Windows 10 Professional,;Vostro 3671;56Y8933
+00278;1;01;07;20;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;JQKFV33
+00279;1;07;09;20;Не в учете;HP LJ 1160;CNM1G47517
+00280;1;01;10;10;"Монитор, Samsung E2220N 21.5""";Samsung E2220NW;0515HLJZA01094F
+00281;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0484XN5
+00282;1;07;11;10;Принтер, HP, LaserJet P2055dn CE459A;HP LJ P2055dn CE495A;CNCK845394
+00283;1;04;09;20;Сканер, Canon, CanoScan LiDE 400;Canon CanoScan Lide700F;KDUB09572
+00284;1;01;07;21;"Монитор(8528521000), Dell 24""";Dell E2420HS;8R97XC3
+00285;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0220V2T
+00286;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA032212Z
+00287;1;01;03;18;"Монитор, Samsung 22""";Samsung S22D300HY;0AJDHLLK300110W
+00288;1;01;05;16;"Монитор, Samsung S22E200NY 21.5""";Samsung S22E200NY;0AZVHLLH501172V
+00289;1;02;09;20;Компьютер, Системный блок, HP ProDesk 600 G1 TWR Core i5-4570, 4 Gb, 500 Gb, Dos,;HP ProDesk 600 G1 TWR;CZC4374F2T
+00290;1;01;06;20;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;HRKFV33
+00291;1;01;01;13;"Монитор, Samsung S22C200N 21.5""";Samsung S22C200B;3123HLPD100180D
+00292;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA3430CDM
+00293;1;02;09;20;Компьютер, персональный компьютер, HP 280 G1 MT Dos,;HP 280 G2 MT Business PC;CZC624BD4Q
+00294;1;01;07;13;"Монитор, Samsung 23""";Samsung S23C200B;3122HLND700802E
+00295;1;08;09;20;ИБП, APC, Back-UPS BR900G-RS,;APC BR900G-RS;4B2022P04836
+00296;1;24;09;20;Система контроля, доступ, видеорегистратор,;Hikvision DS-7616NI-E2;662082300
+00297;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900G-RS;4B2022P04927
+00298;1;02;09;20;Компьютер, персональный компьютер, HP 7300 Windows 7 Professional,;HP Elite 7200MI;CZC118BXNR
+00299;1;02;09;20;Компьютер, персональный компьютер, HP 7300 Windows 7 Professional,;HP Elite 7300 Series MT;CZC1470NDT
+00300;1;01;10;18;"Монитор, Samsung S24E390HL 23.6""";Samsung S24E390HL;0ATNHLLKA01480E
+00301;1;02;09;20;Компьютер, персональный компьютер, HP 7300 Windows 7 Professional,;HP Elite 7200MT;CZC1268J97
+00302;1;02;09;20;Компьютер, персональный компьютер, HP 7300 Windows 7 Professional,;HP Elite 7200MT;CZC1268J92
+00303;1;27;09;20;Не в учете;Panasonic KX-T7250X;4KAVB018547
+00304;1;27;09;20;Не в учете;Panasonic KX-TS2365RUW;3HBK8365914
+00305;1;27;09;20;Не в учете;Panasonic KX-T7230RU;8ECVA003403
+00306;1;27;09;20;Не в учете;Panasonic KX-T7230X;4FBVD006234
+00307;1;27;09;20;Не в учете;Panasonic KX-T7230RU;8FCVA006219
+00308;1;27;09;20;Не в учете;Panasonic KX-T7433RU;3CBSB023431
+00309;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1303X18193
+00310;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA13103L2
+00311;1;02;11;18;Компьютер, персональный компьютер, Dell 3470-0908 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3470;2HL30T2
+00312;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0322232F
+00313;1;02;09;18;Компьютер, персональный компьютер, Dell 3470-0908 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3470;DW1BLR2
+00314;1;02;04;18;Компьютер, персональный компьютер, Dell Vostro 3268, Intel Core i57400/DDR4 4GB/1000GB Dos,;Vostro 3268;FGR47P2
+00315;1;02;11;18;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;2F300T2
+00316;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;CZC12357XF
+00317;1;02;09;20;Компьютер, персональный компьютер, HP 7300 Windows 7 Professional,;HP Elite 7500 Series MT;CZC23551RC
+00318;1;02;09;20;Компьютер, персональный компьютер, HP 280 G1 MT Dos,;HP 280 G1 MT Business PC;CZC53830SB
+00319;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA13205P6
+00320;1;02;09;20;Компьютер, персональный компьютер, HP 7300 Windows 7 Professional,;HP Elite 7300 Series MT;CZC1300ZVP
+00321;1;01;10;18;"Монитор, Samsung S24F350FHI 23.5""";Samsung S24E390HL;0ATNHLLKA01437D
+00322;1;01;02;18;Не в учете;HP 27ea;3CM80607B5
+00323;1;01;06;15;"Монитор, Samsung 23""";Samsung S23E200B;0MYUHTLG600908Y
+00324;1;01;01;13;"Монитор, Samsung 22""";Samsung S22C200N;3128HLPD100892Z
+00325;1;01;02;09;Не в учете;Acer v223HD;90908926340
+00326;1;01;05;10;"Монитор, Samsung E2220N 21.5""";Samsung E2220NW;0515HLOZ500911Y
+00327;1;01;10;18;"Монитор, Samsung S24E390HL 23.6""";Samsung S24E390HL;0ATNLLKA01479V
+00328;1;01;09;10;"Монитор, Samsung 22""";Samsung P2250N;096HLJZ900488R
+00329;1;01;06;15;"Монитор, Samsung 23.6""";Samsung S23E200B;0MYUHTSG600315L
+00330;1;01;04;15;"Монитор, Samsung 22""";Samsung LS22C20K;3128HLLG401495J
+00331;1;01;04;11;Не в учете;HP Compaq LA2306x;CNC1160C5V
+00332;1;01;02;19;"Монитор, Samsung S24E390HL 23.6""";Samsung S24E390HL;0ATNHLLM200510T
+00333;1;01;02;19;"Монитор, Samsung S24E390HL 23.6""";Samsung S24E390HL;0ATNHLLM200501Z
+00334;1;01;10;11;"Монитор, Samsung S24F350FHI 23.5""";Samsung LS24A450BW;1947HLPBA00964M
+00335;1;01;05;15;"Монитор(8528521000), Philips 27""";Philips 274e;UHBA1521010111
+00336;1;01;07;12;"Монитор, Samsung 22""";Samsung S22B300N;2114HLNC702585P
+00337;1;07;10;13;Не в учете;Принтер HP LJ Pro P1102w CE658A;VNF4503661
+00338;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1JASA009477
+00339;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA313044Z
+00340;1;02;09;20;Компьютер, персональный компьютер, HP 7300 Windows 7 Professional,;HP Elite 7300 Series MT;CZC1457GBH
+00341;1;27;09;20;Не в учете;Panasonic KX-T7433RU;3CBSB023429
+00342;1;07;11;13;Принтер, HP, LaserJet Pro 400 M401d;HP LJ Pro 400 Printer M401dn (CF278A);PHHGD04182
+00343;1;27;09;20;Не в учете;Panasinic KX-T7433RU;0LBVA007753
+00344;1;27;09;20;Не в учете;Panasinic KX-T7433RU;7EBSB059497
+00345;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasinic KX-DT321RU;3IATE026994
+00346;1;27;09;20;Телефон стационарный, аппарат телефонный Ritmix RT-320;Ritmix RT-320;RT320103320200102147
+00347;1;27;09;20;Не в учете;Panasonic KX-DT333RU;2BACE012771
+00348;1;27;09;20;Телефон стационарный, аппарат телефонный Ritmix RT-320;Ritmix RT-320;RT320103320170900994
+00349;1;27;09;20;Не в учете;Panasonic KX-DT333RU-B;1LBCD004690
+00350;1;27;09;20;Не в учете;Panasonic KX-T7433RU;2ICVB016406
+00351;1;02;07;19;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;4FGVQX2
+00352;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA31605TR
+00353;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA203080F
+00354;1;02;09;20;Компьютер, персональный компьютер, HP 7300 Windows 7 Professional,;HP Elite 7300 Series MT;CZC1457GBB
+00355;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA20500S8
+00356;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA14004T2
+00357;1;06;09;20;МФУ (принтер, копир, факс), KYOCERA Ecosys M3040IDN, А4,;ECOSYS M3040dn;LS67433179
+00358;1;06;09;20;МФУ (принтер, копир, факс), KYOCERA Ecosys M3040IDN, А4,;ECOSYS M3040dn;LS67535081
+00359;1;01;01;12;"Монитор, Samsung 22""";Samsung LS22A350H;1397HLPC101788A
+00360;1;01;08;13;"Монитор, Samsung 22""";Samsung S22C200B;3123HLPD802406E
+00361;1;01;08;20;"Монитор(8528521000), Dell 24""";Dell E2420HS;GXSBV33
+00362;1;01;12;13;Не в учете;HP Pavilion 22xi 21.5 IPS LED;3CM3480NV9
+00363;1;01;08;13;"Монитор, Samsung 22""";Samsung S22C200B;3123HLPD802413F
+00364;1;01;11;18;"Монитор, Samsung S24E390HL 23.6""";Samsung S24E390HL;0ATNHLLKB01260D
+00365;1;01;12;13;Не в учете;HP Pavilion 22xi 21.5 IPS LED;3CM3210KOP
+00366;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;7GCKB847024
+00367;1;07;06;12;Принтер, HP, LaserJet Pro 400 M401d;HP LJ Pro 400 M401dw CF285A;VNC3M07283
+00368;1;07;09;20;Не в учете;HP LJ P1505n Printer (CB413A);CNCJ603659
+00369;1;01;12;12;"Монитор, Samsung 21.5""";Samsung S20C200B;3121HLPCC00114V
+00370;1;01;10;17;"Монитор, Samsung S24E390HL 23.6""";Samsung S24E390HL;0ATNHLLJA0141H
+00371;1;01;10;17;"Монитор, Samsung S24E390HL 23.6""";Samsung S24E390HL;0ATNHLLJA01404E
+00372;1;01;09;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLOZ901479H
+00373;1;01;06;17;"Монитор, Samsung S24E390HL 23.6""";Samsung S24E390HL;0ATNHLLJ600417M
+00374;1;01;05;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLJZ500917E
+00375;1;01;01;20;"Монитор(8528599009), Dell E2418HN 23.8""";Dell E2418HN;B9FRCZ2
+00376;1;01;08;19;"Монитор(8528599009), Dell E2418HN 23.8""";Dell E2418HN;8C73WQ2
+00377;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1GASA008477
+00378;1;27;09;20;Не в учете;Panasonic KX-T7230RU;8ECVA003293
+00379;1;02;09;20;Компьютер, персональный компьютер, HP ProDesk 400 G4 SFF i3-7100, 4 Gb, 500 Gb, Windows 10 Professional,;HP ProDesk 400 G4 SFF Business PC;CZC73291TJ
+00380;1;01;11;14;"Монитор, Samsung S24D300H 24""";Samsung S24D390HL;0A1THLNFB01554L
+00381;1;01;01;13;"Монитор, Samsung 22""";Samsung S22C200N;3128HLPD100865V
+00382;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA31503ZQ
+00383;1;07;05;13;Не в учете;HP LJ Pro P1600 (CE749A);VNF3K42134
+00384;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;4B1908P45984
+00385;1;02;09;20;Компьютер, персональный компьютер, HP 7300 Windows 7 Professional,;HP Elite 7300 Series MT;CZC13706ZD
+00386;1;02;08;17;Компьютер, персональный компьютер, Dell Optiplex 3050 MT Windows 10,;OptiPlex 3050;CW7V1L2
+00387;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;4B1817P26605
+00388;1;02;09;20;Компьютер, персональный компьютер, HP 280 G1 MT Dos,;HP 280 G2 MT Business PC;CZC6399LDT
+00389;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 8200 Elite SFF;RUA230064B
+00390;1;27;09;20;Не в учете;Panasonic KX-T7433RU;0LBVA007752
+00391;1;27;09;20;Не в учете;Panasonic KX-T7431RU;7IASB031239
+00392;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;3KBTE028612
+00393;1;27;09;20;Не в учете;Panasonic KX-T7230RU;8GCVA008167
+00394;1;27;09;20;Не в учете;Panasonic KX T7230RU;9FAVA009545
+00395;1;27;09;20;Не в учете;Panasonic KX-T7433RU;0LBVA007752
+00396;1;06;09;20;Не в учете;Brother MFC-J6910DW;E68614B2F315805
+00397;1;07;09;20;Принтер, Xerox, Phaser 3260DNI;Xerox Phaser 3260;3363267784
+00398;1;01;05;13;"Монитор, Samsung 22""";Samsung S23B350T;ZX5CHTKD500620V
+00399;1;01;10;11;"Монитор, Samsung 22""";Samsung BX2340;1015HLPBA00102V
+00400;1;01;05;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLJZ500322B
+00401;1;01;03;02;Не в учете;LG Flatron L1800P;BEJLB886F
+00402;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA13603TD
+00403;1;02;09;20;Компьютер, персональный компьютер, HP, dx2300 MT  DualCore PE-2160, Windows 7,;HP Compaq dx2300 Microtower;HUB7520MBS
+00404;1;02;04;20;Компьютер, системный блок, Dell Vostro 3671 i3-9100, 4 Gb, 1 Tb, Dos,;Vostro 3671;96Y8933
+00405;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;3KBTE028589
+00406;1;27;09;20;Не в учете;Panasonic KX-DT333RU;1JBCE010447
+00407;1;27;09;20;Телефон стационарный, аппарат телефонный Panasonic KX-DT521RU;Panasonic KX-DT521RU;7DBTE008570
+00408;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;2DACD015679
+00409;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR800I;3B1U7X10225
+00410;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA044473N
+00411;1;01;12;19;"Монитор(8528599009), Dell E2418HN 23.8""";Dell E2418HN;8HHGVW2
+0412;1;07;09;20;Не в учете;HP LJ Pro P1505;CNCK119167
+0413;1;27;09;20;Не в учете;Panasonic KX-DT333RU-B;1LBCD004476
+00414;1;04;09;20;Сканер, Canon, CanoScan LiDE 400;Canon CanoScan Lide700F;KDUB30911
+00415;1;01;09;18;"Монитор(8528599009), Acer 24""";Acer K240H;MMT6NEE0018390C2E14204
+00416;1;02;11;18;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;2F2ZZS2
+00417;1;27;09;20;Не в учете;Panasonic KX-DT333RU-B;4HATD012387
+00418;1;04;09;20;Сканер, Canon, CanoScan LiDE 400;Canon CanoScan Lide700F;KLVC45929
+00419;1;07;11;18;Принтер, Xerox, Phaser 3260DNI;Xerox Phaser 3260;3363490327
+00420;1;1;11;19;"Монитор(8528599009), Samsung S27E390H 27""";Samsung S27E390H;LS27E390HSO/CI
+00421;1;07;06;07;Не в учете;HP LJ Pro P1102 RU (CE651A);VNC4235357
+00422;1;01;03;11;Не в учете;Acer A221HQL;ETLPH0W01211306F5S44322
+00423;1;04;04;15;Сканер, Canon, P-215 II;Canon P-215;FEA74179
+00424;1;27;09;20;Не в учете;KX-T7433RU;1KASB010043
+00425;1;02;04;15;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA044473P
+00426;1;02;12;18;Компьютер, персональный компьютер, Dell 3470-0908 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3470;HJ7XZS2
+00427;1;15;09;20;Сетевое оборудование, коммутатор, TP-Link, TL-SF1005P,;TP-Link TL-R460;2141403000615
+00428;1;01;12;14;"Монитор, Samsung 22""";Samsung LS22C20K;31128HLNFC01661Z
+00429;1;27;08;20;Телефон стационарный, системный Panasonic KX-DT521RU;Panasonic KX-DT521RU;6IBTE004313
+00430;1;02;10;15;Компьютер, Системный блок, HP ProDesk 600 G1 TWR Core i5-4570, 4 Gb, 500 Gb, Dos,;HP ProDesk 600 G1 TWR;CZC42545WX
+00431;1;27;08;20;Не в учете;Panasonic KX-TS2365RUW;5ABKK897755
+00432;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA3170293
+00433;1;04;04;15;Сканер, Canon, P 215 DMS;Canon P-215;FUA77407
+00434;1;01;12;12;"Монитор, Samsung 21.5""";Samsung S20C200B;3121HLPCC00120J
+00435;1;27;10;15;Не в учете;Panasonic KX-T2365;4IBTA019542
+00436;1;01;11;12;"Монитор, Samsung 21.5""";Samsung S20C200B;312HLPCB00208M
+00437;1;02;04;15;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA2030800
+00438;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;6ABKA643655
+00439;1;01;10;20;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;14LMRX2
+00440;1;02;09;20;Компьютер, персональный компьютер, HP, dx2300 MT  DualCore PE-2160, Windows 7,;HP Compaq dx2300 Microtower;HUB7520MBP
+00441;1;27;09;20;Не в учете;Panasonic KX-TS2350RUJ;4LBKL146537
+00442;1;27;09;20;Телефон стационарный, аппарат телефонный Panasonic KX-HDV100RUB;Panasonic KX-HDV100RUB;7KBTF020447
+00443;1;01;09;11;Не в учете;Acer v223HQ;ETLJ40D04413811A2A8517
+00444;1;01;03;08;Не в учете;Asus VK191 19'';83LMMS034421
+00445;1;02;09;15;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;Compaq 500B MT;CZC0050KVB
+00446;1;14;09;20;Сетевое оборудование, коммутатор, Falcon Eye, FE-104-POE-S,;FE-104POE-S;6900005260180
+00447;1;14;09;20;Сетевое оборудование, коммутатор, HP, 1910-8G,;HP 1910-8;CC3E5F8A1BD1
+00448;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор,;Falcon Eye 16x analog;PA3HF14200188
+00449;1;02;09;20;Компьютер, системный блок, Dell Vostro 3681 Core i3-10100, 8GB, 1 Tb, Windows 10 Professional,;Vostro 3681;DS27P63
+00450;1;01;01;14;Не в учете;HP Pavilion 21.5 IPS LED;3CM4030P3Y
+00451;1;27;09;20;Не в учете;Panasonic KX-TS2388RUW;2BAKD017201
+00452;1;06;07;15;МФУ (принтер, копир, факс), HP LaserJet Pro M426fdn, А4,;HP LJ Pro MFP M426fdn (F6W17A);PHBLN7G42L
+00453;1;27;09;20;Не в учете;Panasonic KX-T2365;0JCLB187377
+00454;1;06;11;07;Не в учете;HP LJ 3050Z;CNCKP28842
+00455;1;04;09;20;Сканер, Canon, CanoScan LiDE 400;Canon CanoScan Lide700F;KDUB23163
+00456;1;02;09;20;Компьютер, системный блок, Dell Vostro 3681 Core i3-10100, 8GB, 1 Tb, Windows 10 Professional,;Vostro 3681;CR27P63
+00457;1;01;09;08;Не в учете;Samsung 943N;MY19HMBQ900128B
+00458;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;Compaq 500B MT;ZCZ0050KTX
+00459;1;14;09;20;Сетевое оборудование, коммутатор, HP, 1910-8 Switch,;HP V1910-16G (JE005A);CNC36BX12HM
+00460;1;27;09;20;Не в учете;Panasonic KX-TS2388RUW;2ABKD015867
+00461;1;01;10;12;"Монитор, Samsung 22""";Samsung S22B300N;2114HLNCA01278D
+00462;1;02;09;20;Компьютер, персональный компьютер, HP ProDesk 400 G4 SFF i3-7100, 4 Gb, 500 Gb, Windows 10 Professional,;HP ProDesk 400 G2 Mini;CZC6020CX4
+00463;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;7GCKB845430
+00464;1;01;03;06;Не в учете;Samsung 173P;DE17H9NL300988 M
+00465;1;02;06;15;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA13103L3
+00466;1;07;10;10;Принтер, HP, LaserJet P2055dn CE459A;HP LJ P2055dn(CE495A);CNCGB38216
+00467;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;7GCKB845530
+00468;1;01;01;13;"Монитор, Samsung 22""";Samsung LS22C20K;3128HLPD100873X
+00469;1;02;04;15;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA330018K
+00470;1;27;09;20;Не в учете;Panasonic KX-T2365;0HBLB135936
+00471;1;27;09;20;Не в учете;Panasonic KX-TS2388RUW;2ABKD015868
+00472;1;01;09;20;Не в учете;Samsung 943N;MY19HMDS713095R
+00473;1;02;04;15;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA31503ZY
+00474;1;01;10;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLJZA00014T
+00475;1;27;09;20;Не в учете;Panasonic KX-TS2388RUW;2ABKD015860
+00476;1;07;08;07;Принтер, HP, LaserJet Pro M104a;HP LaserJet 1022;VNC3302649
+00477;1;02;09;04;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA3150424
+00478;1;02;02;18;Компьютер, персональный компьютер, HP ProDesk 400 G4 SFF i3-7100, 4 Gb, 500 Gb, Windows 10 Professional,;HP ProDesk 400 G4 SFF Business PC;CZC73291TW
+00479;1;01;01;13;"Монитор(8528521000), Samsung S22E200B 21.5""";Samsung LS22C20K;3128HLPD100886X
+00480;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0372Z2C
+00481;1;01;05;18;"Монитор, Samsung S22D300HY 21.5""";Samsung S22D300HY;0AJDHLLK500351K
+00482;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0372Z2C
+00483;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B11225X29594
+00484;1;06;09;12;МФУ (принтер, копир, факс), Xerox WC 6015,;Xerox WorkCentre 6015;3191031163
+00485;1;08;09;21;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1222X09103
+00486;1;01;05;16;"Монитор, Samsung E2220N 21.5""";Samsung S22E200NY;0AZVHLLH501165J
+00487;1;02;09;20;Компьютер, персональный компьютер, HP 280 G1 MT Dos,;HP 280 G1 MT Business PC;CZC521009Z
+00488;1;27;09;20;Телефон стационарный, IP-телефон Panasonic KX-NT511ARUW;Panasonic KX-NT511ARUB;5DBTB004257
+00489;1;01;10;19;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;HGLQ7Z2
+00490;1;01;10;18;"Монитор(8528521000), Dell E2218HN 21.5""";Dell E2218HN;7TK44R2
+00491;1;07;05;10;Не в учете;HP LJ Pro P1102 RU (CE651A);VNC3K35659
+00492;1;02;12;18;Компьютер, персональный компьютер, Dell Vostro 3670-3100 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;81DXZS2
+00493;1;02;09;20;Компьютер, персональный компьютер, HP 280 G1 MT Dos,;HP 280 G1 MT Business PC;CZC5211W4Y
+00494;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA14004TB
+00495;1;01;12;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLJZC01674R
+00496;1;07;08;11;Принтер, HP, LaserJet P2055dn CE459A;HP LJ P2055 (CE456A);CNCJL46100
+00497;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA40304K8
+00498;1;08;09;20;ИБП, APC, Back-UPS RS,;APC BE700G-RS;5B1223T05509
+00499;1;01;11;12;"Монитор, Samsung S22C200N 21.5""";Samsung S20C200B;3121HLPCB00222H
+00500;1;02;09;20;Компьютер, персональный компьютер, HP 6300 i3-3220 Windows 7,;HP Compaq Pro 6300 Microtower;RUA24807F1
+00501;1;01;09;17;"Монитор, Samsung S22E390H 21.5""";Samsung S22E390H;0AH7HLLJ901949E
+00502;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA04950RZ
+00503;1;04;09;20;Сканер, Canon, CanoScan LiDE 400;Canon CanoScan Lide700F;KDUB40460
+00504;1;06;09;20;Не в учете;Kyocera EcoSys M4125idn;VKN8407015
+00505;1;01;12;07;Не в учете;Samsung 931C;ME19HVJPC04390K
+00506;1;14;09;20;Сетевое оборудование, коммутатор, Dahua, DH-(PFS3110)-8P-96,;Dahua DH-PFS3110-8P-96;4M01416PAJ36C9F
+00507;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор DHI-NVR-5216-4KS2,;Dahua DHI-NVR5216-4KS2;4J08518PAZ93DBB
+00508;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор,;Dahua DHI-NVR4208-8P-4K;1K0234APAY00014
+00509;1;01;03;19;"Монитор(8528599009), Dell SE2416H 23.8""";Dell SE2416H/SE2416HX;69L0PL2
+00510;1;07;01;07;Не в учете;HP LJ 1022;VNC3Y00325
+00511;1;02;09;20;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;J8YG0S2
+00512;1;14;09;20;Не в учете;D-Link DES-1024A;QBNG1C7001201
+00513;1;02;09;20;Компьютер, персональный компьютер, Dell 3470-0908 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3470;2FJ40T2
+00514;1;01;10;18;"Монитор(8528521000), Dell E2218HN 21.5""";Dell E2218HN;FSK44R2
+00515;1;01;03;19;"Монитор, Samsung S24D300H 24""";Samsung S24D300H;0AJHHLLM303139D
+00516;1;02;11;18;Компьютер, персональный компьютер, Dell 3470-0908 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3470;2JJ30T2
+00517;1;01;09;14;"Монитор, Samsung 21.5""";Samsung S22C450B;0320H4MF900915H
+00518;1;01;10;18;"Монитор(8528521000), Dell E2218HN 21.5""";Dell E2218HN;3TK44R2
+00519;1;02;09;20;Компьютер, персональный компьютер, HP, dx2300 MT  DualCore PE-2160, Windows 7,;HP Compaq dx2300 Microtower;HUB751196J
+00520;1;01;08;20;"Монитор(8528521000), Dell E2218HN 21.5""";Dell E2218HN;GJF1243
+00521;1;02;09;20;Компьютер, Системный блок, HP 6000 Windows 7 Professional,;HP Desktop Pro A [5JP25ES];8CG8393FQ8
+00522;1;01;07;18;Не в учете;Acer V226HLQ;83002031642
+00523;1;07;06;07;Принтер, Xerox, Phaser 3052NI;Xerox Phaser 3020;3432067750
+00524;1;02;07;20;Компьютер, системный блок, Dell Vostro 3671 i3-9100, 4 Gb, 1 Tb, Dos,;Vostro 3671;5M95933
+00525;1;01;07;19;"Монитор(8528599009), Dell SE2416H 23.8""";Dell SE2416H/SE2416HX;CHYV3V2
+00526;1;02;04;19;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;7700BW2
+00527;1;14;09;20;Сетевое оборудование, коммутатор, HP, 1420 24G 2SFP,;HPE OfficeConnect 1420-24G;CN84GXW0DR
+00528;1;08;09;20;ИБП, CyberPower, OR1000ELCDRM1U,;CyberPower;OR1000ELCDRM1U
+00529;1;01;07;19;"Монитор(8528521000), Dell E2218HN 21.5""";Dell E2218HN;58Y64X2
+00530;1;02;04;19;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;779T9W2
+00531;1;06;09;20;Не в учете;Kyocera EcoSys M4125idn;VKN7900077
+00532;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;4B1546P20268
+00533;1;27;09;20;Не в учете;Panasonic KX-DT333RU;1JBCE010448
+00534;1;07;11;10;Не в учете;HP LJ Pro P1560 (CE663A);VNC3N43037
+00535;1;02;10;16;Компьютер, персональный компьютер, HP 280 G1 MT Dos,;HP 280 G1 MT Business PC;CZC51919TG
+00536;1;04;04;15;Сканер, Canon, CanoScan LiDE 400;Canon CanoScan Lide700F;KDUB16024
+00537;1;01;12;10;"Монитор, Samsung E2220N 21.5""";Samsung E2220NW;0515HLOZC01906D
+00538;1;09;04;15;Компьютер, планшет, Apple iPad 128Gb iOS,;IPAD ME987RU/A;DMPN34PWFKYC
+00539;1;27;09;20;Не в учете;Panasonic KX-T2355;5LCZC046456
+00540;1;02;09;20;Компьютер, персональный компьютер, HP, dx2300 MT  DualCore PE-2160, Windows 7,;HP Compaq dx2420 Microtower;CZC9430C9L
+00541;1;01;12;07;Не в учете;Samsung 931C;ME19HVMPC00431F
+00542;1;01;04;15;"Монитор, Samsung 27""";Samsung SyncMaster P2770HD;0487HLJZ600118H
+00543;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP Pro 3400 Series MT;RUA206054Y
+00544;1;13;09;20;Аппарат кассовый, Атол 30Ф, с фискальной памятью;Атол 30Ф;01911118
+00545;1;07;10;11;Принтер, HP, LaserJet P2055dn CE459A;HP LJ P2055 (CE456A);CNCJP52476
+00546;1;27;09;20;Не в учете;Panasonic KX-DT333RU;1LBCE012309
+00547;1;04;09;20;Сканер, Canon, DR-C125;Canon DR-c125;FP406566
+00548;1;01;05;15;"Монитор, Samsung S22C200N 21.5""";Samsung S22C200N;3128HLLG500422X
+00549;1;01;10;19;"Монитор(8528599009), Dell E2418HN 23.8""";Dell E2418HN;G46FVW2
+00550;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT546RU;Panasonic KX-DT546RU;8CBTF003108
+00551;1;08;09;20;Не в учете;APC BR800I;QB0548136135
+00552;1;02;09;20;Компьютер, Системный блок, HP 6000 Windows 7 Professional,;HP ProDesk 600 G3 SFF;CZC9377VQG
+00553;1;01;05;13;"Монитор, Samsung 23.6""";Samsung S23C200B;3122HLND501008E
+00554;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;3FATE023833
+00555;1;02;04;19;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;35CV9W2
+00556;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1303X18967
+00557;1;27;09;20;Не в учете;Panasonic KX-T7433RU;0GASA002427
+00558;1;02;09;19;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;71T59Z2
+00559;1;01;09;10;"Монитор, Samsung 22""";Samsung P2250N;0964HLJZ900672Z
+00560;1;08;09;20;Не в учете;APC BR800I;QB0341132893
+00561;1;01;12;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLJZC01188N
+00562;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1HAVA011165
+00563;1;02;12;18;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;95W30T2
+00564;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1303X18189
+00565;1;06;06;20;МФУ (принтер, копир, факс), HP LaserJet Pro M426fdn, А4,;LJ Pro MFP M426fdn (F6W17A);PHBLN6K0PK
+00566;1;07;09;19;Принтер, Ricoh, SP C250DN;Ricoh SP250DN;X086P501281
+00567;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;3KBTE028588
+00568;1;04;09;20;Сканер, Canon, CanoScan LiDE 400;Canon CanoScan Lide700F;KDUB67076
+00569;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP Pro 3400 Series MT;RUA209059K
+00570;1;01;09;20;Не в учете;HP Z27n;CNK622137F
+00571;1;01;01;12;"Монитор, Samsung S22E390H 21.5""";Samsung S22A350H;1397HLPC100674E
+00572;1;02;07;19;Компьютер, персональный компьютер, Dell 3470-0908 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3470;7XK0RX2
+00573;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1FASA007870
+00574;1;06;01;18;МФУ (принтер, копир, факс), Canon i-SENSYS MF416dw,;Canon i-SENSYS MF416dw;USK37401
+00575;1;06;01;18;МФУ (принтер, копир, факс), Canon i-SENSYS MF416dw,;Canon i-SENSYS MF416dw;USK37271
+00576;1;01;05;13;"Монитор, Samsung 23.6""";Samsung S23C200B;3122HLND501011M
+00577;1;27;09;20;Не в учете;Panasonic KX-T7436RU;9KBVA001097
+00578;1;27;09;20;Не в учете;Panasonic KX-T7440X console;9KAVD002246
+00579;1;02;07;19;Компьютер, персональный компьютер, Dell 3470-0908 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3470;7XGVQX2
+00580;1;01;12;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLJZC01551L
+00581;1;02;09;20;Компьютер, персональный компьютер, HP 7300 Windows 7 Professional,;HP Elite 7300 Series MT;CZC1457GBM
+00582;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;3GATE024891
+00583;1;07;03;10;Принтер, HP, LaserJet P2055dn CE459A;HP LJ P2055dn (CE459A);CNCKB85229
+00584;1;01;06;04;Не в учете;Samsung 710V C;GS17H9NX604472 p
+00585;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA31605TF
+00586;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1JASA008947
+00587;1;01;07;13;"Монитор, Samsung 23.6""";Samsung S23C200B;3122HLND701670H
+00588;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1LASB011276
+00589;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA31605TC
+00590;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1107X26009
+00591;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;Compaq 500B MT;CZC0050KTD
+00592;1;01;09;14;"Монитор(8528521000), Samsung S24F350FHI 23.5""";Samsung S24D390HL;0A1THLNF901064D
+00593;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1IBVA011727
+00594;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор Dahua DHI-XVR5216AN-S2,;Dahua DH-XVR5216AN;4J083A7PAZ65214
+00595;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA04950RJ
+00596;1;01;09;05;Не в учете;Samsung 913N S;MJ19HSGY907123H
+00597;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1KASB010317
+00598;1;04;09;20;Не в учете;HP Scanjet G3110;CN054A50NX
+00599;1;01;09;20;Не в учете;ViewSonic VA2265S-3;UEH153203233
+00600;1;01;08;15;Не в учете;ViewSonic VA2265S;UE153203233
+00601;1;01;10;16;"Монитор, Samsung S22D300HY 21.5""";Samsung S22D300HY;0AJ2HLHHA01798V
+00602;1;02;09;20;Компьютер, системный блок, HP 400 ProDesk G2 MT Core i5-4590S, 4 Gb, 500 Gb, Dos,;HP ProDesk 400 G2 SFF Business PC;CZC54301WV
+00603;1;07;01;19;Принтер, HP, LaserJet Pro M402dne;HP Laser Pro M402dne;PHC6J60271
+00604;1;14;09;20;Сетевое оборудование, коммутатор, HP, 1910-8 Switch,;HP 1910-8 (JG536A);CN39G1G01N
+00605;1;01;05;12;"Монитор, Samsung 22""";Samsung S22A100N;1902HLPC502417T
+00606;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA14300NP
+00607;1;27;09;20;Не в учете;Panasonic KX-TS15MX-W;0KCLA305045
+00608;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;4B1845P23147
+00609;1;01;08;08;Не в учете;Samsung 943N;MY19HMCQ809984D
+00610;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор,;Dahua DHI-NVR4108H-8P;1K02347PAY00016
+00611;1;01;10;11;"Монитор, Samsung 23""";Samsung BX2340;1015HLPBA01808L
+00612;1;02;09;19;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;7ZD09Z2
+00613;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0525RLJ
+00614;1;27;09;20;Не в учете;Panasonic KX-T7433RU;3HASB034233
+00615;1;27;09;20;Не в учете;Panasonic KX-TS2388RUW;2ABKD015287
+00616;1;01;06;11;"Монитор, Samsung 23""";Samsung BX2340;1015HLNB600740W
+00617;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA3150419
+00618;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1303X18956
+00619;1;27;09;20;Не в учете;Panasonic KX-T7230X;7HCVJ125368
+00620;1;27;09;20;Не в учете;Panasonic KX-T7230X;7JCVJ139015
+00621;1;01;10;11;"Монитор, Samsung 23""";Samsung BX2340;1015HLPBA00227H
+00622;1;07;09;07;Не в учете;LJ P1505n Printer (CB413A);CNCJ603650
+00623;1;01;07;09;Не в учете;Samsung 943N;MY19HMDS702323N
+00624;1;01;08;08;Не в учете;Samsung 943N;MY19HMCQ810432K
+00625;1;02;12;18;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Vostro 3670;95R20T2
+00626;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;2DACD015676
+00627;1;27;09;20;Не в учете;Panasonic KX-T7433RU;9LBVA002693
+00628;1;01;04;10;"Монитор, Samsung 23""";Samsung E2320;CL23H9XZ401056A
+00629;1;01;06;11;"Монитор, Samsung 23""";Samsung BX2340;1015HLNB600528V
+00630;1;01;10;11;"Монитор, Samsung 23""";Samsung BX2340;1015HLPBA00055X
+00631;1;01;10;11;"Монитор, Samsung 23""";Samsung BX2340;1015HLPBA00556H
+00632;1;01;10;11;"Монитор, Samsung 23""";Samsung BX2340;1015HLPBA01579D
+00633;1;01;02;12;"Монитор, Samsung S22E450B 21.5""";Samsung S24A450BW;1947HLNC200261T
+00634;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;3EACE023504
+00635;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;3EACE023503
+00636;1;27;09;20;Не в учете;Panasonic KX-T7230RU;8ECVA003346
+00637;1;27;09;20;Не в учете;Panasonic KX-T7433RU;0DBVA004088
+00638;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;6ABKA644216
+00639;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;3KBTE028613
+00640;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA41201MK
+00641;1;02;09;20;Компьютер, Системный блок, HP 6000 Windows 7 Professional,;HP Compaq 6000 Pro MT;RUA11701KJ
+00642;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0505CDY
+00643;1;02;09;20;Компьютер, персональный компьютер, HP, Compaq dx2400  Windows 7,;HP Compaq dx2400 Microtower;CZC8467VYS
+00644;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;Compaq 500B MT;CZC0050KSZ
+00645;1;02;09;20;Компьютер, Системный блок, HP 6000 Windows 7 Professional,;HP Compaq 6000 Pro MT;RUA11701L7
+00646;1;08;09;20;ИБП, APC, Back-RS900VA(BR900GI),;APC BR900GI;3B1228X03463
+00647;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1303X16708
+00648;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900G-RS;3B1402X05645
+00649;1;01;09;09;Не в учете;LG Flatron W1941S-PF;909TPJP05484
+00650;1;27;09;20;Не в учете;Panasonic KX-TS2388RUW;2ABKD015861
+00651;1;06;09;12;МФУ (принтер, копир, факс), HP LaserJet M1536 , принтер+сканер+копир А4,;HP LJ Pro M1536dnf MFP (CE538A);CND9D9TCBK
+00652;1;01;09;20;Не в учете;NEC LCD1904M;54101714NB
+00653;1;27;09;20;Не в учете;Panasonic KX-TS2365RUW;6GBKD996056
+00654;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA03222WT
+00655;1;08;09;20;ИБП, APC, BR900MI,;APC BR900GI;3B1303X16614
+00656;1;01;10;06;Не в учете;Sansung 940BF;HA19HMELA2463M
+00657;1;02;09;20;Компьютер, персональный компьютер, HP 7300 Windows 7 Professional,;HP Elite 7300 Series MT;CZC1303HWZ
+00658;1;14;09;20;Сетевое оборудование, коммутатор, HP, 1910-48G,;HP V1910-48G (JE009A);CN20BX51YF
+00659;1;07;08;12;Принтер, HP, LaserJet Pro 400 M401d;HP LJ Pro 400 Printer M401dn (CF278A);VNC3J43866
+00660;1;04;09;20;Сканер, Canon, CanoScan LiDE 400;Canon CanoScan Lide700F;KDUB28417
+00661;1;02;09;20;Компьютер, персональный компьютер, HP 6300 i3-3220 Windows 7,;HP Compaq Pro 6300 Microtower;RUA24807FK
+00662;1;01;06;01;Не в учете;Samsung 770TFT;CN17H1CR623007Z
+00663;1;27;09;00;Не в учете;LG GS-472L;90907708
+00664;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0393MM9
+00665;1;07;06;12;Принтер, HP, LaserJet Pro 400 M401d;HP LJ Pro 400 M401dw CF285A;VNC3M07390
+00666;1;27;09;20;Телефон стационарный, IP-телефон Panasonic KX-NT511ARUW;Panasonic KX-NT511ARUW;5JBTB006769
+00667;1;01;12;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLOZC02787P
+00668;1;08;09;20;Не в учете;APC BR800I;5B1033T24926
+00669;1;14;09;20;Не в учете;TW100-BRV204;SE11162400468
+00670;1;02;09;20;Компьютер, персональный компьютер, HP, Compaq dx2400  Windows 7,;HP Compaq dx2420 Microtower;CZC9430CCK
+00671;1;01;12;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLOZC01932H
+00672;1;07;09;14;Принтер, HP, LaserJet Pro 400 M401d;HP LJ Pro 400 Printer M401a (CF270A);PHKBF19675
+00673;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;7GCKB847550
+00674;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA2030809
+00675;1;01;09;20;Не в учете;NEC LCD1560VM;32013081GB
+00676;1;04;09;20;Сканер, Canon, CanoScan LiDE 400;Canon CanoScan Lide700F;KDUB23156
+00677;1;07;07;00;Не в учете;HP LJ 1100 (C4224A);FRHR404447
+00678;1;14;09;20;Не в учете;3COM 4200 50-Port;LDZV74H8E0240
+00679;1;02;11;20;Компьютер, системный блок, Dell Vostro 3681 Core i3-10100, 8GB, 1 Tb, Windows 10 Professional,;Vostro 3681;4NQHF73
+00680;1;01;07;16;"Монитор, Samsung S24D300H 24""";Samsung S24F350FHI;ZZMTH4ZH701545A
+00681;1;01;07;16;"Монитор, Samsung S24F350FHI 23.5""";Samsung S24F350FHI;ZZMTH4ZH701209W
+00682;1;27;09;20;Не в учете;Panasonic KX-DT333RU;1JBCE010449
+00683;1;02;09;20;Компьютер, Системный блок, HP 6000 Windows 7 Professional,;HP Compaq 6000 Pro MT;RUA11701JR
+00684;1;01;09;13;"Монитор, Samsung 27""";Samsung S27C450D;ZXAFTQD900085E
+00685;1;27;09;20;Не в учете;Panasonic KX-T7633RU;4HBSD001930
+00686;1;14;09;20;Сетевое оборудование, коммутатор, HP, HPE OfficeConnect 1950, JG960A,;Hp J9794-60001 1405-8G;CN30FQ74NN
+00687;1;02;09;20;Не в учете;MO4-Video (truck number detect);16268083900336
+00688;1;01;01;2020;"Монитор, Samsung S24D300H 24""";Samsung S24D300H;0AJHHLLN102039Y
+00689;1;02;11;20;Компьютер, системный блок, Dell Vostro 3681 Core i3-10100, 8GB, 1 Tb, Windows 10 Professional,;Vostro 3681;JMQHF73
+00690;1;06;09;12;Не в учете;HP Color LJ Pro 500 M570dn MFP CZ271A;CN59D9RD0P
+00691;1;01;12;07;Не в учете;Samsung 931C;ME19HVJPC03939J
+00692;1;01;09;20;Не в учете;NEC LCD1550V;2201538IB
+00693;1;01;09;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLOZ901586Y
+00694;1;01;05;17;"Телевизор, Mystery 32"", LED";Mystery MTV3225LT2;MTV3225LT2 00507
+00695;1;08;09;20;Не в учете;APC BR1100CI-RS;3B1011X45B02
+00696;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор,;Falcon Eye FE-1080Pro;TZA3HM42100023
+00697;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор,;Falcon Eye FE-4416N;TZA4GF140WSB500
+00698;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор,;Falcon Eye FE-3104H;TZA3DL41200070
+00699;1;27;09;20;Не в учете;LG GS-472L;90907709
+00700;1;01;06;07;Не в учете;Samsung 940BW;HA19HS4P600514W
+00701;1;02;09;20;Компьютер, системный блок, HP 400 ProDesk G2 MT Core i5-4590S, 4 Gb, 500 Gb, Dos,;HP ProDesk 405 G2 MT Business PC;CZC4322TBF
+00702;1;02;02;20;Компьютер, системный блок, Dell Vostro 3671 i3-9100, 4 Gb, 1 Tb, Dos,;Vostro 3671;JTG9P23
+00703;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1222X09088
+00704;1;01;04;20;"Монитор(8528599009), Dell E2418HN 23.8""";Dell E2420HS;CN-020CRSFCC00-04K-DTLB-A01
+00705;1;01;09;20;"Монитор(8528599009), Dell E2418HN 23.8""";Dell E2420HS;9XSBV33
+00706;1;01;09;11;Не в учете;Acer V223HQ;ETLJ40D0441381186C8517
+00707;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор DHI-NVR-5216-4KS2,;Dahua DHI-NVR5216-4KS2;5J0A297PAZDCCFF
+00708;1;27;09;20;Не в учете;Panasonic KX-TS2388RUW;2BAKD017198
+00709;1;14;09;20;Сетевое оборудование, коммутатор, HP, 1910-8 Switch,;HP 1910-8G (JG348A);CN45FRJ1LZ
+00710;1;14;09;20;Сетевое оборудование, коммутатор, Dahua, DH-(PFS3110)-8P-96,;Dahua DH-PFS3110-8P-96;5K023DDPAJE5A47
+00711;2;14;09;20;Сетевое оборудование, коммутатор, Dahua, DH-(PFS3110)-8P-96,;Dahua DH-PFS3110-8P-96;5K023DDPAJ4F79C
+00712;1;01;07;16;"Монитор, Samsung S24D300H 24""";Samsung S24F350FHI;ZZMTH4ZH700511D
+00713;1;04;09;20;Сканер, Canon, P-215 II;Canon Image Formula P-215ii;GY459686
+00714;1;02;09;20;Компьютер, персональный компьютер, HP ProDesk 400 G4 SFF i3-7100, 4 Gb, 500 Gb, Windows 10 Professional,;HP ProDesk 400 G4 SFF Business PC;CZC7329BXN
+00715;1;27;09;20;Не в учете;Panasonic KX-T7230X;7HCVJ124873
+00716;1;01;03;18;"Монитор, Samsung 22""";Samsung S22D300HY;0AJDHLLK300756X
+00717;1;02;09;20;Компьютер, персональный компьютер, HP ProDesk 400 G4 SFF i3-7100, 4 Gb, 500 Gb, Windows 10 Professional,;HP ProDesk 400 G4 SFF Business PC;CZC73291TW
+00718;1;27;09;20;Телефон стационарный, системный Panasonic KX-DT521RU;Panasonic KX-DT521RU;7DBTE008569
+00719;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;Compaq 500B MT;CZC94638SN
+00720;1;01;05;13;"Монитор, Samsung 23""";Samsung S23B350T;ZX5CHTKD500620V
+00721;1;01;09;09;Не в учете;Acer X233H;ETLG1080269390E3214220
+00722;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA21204SY
+00723;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA230013W
+00724;1;01;09;20;"Монитор, Samsung S22E200NY 21.5""";Samsung S22B300N;2114HLPC900327H
+00725;1;27;09;20;Не в учете;Panasonic KX-T7230X;6CCVH050994
+00726;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1LASB011333
+00727;1;02;09;20;Компьютер, персональный компьютер, HP 400 G3PD MT i56500 Dos,;HP ProDesk 400 G3 MT Business PC;CZC5493F41
+00728;1;01;06;15;"Монитор, Samsung S22E200NY 21.5""";Samsung S22C200NY;0AHBHLLG602309D
+00729;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA315042T
+00730;1;27;09;20;Не в учете;Panasonic KX-T7250X;4FAVB014254
+00731;1;01;01;08;Не в учете;Samsung 931C;ME19HVDQ107885T
+00732;1;02;09;20;Компьютер, Системный блок, HP 6000 Windows 7 Professional,;HP Compaq 6000 Pro MT;RUA11701M6
+00733;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;5GCKA560167
+00734;1;02;09;20;Компьютер, Системный блок, HP 280 G1 MT HP Care Pack,;HP 280 G1 MT Business PC;CZC5522D7R
+00735;1;01;03;10;"Монитор, Samsung 22""";Samsung 2243NW;LS22MYNKSBA/EN
+00736;1;27;09;20;Не в учете;Panasonic KX-T7230RU;8FCVA005319
+00737;1;27;09;20;Не в учете;Panasonic KX-T7230RU;8FCVA006220
+00738;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;Compaq 500B MT;RUA0140CQR
+00739;1;01;12;07;Не в учете;Samsung 931C;ME19HVMPC00053T
+00740;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0352KDG
+00741;1;27;09;20;Не в учете;Panasonic KX-T7230X;7HBVJ123061
+00742;1;01;03;11;"Монитор, Samsung 22""";Samsung E2220NW;0515HLOB302063L
+00743;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1IBVA011956
+00744;1;07;12;10;Не в учете;HP LaserJet P2035n (CE462A);CNCKM27271
+00745;1;01;11;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLOZB00754K
+00746;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA3150418
+00747;1;02;09;20;Компьютер, Системный блок, HP 400 ProDesk G2 MT Core i5-4590S, 4 Gb, 1 Tb, Windows 7 Pro 64-bit,;HP ProDesk 400 G4 SFF Business PC;CZC73291TW
+00748;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0484XN9
+00749;1;02;09;20;Компьютер, персональный компьютер, HP 6300 i3-3220 Windows 7,;HP Compaq Pro 6300 Microtower;RUA24809G8
+00750;1;01;12;07;Не в учете;Samsung 931C;ME19HVJPC04122R
+00751;1;27;09;20;Не в учете;Panasonic KX-TS2361RUW;6ABKA644216
+00752;1;01;04;18;"Монитор, Samsung S22D300HY 21.5""";Samsung S22D300HY;0AJDHLLK400731D
+00753;1;27;09;20;Телефон стационарный, проводной цифровой Panasonic KX-DT321RU;Panasonic KX-DT321RU;2IACD020990
+00754;1;02;04;18;Компьютер, персональный компьютер, Dell Vostro 3268, Intel Core i57400/DDR4 4GB/1000GB Dos,;Vostro 3268;FG737P2
+00755;1;01;06;11;"Монитор, Samsung E2220N 21.5""";Samsung E2220NW;0515HLPB60000BT
+00756;1;01;03;14;Не в учете;LG 22M35A-B;403NDEZFL004
+00757;1;27;09;20;Не в учете;Panasonic KX-T7230X;7HBVJ123039
+00758;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA13103KK
+00759;1;04;09;20;Сканер, Canon, P-215 II;Canon Image Formula P-150;FEA71553
+00760;1;27;09;20;Телефон стационарный, системный Panasonic KX-DT543RUB;KX-DT333RU;1LBCD004683
+00761;1;07;01;14;Принтер, HP, LaserJet Pro 400 M401d;HP LJ Pro 400 MFP M425dn (CF286A);CNF8G1F36M
+00762;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;Compaq 500B MT;RUA0210PV5
+00763;1;01;10;19;"Монитор(8528599009), Dell E2418HN 23.8""";Dell E2418HN;BY5FVW2
+00764;1;02;09;20;Компьютер, персональный компьютер, HP, Compaq dx2400  Windows 7,;HP Compaq dx2400 Microtower;CZC8404990
+00765;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1203X49423
+00766;1;27;09;20;Не в учете;Panasonic KX-T7433RU;3HASB034113
+00767;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA230012S
+00768;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;CZC12357XK
+00769;1;02;12;18;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Del Vostro 3670;HLS10T2
+00770;1;01;07;20;"Монитор(8528521000), Dell 24""";Dell E2420HS;57NNV33
+00771;1;01;04;11;Не в учете;HP Compaq LA2306x;CNC1160CR5
+00772;1;02;02;18;Компьютер, персональный компьютер, Dell Vostro 3268, Intel Core i57400/DDR4 4GB/1000GB Dos,;Del Vostro 3268;DF2THN2
+00773;1;07;09;20;Принтер, Canon, PIXMA IX6840;Canon iX6840;ADHN12899
+00774;1;27;09;20;Телефон стационарный, системный Panasonic KX-DT521RU;Panasonic KX-DT521RU-B;7JBTE006152
+00775;1;27;09;20;Не в учете;Panasonic KX-DT333RU;1JBCE010480
+00776;1;02;09;20;Компьютер, Системный блок, HP dc7600 Windows XP Prof Rus,;HP Elite 7300 Series MT;CZC1308962
+00777;1;27;09;20;Не в учете;Panasonic KX-DT390RU;1LBCB003512
+00778;1;02;09;20;Компьютер, Системный блок, HP ProDesk 600 G1 TWR Core i5-4570, 4 Gb, 500 Gb, Dos,;HP Compaq dc7100 CMT;CZC4341BLB
+00779;1;01;07;13;"Монитор, Samsung 23""";Samsung S23C350B;3363HLND700528M
+00780;1;06;09;20;МФУ (принтер, копир, факс), KYOCERA Ecosys M2035DN, принтер+сканер+копир А4,;Kyocera EcoSys M2035dn;LVW4Y50601
+00781;1;06;11;13;Не в учете;HP Color LJ Pro 500 M570dn MFP (CZ271A;CN59FCF8MW
+00782;1;14;09;20;Сетевое оборудование, коммутатор, Dahua, DH-(PFS3110)-8P-96,;Dahua DH-PFS3110-8P-96;4MO1416PAJFF36D2
+00783;1;14;09;20;Сетевое оборудование, коммутатор, HP, PS1810-8G,;HP 1410-8G (J9559A);CN5208J0PH
+00784;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор DHI-NVR2104-4KS2,;Dahua DHI-NVR2104-4KS2;4E07FAEPBQ32EF7
+00785;1;01;10;11;"Монитор, Samsung 23.6""";Samsung B2430L;0441HLPBA01636H
+00786;1;02;09;20;Компьютер, персональный компьютер, HP, Compaq dx2400  Windows 7,;HP Compaq dx2420 Microtower;CZC9430CF4
+00787;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1303X15737
+00788;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA044479B
+00789;1;01;06;05;Не в учете;Samsung 913VN;GS19HMDY605088L
+00790;1;;11;10;"Монитор, Samsung 22""";Samsung E2220NW;0515HLJZB02477K
+00791;1;02;04;20;Компьютер, системный блок, Dell Vostro 3671 i3-9100, 4 Gb, 1 Tb, Dos,;Del Vostro 3671;GN2H833
+00792;1;02;11;18;Компьютер, персональный компьютер, Dell Vostro 3670-2882 Core i3-8100, 4 Gb, 1 Tb, Linux,;Del Vostro 3670;J8WL0S2
+00793;1;01;03;19;"Монитор(8528599009), Dell SE2416H 23.8""";Dell SE2416H/SE2416HX;6BB4PL2
+00794;1;07;05;07;Не в учете;HP LaserJet 1022;VNC3530882
+00795;1;01;01;12;"Монитор, Samsung 23""";Samsung S23C200B;3122HLPD100679M
+00796;1;02;04;20;Компьютер, системный блок, Dell Vostro 3671 i3-9100, 4 Gb, 1 Tb, Dos,;Del Vostro 3671;76Y8933
+00797;1;01;10;19;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;8VJQ7Z2
+00798;1;02;09;20;Компьютер, Системный блок, HP 280 G1 MT HP Care Pack,;HP 280 G1 MT Business PC;CZC51919SV
+00799;1;06;12;19;МФУ (принтер, копир, факс), HP LaserJet Pro M426fdn, А4,;HP LJ Pro MFP M426fdn (F6W17A);PHBLMDL4XL
+00800;1;01;04;19;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;70V08V2
+00801;1;01;04;19;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;80V08V2
+00802;1;02;09;19;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Del Vostro 3670;71YZ8Z2
+00803;1;08;09;20;ИБП, PowerMan, Back Pro 600,;Powerman BackPro 600;1306001709190000570
+00804;1;14;09;20;Сетевое оборудование, коммутатор, HP, PS1810-8G,;HP 1410-8G (J9559A);CN5208J01P
+00805;1;06;09;20;МФУ (принтер, копир, факс), Ricoh MP 2014AD,;Ricoh MP 2014ad;G619MB40386
+00806;1;06;09;20;МФУ (принтер, копир, факс), KYOCERA Ecosys M2035DN, принтер+сканер+копир А4,;Kyocera EcoSys M2035dn;LVW5Z21280
+00807;1;01;01;18;"Монитор, Samsung S24E390HL 23.6""";Samsung S24E390HL;0ATNHLLK101140K
+00808;1;02;12;17;Компьютер, персональный компьютер, Dell Optiplex 3050 MT Windows 10,;OptiPlex 3050;BX7SWM2
+00809;1;01;11;12;"Монитор, Samsung S22C450B 21.5""";Samsung S20C200B;3121HLPCB00217X
+00810;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq Pro 6200 MT;RUA21001Z8
+00811;1;01;05;16;"Монитор(8528521000), Samsung S22E200B 21.5""";Samsung S22E200NY;0AZVHLLH501156R
+00812;1;04;09;20;Сканер, Canon, CanoScan LiDE 220;Canon CanoScan LIDE220;KLAC54472
+00813;1;06;09;20;Не в учете;HP LJ MFP 3015 (Q2669A);CNBF173607
+00814;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq Pro 6200 MT;RUA2300152
+00815;1;01;07;09;Не в учете;Samsung 943SN;MY19HMGS700095A
+00816;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1219X19599
+00817;1;08;09;20;ИБП, PowerMan, Back Pro 600,;Powerman BackPro 600;1306001709190000569
+00818;1;02;09;20;Компьютер, персональный компьютер, Dell 3470-0908 Core i3-8100, 4 Gb, 1 Tb, Linux,;Del Vostro 3470;J9DD0S2
+00819;1;01;10;18;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;7TH44R2
+00820;1;07;10;13;Не в учете;HP LJ Pro P1102w CE658A;VNF4505209
+00821;1;01;08;20;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;F5GK043
+00822;1;02;04;20;Компьютер, системный блок, Dell Vostro 3671 i3-9100, 4 Gb, 1 Tb, Dos,;Del Vostro 3671;C6Y8933
+00823;1;01;09;20;"Монитор, Samsung E2220N 21.5""";Samsung S20C200B;3121HLPCB00221W
+00824;1;02;09;20;Компьютер, персональный компьютер, HP 6300 i3-3220 Windows 7,;HP Compaq Pro 6300 Microtower;RUA24807FN
+00825;1;07;12;05;Не в учете;HP LJ 1160 (Q5933A);CNMD2D80062
+00826;1;27;09;20;Телефон стационарный, IP-телефон Panasonic KX-NT511ARUW;Panasonic KX-NT511ARUB;6JATC007650
+00827;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP Pro 3400 Series MT;CZC2202ZSK
+00828;1;01;05;15;"Монитор(8528521000), Philips 27""";Philips 274e;UHBA1521020639
+00829;1;14;09;20;Сетевое оборудование, коммутатор, ZyXEL, GS-108B,;Zyxel GS-108B;S204302011418
+00830;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA03220C3
+00831;1;01;04;19;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;90V08V2
+00832;1;02;09;20;Компьютер, Системный блок, HP 3500 Pro MT Windows 7,;HP PRO 3500 Series MT;RUA31503WQ
+00833;1;01;12;10;"Монитор, Samsung E2220N 21.5""";Samsung E2220NW;0515HLOZC01819E
+00834;1;07;09;20;МФУ (принтер, копир, факс), HP LaserJet Pro M428dw,;HP LJ Pro 400 MFP M425dn (CF286A);CNF8G6MMNX
+00835;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0322128
+00836;1;04;09;20;Сканер, Canon, CanoScan LiDE 220;Canon CanoScan LIDE220;KKKA74072
+00837;1;01;06;10;"Монитор, Samsung E2220N 21.5""";Samsung E2220NW;0515HLJZ600142V
+00838;1;06;09;20;МФУ (принтер, копир, факс), Xerox WC 6015,;Xerox WorkCentre 6015;3191050370
+00839;1;14;09;20;Сетевое оборудование, коммутатор, HP, 1920-48G,;HP OfficeConnect 1920S 48G (JL386A);CN05K3R26V
+00840;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор DHI-NVR-2208-4KS2,;Dahua DHI-NVR2208-4KS2;4E0641APAZ9168D
+00841;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900G-RS;4B2022P04839
+00842;1;01;09;20;"Монитор, Samsung S22D300HY 21.5""";Samsung S22D300HY;0AJDHLLK400728Z
+00843;1;02;04;18;Компьютер, персональный компьютер, Dell Vostro 3268, Intel Core i57400/DDR4 4GB/1000GB Dos,;Del Vostro 3268;FG7B7P2
+00844;1;01;08;20;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;BWF1243
+00845;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA14004VJ
+00846;1;01;03;08;Не в учете;Asus VK191 19'';836LMMS034453
+00847;1;02;09;20;Компьютер, Системный блок, HP 6000 Windows 7 Professional,;HP Compaq 6000 Pro MT;CZC9485ZQB
+00848;1;01;03;18;"Монитор, Samsung S22E200NY 21.5""";Samsung S22D300HY;0AJDHLLK300116L
+00849;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA0505CDD
+00850;1;01;07;20;"Монитор(8528599009), Dell E2420HS 23.8""";Dell E2420HS;50NNV33
+00851;1;01;07;20;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;9QKFV33
+00852;1;07;08;12;МФУ (принтер, копир, факс), HP LaserJet Pro 400 M425dn,;HP LJ Pro 400 M401dw CF285A;VNC3M16656
+00853;1;02;05;20;Компьютер, системный блок, Dell Vostro 3671 i3-9100, 4 Gb, 1 Tb, Dos,;Del Vostro 3671;1LR2933
+00854;1;08;09;20;ИБП, PowerMan, Back Pro 600,;Powerman BackPro 600;1306001709190000571
+00855;1;14;09;20;Сетевое оборудование, коммутатор, HP, 1920-48G,;HP OfficeConnect 1920S 48G (JL386A);CN05K3R1F1
+00856;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор,;Dahua DHI-NVR4208-8P-4K;1F03348PAY00015
+00857;1;01;08;16;Не в учете;Philips 200V4L;ZV5A1633000046
+00858;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор,;Falcon Eye FE-916DE;TZA3JE00400008
+00859;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор,;Falcon Eye FE-3204N;TZA3GM14100010
+00860;1;14;09;20;Сетевое оборудование, коммутатор, HP, PS1810-8G,;HP 1405-8G [J9794A];CN30FQ773F
+00861;1;24;09;20;Система контроля, видеонаблюдение, видеорегистратор,;Dahua DHI-NVR4104B;1A00CF4PAYA5496
+00862;1;14;09;20;Сетевое оборудование, коммутатор, Falcon Eye, FE-104-POE-S,;Falcon Eye FE-104POE-S;6900005260180
+00863;1;06;10;14;МФУ (принтер, копир, факс), HP LaserJet Pro M225 (CF485A), А4,;HP LJ Pro MFP M225rdn (CF486A);CNB6GBB49S
+00864;1;02;09;20;Компьютер, персональный компьютер, HP, dx2300 MT  DualCore PE-2160, Windows 7,;HP Compaq dx2300 Microtower;HUB751197J
+00865;1;14;09;20;Сетевое оборудование, коммутатор, HP, PS1810-8G,;hp V1410-8G 8 (J9559A);CN5208J0YZ
+00866;1;01;12;12;"Монитор, Samsung 23""";Samsung S23C450B;3124HLNCC00035B
+00867;1;02;09;20;Компьютер, Системный блок, Intel Core i7-6700 Без предустановленного ПО,;HP Compaq 6200 Pro Microtower;RUA230014W
+00868;1;01;11;15;"Монитор, Samsung S22E200NY 21.5""";Samsung S22E200NY;0AZRHLMGB02210A
+00869;1;02;04;20;Компьютер, системный блок, Dell Vostro 3671 i3-9100, 4 Gb, 1 Tb, Dos,;Del Vostro 3671;3P2H833
+00870;1;02;04;20;Компьютер, системный блок, Dell Vostro 3671 i3-9100, 4 Gb, 1 Tb, Dos,;Del Vostro 3671;JN2H833
+00871;1;01;07;20;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;CQKFV33
+00872;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP Compaq dx5800 MT;CZC9332WV2
+00873;1;01;05;09;Не в учете;Samsung 943SN;MY19HMFS514732N
+00874;1;02;09;20;Компьютер, персональный компьютер, HP, Compaq dx2400  Windows 7,;HP Compaq dx2420 Microtower;CZC9430CC7
+00875;1;08;09;20;ИБП, APC, Back-RS900VA(BR900GI),;APC BR1200LCDI;3B1006292230
+00876;1;01;12;13;Не в учете;HP Pavilion 22xi 21.5 IPS LED;3CM3480NVH
+00877;1;06;09;20;МФУ (принтер, копир, факс), Ricoh MP 2014AD,;Ricoh MP 2014ad;G618MC40296
+00878;1;02;09;20;Компьютер, персональный компьютер, HP 6300 i3-3220 Windows 7,;HP Compaq Pro 6300 Microtower;RUA24809GY
+00879;1;01;12;12;"Монитор, Samsung S24E390HL 23.6""";Samsung S20C200B;3121HLPCC00128R
+00880;1;02;09;09;Не в учете;ElemeNT;ELE00018965
+00881;1;01;06;04;Не в учете;Samsung 710V S;GS17H9NX604460
+00882;1;01;04;15;"Монитор, Samsung S24E390HL 23.6""";Samsung S24E510C;0MFBHTQG400947H
+00883;1;02;09;20;Компьютер, персональный компьютер, HP, Compaq dx2400  Windows 7,;HP Compaq dx2420 Microtower;CZC9312L14
+00884;1;01;08;20;"Монитор(8528521000), Dell E2218HN 21.5""";Dell E2218HN;45GK043
+00885;1;02;09;20;Компьютер, системный блок, Dell Vostro 3671 i3-9100, 4 Gb, 1 Tb, Dos,;Del Vostro 3671;5LR2933
+00886;1;01;10;19;"Монитор(8528521000), Dell 21.5""";Dell E2218HN;6WGQ7Z2
+00887;1;02;04;20;Компьютер, системный блок, Dell Vostro 3671 i3-9100, 4 Gb, 1 Tb, Dos,;Del Vostro 3671;9PWZ833
+00888;1;01;10;10;"Монитор, Samsung E2220N 21.5""";Samsung E2220NW;0515HLJZA00970X
+00889;1;02;09;20;Компьютер, системный блок, HP 600 G3 SFF ProDesk Dos,;HP ProDesk 600 G1 TWR;CZC42545X7
+00890;1;07;08;12;Принтер, HP, LaserJet Pro 400 M401d;HP LaserJet Pro 400 M401dw CF285A;VNC3M16666
+00891;1;01;10;18;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;6TK44R2
+00892;1;02;09;20;Компьютер, Системный блок, HP 6000 Windows 7 Professional,;HP Compaq 6000 Pro MT;RUA11701L5
+00893;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1148X16276
+00894;1;01;12;12;"Монитор, Samsung 21.5""";Samsung S20C200B;3121HLPCC00122Y
+00895;1;02;09;20;Компьютер, Системный блок, HP 6000 Windows 7 Professional,;HP Compaq 6000 Pro MT;RUA24807DY
+00896;1;01;01;19;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;B8JCHS2
+00897;1;02;12;18;Компьютер, персональный компьютер, Dell Vostro 3670-0939 Core i3-8100, 4 Gb, 1 Tb, Linux,;Del Vostro 3670;95KXZS2
+00898;1;01;01;10;Не в учете;Samsung 923NW;HA19H9CZ116887K
+00899;1;02;09;20;Компьютер, персональный компьютер, HP, 500B MT Pentium , Windows 7,;HP 500B MT;RUA01006YM
+00900;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1203X54488
+00901;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900GI;3B1203X54508
+00902;1;01;08;19;"Монитор(8528521000), Dell E2418HN 23.8""";Dell E2418HN;FP83WQ2
+00903;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA14300NR
+00904;1;07;09;09;Не в учете;HP LJ P1006 (CB411A);VNF3T52490
+00905;1;24;09;09;Система контроля, видеонаблюдение, видеорегистратор DHI-NVR4116HS-4KS2,;Dahua DHI-NVR4116HS-4KS2;6E07845PAZ33540
+00906;1;15;09;20;Не в учете;ASUS WL-520GU;A9IEG8000622
+00907;1;14;09;20;Сетевое оборудование, коммутатор, HP, 1920-48G,;HPE OfficeConnect 1920S JL386A;CN05K3R2R9
+00908;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC BR900G-RS;4B2032P38042
+00909;1;02;04;15;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA2240395
+00910;1;27;09;20;Не в учете;Panasonic KX-T7433RU;1IBVA011728
+00911;1;06;04;15;МФУ (принтер, копир, факс), KYOCERA Ecosys M3040IDN, А4,;Kyocera EcoSys M3040dn;LS67535081
+00912;1;01;03;15;"Монитор(8528521000), HP 24""";HP E241i;CN45110CCZ
+00913;1;02;09;20;Компьютер, системный блок, HP 6200 Pro MT Core i3-2120, 2 Gb, 500 Gb, Windows 7 Professional,;HP Compaq 6200 Pro Microtower;RUA150002D
+00914;1;27;09;20;Не в учете;Panasonic KX-DT333RU;2BACE012748
+00915;1;01;10;07;Не в учете;Samsung 943;ME19HVCPA01299E
+00916;1;14;09;20;Не в учете;HP PNC J4097C;CN940ZN1B8
+00917;1;08;09;20;ИБП, APC, Back-UPS Pro 900,;APC S900;4B1906P37049
+00918;1;02;09;20;Компьютер, персональный компьютер, HP, Compaq dx2400  Windows 7,;HP Compaq dx2400 Microtower;CZC8467W1Y
+00919;1;01;07;20;"Монитор(8528599009), Dell E2218HN 21.5""";Dell E2218HN;6RKFV33
+00920;1;01;12;13;Не в учете;Samsung S19C200BW;3120HLNDC00392V
+00921;1;01;09;18;"Монитор(8528599009), Dell SE2416H 23.8""";Dell SE2416H/SE2416HX;74CQNL2

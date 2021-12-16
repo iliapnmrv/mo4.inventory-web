@@ -8,14 +8,13 @@ import Loading from "components/Loading/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { SERVER, LOGS_CATALOG } from "constants/constants";
 import Button from "components/Button/Button";
-import QRcode from "qrcode.react";
-import "./ItemInfo.css";
+import QR from "components/QR/QR";
 
 export default function ItemInfo({ close, editId }) {
   const { storages, statuses, sredstva, persons, types } = useSelector(
     (state) => state.info
   );
-  const { username } = useSelector((state) => state.user);
+  const { login, role } = useSelector((state) => state.user.username);
   const { data, initialItemData } = useSelector((state) => state.total);
   const dispatchTotal = useDispatch();
 
@@ -126,7 +125,7 @@ export default function ItemInfo({ close, editId }) {
       const { message: updatedLogs, isSuccess: updatedLogsSuccess } =
         await fetchData(`${SERVER}api/logs/`, {
           qr,
-          user: username,
+          user: login,
           text: logs.slice(0, -1),
         });
       const { message: updatedInfo, isSuccess: updatedInfoSuccess } =
@@ -252,19 +251,6 @@ export default function ItemInfo({ close, editId }) {
     }
   };
 
-  const downloadQR = () => {
-    const qrCodeURL = document
-      .querySelector(".qr canvas")
-      .toDataURL("image/png")
-      .replace("image/png", "image/octet-stream");
-    let aEl = document.createElement("a");
-    aEl.href = qrCodeURL;
-    aEl.download = "QR_Code.png";
-    document.body.appendChild(aEl);
-    aEl.click();
-    document.body.removeChild(aEl);
-  };
-  const printQR = () => {};
   return (
     <div>
       {isPending ? (
@@ -281,7 +267,7 @@ export default function ItemInfo({ close, editId }) {
                 onChange={changeHandler}
               />
               <Input
-                span="Введите наименование"
+                span="Введите наименование по бухучету"
                 name="name"
                 value={name}
                 onChange={changeHandler}
@@ -350,7 +336,7 @@ export default function ItemInfo({ close, editId }) {
               storagesDefault != null &&
               storagesDefault !== "" ? (
                 <SelectInput
-                  span="Выберите место хранения"
+                  span="Выберите местоположение"
                   name="storage"
                   data={storages}
                   default={storagesDefault}
@@ -359,7 +345,7 @@ export default function ItemInfo({ close, editId }) {
               ) : null}
               {storagesDefault === "Not found" ? (
                 <SelectInput
-                  span="Выберите место хранения"
+                  span="Выберите местоположение"
                   name="storage"
                   data={storages}
                   onSelectChange={selectChangeHandler}
@@ -382,7 +368,7 @@ export default function ItemInfo({ close, editId }) {
             </div>
             <div className="form-inputs">
               <Input
-                span="Модель"
+                span="Модель реальная"
                 name="model"
                 value={model}
                 onChange={changeHandler}
@@ -395,7 +381,7 @@ export default function ItemInfo({ close, editId }) {
               />
             </div>
             <Input
-              span="Информация о предмете"
+              span="Примечания"
               name="info"
               value={info}
               onChange={changeHandler}
@@ -406,31 +392,25 @@ export default function ItemInfo({ close, editId }) {
                 type="submit"
                 action={(e) => onSubmitForm(e)}
               />
-              <Button
-                text="Удалить"
-                style="warning"
-                action={() => deleteItem(qr)}
-              />
+              {login === "admin" && (
+                <Button
+                  text="Удалить"
+                  style="warning"
+                  action={() => deleteItem(qr)}
+                />
+              )}
             </div>
           </form>
-
-          <div
-            className="qr"
-            title={`${sredstvo}${("0" + type).slice(
-              -2
-            )}${month}${year}${qr}\n${name}\n${model}\n${sernom}`}
-          >
-            <div className="qr-buttons">
-              <Button text="Скачать" action={downloadQR} style="info" />
-              <Button text="Распечатать" action={printQR} style="info" />
-            </div>
-
-            <QRcode
-              value={`${sredstvo}${("0" + type).slice(
-                -2
-              )}${month}${year}${qr}\n${name}\n${model}\n${sernom}`}
-            />
-          </div>
+          <QR
+            month={month}
+            year={year}
+            name={name}
+            qr={qr}
+            model={model}
+            sernom={sernom}
+            sredstvo={sredstvo}
+            type={type}
+          />
 
           {logs.length ? (
             <>

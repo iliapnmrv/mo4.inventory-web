@@ -8,6 +8,7 @@ import cors from 'cors'
 import multer from 'multer'
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv'
+import { CLIENT } from "./constaints/constaints.js";
 
 dotenv.config()
 
@@ -15,7 +16,7 @@ const app = express()
 
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: CLIENT,
     credentials: true
 }))
 app.use(express.json())
