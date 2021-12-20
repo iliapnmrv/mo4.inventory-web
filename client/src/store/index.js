@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
     auth: authReducer,
     total: totalReducer,
     info: infoReducer,
-    modal: modalReducer
+    modal: modalReducer,
 })
 
 

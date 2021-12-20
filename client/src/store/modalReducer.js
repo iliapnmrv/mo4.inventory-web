@@ -2,6 +2,12 @@ const defaultState = {
     filters: false,
     newItem: false,
     itemInfo: false,
+    deleteDialog: {
+        visible: false,
+    },
+    saveDialog: {
+        visible: false,
+    },
     itemInfoId: 0,
 };
 
@@ -13,6 +19,10 @@ export const modalReducer = (state = defaultState, { type, payload }) => {
             return {...state, newItem: payload };
         case "TOGGLE_ITEMINFO_MODAL":
             return {...state, itemInfo: payload };
+        case "TOGGLE_SAVE_DIALOG":
+            return {...state, saveDialog: {...state.saveDialog, ...payload } };
+        case "TOGGLE_DELETE_DIALOG":
+            return {...state, deleteDialog: {...state.deleteDialog, ...payload } };
         case "CHANGE_ITEMINFOID":
             return {...state, itemInfoId: payload };
         default:

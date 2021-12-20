@@ -1,7 +1,22 @@
 const defaultState = {
     data: [],
     initialItemData: [],
+    itemValues: {
+        qr: "",
+        name: "",
+        sredstvo: "",
+        type_id: "",
+        month: "",
+        year: "",
+        model: "",
+        sernom: "",
+        info: "",
+        status: "",
+        person: "",
+        storage: "",
+    }
 };
+
 
 export const totalReducer = (state = defaultState, { type, payload }) => {
     switch (type) {
@@ -9,6 +24,8 @@ export const totalReducer = (state = defaultState, { type, payload }) => {
             return {...state, data: payload };
         case "INITIAL_ITEM_DATA":
             return {...state, initialItemData: payload };
+        case "CHANGE_ITEM_DATA":
+            return {...state, itemValues: payload };;
         default:
             return state;
     }

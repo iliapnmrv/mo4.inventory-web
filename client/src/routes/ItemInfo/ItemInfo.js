@@ -6,17 +6,27 @@ import usePostFetch from "hooks/usePostFetch";
 import useNotification from "hooks/useNotification";
 import Loading from "components/Loading/Loading";
 import { useDispatch, useSelector } from "react-redux";
-import { SERVER, LOGS_CATALOG } from "constants/constants";
+import { SERVER, ACCESS_RIGHTS } from "constants/constants";
 import Button from "components/Button/Button";
 import QR from "components/QR/QR";
+import Dialog from "components/Dialog/Dialog";
+import OnItemInfoFormSubmit from "./onItemInfoFormSubmit";
 
 export default function ItemInfo({ close, editId }) {
   const { storages, statuses, sredstva, persons, types } = useSelector(
     (state) => state.info
   );
   const { login, role } = useSelector((state) => state.user.username);
-  const { data, initialItemData } = useSelector((state) => state.total);
+  const { data, itemValues } = useSelector((state) => state.total);
+  const {
+    deleteDialog: { visible: deleteDialogVisible },
+  } = useSelector((state) => state.modal);
+
+  console.log(itemValues);
+
   const dispatchTotal = useDispatch();
+  const dispatchModal = useDispatch();
+  const onFormSubmit = OnItemInfoFormSubmit();
 
   const [isPending, setIsPending] = useState(true);
   const [logs, setLogs] = useState([]);
@@ -62,113 +72,14 @@ export default function ItemInfo({ close, editId }) {
     storage: "",
   });
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    onFormSubmit(close, itemValues);
+  };
+
   const getDefault = async (value, obj) => {
     return obj.filter((el) => el["value"] === value);
   };
-
-  const onSubmitForm = async (e) => {
-    e.preventDefault();
-    try {
-      let newItemData = {
-        qr,
-        name,
-        sredstvo,
-        type,
-        month,
-        year,
-        model,
-        sernom,
-        person,
-        storage,
-        status,
-        info,
-      };
-
-      if (JSON.stringify(initialItemData) === JSON.stringify(newItemData)) {
-        dispatch({
-          type: "SUCCESS",
-          message: "Информация не была изменена",
-        });
-        close();
-        return;
-      }
-
-      const { message: updatedTotal, isSuccess: updatedTotalSuccess } =
-        await fetchData(
-          `${SERVER}api/total/${editId}`,
-          {
-            qr,
-            name,
-            sredstvo,
-            type,
-            month,
-            year,
-            model,
-            sernom,
-          },
-          "PUT"
-        );
-      let updatedData = Object.keys(newItemData).reduce((diff, key) => {
-        if (initialItemData[key] === newItemData[key]) return diff;
-        return {
-          ...diff,
-          [key]: newItemData[key],
-        };
-      }, {});
-      let logs = "";
-      for (const key in updatedData) {
-        logs = ` ${logs} ${LOGS_CATALOG[key]}: ${
-          initialItemData[key] == null ? "" : initialItemData[key]
-        } -> ${updatedData[key]},`;
-      }
-
-      const { message: updatedLogs, isSuccess: updatedLogsSuccess } =
-        await fetchData(`${SERVER}api/logs/`, {
-          qr,
-          user: login,
-          text: logs.slice(0, -1),
-        });
-      const { message: updatedInfo, isSuccess: updatedInfoSuccess } =
-        await fetchData(`${SERVER}api/info/${editId}`, {
-          info,
-        });
-      const { message: updatedStatus, isSuccess: updatedStatusSuccess } =
-        await fetchData(`${SERVER}api/status/${editId}`, {
-          status,
-        });
-      console.log(person);
-      const { message: updatedPerson, isSuccess: updatedPersonSuccess } =
-        await fetchData(`${SERVER}api/person/${editId}`, {
-          person,
-        });
-      const { message: updatedStorage, isSuccess: updatedStorageSuccess } =
-        await fetchData(`${SERVER}api/storage/${editId}`, {
-          storage,
-        });
-      close();
-
-      dispatch({
-        type: "SUCCESS",
-        message: updatedTotal,
-        title: "Успешно",
-      });
-
-      let newItem = { qr, name, sredstvo, type, month, year, model, sernom };
-
-      let filtered = data.filter((data) => {
-        return data.qr !== editId;
-      });
-      let newArr = [...filtered, newItem];
-      sortArr(newArr);
-      dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: newArr });
-    } catch (e) {
-      console.error(e.message);
-    }
-  };
-
-  function sortArr(arr) {
-    return arr.sort((a, b) => (a.qr > b.qr ? 1 : -1));
-  }
 
   const getData = async () => {
     try {
@@ -179,6 +90,12 @@ export default function ItemInfo({ close, editId }) {
 
       dispatchTotal({
         type: "INITIAL_ITEM_DATA",
+        payload: item,
+      });
+
+      console.log(item);
+      dispatchTotal({
+        type: "CHANGE_ITEM_DATA",
         payload: item,
       });
 
@@ -199,8 +116,6 @@ export default function ItemInfo({ close, editId }) {
       } else {
         setStatusesDefault("Not found");
       }
-
-      console.log(item.person);
       if (item.person) {
         getDefault(item.person, persons).then((res) => setPersonsDefault(res));
       } else {
@@ -237,9 +152,10 @@ export default function ItemInfo({ close, editId }) {
       dispatch({
         type: "SUCCESS",
         message: deleteMessage,
-        title: "Успех",
+        title: "Удалено",
       });
       close();
+      closeDialog();
       dispatchTotal({
         type: "CHANGE_TOTAL_DATA",
         payload: data.filter((data) => {
@@ -251,15 +167,41 @@ export default function ItemInfo({ close, editId }) {
     }
   };
 
+  const handleDelete = (qr) => {
+    console.log(qr);
+    dispatchModal({
+      type: "TOGGLE_DELETE_DIALOG",
+      payload: {
+        visible: true,
+      },
+    });
+  };
+
+  const closeDialog = () => {
+    dispatchModal({
+      type: "TOGGLE_DELETE_DIALOG",
+      payload: {
+        visible: false,
+      },
+    });
+  };
+
   return (
     <div>
+      <Dialog
+        visible={deleteDialogVisible}
+        action={deleteItem}
+        close={closeDialog}
+        dialogType="delete"
+      />
       {isPending ? (
         <Loading />
       ) : (
         <div className="md-content">
-          <form onSubmit={(e) => onSubmitForm(e)}>
+          <form onSubmit={(e) => onSubmit(e)}>
             <div className="form-inputs">
               <Input
+                disabled={ACCESS_RIGHTS[role].qr}
                 span="Введите номер QR кода"
                 name="qr"
                 type="number"
@@ -267,6 +209,7 @@ export default function ItemInfo({ close, editId }) {
                 onChange={changeHandler}
               />
               <Input
+                disabled={ACCESS_RIGHTS[role].name}
                 span="Введите наименование по бухучету"
                 name="name"
                 value={name}
@@ -276,6 +219,7 @@ export default function ItemInfo({ close, editId }) {
             <div className="form-inputs">
               {typesDefault ? (
                 <SelectInput
+                  disabled={ACCESS_RIGHTS[role].type}
                   span="Выберите тип"
                   name="type"
                   data={types}
@@ -285,6 +229,7 @@ export default function ItemInfo({ close, editId }) {
               ) : null}
               {sredstvaDefault ? (
                 <SelectInput
+                  disabled={ACCESS_RIGHTS[role].sredstvo}
                   span="Выберите средство"
                   name="sredstvo"
                   data={sredstva}
@@ -296,6 +241,7 @@ export default function ItemInfo({ close, editId }) {
               statusesDefault != null &&
               statusesDefault !== "" ? (
                 <SelectInput
+                  disabled={ACCESS_RIGHTS[role].status}
                   span="Выберите статус"
                   name="status"
                   data={statuses}
@@ -305,6 +251,7 @@ export default function ItemInfo({ close, editId }) {
               ) : null}
               {statusesDefault === "Not found" ? (
                 <SelectInput
+                  disabled={ACCESS_RIGHTS[role].status}
                   span="Выберите статус"
                   name="status"
                   data={statuses}
@@ -315,6 +262,7 @@ export default function ItemInfo({ close, editId }) {
               personsDefault != null &&
               personsDefault !== "" ? (
                 <SelectInput
+                  disabled={ACCESS_RIGHTS[role].person}
                   span="Выберите МОЛ"
                   name="person"
                   data={persons}
@@ -324,6 +272,7 @@ export default function ItemInfo({ close, editId }) {
               ) : null}
               {personsDefault === "Not found" ? (
                 <SelectInput
+                  disabled={ACCESS_RIGHTS[role].person}
                   span="Выберите МОЛ"
                   name="person"
                   data={persons}
@@ -336,6 +285,7 @@ export default function ItemInfo({ close, editId }) {
               storagesDefault != null &&
               storagesDefault !== "" ? (
                 <SelectInput
+                  disabled={ACCESS_RIGHTS[role].storage}
                   span="Выберите местоположение"
                   name="storage"
                   data={storages}
@@ -345,6 +295,7 @@ export default function ItemInfo({ close, editId }) {
               ) : null}
               {storagesDefault === "Not found" ? (
                 <SelectInput
+                  disabled={ACCESS_RIGHTS[role].storage}
                   span="Выберите местоположение"
                   name="storage"
                   data={storages}
@@ -352,6 +303,7 @@ export default function ItemInfo({ close, editId }) {
                 />
               ) : null}
               <Input
+                disabled={ACCESS_RIGHTS[role].month}
                 span="Месяц ввода"
                 type="number"
                 name="month"
@@ -359,6 +311,7 @@ export default function ItemInfo({ close, editId }) {
                 onChange={changeHandler}
               />
               <Input
+                disabled={ACCESS_RIGHTS[role].year}
                 span="Год ввода в эксплуатацию"
                 type="number"
                 name="year"
@@ -368,12 +321,14 @@ export default function ItemInfo({ close, editId }) {
             </div>
             <div className="form-inputs">
               <Input
+                disabled={ACCESS_RIGHTS[role].model}
                 span="Модель реальная"
                 name="model"
                 value={model}
                 onChange={changeHandler}
               />
               <Input
+                disabled={ACCESS_RIGHTS[role].sernom}
                 span="Серийный номер"
                 name="sernom"
                 value={sernom}
@@ -381,6 +336,7 @@ export default function ItemInfo({ close, editId }) {
               />
             </div>
             <Input
+              disabled={ACCESS_RIGHTS[role].info}
               span="Примечания"
               name="info"
               value={info}
@@ -390,13 +346,13 @@ export default function ItemInfo({ close, editId }) {
               <Button
                 text="Сохранить"
                 type="submit"
-                action={(e) => onSubmitForm(e)}
+                action={(e) => onSubmit(e)}
               />
               {login === "admin" && (
                 <Button
                   text="Удалить"
                   style="warning"
-                  action={() => deleteItem(qr)}
+                  action={() => handleDelete(qr)}
                 />
               )}
             </div>

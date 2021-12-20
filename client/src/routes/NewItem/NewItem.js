@@ -39,7 +39,7 @@ export default function NewItem({ close }) {
     selectChangeHandler,
     resetForm,
   } = useForm({
-    qr: "",
+    qr: ("00000" + (Number(data[data.length - 1]?.qr) + 1)).slice(-5),
     name: "",
     sredstvo: "",
     type: "",
@@ -202,13 +202,19 @@ export default function NewItem({ close }) {
               value={model}
               onChange={changeHandler}
             />
+
             <Input
               span="Серийный номер"
               name="sernom"
               value={sernom}
               onChange={changeHandler}
-            />
-            {sernomExists && <p>{sernomExists}</p>}
+            >
+              {sernomExists && (
+                <span className="input-comment">
+                  Данный серийный номер уже используется
+                </span>
+              )}
+            </Input>
           </div>
           <div className="form-inputs">
             <Input

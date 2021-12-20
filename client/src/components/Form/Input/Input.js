@@ -8,12 +8,15 @@ export default function Input({
   onChange,
   required = true,
   max,
+  disabled = false,
+  children,
 }) {
   return (
     <>
       <label className="form-item">
         <span className={required && "required"}>{span}</span>
         <input
+          disabled={disabled}
           required={required}
           max={max}
           type={type}
@@ -21,6 +24,7 @@ export default function Input({
           value={value}
           onChange={onChange}
         />
+        {children}
       </label>
     </>
   );

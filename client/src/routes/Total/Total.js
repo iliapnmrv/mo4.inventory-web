@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./Total.css";
 import Item from "components/Item/Item";
 import Modal from "components/Modal/Modal";
@@ -12,10 +12,11 @@ import ItemInfo from "routes/ItemInfo/ItemInfo";
 import Button from "components/Button/Button";
 
 export default function Total() {
-  const data = useSelector((state) => state.total.data);
+  const { data } = useSelector((state) => state.total);
   const { filters, newItem, itemInfo, itemInfoId } = useSelector(
     (state) => state.modal
   );
+  const { login, role } = useSelector((state) => state.user.username);
 
   const dispatchTotal = useDispatch();
 
@@ -44,12 +45,18 @@ export default function Total() {
   };
 
   const toggleFiltersVisible = () => {
+    if (document.body.style.overflow == "hidden")
+      document.body.style.overflow = "auto";
+    else document.body.style.overflow = "hidden";
     dispatchTotal({
       type: "TOGGLE_FILTERS_MODAL",
       payload: !filters,
     });
   };
   const toggleNewItemVisible = () => {
+    if (document.body.style.overflow == "hidden")
+      document.body.style.overflow = "auto";
+    else document.body.style.overflow = "hidden";
     dispatchTotal({
       type: "TOGGLE_NEWITEM_MODAL",
       payload: !newItem,
@@ -70,11 +77,13 @@ export default function Total() {
     <>
       <div className="filters-bar">
         <Button text="Фильтры" style="filters" action={toggleFiltersVisible} />
-        <Button
-          text="Новый элемент"
-          style="filters"
-          action={toggleNewItemVisible}
-        />
+        {login === "admin" && (
+          <Button
+            text="Новый элемент"
+            style="filters"
+            action={toggleNewItemVisible}
+          />
+        )}
       </div>
       <Modal
         visible={newItem}
@@ -100,8 +109,8 @@ export default function Total() {
                   <th>Тип</th>
                   <th>Месяц ввода</th>
                   <th>Год ввода</th>
-                  <th>Наименование</th>
-                  <th>Модель</th>
+                  <th>Наименование по бухучету</th>
+                  <th>Модель реальная</th>
                   <th>Серийный номер</th>
                 </tr>
               </thead>

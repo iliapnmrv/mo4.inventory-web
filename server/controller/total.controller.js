@@ -112,7 +112,7 @@ class totalController {
         `, [num])
         if (item.length) {
             res.status(200)
-            res.json("Предмет с таким серийным номером уже существует!")
+            res.json(true)
         } else {
             res.status(404)
             res.json(false)

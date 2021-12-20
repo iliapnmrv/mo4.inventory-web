@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRef } from "react";
 import Select from "react-select";
 
@@ -13,7 +13,7 @@ export default function SelectInput(props) {
     span,
     required,
     default: defaultValue,
-    onSelectReset,
+    disabled = false,
   } = props;
 
   const multiStyles = {
@@ -50,6 +50,7 @@ export default function SelectInput(props) {
       <label className="form-item">
         <span className={required ? "required" : null}>{span}</span>
         <Select
+          isDisabled={disabled}
           ref={selectInputRef}
           styles={multi ? multiStyles : ""}
           options={data}
