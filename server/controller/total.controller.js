@@ -1,14 +1,51 @@
 import pool from "../db.js"
+import fetch from 'node-fetch';
 import totalService from "../service/total-service.js"
 class totalController {
     async analyzeTotal(req, res) {
-        const [inv] = await pool.query('SELECT qr, name, model, sernom FROM total')
+
+        let response = await fetch(`${SERVER}/api/inventory/analyze`)
+        response = await response.json()
+        console.log(response);
+
+        const [inv] = await pool.query('SELECT name FROM total')
         if (inv.length) {
-            res.json(inv)
+            inv.forEach((invObj) => {
+                invObj.kolvo = 1;
+            });
+            inv.sort((a, b) => (a.name > b.name ? 1 : -1));
+            let totalAnalyzeResult = Object.values(
+                inv.reduce((a, c) => {
+                    return (
+                        a[c.name] ? (a[c.name].kolvo += c.kolvo) : (a[c.name] = c), a
+                    );
+                }, Object.create(null))
+            );
+            res.json(totalAnalyzeResult)
         } else {
             res.json(null)
         }
     }
+    async analyzeTotalOne(req, res) {
+        const [inv] = await pool.query('SELECT name FROM total')
+        if (inv.length) {
+            inv.forEach((invObj) => {
+                invObj.kolvo = 1;
+            });
+            inv.sort((a, b) => (a.name > b.name ? 1 : -1));
+            let totalAnalyzeResult = Object.values(
+                inv.reduce((a, c) => {
+                    return (
+                        a[c.name] ? (a[c.name].kolvo += c.kolvo) : (a[c.name] = c), a
+                    );
+                }, Object.create(null))
+            );
+            res.json(totalAnalyzeResult)
+        } else {
+            res.json(null)
+        }
+    }
+
     async getOne(req, res) {
         try {
             const { id } = req.params
@@ -25,10 +62,13 @@ class totalController {
                 persons.person,
                 storages.storage,
                 statuses.status,
-                info.info
+                info.info,
+                additional_info.addinfo
             FROM total 
                 LEFT JOIN info
                     ON total.qr = info.info_qr
+                LEFT JOIN additional_info
+                    ON total.qr = additional_info.addinfo_qr
                 LEFT JOIN statuses
                     ON total.qr = statuses.status_qr
                 LEFT JOIN storages
@@ -82,7 +122,6 @@ class totalController {
     async filterTotal(req, res) {
         try {
             const whereClause = totalService.createFilters(req.query)
-
             const [filtered] = await pool.query(`
             SELECT * FROM total 
                 LEFT JOIN types

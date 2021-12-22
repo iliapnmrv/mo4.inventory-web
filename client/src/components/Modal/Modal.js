@@ -6,7 +6,6 @@ import OnItemInfoFormSubmit from "routes/ItemInfo/onItemInfoFormSubmit";
 export default function Modal({ visible, close, header, children }) {
   const onFormSubmit = OnItemInfoFormSubmit();
   const dispatchModal = useDispatch();
-  const { itemValues } = useSelector((state) => state.total);
 
   const {
     saveDialog: { visible: dialogVisible },
@@ -32,7 +31,7 @@ export default function Modal({ visible, close, header, children }) {
 
   const saveData = (e) => {
     e.preventDefault();
-    onFormSubmit(close, itemValues);
+    onFormSubmit(close);
     dispatchModal({
       type: "TOGGLE_SAVE_DIALOG",
       payload: {

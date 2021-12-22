@@ -20,6 +20,25 @@ class infoController {
             res.json(e.message)
         }
     }
+    async setAdditionalInfo(req, res) {
+        try {
+            const { id } = req.params
+            const { addinfo } = req.body
+
+            if (addinfo) {
+                const [newInfo] = await pool.query(
+                    `INSERT INTO additional_info (addinfo_qr, addinfo) 
+                    VALUES (?, ?)
+                    ON DUPLICATE KEY UPDATE addinfo = ?`, [id, addinfo, addinfo]
+                )
+                return res.json(newInfo)
+            }
+            res.json('Отсутствует дополнительная информация')
+            res.status(200)
+        } catch (e) {
+            res.json(e.message)
+        }
+    }
 
     async setPerson(req, res) {
         try {

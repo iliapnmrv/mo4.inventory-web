@@ -34,10 +34,10 @@ export default function NewItem({ close }) {
       status,
       person,
       storage,
+      addinfo,
     },
     changeHandler,
     selectChangeHandler,
-    resetForm,
   } = useForm({
     qr: ("00000" + (Number(data[data.length - 1]?.qr) + 1)).slice(-5),
     name: "",
@@ -51,6 +51,7 @@ export default function NewItem({ close }) {
     status: "",
     person: "",
     storage: "",
+    addinfo: "",
   });
 
   useEffect(() => {
@@ -92,6 +93,10 @@ export default function NewItem({ close }) {
         await fetchData(`${SERVER}api/storage/${qr}`, {
           storage,
         });
+      const { message: newAddinfoMessage, isSuccess: newAddinfoSuccess } =
+        await fetchData(`${SERVER}api/addinfo/${qr}`, {
+          addinfo,
+        });
 
       const { message: newLogMessage, isSuccess: newLogSuccess } =
         await fetchData(`${SERVER}api/logs/`, {
@@ -110,7 +115,6 @@ export default function NewItem({ close }) {
 
       sortArr(newArr);
       dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: newArr });
-      resetForm();
     } catch (e) {
       console.error(e.message);
     }
@@ -222,6 +226,15 @@ export default function NewItem({ close }) {
               name="info"
               required={false}
               value={info}
+              onChange={changeHandler}
+            />
+          </div>
+          <div className="form-inputs">
+            <Input
+              span="Дополнительная информация (ip, логин, пароль)"
+              name="addinfo"
+              required={false}
+              value={addinfo}
               onChange={changeHandler}
             />
           </div>

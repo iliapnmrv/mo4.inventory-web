@@ -5,7 +5,7 @@ const defaultState = {
         qr: "",
         name: "",
         sredstvo: "",
-        type_id: "",
+        type: "",
         month: "",
         year: "",
         model: "",
@@ -14,6 +14,7 @@ const defaultState = {
         status: "",
         person: "",
         storage: "",
+        addinfo: "",
     }
 };
 
@@ -25,7 +26,7 @@ export const totalReducer = (state = defaultState, { type, payload }) => {
         case "INITIAL_ITEM_DATA":
             return {...state, initialItemData: payload };
         case "CHANGE_ITEM_DATA":
-            return {...state, itemValues: payload };;
+            return {...state, itemValues: {...state.itemValues, ...payload } };;
         default:
             return state;
     }

@@ -14,18 +14,18 @@ export default function Filters({ close }) {
   const dispatchTotal = useDispatch();
   const fetchData = usePostFetch();
   const {
-    values: { sredstvo, type_id, status, person, storage },
+    values: { sredstvo, type, status, person, storage },
     selectChangeHandler,
   } = useForm({
     sredstvo: "",
-    type_id: "",
+    type: "",
     status: "",
     person: "",
     storage: "",
   });
 
   const handleFilter = async () => {
-    let filters = { sredstvo, type_id, status, person, storage };
+    let filters = { sredstvo, type, status, person, storage };
     let query = "";
     for (const key in filters) {
       for (let i = 0; i < filters[key].length; i++) {
@@ -46,7 +46,7 @@ export default function Filters({ close }) {
           <SelectInput
             multi={true}
             span="Выберите тип устройства"
-            name="type_id"
+            name="type"
             data={types}
             onSelectChange={selectChangeHandler}
             required={false}

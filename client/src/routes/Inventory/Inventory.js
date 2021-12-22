@@ -63,25 +63,23 @@ export default function Inventory() {
     setOpen(!open);
   };
 
-  const analyzeInventory = () => {
-    fetch(`${SERVER}api/inventory/analyze`)
+  const analyzeInventory = async () => {
+    let invAnalysis = await fetch(`${SERVER}api/inventory/analyze`)
       .then((res) => res.json())
-      .then((inv) => {
-        console.log(inv);
-        inv.sort((a, b) => (a.name > b.name ? 1 : -1));
-        let result = Object.values(
-          inv.reduce((a, c) => {
-            // console.log(a[c.name], a[c.kolvo], c.kolvo);
-            console.log(a);
-            // return (
-            //   (a[c.name] || (a[c.name] = { ...c, kolvo: c.kolvo })).kolvo +
-            //   c.kolvo
-            // );
-            return a;
-          }, Object.create(null))
-        );
-        console.log(result);
-      });
+      .then((inv) => inv);
+    console.log(invAnalysis);
+    let totalAnalysis = await fetch(`${SERVER}api/total/analyze`)
+      .then((res) => res.json())
+      .then((inv) => inv);
+    console.log(totalAnalysis);
+    let inv = [...invAnalysis, ...totalAnalysis];
+    console.log(inv);
+    let result = Object.values(
+      inv.reduce((a, c) => {
+        return a[c.name] ? (a[c.name].kolvo += c.kolvo) : (a[c.name] = c), a;
+      }, Object.create(null))
+    );
+    console.log(result);
   };
 
   return (

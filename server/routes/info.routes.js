@@ -11,6 +11,7 @@ router.get('/persons', infoController.getPersons)
 router.post('/status/:id', infoController.setStatus)
 router.post('/storage/:id', infoController.setStorage)
 router.post('/info/:id', infoController.setInfo)
+router.post('/addinfo/:id', infoController.setAdditionalInfo)
 router.post('/person/:id', infoController.setPerson)
 
 

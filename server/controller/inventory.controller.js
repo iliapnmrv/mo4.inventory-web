@@ -12,14 +12,6 @@ class inventoryController {
             res.json(null)
         }
     }
-    async analyzeInventory(req, res) {
-        const [inv] = await pool.query('SELECT name, kolvo FROM inventory')
-        if (inv.length) {
-            res.json(inv)
-        } else {
-            res.json(null)
-        }
-    }
     async deleteInventory(req, res) {
         try {
             await pool.query('TRUNCATE TABLE inventory')

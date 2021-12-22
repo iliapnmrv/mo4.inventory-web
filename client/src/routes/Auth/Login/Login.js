@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import Input from "components/Form/Input/Input";
 import Header from "components/Header/Header";
 import useForm from "hooks/useForm";
@@ -53,7 +52,7 @@ export default function Login() {
   return (
     <>
       {loginVisible && (
-        <div className="modal-container">
+        <div className="md-container">
           <div className="auth-modal">
             <Header name="Войдите" />
             <form className="form slide" onSubmit={(e) => onSubmitForm(e)}>

@@ -8,7 +8,26 @@ const OnItemInfoFormSubmit = () => {
     const dispatch = useNotification();
     const dispatchTotal = useDispatch();
     const { login } = useSelector((state) => state.user.username);
-    const { data, initialItemData } = useSelector((state) => state.total);
+    const {
+        data,
+        initialItemData,
+        itemValues: {
+            qr,
+            name,
+            sredstvo,
+            type,
+            month,
+            year,
+            model,
+            sernom,
+            person,
+            storage,
+            status,
+            info,
+            addinfo
+        }
+    } = useSelector((state) => state.total);
+
     const { itemInfoId: editId } = useSelector(
         (state) => state.modal
     );
@@ -16,27 +35,16 @@ const OnItemInfoFormSubmit = () => {
         (state) => state.info
     );
 
-    const allInfo = {
-        person: persons,
-        storage: storages,
-        status: statuses,
-        sredstvo: sredstva,
-        type: types,
-    }
-    const onFormSubmit = async(close, {
-        qr,
-        name,
-        sredstvo,
-        type,
-        month,
-        year,
-        model,
-        sernom,
-        person,
-        storage,
-        status,
-        info
-    }) => {
+
+    const onFormSubmit = async(close) => {
+
+        const allInfo = {
+            person: persons,
+            storage: storages,
+            status: statuses,
+            sredstvo: sredstva,
+            type: types,
+        }
         try {
             let newItemData = {
                 qr,
@@ -51,6 +59,7 @@ const OnItemInfoFormSubmit = () => {
                 storage,
                 status,
                 info,
+                addinfo
             };
 
             if (JSON.stringify(initialItemData) === JSON.stringify(newItemData)) {
@@ -86,14 +95,14 @@ const OnItemInfoFormSubmit = () => {
             let logs = "",
                 prevState;
             for (const key in updatedData) {
-                if (initialItemData[key]) {
-                    allInfo[key].forEach((elem) => {
-                        if (elem.value === initialItemData[key]) {
-                            return prevState = elem.label
-                        }
-                    })
-                }
                 if (allInfo[key]) {
+                    if (initialItemData[key]) {
+                        allInfo[key].forEach((elem) => {
+                            if (elem.value === initialItemData[key]) {
+                                return prevState = elem.label
+                            }
+                        })
+                    }
                     allInfo[key].forEach((elem) => {
                         if (elem.value === updatedData[key]) {
                             logs = ` ${logs} ${LOGS_CATALOG[key]}: ${
@@ -131,6 +140,11 @@ const OnItemInfoFormSubmit = () => {
             const { message: updatedStorage, isSuccess: updatedStorageSuccess } =
             await fetchData(`${SERVER}api/storage/${editId}`, {
                 storage,
+            });
+
+            const { message: updatedAddinfo, isSuccess: updatedAddinfoSuccess } =
+            await fetchData(`${SERVER}api/addinfo/${editId}`, {
+                addinfo,
             });
             close();
 

@@ -50,7 +50,7 @@ export default function Registration() {
   return (
     <>
       {regVisible && (
-        <div className="modal-container">
+        <div className="md-container">
           <div className="auth-modal">
             <Header name="Зарегистрируйтесь" />
             <form className="form slide" onSubmit={(e) => onSubmitForm(e)}>

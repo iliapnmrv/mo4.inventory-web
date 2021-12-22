@@ -11,18 +11,17 @@ import Button from "components/Button/Button";
 import QR from "components/QR/QR";
 import Dialog from "components/Dialog/Dialog";
 import OnItemInfoFormSubmit from "./onItemInfoFormSubmit";
+import Analysis from "components/Analysis/Analysis";
 
 export default function ItemInfo({ close, editId }) {
   const { storages, statuses, sredstva, persons, types } = useSelector(
     (state) => state.info
   );
   const { login, role } = useSelector((state) => state.user.username);
-  const { data, itemValues } = useSelector((state) => state.total);
+  const { data } = useSelector((state) => state.total);
   const {
     deleteDialog: { visible: deleteDialogVisible },
   } = useSelector((state) => state.modal);
-
-  console.log(itemValues);
 
   const dispatchTotal = useDispatch();
   const dispatchModal = useDispatch();
@@ -51,8 +50,9 @@ export default function ItemInfo({ close, editId }) {
       sernom,
       info,
       status,
-      person,
-      storage,
+      // person,
+      // storage,
+      addinfo,
     },
     changeHandler,
     selectChangeHandler,
@@ -70,11 +70,12 @@ export default function ItemInfo({ close, editId }) {
     status: "",
     person: "",
     storage: "",
+    addinfo: "",
   });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    onFormSubmit(close, itemValues);
+    onFormSubmit(close);
   };
 
   const getDefault = async (value, obj) => {
@@ -93,7 +94,6 @@ export default function ItemInfo({ close, editId }) {
         payload: item,
       });
 
-      console.log(item);
       dispatchTotal({
         type: "CHANGE_ITEM_DATA",
         payload: item,
@@ -198,6 +198,7 @@ export default function ItemInfo({ close, editId }) {
         <Loading />
       ) : (
         <div className="md-content">
+          <Analysis name={name} />
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="form-inputs">
               <Input
@@ -340,6 +341,13 @@ export default function ItemInfo({ close, editId }) {
               span="Примечания"
               name="info"
               value={info}
+              onChange={changeHandler}
+            />
+            <Input
+              disabled={ACCESS_RIGHTS[role].addinfo}
+              span="Дополнительная информация"
+              name="addinfo"
+              value={addinfo}
               onChange={changeHandler}
             />
             <div className="buttons">

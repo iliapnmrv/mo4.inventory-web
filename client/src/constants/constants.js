@@ -13,6 +13,7 @@ export const LOGS_CATALOG = {
     storage: "Местоположение",
     status: "Статус",
     info: "Примечания",
+    addinfo: "Дополнительная информация",
 }
 
 export const ACCESS_RIGHTS = {
@@ -29,6 +30,7 @@ export const ACCESS_RIGHTS = {
         status: false,
         person: false,
         storage: false,
+        addinfo: false,
     },
     user: {
         qr: true,
@@ -42,7 +44,7 @@ export const ACCESS_RIGHTS = {
         info: false,
         status: true,
         person: true,
-        storage: false,
+        addinfo: false,
     }
 }
 

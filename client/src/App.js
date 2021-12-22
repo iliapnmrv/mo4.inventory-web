@@ -14,7 +14,7 @@ import { SERVER } from "constants/constants";
 import useFetch from "hooks/useFetch";
 
 function App() {
-  const { login, role } = useSelector((state) => state.user.username);
+  const { username } = useSelector((state) => state.user);
   const dispatchUser = useDispatch();
   const dispatchAuth = useDispatch();
   const dispatchInfo = useDispatch();
@@ -36,19 +36,28 @@ function App() {
   );
 
   useEffect(() => {
-    dispatchInfo({ type: "CHANGE_STORAGES_DATA", payload: fetchStorages });
-    dispatchInfo({ type: "CHANGE_STATUSES_DATA", payload: fetchStatuses });
-    dispatchInfo({ type: "CHANGE_SREDSTVA_DATA", payload: fetchSredstva });
-    dispatchInfo({ type: "CHANGE_PERSONS_DATA", payload: fetchPersons });
     dispatchInfo({ type: "CHANGE_TYPES_DATA", payload: fetchTypes });
-  }, [fetchTypes, fetchSredstva, fetchStatuses, fetchPersons, fetchStorages]);
+  }, [fetchTypes]);
+  useEffect(() => {
+    dispatchInfo({ type: "CHANGE_SREDSTVA_DATA", payload: fetchSredstva });
+  }, [fetchSredstva]);
+  useEffect(() => {
+    dispatchInfo({ type: "CHANGE_STATUSES_DATA", payload: fetchStatuses });
+  }, [fetchStatuses]);
+  useEffect(() => {
+    dispatchInfo({ type: "CHANGE_PERSONS_DATA", payload: fetchPersons });
+  }, [fetchPersons]);
+  useEffect(() => {
+    dispatchInfo({ type: "CHANGE_STORAGES_DATA", payload: fetchStorages });
+  }, [fetchStorages]);
 
   const checkLogin = () => {
     AuthService.chechAuth();
     const token = localStorage.getItem("token");
     const username = localStorage.getItem("username");
-
-    dispatchUser({ type: "CHANGE_USER_DATA", payload: JSON.parse(username) });
+    if (username) {
+      dispatchUser({ type: "CHANGE_USER_DATA", payload: JSON.parse(username) });
+    }
 
     if (!token) {
       dispatchAuth({ type: "TOGGLE_REG_MODAL", payload: true });
