@@ -1,18 +1,22 @@
-import { SERVER } from "constants/constants";
+import $api from "http/index.js";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "./Analysis.sass";
 
 export default function Analysis() {
   const [availability, setAvailability] = useState(null);
+
   const {
     itemValues: { name },
   } = useSelector((state) => state.total);
 
   useEffect(() => {
-    fetch(`${SERVER}api/analysis/${name}`)
-      .then((res) => res.json())
-      .then((data) => setAvailability(data));
+    const fetchData = async () => {
+      const data = await $api.get(`analysis/${name}`).then(({ data }) => data);
+      setAvailability(data);
+    };
+
+    fetchData();
   }, []);
 
   return (

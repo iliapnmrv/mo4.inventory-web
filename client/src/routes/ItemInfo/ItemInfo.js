@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import Input from "components/Form/Input/Input";
 import SelectInput from "components/Form/Select/Select";
 import useForm from "hooks/useForm";
-import usePostFetch from "hooks/usePostFetch";
 import useNotification from "hooks/useNotification";
 import Loading from "components/Loading/Loading";
 import { useDispatch, useSelector } from "react-redux";
-import { SERVER, ACCESS_RIGHTS } from "constants/constants";
+import { ACCESS_RIGHTS } from "constants/constants";
 import Button from "components/Button/Button";
 import QR from "components/QR/QR";
 import Dialog from "components/Dialog/Dialog";
 import OnItemInfoFormSubmit from "./onItemInfoFormSubmit";
 import Analysis from "components/Analysis/Analysis";
+import $api from "http/index.js";
 
 export default function ItemInfo({ close, editId }) {
   const { storages, statuses, sredstva, persons, types } = useSelector(
@@ -35,7 +35,6 @@ export default function ItemInfo({ close, editId }) {
   const [personsDefault, setPersonsDefault] = useState();
   const [storagesDefault, setStoragesDefault] = useState();
 
-  const fetchData = usePostFetch();
   const dispatch = useNotification();
 
   const {
@@ -84,10 +83,12 @@ export default function ItemInfo({ close, editId }) {
 
   const getData = async () => {
     try {
-      setIsPending(true);
-      const item = await fetch(`${SERVER}api/total/${editId}`).then((res) =>
-        res.json()
-      );
+      const item = await $api.get(`total/${editId}`).then(({ data }) => data);
+      const logsData = await $api
+        .get(`logs/${editId}`)
+        .then(({ data }) => data)
+        .finally(setIsPending(false));
+      setLogs(logsData);
 
       dispatchTotal({
         type: "INITIAL_ITEM_DATA",
@@ -98,11 +99,6 @@ export default function ItemInfo({ close, editId }) {
         type: "CHANGE_ITEM_DATA",
         payload: item,
       });
-
-      fetch(`${SERVER}api/logs/${editId}`)
-        .then((res) => res.json())
-        .then((data) => setLogs(data))
-        .finally(setIsPending(false));
 
       setDefault(item);
       getDefault(item.type, types).then((res) => setTypesDefault(res));
@@ -144,10 +140,12 @@ export default function ItemInfo({ close, editId }) {
 
   const deleteItem = async () => {
     try {
-      const { message: deleteMessage, isSuccess: deleteSuccess } =
-        await fetchData(`${SERVER}api/total/${editId}`, { status }, "DELETE");
-      const { message: deleteLogMessage, isSuccess: deleteLogSuccess } =
-        await fetchData(`${SERVER}api/logs/${editId}`, {}, "DELETE");
+      const deleteMessage = await $api
+        .delete(`total/${editId}`, { status })
+        .then(({ data }) => data);
+      const deleteLogMessage = await $api
+        .delete(`logs/${editId}`)
+        .then(({ data }) => data);
 
       dispatch({
         type: "SUCCESS",

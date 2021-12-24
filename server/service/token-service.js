@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken"
 import pool from "../db.js"
 class TokenService {
     generateTokens(payload) {
-        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, { expiresIn: '15s' })
+        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, { expiresIn: '30s' })
         const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, { expiresIn: '60d' })
         return { accessToken, refreshToken }
     }
@@ -23,8 +23,6 @@ class TokenService {
         }
     }
     async saveToken(userId, refreshToken) {
-        console.log(123);
-        console.log(userId, refreshToken);
         const [tokenData] = await pool.query(
             `SELECT * FROM tokens WHERE user_id = ?`, [userId]
         )

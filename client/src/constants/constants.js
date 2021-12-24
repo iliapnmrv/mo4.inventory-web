@@ -1,5 +1,3 @@
-export const SERVER = "http://localhost:8000/"
-    // export const SERVER = "http://mo4-it5:8000/"
 export const LOGS_CATALOG = {
     qr: "QR",
     name: "Наименование по бухучету",

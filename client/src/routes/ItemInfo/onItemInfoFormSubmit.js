@@ -1,10 +1,10 @@
-import { SERVER, LOGS_CATALOG } from 'constants/constants';
+import { LOGS_CATALOG } from 'constants/constants';
 import useNotification from 'hooks/useNotification';
-import usePostFetch from 'hooks/usePostFetch';
+import $api from 'http/index.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 const OnItemInfoFormSubmit = () => {
-    const fetchData = usePostFetch();
+
     const dispatch = useNotification();
     const dispatchTotal = useDispatch();
     const { login } = useSelector((state) => state.user.username);
@@ -37,6 +37,7 @@ const OnItemInfoFormSubmit = () => {
 
 
     const onFormSubmit = async(close) => {
+        console.log(123);
 
         const allInfo = {
             person: persons,
@@ -71,9 +72,9 @@ const OnItemInfoFormSubmit = () => {
                 return;
             }
 
-            const { message: updatedTotal, isSuccess: updatedTotalSuccess } =
-            await fetchData(
-                `${SERVER}api/total/${editId}`, {
+
+            const updatedTotal = await $api
+                .put(`total/${editId}`, {
                     qr,
                     name,
                     sredstvo,
@@ -82,9 +83,10 @@ const OnItemInfoFormSubmit = () => {
                     year,
                     model,
                     sernom,
-                },
-                "PUT"
-            );
+                })
+                .then(({ data }) => data)
+            console.log(updatedTotal);
+
             let updatedData = Object.keys(newItemData).reduce((diff, key) => {
                 if (initialItemData[key] === newItemData[key]) return diff;
                 return {
@@ -117,35 +119,32 @@ const OnItemInfoFormSubmit = () => {
                 }
             }
 
-
-            const { message: updatedLogs, isSuccess: updatedLogsSuccess } =
-            await fetchData(`${SERVER}api/logs/`, {
+            const updatedLogs = await $api.post(`logs/`, {
                 qr,
                 user: login,
                 text: logs.slice(0, -1),
-            });
-            const { message: updatedInfo, isSuccess: updatedInfoSuccess } =
-            await fetchData(`${SERVER}api/info/${editId}`, {
-                info,
-            });
-            const { message: updatedStatus, isSuccess: updatedStatusSuccess } =
-            await fetchData(`${SERVER}api/status/${editId}`, {
-                status,
-            });
-            console.log(person);
-            const { message: updatedPerson, isSuccess: updatedPersonSuccess } =
-            await fetchData(`${SERVER}api/person/${editId}`, {
-                person,
-            });
-            const { message: updatedStorage, isSuccess: updatedStorageSuccess } =
-            await fetchData(`${SERVER}api/storage/${editId}`, {
-                storage,
-            });
+            })
 
-            const { message: updatedAddinfo, isSuccess: updatedAddinfoSuccess } =
-            await fetchData(`${SERVER}api/addinfo/${editId}`, {
-                addinfo,
-            });
+            const updatedInfo = await $api.post(`info/${editId}`, {
+                info
+            })
+
+            const updatedStatus = await $api.post(`status/${editId}`, {
+                status
+            })
+
+            const updatedPerson = await $api.post(`person/${editId}`, {
+                person
+            })
+
+            const updatedStorage = await $api.post(`storage/${editId}`, {
+                storage
+            })
+
+            const updatedAddinfo = await $api.post(`addinfo/${editId}`, {
+                storage
+            })
+
             close();
 
             dispatch({

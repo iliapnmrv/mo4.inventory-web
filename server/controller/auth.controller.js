@@ -7,9 +7,9 @@ class authController {
             const { login, password } = req.body
             const userData = await authService.registration(login, password)
             res.cookie('refresh', userData.refreshToken, { maxAge: 60 * 24 * 60 * 60 * 1000, httpOnly: true })
-            res.json(userData)
+            res.status(201).json(userData)
         } catch (e) {
-            res.json(e.message)
+            res.status(409).json(e.message)
         }
     }
 
@@ -20,7 +20,7 @@ class authController {
             res.cookie('refresh', userData.refreshToken, { maxAge: 1000 * 60 * 15, httpOnly: true })
             res.json(userData)
         } catch (e) {
-            res.json(e.message)
+            res.status(400).json(e.message)
         }
     }
     async logout(req, res) {

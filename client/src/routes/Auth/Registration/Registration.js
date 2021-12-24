@@ -29,21 +29,16 @@ export default function Registration() {
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
-    const { regMessage, regSuccess } = await AuthService.registration(
-      login,
-      password
-    );
-    if (!regMessage?.user) {
-      dispatch({ type: "ERROR", message: regMessage, title: "Ошибка" });
+    const regData = await AuthService.registration(login, password);
+    if (!regData?.user) {
+      dispatch({ type: "ERROR", message: regData, title: "Ошибка" });
       return;
     }
     dispatchAuth({ type: "TOGGLE_REG_MODAL", payload: false });
-    localStorage.setItem("token", regMessage.accessToken);
-    localStorage.setItem("username", JSON.stringify(regMessage.user));
-    dispatchUser({ type: "CHANGE_USER_DATA", payload: regMessage.user });
+    dispatchUser({ type: "CHANGE_USER_DATA", payload: regData.user });
     dispatch({
       type: "SUCCESS",
-      message: `Добро пожаловать, ${regMessage.user.login}`,
+      message: `Добро пожаловать, ${regData.user.login}`,
     });
   };
 

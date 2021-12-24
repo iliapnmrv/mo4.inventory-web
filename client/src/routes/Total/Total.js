@@ -1,15 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Total.css";
 import Item from "components/Item/Item";
 import Modal from "components/Modal/Modal";
-import useFetch from "hooks/useFetch";
 import Loading from "components/Loading/Loading";
 import Form from "routes/NewItem/NewItem";
 import Filters from "components/Filters/Filters";
 import { useDispatch, useSelector } from "react-redux";
-import { SERVER } from "constants/constants";
 import ItemInfo from "routes/ItemInfo/ItemInfo";
 import Button from "components/Button/Button";
+import $api from "http/index.js";
 
 export default function Total() {
   const { data } = useSelector((state) => state.total);
@@ -17,6 +16,7 @@ export default function Total() {
     (state) => state.modal
   );
   const { login, role } = useSelector((state) => state.user.username);
+  const [isPending, setIsPending] = useState(true);
 
   const dispatchTotal = useDispatch();
 
@@ -63,15 +63,16 @@ export default function Total() {
     });
   };
 
-  const {
-    data: fetchedData,
-    isPending,
-    error,
-  } = useFetch(`${SERVER}api/total`);
-
   useEffect(() => {
-    dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: fetchedData });
-  }, [fetchedData]);
+    const fetchData = async () => {
+      const data = await $api
+        .get(`total`)
+        .then(({ data }) => data)
+        .finally(setIsPending(false));
+      dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: data });
+    };
+    fetchData();
+  }, []);
 
   return (
     <>

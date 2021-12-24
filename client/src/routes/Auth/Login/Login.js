@@ -28,24 +28,23 @@ export default function Login() {
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
-    const { loginMessage, loginSuccess } = await AuthService.login(
-      login,
-      password
-    );
-    if (!loginMessage?.user) {
-      dispatch({ type: "ERROR", message: loginMessage, title: "Успех" });
+    const loginData = await AuthService.login(login, password);
+    if (!loginData?.user) {
+      dispatch({
+        type: "ERROR",
+        message: loginData,
+        title: "Произошла ошибка",
+      });
       return;
     }
     dispatchAuth({ type: "TOGGLE_LOGIN_MODAL", payload: false });
-    localStorage.setItem("token", loginMessage.accessToken);
-    localStorage.setItem("username", JSON.stringify(loginMessage.user));
     dispatchUser({
       type: "CHANGE_USER_DATA",
-      payload: loginMessage.user,
+      payload: loginData.user,
     });
     dispatch({
       type: "SUCCESS",
-      message: `Добро пожаловать, ${loginMessage.user.login}`,
+      message: `Добро пожаловать, ${loginData.user.login}`,
     });
   };
 

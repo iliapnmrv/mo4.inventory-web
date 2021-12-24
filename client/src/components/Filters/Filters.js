@@ -1,18 +1,17 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import useForm from "hooks/useForm";
-import usePostFetch from "hooks/usePostFetch";
 import Button from "components/Button/Button";
 import SelectInput from "components/Form/Select/Select";
-import { SERVER } from "constants/constants";
 import { useSelector } from "react-redux";
+import $api from "http/index.js";
 
 export default function Filters({ close }) {
   const { storages, statuses, sredstva, persons, types } = useSelector(
     (state) => state.info
   );
   const dispatchTotal = useDispatch();
-  const fetchData = usePostFetch();
+
   const {
     values: { sredstvo, type, status, person, storage },
     selectChangeHandler,
@@ -34,8 +33,11 @@ export default function Filters({ close }) {
       }
     }
     close();
-    const { message: filteredData, isSuccess: filteredSuccess } =
-      await fetchData(`${SERVER}api/total/filter?${query.slice(0, -1)}`);
+
+    const filteredData = await $api
+      .post(`total/filter?${query.slice(0, -1)}`)
+      .then(({ data }) => data);
+    console.log(filteredData);
     dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: filteredData });
   };
 

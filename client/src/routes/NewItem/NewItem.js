@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Input from "components/Form/Input/Input";
 import SelectInput from "components/Form/Select/Select";
-import usePostFetch from "hooks/usePostFetch";
 import useForm from "hooks/useForm";
 import useNotification from "hooks/useNotification";
-import { SERVER } from "constants/constants";
 import { useDispatch, useSelector } from "react-redux";
 import QR from "components/QR/QR";
+import $api from "http/index.js";
 
 export default function NewItem({ close }) {
   const { storages, statuses, sredstva, persons, types } = useSelector(
@@ -17,7 +16,6 @@ export default function NewItem({ close }) {
   const dispatchTotal = useDispatch();
   const [sernomExists, setSernomExists] = useState(false);
 
-  const fetchData = usePostFetch();
   const dispatch = useNotification();
 
   const {
@@ -55,19 +53,21 @@ export default function NewItem({ close }) {
   });
 
   useEffect(() => {
-    fetch(`${SERVER}api/total/checkSerialNum/${sernom}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setSernomExists(data);
-      });
+    const fetchData = async () => {
+      const fetchedData = await $api
+        .get(`total/checkSerialNum/${sernom}`)
+        .then(({ data }) => data);
+      setSernomExists(fetchedData);
+    };
+    fetchData();
   }, [sernom]);
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
       close();
-      const { message: newItemMessage, isSuccess: newItemSuccess } =
-        await fetchData(`${SERVER}api/total/`, {
+      const newItemMessage = await $api
+        .post(`total`, {
           qr,
           name,
           sredstvo,
@@ -76,40 +76,52 @@ export default function NewItem({ close }) {
           year,
           model,
           sernom,
-        });
-      const { message: newInfoMessage, isSuccess: newInfoSuccess } =
-        await fetchData(`${SERVER}api/info/${qr}`, {
+        })
+        .then(({ data }) => data);
+      const newInfoMessage = await $api
+        .post(`info/${qr}`, {
           info,
-        });
-      const { message: newStatusMessage, isSuccess: newStatusSuccess } =
-        await fetchData(`${SERVER}api/status/${qr}`, {
-          status,
-        });
-      const { message: newPersonMessage, isSuccess: newPersonSuccess } =
-        await fetchData(`${SERVER}api/person/${qr}`, {
-          person,
-        });
-      const { message: newStorageMessage, isSuccess: newStorageSuccess } =
-        await fetchData(`${SERVER}api/storage/${qr}`, {
-          storage,
-        });
-      const { message: newAddinfoMessage, isSuccess: newAddinfoSuccess } =
-        await fetchData(`${SERVER}api/addinfo/${qr}`, {
-          addinfo,
-        });
+        })
+        .then(({ data }) => data);
 
-      const { message: newLogMessage, isSuccess: newLogSuccess } =
-        await fetchData(`${SERVER}api/logs/`, {
+      const newStatusMessage = await $api
+        .post(`status/${qr}`, {
+          status,
+        })
+        .then(({ data }) => data);
+
+      const newPersonMessage = await $api
+        .post(`person/${qr}`, {
+          person,
+        })
+        .then(({ data }) => data);
+
+      const newStorageMessage = await $api
+        .post(`storage/${qr}`, {
+          storage,
+        })
+        .then(({ data }) => data);
+
+      const newAddinfoMessage = await $api
+        .post(`addinfo/${qr}`, {
+          addinfo,
+        })
+        .then(({ data }) => data);
+
+      const newLogMessage = await $api
+        .post(`logs`, {
           qr,
           user: login,
           text: "Предмет создан",
-        });
+        })
+        .then(({ data }) => data);
 
       dispatch({
         type: "SUCCESS",
         message: newItemMessage,
         title: "Успешно",
       });
+
       let newItem = { qr, name, sredstvo, type, month, year, model, sernom };
       let newArr = [...data, newItem];
 

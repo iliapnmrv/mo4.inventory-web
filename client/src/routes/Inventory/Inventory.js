@@ -2,57 +2,43 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import "./Inventory.css";
-import useFetch from "hooks/useFetch";
 import useNotification from "hooks/useNotification";
 import Loading from "components/Loading/Loading";
-import { SERVER } from "constants/constants";
 import Button from "components/Button/Button";
+import $api from "http/index.js";
 
 export default function Inventory() {
   const [open, setOpen] = useState(false);
+  const [isPending, setIsPending] = useState(true);
 
-  const { data, isPending } = useFetch(`${SERVER}api/inventory`);
+  const data = $api
+    .get(`inventory`)
+    .then(({ data }) => data)
+    .finally(setIsPending(false));
+
   const dispatch = useNotification();
 
   const handleUpload = async (e) => {
     try {
-      const truncate = new Promise((resolve, reject) => {
-        fetch(`${SERVER}api/inventory`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => resolve(data));
-      });
-      truncate.then((res) => {
-        const files = e.target.files;
-        const formData = new FormData();
-        formData.append("csv", files[0]);
+      const truncateData = await $api.delete(`inventory`);
 
-        fetch(`${SERVER}api/inventory/upload`, {
-          method: "POST",
-          body: formData,
-        })
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error(res.json());
-            }
-            return res.text();
-          })
-          .then((data) => {
-            dispatch({
-              type: "SUCCESS",
-              message: data,
-              title: "Обновлено",
-            });
-          })
-          .catch((e) => {
-            console.log(e.message);
-          });
+      const files = e.target.files;
+      const formData = new FormData();
+      formData.append("csv", files[0]);
+
+      const uploadData = await $api.post(`inventory/upload`, {
+        formData,
+      });
+
+      dispatch({
+        type: "SUCCESS",
+        message: uploadData,
+        title: "Обновлено",
       });
     } catch (e) {
       console.log(e.message);
       dispatch({
-        type: "SUCCESS",
+        type: "ERROR",
         message: "Ошибка при загрузке",
       });
     }
@@ -64,22 +50,13 @@ export default function Inventory() {
   };
 
   const analyzeInventory = async () => {
-    let invAnalysis = await fetch(`${SERVER}api/inventory/analyze`)
-      .then((res) => res.json())
-      .then((inv) => inv);
-    console.log(invAnalysis);
-    let totalAnalysis = await fetch(`${SERVER}api/total/analyze`)
-      .then((res) => res.json())
-      .then((inv) => inv);
-    console.log(totalAnalysis);
-    let inv = [...invAnalysis, ...totalAnalysis];
-    console.log(inv);
-    let result = Object.values(
-      inv.reduce((a, c) => {
-        return a[c.name] ? (a[c.name].kolvo += c.kolvo) : (a[c.name] = c), a;
-      }, Object.create(null))
-    );
-    console.log(result);
+    const invAnalysis = await $api
+      .get(`inventory/analyze`)
+      .then(({ data }) => data);
+    const totalAnalysis = await $api
+      .get(`total/analyze`)
+      .then(({ data }) => data);
+    console.log(totalAnalysis, invAnalysis);
   };
 
   return (
