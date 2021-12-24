@@ -5,8 +5,10 @@ import AnalysisService from "../service/analysis-service.js";
 
 class analysisController {
     async getAnalysisAll(req, res) {
-        const totalAnalysisData = await AnalysisService.fetchRequest(`${SERVER}api/analysis/total`)
-        const inventoryAnalysisData = await AnalysisService.fetchRequest(`${SERVER}api/analysis/inventory`);
+        const { authorization } = req.headers
+        const totalAnalysisData = await AnalysisService.fetchRequest(`${SERVER}api/analysis/total`, authorization)
+        const inventoryAnalysisData = await AnalysisService.fetchRequest(`${SERVER}api/analysis/inventory`, authorization);
+        console.log(inventoryAnalysisData);
         const basis = inventoryAnalysisData.map((invObj) => {
             return {...invObj, kolvo: 0 }
         });
@@ -24,8 +26,9 @@ class analysisController {
 
     async getAnalysisOne(req, res) {
         const { name } = req.params
-        let totalAnalysisData = await AnalysisService.fetchRequest(`${SERVER}api/analysis/total/${name}`)
-        let [inventoryAnalysisData] = await AnalysisService.fetchRequest(`${SERVER}api/analysis/inventory/${name}`);
+        const { authorization } = req.headers
+        let totalAnalysisData = await AnalysisService.fetchRequest(`${SERVER}api/analysis/total/${name}`, authorization)
+        let [inventoryAnalysisData] = await AnalysisService.fetchRequest(`${SERVER}api/analysis/inventory/${name}`, authorization);
 
         if (!totalAnalysisData.length && !inventoryAnalysisData) {
             res.json("Предмета с таким наименованием не сущетсвует")

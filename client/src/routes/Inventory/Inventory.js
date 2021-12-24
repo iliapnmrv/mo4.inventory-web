@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Inventory.css";
 import useNotification from "hooks/useNotification";
 import Loading from "components/Loading/Loading";
@@ -10,11 +10,17 @@ import $api from "http/index.js";
 export default function Inventory() {
   const [open, setOpen] = useState(false);
   const [isPending, setIsPending] = useState(true);
+  const [data, setData] = useState([]);
 
-  const data = $api
-    .get(`inventory`)
-    .then(({ data }) => data)
-    .finally(setIsPending(false));
+  useEffect(() => {
+    const fetchData = async () => {
+      await $api
+        .get(`inventory`)
+        .then(({ data }) => setData(data))
+        .finally(setIsPending(false));
+    };
+    fetchData();
+  }, []);
 
   const dispatch = useNotification();
 
@@ -59,8 +65,14 @@ export default function Inventory() {
     console.log(totalAnalysis, invAnalysis);
   };
 
+  const showUsers = async () => {
+    const users = await $api.get(`auth/users`).then(({ data }) => data);
+    console.log(users);
+  };
+
   return (
     <>
+      <Button text="Проанализировать" action={showUsers} />
       <Button text="Проанализировать" action={analyzeInventory} />
       <div
         className="header"

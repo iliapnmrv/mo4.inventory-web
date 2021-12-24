@@ -11,6 +11,8 @@ import multer from 'multer'
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv'
 import { CLIENT, SERVER } from "./constaints/constaints.js";
+import errorMiddleware from "./middlewares/error.middleware.js";
+import { isLoggedin } from "./middlewares/auth.middleware.js";
 
 dotenv.config()
 
@@ -25,13 +27,14 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(multer({ dest: "uploads" }).single("csv"));
 // Middlewares
-
+app.use('/api/auth', authRouter)
+    // app.use(isLoggedin)
 app.use('/api/inventory', inventoryRoutes)
 app.use('/api/total', totalRouter)
-app.use('/api/auth', authRouter)
 app.use('/api/logs', logsRouter)
 app.use('/api/analysis', analysisRouter)
 app.use('/api', infoRouter)
+app.use(errorMiddleware)
 
 app.listen(8000, () => {
     console.log("runnin");

@@ -1,10 +1,12 @@
-import pool from "../db.js"
 import fetch from 'node-fetch';
-
-
 class AnalysisService {
-    async fetchRequest(url) {
-        let data = fetch(url)
+    async fetchRequest(url, auth) {
+        console.log(auth);
+        let data = fetch(url, {
+                header: {
+                    authorization: `BEARER ${auth}`
+                }
+            })
             .then(res => res.json())
             .then(data => data)
         return data

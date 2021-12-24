@@ -1,26 +1,25 @@
+import { ApiError } from "../exceptions/api.error.js";
 import tokenService from "../service/token-service.js";
 
 export const isLoggedin = (req, res, next) => {
     try {
-
+        console.log(123);
         const { authorization } = req.headers
         if (!authorization) {
-            res.status(403).json("Пользователь не авторизован")
-            return
+            return next(ApiError.UnauthorizedError())
         }
         const token = authorization.split(' ')[1]
         if (!token) {
-            throw new Error("Токен отсутствует")
+            return next(ApiError.UnauthorizedError())
         }
         const userData = tokenService.validateAccessToken(token)
         if (!userData) {
-            throw new Error("Пользователь не авторизован")
+            return next(ApiError.UnauthorizedError())
         }
         req.user = userData
         next()
 
     } catch (e) {
-        console.log(e.message);
-        res.json(e.message)
+        return next(ApiError.UnauthorizedError())
     }
 }

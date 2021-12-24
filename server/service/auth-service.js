@@ -1,6 +1,7 @@
 import { compare, hash } from 'bcrypt'
 import tokenService from "../service/token-service.js"
 import pool from "../db.js"
+import { ApiError } from '../exceptions/api.error.js'
 
 class AuthService {
     async registration(login, password, role = "user") {
@@ -8,7 +9,7 @@ class AuthService {
             `SELECT * FROM users WHERE login = ?`, [login]
         )
         if (candidate.length) {
-            throw new Error(`Пользователь с логином ${login} уже существует`)
+            throw ApiError.BadRequest(`Пользователь с логином ${login} уже существует`)
         }
         const hashPassword = await hash(password, 3)
         const [user] = await pool.query(
@@ -25,15 +26,14 @@ class AuthService {
             `SELECT * FROM users WHERE login = ?`, [login]
         )
         if (!candidate.length) {
-            throw new Error(`Пользователя с логином ${login} не существует`)
+            throw ApiError.BadRequest(`Пользователя с логином ${login} не существует`)
         }
 
         const isPassEquals = await compare(password, candidate[0].password)
         if (!isPassEquals) {
-            throw new Error(`Неверный пароль`)
+            throw ApiError.BadRequest(`Неверный пароль`)
         }
         const { id, role } = candidate[0]
-            // console.log("candidate", candidate[0]);
         const tokens = tokenService.generateTokens({ id, login })
         await tokenService.saveToken(id, tokens.refreshToken)
 
@@ -47,18 +47,15 @@ class AuthService {
 
     async refresh(refreshToken) {
         if (!refreshToken) {
-            throw new Error('Пользователь не авторизован')
+            throw ApiError.BadRequest('Пользователь не авторизован')
         }
-        // console.log(refreshToken);
         const userData = tokenService.validateRefreshToken(refreshToken)
         const tokenFromDb = await tokenService.findToken(refreshToken)
-            // console.log(tokenFromDb);
         if (!userData || !tokenFromDb) {
-            throw new Error('Пользователь не авторизован')
+            throw ApiError.BadRequest('Пользователь не авторизован')
         }
         const [user] = await pool.query(`SELECT * FROM users WHERE id = ?`, [tokenFromDb.user_id])
         const { id, login, role } = user[0]
-        console.log(id, login);
         const tokens = tokenService.generateTokens({ id, login })
         await tokenService.saveToken(id, tokens.refreshToken)
 

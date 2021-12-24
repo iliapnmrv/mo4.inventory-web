@@ -2,7 +2,7 @@ import { Router } from "express";
 const router = Router()
 
 import authController from "../controller/auth.controller.js";
-import { isLoggedin } from "../middleware/auth.middleware.js";
+import { isLoggedin } from "../middlewares/auth.middleware.js";
 
 router.post('/registration', authController.registration)
 router.post('/login', authController.login)
