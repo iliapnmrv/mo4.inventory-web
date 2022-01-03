@@ -1,7 +1,7 @@
 import pool from "../db.js"
 import csv from 'csvtojson'
 import fetch from 'node-fetch';
-import { SERVER } from "../constaints/constaints.js";
+import { SERVER } from "../constants/constants.js";
 
 class inventoryController {
     async getInventory(req, res) {

@@ -1,5 +1,5 @@
 import pool from "../db.js"
-import { SERVER } from "../constaints/constaints.js";
+import { SERVER } from "../constants/constants.js";
 import AnalysisService from "../service/analysis-service.js";
 
 

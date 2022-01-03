@@ -10,7 +10,7 @@ import cors from 'cors'
 import multer from 'multer'
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv'
-import { CLIENT, SERVER } from "./constaints/constaints.js";
+import { CLIENT, CLIENT_MOBILE, SERVER } from "./constants/constants.js";
 import errorMiddleware from "./middlewares/error.middleware.js";
 import { isLoggedin } from "./middlewares/auth.middleware.js";
 
@@ -19,7 +19,7 @@ dotenv.config()
 const app = express()
 
 app.use(cors({
-    origin: { CLIENT, SERVER },
+    origin: { CLIENT, CLIENT_MOBILE, SERVER },
     credentials: true
 }))
 
