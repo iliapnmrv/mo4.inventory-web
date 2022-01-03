@@ -10,8 +10,4 @@ router.get('/inventory', analysisController.analyzeInventory)
 router.get('/', analysisController.getAnalysisAll)
 router.get('/:name', analysisController.getAnalysisOne)
 
-
-
-
-
 export default router

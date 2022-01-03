@@ -1,12 +1,9 @@
 import fetch from 'node-fetch';
+
+
 class AnalysisService {
-    async fetchRequest(url, auth) {
-        console.log(auth);
-        let data = fetch(url, {
-                header: {
-                    authorization: `BEARER ${auth}`
-                }
-            })
+    async fetchRequest(url) {
+        let data = fetch(url)
             .then(res => res.json())
             .then(data => data)
         return data
