@@ -6,6 +6,8 @@ import useForm from "hooks/useForm";
 import useNotification from "hooks/useNotification";
 import AuthService from "services/AuthService";
 import "../Auth.css";
+import { toggleLoginModal, toggleRegModal } from "store/actions/authAction";
+import { changeUserData } from "store/actions/userAction";
 
 export default function Login() {
   const dispatch = useNotification();
@@ -22,8 +24,8 @@ export default function Login() {
   });
 
   const showReg = () => {
-    dispatchAuth({ type: "TOGGLE_REG_MODAL", payload: true });
-    dispatchAuth({ type: "TOGGLE_LOGIN_MODAL", payload: false });
+    dispatchAuth(toggleRegModal(true));
+    dispatchAuth(toggleLoginModal(false));
   };
 
   const onSubmitForm = async (e) => {
@@ -37,11 +39,8 @@ export default function Login() {
       });
       return;
     }
-    dispatchAuth({ type: "TOGGLE_LOGIN_MODAL", payload: false });
-    dispatchUser({
-      type: "CHANGE_USER_DATA",
-      payload: loginData.user,
-    });
+    dispatchAuth(toggleLoginModal(false));
+    dispatchUser(changeUserData(loginData.user));
     dispatch({
       type: "SUCCESS",
       message: `Добро пожаловать, ${loginData.user.login}`,

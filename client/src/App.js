@@ -6,52 +6,60 @@ import Navbar from "./components/Navbar/Navbar";
 import Total from "./routes/Total/Total";
 import Login from "./routes/Auth/Login/Login";
 import Registration from "./routes/Auth/Registration/Registration";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AuthService from "./services/AuthService";
 import "./styles/main.sass";
 import $api from "http/index.js";
+import {
+  changePersonsData,
+  changeSredstvaData,
+  changeStatusesData,
+  changeStoragesData,
+  changeTypesData,
+} from "store/actions/infoAction";
+import { changeUserData } from "store/actions/userAction";
+import { toggleRegModal } from "store/actions/authAction";
 
 function App() {
   const dispatchUser = useDispatch();
   const dispatchAuth = useDispatch();
   const dispatchInfo = useDispatch();
 
+  const { token } = useSelector(({ user }) => user);
+
   useEffect(() => {
     const fetchData = async () => {
-      const types = await $api.get(`/types`).then(({ data }) => data);
-      dispatchInfo({ type: "CHANGE_TYPES_DATA", payload: types });
+      const types = await $api.get(`types`).then(({ data }) => data);
+      dispatchInfo(changeTypesData(types));
 
       const sredstva = await $api.get(`sredstva`).then(({ data }) => data);
-      dispatchInfo({ type: "CHANGE_SREDSTVA_DATA", payload: sredstva });
+      dispatchInfo(changeSredstvaData(sredstva));
 
       const statuses = await $api.get(`statuses`).then(({ data }) => data);
-      dispatchInfo({ type: "CHANGE_STATUSES_DATA", payload: statuses });
+      dispatchInfo(changeStatusesData(statuses));
 
       const persons = await $api.get(`persons`).then(({ data }) => data);
-      dispatchInfo({ type: "CHANGE_PERSONS_DATA", payload: persons });
+      dispatchInfo(changePersonsData(persons));
 
       const storages = await $api.get(`storages`).then(({ data }) => data);
-      dispatchInfo({ type: "CHANGE_STORAGES_DATA", payload: storages });
+      dispatchInfo(changeStoragesData(storages));
     };
     fetchData();
   }, []);
 
   useEffect(() => {
     const checkLogin = async () => {
-      if (localStorage.getItem("token")) {
+      if (token) {
         const { user, accessToken, refreshToken } =
           await AuthService.checkAuth();
-        dispatchUser({
-          type: "CHANGE_USER_DATA",
-          payload: user,
-        });
+        dispatchUser(changeUserData(user));
       } else {
-        dispatchAuth({ type: "TOGGLE_REG_MODAL", payload: true });
+        dispatchAuth(toggleRegModal(true));
       }
     };
 
     checkLogin();
-  }, []);
+  }, [token]);
 
   return (
     <Router>

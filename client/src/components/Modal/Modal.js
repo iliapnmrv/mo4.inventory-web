@@ -2,6 +2,7 @@ import Dialog from "components/Dialog/Dialog";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OnItemInfoFormSubmit from "routes/ItemInfo/onItemInfoFormSubmit";
+import { toggleSaveDialog } from "store/actions/modalAction";
 
 export default function Modal({ visible, close, header, children }) {
   const onFormSubmit = OnItemInfoFormSubmit();
@@ -12,32 +13,17 @@ export default function Modal({ visible, close, header, children }) {
   } = useSelector((state) => state.modal);
 
   const handleDialogToggle = () => {
-    dispatchModal({
-      type: "TOGGLE_SAVE_DIALOG",
-      payload: {
-        visible: !dialogVisible,
-      },
-    });
+    dispatchModal(toggleSaveDialog({ visible: !dialogVisible }));
   };
   const dialogCloseHandle = () => {
     close();
-    dispatchModal({
-      type: "TOGGLE_SAVE_DIALOG",
-      payload: {
-        visible: !dialogVisible,
-      },
-    });
+    dispatchModal(toggleSaveDialog({ visible: !dialogVisible }));
   };
 
   const saveData = (e) => {
     e.preventDefault();
     onFormSubmit(close);
-    dispatchModal({
-      type: "TOGGLE_SAVE_DIALOG",
-      payload: {
-        visible: !dialogVisible,
-      },
-    });
+    dispatchModal(toggleSaveDialog({ visible: !dialogVisible }));
   };
 
   return visible ? (

@@ -1,4 +1,7 @@
 import axios from "axios";
+import { store } from "store";
+import { setToken } from "store/actions/userAction";
+
 
 export const API_URL = `http://localhost:8000/api/`;
 
@@ -13,7 +16,7 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-    config.headers.authorization = `Bearer ${localStorage.getItem("token")}`;
+    config.headers.authorization = `Bearer ${store.getState().user.token}`;
     return config;
 });
 
@@ -26,7 +29,7 @@ $api.interceptors.response.use((config) => {
     if (error.response.status == 401) {
         try {
             const data = await axios.get(`${API_URL}auth/refresh`, { withCredentials: true }).then(({ data }) => data)
-            localStorage.setItem('token', data.accessToken)
+            store.dispatch(setToken(data.accessToken))
             return $api.request(originalRequest)
         } catch (e) {
             console.log('Не авторизован');

@@ -12,6 +12,12 @@ import Dialog from "components/Dialog/Dialog";
 import OnItemInfoFormSubmit from "./onItemInfoFormSubmit";
 import Analysis from "components/Analysis/Analysis";
 import $api from "http/index.js";
+import { toggleDeleteDialog } from "store/actions/modalAction";
+import {
+  changeItemData,
+  changeTotalData,
+  initialItemData,
+} from "store/actions/totalAction";
 
 export default function ItemInfo({ close, editId }) {
   const { storages, statuses, sredstva, persons, types } = useSelector(
@@ -90,15 +96,9 @@ export default function ItemInfo({ close, editId }) {
         .finally(setIsPending(false));
       setLogs(logsData);
 
-      dispatchTotal({
-        type: "INITIAL_ITEM_DATA",
-        payload: item,
-      });
+      dispatchTotal(initialItemData(item));
 
-      dispatchTotal({
-        type: "CHANGE_ITEM_DATA",
-        payload: item,
-      });
+      dispatchTotal(changeItemData(item));
 
       setDefault(item);
       getDefault(item.type, types).then((res) => setTypesDefault(res));
@@ -154,12 +154,13 @@ export default function ItemInfo({ close, editId }) {
       });
       close();
       closeDialog();
-      dispatchTotal({
-        type: "CHANGE_TOTAL_DATA",
-        payload: data.filter((data) => {
-          return data.qr !== editId;
-        }),
-      });
+      dispatchTotal(
+        changeTotalData(
+          data.filter((data) => {
+            return data.qr !== editId;
+          })
+        )
+      );
     } catch (e) {
       console.error(e.message);
     }
@@ -167,21 +168,11 @@ export default function ItemInfo({ close, editId }) {
 
   const handleDelete = (qr) => {
     console.log(qr);
-    dispatchModal({
-      type: "TOGGLE_DELETE_DIALOG",
-      payload: {
-        visible: true,
-      },
-    });
+    dispatchModal(toggleDeleteDialog({ visible: true }));
   };
 
   const closeDialog = () => {
-    dispatchModal({
-      type: "TOGGLE_DELETE_DIALOG",
-      payload: {
-        visible: false,
-      },
-    });
+    dispatchModal(toggleDeleteDialog({ visible: false }));
   };
 
   return (

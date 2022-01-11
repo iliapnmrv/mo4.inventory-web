@@ -2,12 +2,14 @@ import { LOGS_CATALOG } from 'constants/constants';
 import useNotification from 'hooks/useNotification';
 import $api from 'http/index.js';
 import { useDispatch, useSelector } from 'react-redux';
+import { changeTotalData } from 'store/actions/totalAction';
 
 const OnItemInfoFormSubmit = () => {
 
     const dispatch = useNotification();
     const dispatchTotal = useDispatch();
     const { login } = useSelector((state) => state.user.username);
+
     const {
         data,
         initialItemData,
@@ -160,7 +162,7 @@ const OnItemInfoFormSubmit = () => {
             });
             let newArr = [...filtered, newItem];
             sortArr(newArr);
-            dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: newArr });
+            dispatchTotal(changeTotalData(newArr));
         } catch (e) {
             console.error(e.message);
         }

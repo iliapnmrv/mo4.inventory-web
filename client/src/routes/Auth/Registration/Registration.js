@@ -6,6 +6,8 @@ import Header from "components/Header/Header";
 import useForm from "hooks/useForm";
 import useNotification from "hooks/useNotification";
 import AuthService from "services/AuthService";
+import { toggleLoginModal, toggleRegModal } from "store/actions/authAction";
+import { changeUserData } from "store/actions/userAction";
 
 export default function Registration() {
   const dispatch = useNotification();
@@ -23,8 +25,8 @@ export default function Registration() {
   });
 
   const showLogin = () => {
-    dispatchAuth({ type: "TOGGLE_REG_MODAL", payload: false });
-    dispatchAuth({ type: "TOGGLE_LOGIN_MODAL", payload: true });
+    dispatchAuth(toggleRegModal(false));
+    dispatchAuth(toggleLoginModal(true));
   };
 
   const onSubmitForm = async (e) => {
@@ -34,8 +36,8 @@ export default function Registration() {
       dispatch({ type: "ERROR", message: regData, title: "Ошибка" });
       return;
     }
-    dispatchAuth({ type: "TOGGLE_REG_MODAL", payload: false });
-    dispatchUser({ type: "CHANGE_USER_DATA", payload: regData.user });
+    dispatchAuth(toggleRegModal(true));
+    dispatchUser(changeUserData(regData.user));
     dispatch({
       type: "SUCCESS",
       message: `Добро пожаловать, ${regData.user.login}`,

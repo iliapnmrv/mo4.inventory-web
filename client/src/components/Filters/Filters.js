@@ -5,6 +5,7 @@ import Button from "components/Button/Button";
 import SelectInput from "components/Form/Select/Select";
 import { useSelector } from "react-redux";
 import $api from "http/index.js";
+import { changeTotalData } from "store/actions/totalAction";
 
 export default function Filters({ close }) {
   const { storages, statuses, sredstva, persons, types } = useSelector(
@@ -38,7 +39,7 @@ export default function Filters({ close }) {
       .post(`total/filter?${query.slice(0, -1)}`)
       .then(({ data }) => data);
     console.log(filteredData);
-    dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: filteredData });
+    dispatchTotal(changeTotalData(filteredData));
   };
 
   return (

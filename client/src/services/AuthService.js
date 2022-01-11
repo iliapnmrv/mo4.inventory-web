@@ -1,5 +1,7 @@
 import $api, { API_URL } from "http/index.js";
 import axios from 'axios'
+import { store } from "store";
+import { changeUserData, setToken } from "store/actions/userAction";
 class AuthService {
 
     async registration(login, password) {
@@ -7,30 +9,30 @@ class AuthService {
             login,
             password
         }).then(({ data }) => data)
-        localStorage.setItem("token", registrationData.accessToken);
-        localStorage.setItem("username", JSON.stringify(registrationData.user));
+        store.dispatch(setToken(registrationData.accessToken))
+        store.dispatch(changeUserData(JSON.stringify(registrationData.user)))
         return registrationData
     }
 
     async login(login, password) {
-        const loginData = $api.post('auth/login/', {
+        const loginData = await $api.post('auth/login/', {
             login,
             password
         }).then(({ data }) => data)
-        localStorage.setItem("token", loginData.accessToken);
-        localStorage.setItem("username", JSON.stringify(loginData.user));
+        store.dispatch(setToken(loginData.accessToken))
+        store.dispatch(changeUserData(JSON.stringify(loginData.user)))
         return loginData
     }
 
     async logout() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('username');
+        store.dispatch(setToken(""))
+        store.dispatch(changeUserData(""))
         return $api.post('auth/logout/')
     }
 
     async checkAuth() {
         const data = await axios.get(`${API_URL}auth/refresh`, { withCredentials: true }).then(({ data }) => data)
-        localStorage.setItem('token', data.accessToken)
+        store.dispatch(setToken(data.accessToken))
         return data
     }
 }

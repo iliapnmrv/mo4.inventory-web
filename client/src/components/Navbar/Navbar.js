@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import AuthService from "services/AuthService";
+import { toggleLoginModal } from "store/actions/authAction";
+import { changeUserData } from "store/actions/userAction";
 
 export default function Navbar() {
   const dispatchUser = useDispatch();
@@ -9,8 +11,8 @@ export default function Navbar() {
 
   const handleLogout = () => {
     AuthService.logout();
-    dispatchAuth({ type: "TOGGLE_LOGIN_MODAL", payload: true });
-    dispatchUser({ type: "CHANGE_USER_DATA", payload: "guest" });
+    dispatchAuth(toggleLoginModal(true));
+    dispatchUser(changeUserData("guest"));
   };
   return (
     <>

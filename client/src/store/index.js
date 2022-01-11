@@ -1,9 +1,12 @@
 import { combineReducers, createStore } from "redux";
-import { authReducer } from "./authReducer";
-import { infoReducer } from "./infoReducer";
-import { modalReducer } from "./modalReducer";
-import { totalReducer } from "./totalReducer";
-import { userReducer } from "./userReducer";
+import { persistStore, persistReducer } from "redux-persist";
+
+import { authReducer } from "./reducers/authReducer";
+import { infoReducer } from "./reducers/infoReducer";
+import { modalReducer } from "./reducers/modalReducer";
+import { totalReducer } from "./reducers/totalReducer";
+import { userReducer } from "./reducers/userReducer";
+import storage from 'redux-persist/lib/storage'
 
 const rootReducer = combineReducers({
     user: userReducer,
@@ -11,9 +14,15 @@ const rootReducer = combineReducers({
     total: totalReducer,
     info: infoReducer,
     modal: modalReducer,
-})
+});
 
+const persistConfig = {
+    key: "root",
+    storage,
+    blacklist: ['total, info, modal'],
+};
 
-export const store = createStore(
-    rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = createStore(persistedReducer);
+export const persistor = persistStore(store);

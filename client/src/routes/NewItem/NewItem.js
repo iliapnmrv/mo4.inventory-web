@@ -6,6 +6,7 @@ import useNotification from "hooks/useNotification";
 import { useDispatch, useSelector } from "react-redux";
 import QR from "components/QR/QR";
 import $api from "http/index.js";
+import { changeTotalData } from "store/actions/totalAction";
 
 export default function NewItem({ close }) {
   const { storages, statuses, sredstva, persons, types } = useSelector(
@@ -126,7 +127,7 @@ export default function NewItem({ close }) {
       let newArr = [...data, newItem];
 
       sortArr(newArr);
-      dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: newArr });
+      dispatchTotal(changeTotalData(newArr));
     } catch (e) {
       console.error(e.message);
     }

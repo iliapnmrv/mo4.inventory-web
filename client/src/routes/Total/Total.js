@@ -9,58 +9,47 @@ import { useDispatch, useSelector } from "react-redux";
 import ItemInfo from "routes/ItemInfo/ItemInfo";
 import Button from "components/Button/Button";
 import $api from "http/index.js";
+import {
+  changeItemInfoId,
+  toggleFiltersModal,
+  toggleItemInfoModal,
+  toggleNewItemModal,
+} from "store/actions/modalAction";
+import { changeTotalData } from "store/actions/totalAction";
 
 export default function Total() {
   const { data } = useSelector((state) => state.total);
   const { filters, newItem, itemInfo, itemInfoId } = useSelector(
     (state) => state.modal
   );
-  const { login, role } = useSelector((state) => state.user.username);
+  const { login, role } = useSelector(({ user }) => user.username);
   const [isPending, setIsPending] = useState(true);
 
   const dispatchTotal = useDispatch();
 
   const openItemModal = (id) => {
     document.body.style.overflow = "hidden";
-    dispatchTotal({
-      type: "CHANGE_ITEMINFOID",
-      payload: id,
-    });
-    dispatchTotal({
-      type: "TOGGLE_ITEMINFO_MODAL",
-      payload: true,
-    });
+    dispatchTotal(changeItemInfoId(id));
+    dispatchTotal(toggleItemInfoModal(true));
   };
 
   const closeItemModal = () => {
     document.body.style.overflow = "auto";
-    dispatchTotal({
-      type: "CHANGE_ITEMINFOID",
-      payload: 0,
-    });
-    dispatchTotal({
-      type: "TOGGLE_ITEMINFO_MODAL",
-      payload: false,
-    });
+    dispatchTotal(changeItemInfoId(0));
+    dispatchTotal(toggleItemInfoModal(false));
   };
 
   const toggleFiltersVisible = () => {
     if (document.body.style.overflow == "hidden")
       document.body.style.overflow = "auto";
     else document.body.style.overflow = "hidden";
-    dispatchTotal({
-      type: "TOGGLE_FILTERS_MODAL",
-      payload: !filters,
-    });
+    dispatchTotal(toggleFiltersModal(!filters));
   };
   const toggleNewItemVisible = () => {
     if (document.body.style.overflow == "hidden")
       document.body.style.overflow = "auto";
     else document.body.style.overflow = "hidden";
-    dispatchTotal({
-      type: "TOGGLE_NEWITEM_MODAL",
-      payload: !newItem,
-    });
+    dispatchTotal(toggleNewItemModal(!newItem));
   };
 
   useEffect(() => {
@@ -69,7 +58,7 @@ export default function Total() {
         .get(`total`)
         .then(({ data }) => data)
         .finally(setIsPending(false));
-      dispatchTotal({ type: "CHANGE_TOTAL_DATA", payload: data });
+      dispatchTotal(changeTotalData(data));
     };
     fetchData();
   }, []);
