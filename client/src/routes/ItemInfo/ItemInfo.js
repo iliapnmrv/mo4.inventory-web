@@ -96,6 +96,8 @@ export default function ItemInfo({ close, editId }) {
         .finally(setIsPending(false));
       setLogs(logsData);
 
+      console.log(item);
+
       dispatchTotal(initialItemData(item));
 
       dispatchTotal(changeItemData(item));

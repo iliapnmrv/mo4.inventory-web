@@ -22,6 +22,7 @@ class AuthService {
         return {...tokens, user: { id, login, role } }
     }
     async login(login, password) {
+        console.log(login, password);
         const [candidate] = await pool.query(
             `SELECT * FROM users WHERE login = ?`, [login]
         )

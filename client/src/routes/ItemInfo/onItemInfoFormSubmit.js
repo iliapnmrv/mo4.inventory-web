@@ -144,7 +144,7 @@ const OnItemInfoFormSubmit = () => {
             })
 
             const updatedAddinfo = await $api.post(`addinfo/${editId}`, {
-                storage
+                addinfo
             })
 
             close();

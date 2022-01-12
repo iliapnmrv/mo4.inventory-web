@@ -35,6 +35,7 @@ $api.interceptors.response.use((config) => {
             console.log('Не авторизован');
         }
     }
+    throw error
 });
 
 export default $api;
