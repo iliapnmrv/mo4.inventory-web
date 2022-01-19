@@ -12,6 +12,7 @@ export const LOGS_CATALOG = {
     status: "Статус",
     info: "Примечания",
     addinfo: "Дополнительная информация",
+    owner: "Владелец",
 }
 
 export const ACCESS_RIGHTS = {
@@ -29,6 +30,7 @@ export const ACCESS_RIGHTS = {
         person: false,
         storage: false,
         addinfo: false,
+        owner: false,
     },
     user: {
         qr: true,
@@ -43,6 +45,7 @@ export const ACCESS_RIGHTS = {
         status: true,
         person: true,
         addinfo: false,
+        owner: false,
     }
 }
 

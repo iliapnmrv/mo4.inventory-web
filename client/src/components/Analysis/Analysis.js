@@ -23,7 +23,7 @@ export default function Analysis() {
     <div className="item-analysis">
       <div className="item-analysis-info">
         <h3>В наличии:</h3>
-        <p>{availability?.inStock.kolvo}</p>
+        <p>{availability?.inStock?.kolvo}</p>
       </div>
       <div className="item-analysis-info">
         <h3>{availability?.listed?.kolvo ? "Числится:" : "Не числится"}</h3>

@@ -26,27 +26,27 @@ const OnItemInfoFormSubmit = () => {
             storage,
             status,
             info,
-            addinfo
+            addinfo,
+            owner
         }
     } = useSelector((state) => state.total);
 
     const { itemInfoId: editId } = useSelector(
         (state) => state.modal
     );
-    const { storages, statuses, sredstva, persons, types } = useSelector(
+    const { storages, statuses, sredstva, persons, types, owners } = useSelector(
         (state) => state.info
     );
 
 
     const onFormSubmit = async(close) => {
-        console.log(123);
-
         const allInfo = {
             person: persons,
             storage: storages,
             status: statuses,
             sredstvo: sredstva,
             type: types,
+            owner: owners,
         }
         try {
             let newItemData = {
@@ -62,7 +62,8 @@ const OnItemInfoFormSubmit = () => {
                 storage,
                 status,
                 info,
-                addinfo
+                addinfo,
+                owner
             };
 
             if (JSON.stringify(initialItemData) === JSON.stringify(newItemData)) {
@@ -145,6 +146,9 @@ const OnItemInfoFormSubmit = () => {
 
             const updatedAddinfo = await $api.post(`addinfo/${editId}`, {
                 addinfo
+            })
+            const updatedOwner = await $api.post(`owner/${editId}`, {
+                owner
             })
 
             close();

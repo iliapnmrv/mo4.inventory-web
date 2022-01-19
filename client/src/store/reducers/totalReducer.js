@@ -17,6 +17,7 @@ const defaultState = {
         person: "",
         storage: "",
         addinfo: "",
+        owner: "",
     }
 };
 

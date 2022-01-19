@@ -11,6 +11,7 @@ import AuthService from "./services/AuthService";
 import "./styles/main.sass";
 import $api from "http/index.js";
 import {
+  changeOwnersData,
   changePersonsData,
   changeSredstvaData,
   changeStatusesData,
@@ -43,6 +44,9 @@ function App() {
 
       const storages = await $api.get(`storages`).then(({ data }) => data);
       dispatchInfo(changeStoragesData(storages));
+
+      const owners = await $api.get(`owners`).then(({ data }) => data);
+      dispatchInfo(changeOwnersData(owners));
     };
     fetchData();
   }, []);

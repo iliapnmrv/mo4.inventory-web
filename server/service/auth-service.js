@@ -15,6 +15,7 @@ class AuthService {
         const [user] = await pool.query(
             `INSERT INTO users( login, password, role ) 
                 VALUES(?, ?, ?)`, [login, hashPassword, role])
+        console.log("user", user);
         const { id } = user
         const tokens = tokenService.generateTokens({ id, login })
         await tokenService.saveToken(id, tokens.refreshToken)

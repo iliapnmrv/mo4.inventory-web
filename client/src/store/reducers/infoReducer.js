@@ -1,4 +1,4 @@
-import { CHANGE_PERSONS_DATA, CHANGE_SREDSTVA_DATA, CHANGE_STATUSES_DATA, CHANGE_STORAGES_DATA, CHANGE_TYPES_DATA } from "store/actions/infoAction";
+import { CHANGE_OWNERS_DATA, CHANGE_PERSONS_DATA, CHANGE_SREDSTVA_DATA, CHANGE_STATUSES_DATA, CHANGE_STORAGES_DATA, CHANGE_TYPES_DATA } from "store/actions/infoAction";
 
 const defaultState = {
     storages: [],
@@ -6,6 +6,7 @@ const defaultState = {
     sredstva: [],
     persons: [],
     types: [],
+    owners: [],
 };
 
 export const infoReducer = (state = defaultState, { type, payload }) => {
@@ -43,6 +44,13 @@ export const infoReducer = (state = defaultState, { type, payload }) => {
                 types: payload.map((row) => ({
                     label: `${row.type_name}`,
                     value: row.type_id,
+                }))
+            };
+        case CHANGE_OWNERS_DATA:
+            return {...state,
+                owners: payload.map((row) => ({
+                    label: `${row.owner_name}`,
+                    value: row.owner_id,
                 }))
             };
         default:

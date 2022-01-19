@@ -3,6 +3,7 @@ export const CHANGE_STATUSES_DATA = "CHANGE_STATUSES_DATA"
 export const CHANGE_SREDSTVA_DATA = "CHANGE_SREDSTVA_DATA"
 export const CHANGE_PERSONS_DATA = "CHANGE_PERSONS_DATA"
 export const CHANGE_TYPES_DATA = "CHANGE_TYPES_DATA"
+export const CHANGE_OWNERS_DATA = "CHANGE_OWNERS_DATA"
 
 export const changeStoragesData = (payload) => {
     return {
@@ -31,6 +32,12 @@ export const changePersonsData = (payload) => {
 export const changeTypesData = (payload) => {
     return {
         type: CHANGE_TYPES_DATA,
+        payload
+    }
+}
+export const changeOwnersData = (payload) => {
+    return {
+        type: CHANGE_OWNERS_DATA,
         payload
     }
 }

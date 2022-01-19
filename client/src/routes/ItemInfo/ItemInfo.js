@@ -20,10 +20,11 @@ import {
 } from "store/actions/totalAction";
 
 export default function ItemInfo({ close, editId }) {
-  const { storages, statuses, sredstva, persons, types } = useSelector(
+  const { storages, statuses, sredstva, persons, types, owners } = useSelector(
     (state) => state.info
   );
   const { login, role } = useSelector((state) => state.user.username);
+
   const { data } = useSelector((state) => state.total);
   const {
     deleteDialog: { visible: deleteDialogVisible },
@@ -40,6 +41,7 @@ export default function ItemInfo({ close, editId }) {
   const [statusesDefault, setStatusesDefault] = useState();
   const [personsDefault, setPersonsDefault] = useState();
   const [storagesDefault, setStoragesDefault] = useState();
+  const [ownersDefault, setOwnersDefault] = useState();
 
   const dispatch = useNotification();
 
@@ -58,6 +60,7 @@ export default function ItemInfo({ close, editId }) {
       // person,
       // storage,
       addinfo,
+      owner,
     },
     changeHandler,
     selectChangeHandler,
@@ -76,6 +79,7 @@ export default function ItemInfo({ close, editId }) {
     person: "",
     storage: "",
     addinfo: "",
+    owner: "",
   });
 
   const onSubmit = (e) => {
@@ -125,6 +129,11 @@ export default function ItemInfo({ close, editId }) {
       } else {
         setStoragesDefault("Not found");
       }
+      if (item.owner) {
+        getDefault(item.owner, owners).then((res) => setOwnersDefault(res));
+      } else {
+        setOwnersDefault("Not found");
+      }
     } catch (e) {
       console.error(e.message);
     }
@@ -135,6 +144,7 @@ export default function ItemInfo({ close, editId }) {
     setSredstvaDefault("");
     setTypesDefault("");
     setStoragesDefault("");
+    setOwnersDefault("");
     getData();
   }, []);
 
@@ -292,6 +302,7 @@ export default function ItemInfo({ close, editId }) {
                   onSelectChange={selectChangeHandler}
                 />
               ) : null}
+
               <Input
                 disabled={ACCESS_RIGHTS[role].month}
                 span="Месяц ввода"
@@ -310,6 +321,27 @@ export default function ItemInfo({ close, editId }) {
               />
             </div>
             <div className="form-inputs">
+              {ownersDefault !== "Not found" &&
+              ownersDefault != null &&
+              ownersDefault !== "" ? (
+                <SelectInput
+                  disabled={ACCESS_RIGHTS[role].owner}
+                  span="Выберите владельца"
+                  name="owner"
+                  data={owners}
+                  default={ownersDefault}
+                  onSelectChange={selectChangeHandler}
+                />
+              ) : null}
+              {ownersDefault === "Not found" ? (
+                <SelectInput
+                  disabled={ACCESS_RIGHTS[role].owner}
+                  span="Выберите владельца"
+                  name="owner"
+                  data={owners}
+                  onSelectChange={selectChangeHandler}
+                />
+              ) : null}
               <Input
                 disabled={ACCESS_RIGHTS[role].model}
                 span="Модель реальная"
@@ -345,7 +377,7 @@ export default function ItemInfo({ close, editId }) {
                 type="submit"
                 action={(e) => onSubmit(e)}
               />
-              {login === "admin" && (
+              {role === "admin" && (
                 <Button
                   text="Удалить"
                   style="warning"

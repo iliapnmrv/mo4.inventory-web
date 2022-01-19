@@ -9,7 +9,7 @@ import $api from "http/index.js";
 import { changeTotalData } from "store/actions/totalAction";
 
 export default function NewItem({ close }) {
-  const { storages, statuses, sredstva, persons, types } = useSelector(
+  const { storages, statuses, sredstva, persons, types, owners } = useSelector(
     (state) => state.info
   );
   const { login, role } = useSelector((state) => state.user.username);
@@ -34,6 +34,7 @@ export default function NewItem({ close }) {
       person,
       storage,
       addinfo,
+      owner,
     },
     changeHandler,
     selectChangeHandler,
@@ -51,6 +52,7 @@ export default function NewItem({ close }) {
     person: "",
     storage: "",
     addinfo: "",
+    owner: "",
   });
 
   useEffect(() => {
@@ -106,6 +108,12 @@ export default function NewItem({ close }) {
       const newAddinfoMessage = await $api
         .post(`addinfo/${qr}`, {
           addinfo,
+        })
+        .then(({ data }) => data);
+
+      const newOwnerMessage = await $api
+        .post(`owner/${qr}`, {
+          owner,
         })
         .then(({ data }) => data);
 
@@ -172,6 +180,12 @@ export default function NewItem({ close }) {
               span="Выберите МОЛ"
               name="person"
               data={persons}
+              onSelectChange={selectChangeHandler}
+            />
+            <SelectInput
+              span="Выберите владельца"
+              name="owner"
+              data={owners}
               onSelectChange={selectChangeHandler}
             />
             <SelectInput

@@ -67,7 +67,7 @@ export default function Total() {
     <>
       <div className="filters-bar">
         <Button text="Фильтры" style="filters" action={toggleFiltersVisible} />
-        {login === "admin" && (
+        {role === "admin" && (
           <Button
             text="Новый элемент"
             style="filters"

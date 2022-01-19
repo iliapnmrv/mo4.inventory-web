@@ -63,7 +63,8 @@ class totalController {
                 storages.storage,
                 statuses.status,
                 info.info,
-                additional_info.addinfo
+                additional_info.addinfo,
+                owners.owner
             FROM total 
                 LEFT JOIN info
                     ON total.qr = info.info_qr
@@ -75,6 +76,8 @@ class totalController {
                     ON total.qr = storages.storage_qr
                 LEFT JOIN persons
                     ON total.qr = persons.person_qr
+                LEFT JOIN owners
+                    ON total.qr = owners.owner_qr
                 WHERE total.qr = ?
                 ORDER BY total.qr ASC
             `, [id])
