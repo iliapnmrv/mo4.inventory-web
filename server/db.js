@@ -12,6 +12,12 @@ const pool = new mysql.createConnection({
     user: 'inventuser',
     password: '8o6a3O4A5eLA',
     database: 'inventory'
-}).promise();
+})
+
+pool.connect(function(err) {
+    // console.log(err.code); // 'ECONNREFUSED'
+    // console.log(err.fatal); // true
+    console.log(err);
+});
 
 export default pool
