@@ -1,6 +1,7 @@
 import axios from "axios";
 import { store } from "store";
-import { setToken } from "store/actions/userAction";
+import { toggleLoginModal } from "store/actions/authAction";
+import { setIsAuthenticated, setToken } from "store/actions/userAction";
 
 
 export const API_URL = `http://localhost:8000/api/`;
@@ -26,12 +27,14 @@ $api.interceptors.response.use((config) => {
     const originalRequest = error.config
     console.log(originalRequest);
     console.log(error.response.status);
-    if (error.response.status == 401) {
+    if (error.response.status === 401) {
         try {
             const data = await axios.get(`${API_URL}auth/refresh`, { withCredentials: true }).then(({ data }) => data)
             store.dispatch(setToken(data.accessToken))
             return $api.request(originalRequest)
         } catch (e) {
+            store.dispatch(toggleLoginModal(true))
+            store.dispatch(setIsAuthenticated(false))
             console.log('Не авторизован');
         }
     }

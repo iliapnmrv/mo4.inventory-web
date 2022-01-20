@@ -17,9 +17,7 @@ class AuthService {
             `INSERT INTO users( login, password, role ) 
                 VALUES(?, ?, ?)`, [login, hashPassword, role])
         const { insertId: id } = user
-        const tokens = tokenService.generateTokens({ id, login })
-        await tokenService.saveToken(id, tokens.refreshToken)
-
+        const tokens = tokenService.generateTokens({ id, login, role })
         return {...tokens, user: { id, login, role } }
     }
     async login(login, password) {
@@ -35,31 +33,20 @@ class AuthService {
             throw ApiError.BadRequest(`Неверный пароль`)
         }
         const { id, role } = candidate[0]
-        const tokens = tokenService.generateTokens({ id, login })
-        await tokenService.saveToken(id, tokens.refreshToken)
-
+        const tokens = tokenService.generateTokens({ id, login, role })
         return {...tokens, user: { id, login, role } }
-    }
-
-    async logout(refreshToken) {
-        const token = await tokenService.removeToken(refreshToken)
-        return token
     }
 
     async refresh(refreshToken) {
         if (!refreshToken) {
-            throw ApiError.BadRequest('Пользователь не авторизован')
+            throw ApiError.UnauthorizedError('Пользователь не авторизован')
         }
         const userData = tokenService.validateRefreshToken(refreshToken)
-        const tokenFromDb = await tokenService.findToken(refreshToken)
-        if (!userData || !tokenFromDb) {
-            throw ApiError.BadRequest('Пользователь не авторизован')
+        if (!userData) {
+            throw ApiError.UnauthorizedError('Пользователь не авторизован')
         }
-        const [user] = await pool.query(`SELECT * FROM users WHERE id = ?`, [tokenFromDb.user_id])
-        const { id, login, role } = user[0]
-        const tokens = tokenService.generateTokens({ id, login })
-        await tokenService.saveToken(id, tokens.refreshToken)
-
+        const { id, login, role } = userData
+        const tokens = tokenService.generateTokens({ id, login, role })
         return {...tokens, user: { id, login, role } }
     }
 
