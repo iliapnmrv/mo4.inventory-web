@@ -29,22 +29,25 @@ export default function Login() {
   };
 
   const onSubmitForm = async (e) => {
-    e.preventDefault();
-    const loginData = await AuthService.login(login, password);
-    if (!loginData?.user) {
+    try {
+      e.preventDefault();
+      const loginData = await AuthService.login(login, password);
+      if (loginData?.message) {
+        throw loginData;
+      }
+      dispatchAuth(toggleLoginModal(false));
+      dispatchAuth(toggleRegModal(false));
+      dispatch({
+        type: "SUCCESS",
+        message: `Добро пожаловать, ${loginData.user.login}`,
+      });
+    } catch (e) {
       dispatch({
         type: "ERROR",
-        message: loginData,
+        message: e.message,
         title: "Произошла ошибка",
       });
-      return;
     }
-    dispatchAuth(toggleLoginModal(false));
-    dispatchUser(changeUserData(loginData.user));
-    dispatch({
-      type: "SUCCESS",
-      message: `Добро пожаловать, ${loginData.user.login}`,
-    });
   };
 
   return (

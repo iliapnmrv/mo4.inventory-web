@@ -30,18 +30,25 @@ export default function Registration() {
   };
 
   const onSubmitForm = async (e) => {
-    e.preventDefault();
-    const regData = await AuthService.registration(login, password);
-    if (!regData?.user) {
-      dispatch({ type: "ERROR", message: regData, title: "Ошибка" });
-      return;
+    try {
+      e.preventDefault();
+      const regData = await AuthService.registration(login, password);
+      if (regData?.message) {
+        throw regData;
+      }
+      dispatchAuth(toggleRegModal(false));
+      dispatchAuth(toggleLoginModal(false));
+      dispatch({
+        type: "SUCCESS",
+        message: `Добро пожаловать, ${regData.user.login}`,
+      });
+    } catch (e) {
+      dispatch({
+        type: "ERROR",
+        message: e.message,
+        title: "Произошла ошибка",
+      });
     }
-    dispatchAuth(toggleRegModal(true));
-    dispatchUser(changeUserData(regData.user));
-    dispatch({
-      type: "SUCCESS",
-      message: `Добро пожаловать, ${regData.user.login}`,
-    });
   };
 
   return (

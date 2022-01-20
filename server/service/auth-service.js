@@ -12,11 +12,11 @@ class AuthService {
             throw ApiError.BadRequest(`Пользователь с логином ${login} уже существует`)
         }
         const hashPassword = await hash(password, 3)
+        console.log(login, hashPassword, role);
         const [user] = await pool.query(
             `INSERT INTO users( login, password, role ) 
                 VALUES(?, ?, ?)`, [login, hashPassword, role])
-        console.log("user", user);
-        const { id } = user
+        const { insertId: id } = user
         const tokens = tokenService.generateTokens({ id, login })
         await tokenService.saveToken(id, tokens.refreshToken)
 
