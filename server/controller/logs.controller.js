@@ -13,17 +13,7 @@ class logsController {
             res.json(e.message)
         }
     }
-    async deleteLogs(req, res) {
-        try {
-            const { id } = req.params
-            const [log] = await pool.query(`
-            DELETE FROM logs 
-                WHERE logs.qr = ?`, [id])
-            res.json(log)
-        } catch (e) {
-            res.json(e.message)
-        }
-    }
+
     async getOne(req, res) {
         try {
             const { id } = req.params

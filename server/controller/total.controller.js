@@ -104,6 +104,13 @@ class totalController {
         try {
             const { id } = req.params
             await pool.query('DELETE FROM total WHERE qr = ?', [id])
+            await pool.query('DELETE FROM persons WHERE person_qr = ?', [id])
+            await pool.query('DELETE FROM owners WHERE owner_qr = ?', [id])
+            await pool.query('DELETE FROM info WHERE info_qr = ?', [id])
+            await pool.query('DELETE FROM additional_info WHERE addinfo_qr = ?', [id])
+            await pool.query('DELETE FROM statuses WHERE status_qr = ?', [id])
+            await pool.query('DELETE FROM storages WHERE storage_qr = ?', [id])
+            await pool.query('DELETE FROM logs WHERE qr = ?', [id])
             res.json(`Позиция удалена, QR код: ${id}`)
         } catch (e) {
             res.json(e.message)

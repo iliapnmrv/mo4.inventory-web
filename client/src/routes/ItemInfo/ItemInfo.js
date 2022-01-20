@@ -151,10 +151,7 @@ export default function ItemInfo({ close, editId }) {
   const deleteItem = async () => {
     try {
       const deleteMessage = await $api
-        .delete(`total/${editId}`, { status })
-        .then(({ data }) => data);
-      const deleteLogMessage = await $api
-        .delete(`logs/${editId}`)
+        .delete(`total/${editId}`)
         .then(({ data }) => data);
 
       dispatch({

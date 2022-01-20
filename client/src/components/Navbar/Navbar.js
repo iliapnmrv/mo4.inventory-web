@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import AuthService from "services/AuthService";
@@ -8,6 +9,8 @@ import { changeUserData } from "store/actions/userAction";
 export default function Navbar() {
   const dispatchUser = useDispatch();
   const dispatchAuth = useDispatch();
+
+  const { login, role } = useSelector((state) => state.user.username);
 
   const handleLogout = () => {
     AuthService.logout();
@@ -24,6 +27,11 @@ export default function Navbar() {
           <li>
             <Link to="/inventory">Инвентаризация</Link>
           </li>
+          {role === "admin" ? (
+            <li>
+              <Link to="/catalogs">Справочники</Link>
+            </li>
+          ) : null}
         </ul>
         <button className="btn logout" onClick={handleLogout}>
           Выйти

@@ -20,6 +20,7 @@ import {
 } from "store/actions/infoAction";
 import { changeUserData } from "store/actions/userAction";
 import { toggleRegModal } from "store/actions/authAction";
+import Catalogs from "routes/Catalogs/Catalogs";
 
 function App() {
   const dispatchUser = useDispatch();
@@ -75,6 +76,10 @@ function App() {
           <Route path="/inventory">
             <Header name="Инвентаризация" />
             <Inventory />
+          </Route>
+          <Route path="/catalogs">
+            <Header name="Справочники" />
+            <Catalogs />
           </Route>
           <Route path="/">
             <Header name="Документооборот" />
