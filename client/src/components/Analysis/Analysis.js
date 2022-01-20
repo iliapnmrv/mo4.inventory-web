@@ -17,7 +17,7 @@ export default function Analysis() {
     };
 
     fetchData();
-  }, []);
+  }, [name]);
 
   return (
     <div className="item-analysis">

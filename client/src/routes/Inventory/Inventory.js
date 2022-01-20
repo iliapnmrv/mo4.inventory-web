@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import "./Inventory.css";
 import useNotification from "hooks/useNotification";
 import Loading from "components/Loading/Loading";
-import Button from "components/Button/Button";
 import $api from "http/index.js";
 
 export default function Inventory() {
@@ -26,7 +25,7 @@ export default function Inventory() {
 
   const handleUpload = async (e) => {
     try {
-      const truncateData = await $api.delete(`inventory`);
+      await $api.delete(`inventory`);
 
       const files = e.target.files;
       const formData = new FormData();
@@ -55,25 +54,8 @@ export default function Inventory() {
     setOpen(!open);
   };
 
-  const analyzeInventory = async () => {
-    const invAnalysis = await $api
-      .get(`inventory/analyze`)
-      .then(({ data }) => data);
-    const totalAnalysis = await $api
-      .get(`total/analyze`)
-      .then(({ data }) => data);
-    console.log(totalAnalysis, invAnalysis);
-  };
-
-  const showUsers = async () => {
-    const users = await $api.get(`auth/users`).then(({ data }) => data);
-    console.log(users);
-  };
-
   return (
     <>
-      <Button text="Проанализировать" action={showUsers} />
-      <Button text="Проанализировать" action={analyzeInventory} />
       <div
         className="header"
         onClick={() => {

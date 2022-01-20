@@ -25,12 +25,12 @@ app.use(cors({
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(multer({ dest: "uploads" }).single("csv"));
+app.use(multer({ dest: "./uploads" }).single("csv"));
 // Middlewares
 app.use('/api/auth', authRouter)
 app.use('/api/analysis', analysisRouter)
 
-app.use(isLoggedin)
+// app.use(isLoggedin)
 app.use('/api/inventory', inventoryRoutes)
 app.use('/api/total', totalRouter)
 app.use('/api/logs', logsRouter)

@@ -24,21 +24,21 @@ class inventoryController {
     async uploadInventory(req, res) {
         try {
             let filedata = req.file;
-            const csvFilePath = filedata.path
+            // const csvFilePath = filedata.path
 
-            let length = await csv()
-                .fromFile(csvFilePath)
-                .then(async(json) => {
-                    for (let i = 0; i < json.length; i++) {
-                        let obj = json[i]
-                        const response = await fetch(`${SERVER}/api/inventory`, {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(obj)
-                        })
-                    }
-                    return json.length
-                })
+            // let length = await csv()
+            //     .fromFile(csvFilePath)
+            //     .then(async(json) => {
+            //         for (let i = 0; i < json.length; i++) {
+            //             console.log(json[i]);
+            //             const response = await fetch(`${SERVER}/api/inventory`, {
+            //                 method: "POST",
+            //                 headers: { "Content-Type": "application/json" },
+            //                 body: JSON.stringify(json[i])
+            //             })
+            //         }
+            //         return json.length
+            //     })
             res.send(`Успешно загружено ${length} строк`);
         } catch (e) {
             console.log(e)
