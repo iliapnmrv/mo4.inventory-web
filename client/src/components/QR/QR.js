@@ -42,13 +42,45 @@ export default function QR({
   };
   const printQR = () => {};
 
+  function fallbackCopyTextToClipboard(text) {
+    var textArea = document.createElement("textarea");
+    textArea.value = text;
+
+    // Avoid scrolling to bottom
+    textArea.style.top = "0";
+    textArea.style.left = "0";
+    textArea.style.position = "fixed";
+
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+
+    try {
+      document.execCommand("copy");
+      setIsCopied(true);
+    } catch (err) {
+      console.log("Ошибка при копировании");
+    }
+
+    document.body.removeChild(textArea);
+  }
+
   const copyQR = (e) => {
-    navigator.clipboard.writeText(
-      `${sredstvo}${("0" + type).slice(
-        -2
-      )}${month}${year}${qr}\n${name}\n${model}\n${sernom}`
-    );
-    setIsCopied(true);
+    const text = `${sredstvo}${("0" + type).slice(
+      -2
+    )}${month}${year}${qr}\n${name}\n${model}\n${sernom}`;
+    if (!navigator.clipboard) {
+      fallbackCopyTextToClipboard(text);
+      return;
+    }
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setIsCopied(true);
+      })
+      .catch(() => {
+        console.log("Ошибка при копировании");
+      });
   };
   return (
     <>

@@ -144,6 +144,8 @@ class totalController {
                     ON total.qr = storages.storage_qr
                 LEFT JOIN persons
                     ON total.qr = persons.person_qr
+                LEFT JOIN owners
+                    ON total.qr = owners.owner_qr
                 ${whereClause}
                 ORDER BY total.qr ASC
             `)
@@ -156,28 +158,19 @@ class totalController {
     async checkSerialNum(req, res) {
         const { num } = req.params
         const [item] = await pool.query(`
-        SELECT * FROM total
-            WHERE sernom = ?
-        `, [num])
+        SELECT * FROM inventory.total WHERE sernom = ?`, [num])
+        console.log(item);
         if (item.length) {
-            res.status(200)
             res.json(true)
         } else {
-            res.status(404)
             res.json(false)
         }
-
-
+        res.status(200)
     }
 
     async getAll(req, res) {
         const [all] = await pool.query(`
-        SELECT * FROM total 
-            LEFT JOIN types
-                ON total.type = types.type_id
-            LEFT JOIN sredstva
-                ON total.sredstvo = sredstva.sredstvo_id
-            ORDER BY total.qr ASC`)
+        SELECT * FROM total ORDER BY total.qr ASC`)
         res.json(all)
     }
 

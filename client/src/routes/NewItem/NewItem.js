@@ -156,6 +156,7 @@ export default function NewItem({ close }) {
         <form className="form" id="newItem" onSubmit={(e) => onSubmitForm(e)}>
           <div className="form-inputs">
             <SelectInput
+              required
               span="Выберите тип устройства"
               name="type"
               data={types}
@@ -163,12 +164,14 @@ export default function NewItem({ close }) {
               onSelectReset={type}
             />
             <SelectInput
+              required
               span="Выберите средство"
               name="sredstvo"
               data={sredstva}
               onSelectChange={selectChangeHandler}
             />
             <SelectInput
+              required
               span="Выберите статус"
               name="status"
               data={statuses}
@@ -177,18 +180,21 @@ export default function NewItem({ close }) {
           </div>
           <div className="form-inputs">
             <SelectInput
+              required
               span="Выберите МОЛ"
               name="person"
               data={persons}
               onSelectChange={selectChangeHandler}
             />
             <SelectInput
+              required
               span="Выберите владельца"
               name="owner"
               data={owners}
               onSelectChange={selectChangeHandler}
             />
             <SelectInput
+              required
               span="Выберите местоположение"
               name="storage"
               data={storages}

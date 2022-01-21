@@ -12,14 +12,17 @@ table {
 }
 
 table thead th {
+    position: sticky;
+    top: 44px;
     font-weight: bold;
     text-align: left;
     border: none;
     padding: 10px 15px;
-    background: #dfdddd61;
+    background: #f1f1f1;
     font-size: 16px;
     border-left: 1px solid #ddd;
     border-right: 1px solid #ddd;
+    z-index: 4;
 }
 
 table tbody td {

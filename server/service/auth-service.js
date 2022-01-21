@@ -34,6 +34,7 @@ class AuthService {
         }
         const { id, role } = candidate[0]
         const tokens = tokenService.generateTokens({ id, login, role })
+        console.log("tokens", tokens);
         return {...tokens, user: { id, login, role } }
     }
 

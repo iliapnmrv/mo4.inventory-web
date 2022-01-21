@@ -15,11 +15,16 @@ import {
   toggleItemInfoModal,
   toggleNewItemModal,
 } from "store/actions/modalAction";
-import { changeTotalData } from "store/actions/totalAction";
+import { changeTotalData, setFilters } from "store/actions/totalAction";
 
 export default function Total() {
-  const { data } = useSelector((state) => state.total);
-  const { filters, newItem, itemInfo, itemInfoId } = useSelector(
+  const {
+    data,
+    itemValues,
+    initialItemData,
+    filters: { sredstvo, type, status, person, storage, owner },
+  } = useSelector((state) => state.total);
+  const { filtersModal, newItem, itemInfo, itemInfoId } = useSelector(
     (state) => state.modal
   );
   const { login, role } = useSelector(({ user }) => user.username);
@@ -40,32 +45,51 @@ export default function Total() {
   };
 
   const toggleFiltersVisible = () => {
-    if (document.body.style.overflow == "hidden")
+    if (document.body.style.overflow === "hidden")
       document.body.style.overflow = "auto";
     else document.body.style.overflow = "hidden";
-    dispatchTotal(toggleFiltersModal(!filters));
+    dispatchTotal(toggleFiltersModal(!filtersModal));
   };
   const toggleNewItemVisible = () => {
-    if (document.body.style.overflow == "hidden")
+    if (document.body.style.overflow === "hidden")
       document.body.style.overflow = "auto";
     else document.body.style.overflow = "hidden";
     dispatchTotal(toggleNewItemModal(!newItem));
   };
 
+  const getAllData = async () => {
+    const data = await $api
+      .get(`total`)
+      .then(({ data }) => data)
+      .finally(setIsPending(false));
+    dispatchTotal(changeTotalData(data));
+    dispatchTotal(
+      setFilters({
+        sredstvo: [],
+        type: [],
+        status: [],
+        person: [],
+        storage: [],
+        owner: [],
+      })
+    );
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await $api
-        .get(`total`)
-        .then(({ data }) => data)
-        .finally(setIsPending(false));
-      dispatchTotal(changeTotalData(data));
-    };
-    fetchData();
+    getAllData();
   }, []);
 
   return (
     <>
       <div className="filters-bar">
+        {sredstvo.length ||
+        type.length ||
+        status.length ||
+        person.length ||
+        storage.length ||
+        owner.length ? (
+          <Button text="Сбросить фильтры" style="filters" action={getAllData} />
+        ) : null}
         <Button text="Фильтры" style="filters" action={toggleFiltersVisible} />
         {role === "admin" && (
           <Button
@@ -82,7 +106,11 @@ export default function Total() {
       >
         <Form close={toggleNewItemVisible} />
       </Modal>
-      <Modal visible={filters} close={toggleFiltersVisible} header={"Фильтры"}>
+      <Modal
+        visible={filtersModal}
+        close={toggleFiltersVisible}
+        header={"Фильтры"}
+      >
         <Filters close={toggleFiltersVisible} />
       </Modal>
 
@@ -104,11 +132,15 @@ export default function Total() {
                   <th>Серийный номер</th>
                 </tr>
               </thead>
-              <tbody>
-                {data.map((row) => {
-                  return <Item openModal={openItemModal} data={row} />;
-                })}
-              </tbody>
+              {data.length ? (
+                <tbody>
+                  {data.map((row) => {
+                    return <Item openModal={openItemModal} data={row} />;
+                  })}
+                </tbody>
+              ) : (
+                <div>Данные отсутствуют</div>
+              )}
             </table>
           </>
         )}

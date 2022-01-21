@@ -1,7 +1,7 @@
 import { CHANGE_ITEMINFOID, TOGGLE_DELETE_DIALOG, TOGGLE_FILTERS_MODAL, TOGGLE_ITEMINFO_MODAL, TOGGLE_NEWITEM_MODAL, TOGGLE_SAVE_DIALOG } from "store/actions/modalAction";
 
 const defaultState = {
-    filters: false,
+    filtersModal: false,
     newItem: false,
     itemInfo: false,
     deleteDialog: {
@@ -16,7 +16,7 @@ const defaultState = {
 export const modalReducer = (state = defaultState, { type, payload }) => {
     switch (type) {
         case TOGGLE_FILTERS_MODAL:
-            return {...state, filters: payload };
+            return {...state, filtersModal: payload };
         case TOGGLE_NEWITEM_MODAL:
             return {...state, newItem: payload };
         case TOGGLE_ITEMINFO_MODAL:

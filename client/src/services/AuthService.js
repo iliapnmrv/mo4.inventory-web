@@ -48,9 +48,14 @@ class AuthService {
     }
 
     async checkAuth() {
-        const data = await axios.get(`${API_URL}auth/refresh`, { withCredentials: true }).then(({ data }) => data)
-        store.dispatch(setToken(data.accessToken))
-        return data
+        try {
+            const data = await axios.get(`${API_URL}auth/refresh`, { withCredentials: true }).then(({ data }) => data)
+            store.dispatch(setToken(data.accessToken))
+            return data
+        } catch (e) {
+            return e.response.data
+        }
+
     }
 }
 

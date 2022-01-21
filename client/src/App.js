@@ -69,8 +69,8 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Login />
       <Registration />
+      <Login />
       <div className="container">
         <Switch>
           <Route path="/inventory">

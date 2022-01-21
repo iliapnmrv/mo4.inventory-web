@@ -8,24 +8,16 @@ import $api from "http/index.js";
 import { changeTotalData } from "store/actions/totalAction";
 
 export default function Filters({ close }) {
-  const { storages, statuses, sredstva, persons, types } = useSelector(
+  const { storages, statuses, sredstva, persons, types, owners } = useSelector(
     (state) => state.info
   );
+  const { filters } = useSelector((state) => state.total);
   const dispatchTotal = useDispatch();
 
-  const {
-    values: { sredstvo, type, status, person, storage },
-    selectChangeHandler,
-  } = useForm({
-    sredstvo: "",
-    type: "",
-    status: "",
-    person: "",
-    storage: "",
-  });
+  const { filtersChangeHandler } = useForm();
 
   const handleFilter = async () => {
-    let filters = { sredstvo, type, status, person, storage };
+    console.log(filters);
     let query = "";
     for (const key in filters) {
       for (let i = 0; i < filters[key].length; i++) {
@@ -51,7 +43,7 @@ export default function Filters({ close }) {
             span="Выберите тип устройства"
             name="type"
             data={types}
-            onSelectChange={selectChangeHandler}
+            onSelectChange={filtersChangeHandler}
             required={false}
           />
           <SelectInput
@@ -59,7 +51,7 @@ export default function Filters({ close }) {
             span="Выберите средство устройства"
             name="sredstvo"
             data={sredstva}
-            onSelectChange={selectChangeHandler}
+            onSelectChange={filtersChangeHandler}
             required={false}
           />
           <SelectInput
@@ -67,7 +59,7 @@ export default function Filters({ close }) {
             span="Выберите статус"
             name="status"
             data={statuses}
-            onSelectChange={selectChangeHandler}
+            onSelectChange={filtersChangeHandler}
             required={false}
           />
           <SelectInput
@@ -75,7 +67,15 @@ export default function Filters({ close }) {
             span="Выберите МОЛ"
             name="person"
             data={persons}
-            onSelectChange={selectChangeHandler}
+            onSelectChange={filtersChangeHandler}
+            required={false}
+          />
+          <SelectInput
+            multi={true}
+            span="Выберите владельца"
+            name="owner"
+            data={owners}
+            onSelectChange={filtersChangeHandler}
             required={false}
           />
           <SelectInput
@@ -83,7 +83,7 @@ export default function Filters({ close }) {
             span="Выберите место хранения"
             name="storage"
             data={storages}
-            onSelectChange={selectChangeHandler}
+            onSelectChange={filtersChangeHandler}
             required={false}
           />
         </div>

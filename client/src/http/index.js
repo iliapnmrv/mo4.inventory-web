@@ -5,9 +5,9 @@ import { setIsAuthenticated, setToken } from "store/actions/userAction";
 
 
 
-// export const API_URL = "http://mo4-it5:8000/api/"
+export const API_URL = "http://mo4-it5:8000/api/"
 
-export const API_URL = "http://localhost:8000/api/"
+// export const API_URL = "http://localhost:8000/api/"
 
 // export const API_URL = "http://192.168.26.75:8000/api/"
 
@@ -17,6 +17,7 @@ const $api = axios.create({
     headers: {
         "Content-Type": "application/json",
     },
+
 });
 
 $api.interceptors.request.use((config) => {

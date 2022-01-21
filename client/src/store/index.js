@@ -8,10 +8,16 @@ import { totalReducer } from "./reducers/totalReducer";
 import { userReducer } from "./reducers/userReducer";
 import storage from 'redux-persist/lib/storage'
 
+const totalConfig = {
+    key: "total",
+    storage,
+    blacklist: ['modal'],
+}
+
 const rootReducer = combineReducers({
     user: userReducer,
     auth: authReducer,
-    total: totalReducer,
+    total: persistReducer(totalConfig, totalReducer),
     info: infoReducer,
     modal: modalReducer,
 });
@@ -19,7 +25,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
     key: "root",
     storage,
-    blacklist: ['total, info, modal'],
+    blacklist: ['total'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
