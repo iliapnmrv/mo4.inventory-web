@@ -14,6 +14,7 @@ export default function SelectInput(props) {
     required,
     default: defaultValue,
     disabled = false,
+    selectValue,
   } = props;
 
   const multiStyles = {
@@ -22,6 +23,9 @@ export default function SelectInput(props) {
 
   const [value, setValue] = useState();
   const [multiple, setMultiple] = useState();
+
+  console.log(multiple);
+  console.log(selectValue);
 
   const handleSelect = (e) => {
     let out = {
@@ -41,6 +45,7 @@ export default function SelectInput(props) {
       name: name,
       value: values,
     };
+    console.log(out);
     setMultiple(values);
     onSelectChange(out);
   };
@@ -60,6 +65,7 @@ export default function SelectInput(props) {
           onChange={(e) => {
             multi ? handleMultiple(e) : handleSelect(e);
           }}
+          // value={selectValue}
           maxMenuHeight={210}
         />
         <input

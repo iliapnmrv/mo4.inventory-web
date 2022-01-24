@@ -6,8 +6,9 @@ import SelectInput from "components/Form/Select/Select";
 import { useSelector } from "react-redux";
 import $api from "http/index.js";
 import { changeTotalData } from "store/actions/totalAction";
+import { useEffect } from "react";
 
-export default function Filters({ close }) {
+export default function Filters() {
   const { storages, statuses, sredstva, persons, types, owners } = useSelector(
     (state) => state.info
   );
@@ -16,7 +17,7 @@ export default function Filters({ close }) {
 
   const { filtersChangeHandler } = useForm();
 
-  const handleFilter = async () => {
+  const filterData = async () => {
     console.log(filters);
     let query = "";
     for (const key in filters) {
@@ -25,14 +26,20 @@ export default function Filters({ close }) {
         query = `${query}${key}=${value}&`;
       }
     }
-    close();
-
     const filteredData = await $api
       .post(`total/filter?${query.slice(0, -1)}`)
       .then(({ data }) => data);
     console.log(filteredData);
     dispatchTotal(changeTotalData(filteredData));
   };
+
+  const handleFilter = async () => {
+    filterData();
+  };
+
+  useEffect(() => {
+    filterData();
+  }, [filters]);
 
   return (
     <>
@@ -45,6 +52,7 @@ export default function Filters({ close }) {
             data={types}
             onSelectChange={filtersChangeHandler}
             required={false}
+            selectValue={filters.type}
           />
           <SelectInput
             multi={true}
@@ -53,6 +61,7 @@ export default function Filters({ close }) {
             data={sredstva}
             onSelectChange={filtersChangeHandler}
             required={false}
+            selectValue={filters.sredstvo}
           />
           <SelectInput
             multi={true}
@@ -61,6 +70,7 @@ export default function Filters({ close }) {
             data={statuses}
             onSelectChange={filtersChangeHandler}
             required={false}
+            selectValue={filters.status}
           />
           <SelectInput
             multi={true}
@@ -69,6 +79,7 @@ export default function Filters({ close }) {
             data={persons}
             onSelectChange={filtersChangeHandler}
             required={false}
+            selectValue={filters.person}
           />
           <SelectInput
             multi={true}
@@ -77,6 +88,7 @@ export default function Filters({ close }) {
             data={owners}
             onSelectChange={filtersChangeHandler}
             required={false}
+            selectValue={filters.owner}
           />
           <SelectInput
             multi={true}
@@ -85,6 +97,7 @@ export default function Filters({ close }) {
             data={storages}
             onSelectChange={filtersChangeHandler}
             required={false}
+            selectValue={filters.storage}
           />
         </div>
         <Button text="Отфильтровать" style="info" action={handleFilter} />

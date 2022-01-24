@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Total.css";
+import "./Total.sass";
 import Item from "components/Item/Item";
 import Modal from "components/Modal/Modal";
 import Loading from "components/Loading/Loading";
@@ -44,12 +44,6 @@ export default function Total() {
     dispatchTotal(toggleItemInfoModal(false));
   };
 
-  const toggleFiltersVisible = () => {
-    if (document.body.style.overflow === "hidden")
-      document.body.style.overflow = "auto";
-    else document.body.style.overflow = "hidden";
-    dispatchTotal(toggleFiltersModal(!filtersModal));
-  };
   const toggleNewItemVisible = () => {
     if (document.body.style.overflow === "hidden")
       document.body.style.overflow = "auto";
@@ -82,15 +76,21 @@ export default function Total() {
   return (
     <>
       <div className="filters-bar">
-        {sredstvo.length ||
-        type.length ||
-        status.length ||
-        person.length ||
-        storage.length ||
-        owner.length ? (
-          <Button text="Сбросить фильтры" style="filters" action={getAllData} />
-        ) : null}
-        <Button text="Фильтры" style="filters" action={toggleFiltersVisible} />
+        <Button
+          text="Сбросить фильтры"
+          style="filters"
+          action={getAllData}
+          disabled={
+            sredstvo.length ||
+            type.length ||
+            status.length ||
+            person.length ||
+            storage.length ||
+            owner.length
+              ? false
+              : true
+          }
+        />
         {role === "admin" && (
           <Button
             text="Новый элемент"
@@ -106,51 +106,49 @@ export default function Total() {
       >
         <Form close={toggleNewItemVisible} />
       </Modal>
-      <Modal
-        visible={filtersModal}
-        close={toggleFiltersVisible}
-        header={"Фильтры"}
-      >
-        <Filters close={toggleFiltersVisible} />
-      </Modal>
+      <div className="page-content">
+        <div className="sidebar">
+          <Filters />
+        </div>
 
-      <div className="table">
-        {isPending ? (
-          <Loading />
-        ) : (
-          <>
-            <table>
-              <thead>
-                <tr key={9999}>
-                  <th>Номер QR</th>
-                  <th>Ср-во</th>
-                  <th>Тип</th>
-                  <th>Месяц ввода</th>
-                  <th>Год ввода</th>
-                  <th>Наименование по бухучету</th>
-                  <th>Модель реальная</th>
-                  <th>Серийный номер</th>
-                </tr>
-              </thead>
-              {data.length ? (
-                <tbody>
-                  {data.map((row) => {
-                    return <Item openModal={openItemModal} data={row} />;
-                  })}
-                </tbody>
-              ) : (
-                <div>Данные отсутствуют</div>
-              )}
-            </table>
-          </>
-        )}
-        <Modal
-          visible={itemInfo}
-          close={closeItemModal}
-          header={`Изменить информацию о позиции с QR номером: ${itemInfoId}`}
-        >
-          <ItemInfo editId={itemInfoId} close={closeItemModal} />
-        </Modal>
+        <div className="table">
+          {isPending ? (
+            <Loading />
+          ) : (
+            <>
+              <table>
+                <thead>
+                  <tr key={9999}>
+                    <th>Номер QR</th>
+                    <th>Ср-во</th>
+                    <th>Тип</th>
+                    <th>Месяц ввода</th>
+                    <th>Год ввода</th>
+                    <th>Наименование по бухучету</th>
+                    <th>Модель реальная</th>
+                    <th>Серийный номер</th>
+                  </tr>
+                </thead>
+                {data.length ? (
+                  <tbody>
+                    {data.map((row) => {
+                      return <Item openModal={openItemModal} data={row} />;
+                    })}
+                  </tbody>
+                ) : (
+                  <div>Данные отсутствуют</div>
+                )}
+              </table>
+            </>
+          )}
+          <Modal
+            visible={itemInfo}
+            close={closeItemModal}
+            header={`Изменить информацию о позиции с QR номером: ${itemInfoId}`}
+          >
+            <ItemInfo editId={itemInfoId} close={closeItemModal} />
+          </Modal>
+        </div>
       </div>
     </>
   );

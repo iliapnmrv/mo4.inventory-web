@@ -5,6 +5,7 @@ export default function Button({
   action,
   style = "success",
   type = "button",
+  disabled = true,
 }) {
   return (
     <button onClick={action} className={`btn ${style}`} type={type}>

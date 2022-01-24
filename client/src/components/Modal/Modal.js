@@ -11,12 +11,15 @@ export default function Modal({ visible, close, header, children }) {
   const {
     saveDialog: { visible: dialogVisible },
   } = useSelector((state) => state.modal);
+  const { data, initialItemData, itemValues } = useSelector(
+    (state) => state.total
+  );
 
   const handleDialogToggle = () => {
     dispatchModal(toggleSaveDialog({ visible: !dialogVisible }));
   };
   const dialogCloseHandle = () => {
-    close();
+    // close();
     dispatchModal(toggleSaveDialog({ visible: !dialogVisible }));
   };
 
@@ -24,6 +27,15 @@ export default function Modal({ visible, close, header, children }) {
     e.preventDefault();
     onFormSubmit(close);
     dispatchModal(toggleSaveDialog({ visible: !dialogVisible }));
+  };
+
+  const checkForChanges = () => {
+    let newItemData = itemValues;
+    console.log("here");
+    if (JSON.stringify(initialItemData) === JSON.stringify(newItemData)) {
+      return false;
+    }
+    return true;
   };
 
   return visible ? (
@@ -38,11 +50,19 @@ export default function Modal({ visible, close, header, children }) {
 
       <div
         className="md-container modal"
-        onClick={(e) =>
-          e.target.className === "md-container modal"
-            ? handleDialogToggle()
-            : null
-        }
+        onClick={(e) => {
+          if (
+            e.target.className === "md-container modal" &&
+            checkForChanges() === false
+          ) {
+            close();
+          } else if (
+            e.target.className === "md-container modal" &&
+            checkForChanges() === true
+          ) {
+            handleDialogToggle();
+          }
+        }}
       >
         <div className="md-modal">
           <div className="modal-header">
