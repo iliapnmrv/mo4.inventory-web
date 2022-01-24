@@ -1,15 +1,14 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import "./Inventory.css";
 import useNotification from "hooks/useNotification";
 import Loading from "components/Loading/Loading";
 import Button from "components/Button/Button";
 import $api from "http/index.js";
+import FileUpload from "components/FileUpload/FileUpload";
 
 export default function Inventory() {
-  const [open, setOpen] = useState(false);
   const [isPending, setIsPending] = useState(true);
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -21,39 +20,6 @@ export default function Inventory() {
     };
     fetchData();
   }, []);
-
-  const dispatch = useNotification();
-
-  const handleUpload = async (e) => {
-    try {
-      const truncateData = await $api.delete(`inventory`);
-
-      const files = e.target.files;
-      const formData = new FormData();
-      formData.append("csv", files[0]);
-
-      const uploadData = await $api.post(`inventory/upload`, {
-        formData,
-      });
-
-      dispatch({
-        type: "SUCCESS",
-        message: uploadData,
-        title: "Обновлено",
-      });
-    } catch (e) {
-      console.log(e.message);
-      dispatch({
-        type: "ERROR",
-        message: "Ошибка при загрузке",
-      });
-    }
-  };
-
-  const toggleForm = () => {
-    document.querySelector(".form").classList.toggle("slide");
-    setOpen(!open);
-  };
 
   const analyzeInventory = async () => {
     const invAnalysis = await $api
@@ -74,27 +40,7 @@ export default function Inventory() {
     <>
       <Button text="Проанализировать" action={showUsers} />
       <Button text="Проанализировать" action={analyzeInventory} />
-      <div
-        className="header"
-        onClick={() => {
-          toggleForm();
-        }}
-      >
-        <h2>Загрузить инвентаризацинную опись</h2>
-        <FontAwesomeIcon icon={open ? faChevronDown : faChevronUp} />
-      </div>
-      <div className="uploader form">
-        <label htmlFor="csv">Загрузить csv файл</label>
-        <input
-          accept=".csv"
-          className="uploader"
-          id="csv"
-          onChange={(e) => {
-            handleUpload(e);
-          }}
-          type="file"
-        />
-      </div>
+      <FileUpload />
 
       <div className="flex">
         {isPending ? (

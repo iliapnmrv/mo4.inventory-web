@@ -1,8 +1,5 @@
 import pool from "../db.js"
-import csv from 'csvtojson'
-import fetch from 'node-fetch';
-import { SERVER } from "../constants/constants.js";
-
+import csvtojson from 'csvtojson'
 class inventoryController {
     async getInventory(req, res) {
         const [inv] = await pool.query('SELECT * FROM inventory')
@@ -12,51 +9,40 @@ class inventoryController {
             res.json(null)
         }
     }
-    async deleteInventory(req, res) {
-        try {
-            await pool.query('TRUNCATE TABLE inventory')
-            res.json("Успешно удалено")
-        } catch (e) {
-            console.log(e)
-        }
-
-    }
     async uploadInventory(req, res) {
         try {
-            let filedata = req.file;
-            // const csvFilePath = filedata.path
+            await pool.query('TRUNCATE TABLE inventory')
+            if (req.file == undefined) {
+                res.status(301).send("Ошибка при загрузке");
+            }
 
-            // let length = await csv()
-            //     .fromFile(csvFilePath)
-            //     .then(async(json) => {
-            //         for (let i = 0; i < json.length; i++) {
-            //             console.log(json[i]);
-            //             const response = await fetch(`${SERVER}/api/inventory`, {
-            //                 method: "POST",
-            //                 headers: { "Content-Type": "application/json" },
-            //                 body: JSON.stringify(json[i])
-            //             })
-            //         }
-            //         return json.length
-            //     })
+            let filedata = req.file;
+
+            const csvFilePath = filedata.path
+            let length = await csvtojson({ "delimiter": ";" })
+                .preFileLine((fileLineString, lineIdx) => {
+                    let invalidLinePattern = /^['"].*[^"'];/;
+                    if (invalidLinePattern.test(fileLineString)) {
+                        fileLineString = "";
+                        invalidLineCount++;
+                    }
+                    return fileLineString
+                })
+                .fromFile(csvFilePath)
+                .then(async(json) => {
+                    for (let i = 0; i < json.length; i++) {
+                        const { vedpos, name, place, kolvo, placepriority } = json[i]
+                        await pool.query(
+                            `INSERT INTO inventory(vedpos, name, place, kolvo, placepriority) 
+                             VALUES(?, ?, ?, ?, ?)`, [vedpos, name, place, kolvo, placepriority]
+                        )
+                    }
+                    return json.length
+                })
             res.send(`Успешно загружено ${length} строк`);
         } catch (e) {
             console.log(e)
         }
-
-    }
-    async createInventory(req, res) {
-        try {
-            const { vedPos, name, place, kolvo, placePriority } = req.body
-            await pool.query(
-                `INSERT INTO inventory( vedPos, name, place, kolvo, placePriority ) 
-                        VALUES(?, ?, ?, ?, ?)`, [vedPos, name, place, kolvo, placePriority]
-            )
-            res.json(`Загружено`)
-        } catch (e) {
-            res.json(e.message)
-        }
-
     }
 }
 

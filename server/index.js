@@ -25,8 +25,7 @@ app.use(cors({
 
 app.use(express.json())
 app.use(cookieParser())
-app.use(multer({ dest: "./uploads" }).single("csv"));
-// Middlewares
+    // Middlewares
 app.use('/api/auth', authRouter)
 app.use('/api/analysis', analysisRouter)
 
