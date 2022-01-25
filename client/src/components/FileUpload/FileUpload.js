@@ -1,14 +1,16 @@
 import axios from "axios";
+import Button from "components/Button/Button";
 import useNotification from "hooks/useNotification";
-import $api from "http";
 import { API_URL } from "http";
 import React from "react";
 import { useState } from "react";
-import { store } from "store";
+import "./FileUpload.sass";
 
 export default function FileUpload() {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
+
+  console.log(selectedFile);
   const dispatch = useNotification();
   const handleChange = (e) => {
     setSelectedFile(e.target.files[0]);
@@ -44,11 +46,28 @@ export default function FileUpload() {
       });
     }
   };
+
+  function fileSize(size) {
+    var i = Math.floor(Math.log(size) / Math.log(1024));
+    return (
+      (size / Math.pow(1024, i)).toFixed(2) * 1 +
+      " " +
+      ["B", "kB", "MB", "GB", "TB"][i]
+    );
+  }
+
   return (
     <>
-      <h2>Загрузить инвентаризацинную опись</h2>
       <div className="uploader form">
-        <label htmlFor="csv">Загрузить csv файл</label>
+        {selectedFile ? (
+          <span>
+            {selectedFile?.name} {fileSize(selectedFile?.size)}
+          </span>
+        ) : (
+          <span>Нет выбранных файлов</span>
+        )}
+        <label htmlFor="csv">Загрузить csv файл инвентаризационной описи</label>
+
         <input
           accept=".csv"
           className="uploader"
@@ -56,7 +75,7 @@ export default function FileUpload() {
           onChange={handleChange}
           type="file"
         />
-        <button onClick={handleSubmit}>Submit</button>
+        <Button text="Загрузить" action={handleSubmit} style="filters" />
       </div>
     </>
   );

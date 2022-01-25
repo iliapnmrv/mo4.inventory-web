@@ -11,8 +11,10 @@ export default function Input({
   max,
   disabled = false,
   children,
+  formName = "itemInfo",
 }) {
-  const { changeInRedux } = useForm();
+  const { changeInRedux, changeNewItemInRedux } = useForm();
+
   return (
     <>
       <label className="form-item">
@@ -25,7 +27,9 @@ export default function Input({
           name={name}
           value={value}
           onChange={onChange}
-          onBlur={changeInRedux}
+          onBlur={
+            formName === "itemInfo" ? changeInRedux : changeNewItemInRedux
+          }
         />
         {children}
       </label>

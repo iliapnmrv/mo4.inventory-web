@@ -24,8 +24,8 @@ export default function SelectInput(props) {
   const [value, setValue] = useState();
   const [multiple, setMultiple] = useState();
 
-  console.log(multiple);
-  console.log(selectValue);
+  // console.log(multiple);
+  // console.log(selectValue);
 
   const handleSelect = (e) => {
     let out = {

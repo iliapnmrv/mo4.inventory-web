@@ -27,7 +27,6 @@ class analysisController {
     async getAnalysisAll(req, res) {
         const { authorization } = req.headers
         const { listed, inStock } = await AnalysisService.fetchRequest(`${SERVER}api/analysis/rawData`, authorization)
-            // console.log(listed, inStock);
 
         listed.forEach(o => {
             delete Object.assign(o, {

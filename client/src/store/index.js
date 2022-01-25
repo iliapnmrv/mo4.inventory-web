@@ -7,11 +7,13 @@ import { modalReducer } from "./reducers/modalReducer";
 import { totalReducer } from "./reducers/totalReducer";
 import { userReducer } from "./reducers/userReducer";
 import storage from 'redux-persist/lib/storage'
+import { composeWithDevTools } from "redux-devtools-extension";
+
 
 const totalConfig = {
     key: "total",
     storage,
-    blacklist: ['modal'],
+    blacklist: ['filters', 'itemValues', 'initialData'],
 }
 
 const rootReducer = combineReducers({
@@ -30,5 +32,5 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = createStore(persistedReducer);
+export const store = createStore(persistedReducer, composeWithDevTools());
 export const persistor = persistStore(store);

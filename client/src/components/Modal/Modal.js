@@ -10,35 +10,42 @@ export default function Modal({
   header,
   children,
   doNotCheckForChanges = false,
+  action,
+  comparisonObject,
 }) {
-  const onFormSubmit = OnItemInfoFormSubmit();
   const dispatchModal = useDispatch();
 
   const {
     saveDialog: { visible: dialogVisible },
   } = useSelector((state) => state.modal);
-  const { data, initialItemData, itemValues } = useSelector(
-    (state) => state.total
-  );
+  const { initialItemData } = useSelector((state) => state.total);
 
-  const handleDialogToggle = () => {
-    dispatchModal(toggleSaveDialog({ visible: !dialogVisible }));
-  };
-  const dialogCloseHandle = () => {
-    // close();
+  const toggleDialog = () => {
     dispatchModal(toggleSaveDialog({ visible: !dialogVisible }));
   };
 
-  const saveData = (e) => {
-    e.preventDefault();
-    onFormSubmit(close);
-    dispatchModal(toggleSaveDialog({ visible: !dialogVisible }));
+  const closeEverything = () => {
+    toggleDialog();
+    close();
+  };
+
+  const closeModal = () => {
+    if (doNotCheckForChanges) {
+      close();
+      return;
+    }
+    if (checkForChanges()) {
+      toggleDialog();
+    } else {
+      close();
+    }
   };
 
   const checkForChanges = () => {
-    let newItemData = itemValues;
-    console.log("here");
-    if (JSON.stringify(initialItemData) === JSON.stringify(newItemData)) {
+    console.log(JSON.stringify(comparisonObject));
+    console.log(JSON.stringify(initialItemData));
+    if (JSON.stringify(initialItemData) === JSON.stringify(comparisonObject)) {
+      console.log("Объекты одинаковы");
       return false;
     }
     return true;
@@ -48,37 +55,22 @@ export default function Modal({
     <>
       <Dialog
         visible={dialogVisible}
-        action={saveData}
-        close={dialogCloseHandle}
-        timesButton={handleDialogToggle}
+        action={action}
+        close={closeEverything}
+        timesButton={toggleDialog}
         dialogType="save"
       />
 
       <div
         className="md-container modal"
-        onClick={(e) => {
-          if (
-            e.target.className === "md-container modal" &&
-            doNotCheckForChanges === true
-          ) {
-            close();
-          } else if (
-            e.target.className === "md-container modal" &&
-            checkForChanges() === false
-          ) {
-            close();
-          } else if (
-            e.target.className === "md-container modal" &&
-            checkForChanges() === true
-          ) {
-            handleDialogToggle();
-          }
-        }}
+        onClick={(e) =>
+          e.target.className === "md-container modal" ? closeModal() : null
+        }
       >
         <div className="md-modal">
           <div className="modal-header">
             <h2>{header}</h2>
-            <div className="close-btn" onClick={close}>
+            <div className="close-btn" onClick={closeModal}>
               &times;
             </div>
           </div>

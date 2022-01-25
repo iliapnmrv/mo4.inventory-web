@@ -38,8 +38,15 @@ export default function Inventory() {
 
   return (
     <>
-      <Button text="Проанализировать" action={toggleAnalysis} />
-      <FileUpload />
+      <div className="secondary-navbar">
+        <Button
+          text="Показать данные анализа"
+          action={toggleAnalysis}
+          style="filters"
+        />
+        <FileUpload />
+      </div>
+
       <Modal
         visible={analysisModal}
         close={toggleAnalysis}

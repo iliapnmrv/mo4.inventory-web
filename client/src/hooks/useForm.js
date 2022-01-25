@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux";
-import { changeItemData, setFilters } from "store/actions/totalAction";
+import { changeItemData, changeNewItemData, setFilters } from "store/actions/totalAction";
 
 const useForm = (initial) => {
     const [values, setValues] = useState(initial)
@@ -30,6 +30,9 @@ const useForm = (initial) => {
         },
         setDefault: data => data ? setValues(data) : null,
         changeInRedux: e => dispatchTotal(changeItemData({
+            [e.target.name]: e.target.value
+        })),
+        changeNewItemInRedux: e => dispatchTotal(changeNewItemData({
             [e.target.name]: e.target.value
         })),
     }

@@ -1,11 +1,26 @@
-import { CHANGE_ITEM_DATA, CHANGE_TOTAL_DATA, INITIAL_ITEM_DATA, SET_FILTERS } from "store/actions/totalAction";
+import { CHANGE_ITEM_DATA, CHANGE_NEW_ITEM_DATA, CHANGE_TOTAL_DATA, INITIAL_ITEM_DATA, SET_FILTERS } from "store/actions/totalAction";
 
 const defaultState = {
     data: [],
     initialItemData: [],
 
-
     itemValues: {
+        qr: "",
+        name: "",
+        sredstvo: "",
+        type: "",
+        month: "",
+        year: "",
+        model: "",
+        sernom: "",
+        info: "",
+        status: "",
+        person: "",
+        storage: "",
+        addinfo: "",
+        owner: "",
+    },
+    newItemValues: {
         qr: "",
         name: "",
         sredstvo: "",
@@ -40,6 +55,8 @@ export const totalReducer = (state = defaultState, { type, payload }) => {
             return {...state, initialItemData: payload };
         case CHANGE_ITEM_DATA:
             return {...state, itemValues: {...state.itemValues, ...payload } };
+        case CHANGE_NEW_ITEM_DATA:
+            return {...state, newItemValues: {...state.newItemValues, ...payload } };
         case SET_FILTERS:
             return {...state, filters: {...state.filters, ...payload } };
         default:

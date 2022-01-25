@@ -13,7 +13,7 @@ export default function NewItem({ close }) {
     (state) => state.info
   );
   const { login, role } = useSelector((state) => state.user.username);
-  const { data } = useSelector((state) => state.total);
+  const { data, initialItemData } = useSelector((state) => state.total);
   const dispatchTotal = useDispatch();
   const [sernomExists, setSernomExists] = useState(false);
 
@@ -53,6 +53,24 @@ export default function NewItem({ close }) {
     storage: "",
     addinfo: "",
     owner: "",
+  });
+
+  console.log(initialItemData);
+  console.log({
+    qr,
+    name,
+    sredstvo,
+    type,
+    month,
+    year,
+    model,
+    sernom,
+    info,
+    status,
+    person,
+    storage,
+    addinfo,
+    owner,
   });
 
   useEffect(() => {
@@ -208,12 +226,14 @@ export default function NewItem({ close }) {
               type="number"
               value={qr}
               onChange={changeHandler}
+              formName="newItem"
             />
             <Input
               span="Наименование по бухучету"
               name="name"
               value={name}
               onChange={changeHandler}
+              formName="newItem"
             />
             <Input
               span="Месяц ввода"
@@ -222,6 +242,7 @@ export default function NewItem({ close }) {
               max="12"
               value={month}
               onChange={changeHandler}
+              formName="newItem"
             />
           </div>
           <div className="form-inputs">
@@ -232,12 +253,14 @@ export default function NewItem({ close }) {
               value={year}
               max="40"
               onChange={changeHandler}
+              formName="newItem"
             />
             <Input
               span="Модель реальная"
               name="model"
               value={model}
               onChange={changeHandler}
+              formName="newItem"
             />
 
             <Input
@@ -245,6 +268,7 @@ export default function NewItem({ close }) {
               name="sernom"
               value={sernom}
               onChange={changeHandler}
+              formName="newItem"
             >
               {sernomExists && (
                 <span className="input-comment">
@@ -260,6 +284,7 @@ export default function NewItem({ close }) {
               required={false}
               value={info}
               onChange={changeHandler}
+              formName="newItem"
             />
           </div>
           <div className="form-inputs">
@@ -269,6 +294,7 @@ export default function NewItem({ close }) {
               required={false}
               value={addinfo}
               onChange={changeHandler}
+              formName="newItem"
             />
           </div>
           <button className="btn success" type="submit">

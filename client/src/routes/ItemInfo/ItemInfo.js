@@ -14,9 +14,9 @@ import Analysis from "components/Analysis/Analysis";
 import $api from "http/index.js";
 import { toggleDeleteDialog } from "store/actions/modalAction";
 import {
+  changeInitialItemData,
   changeItemData,
   changeTotalData,
-  initialItemData,
 } from "store/actions/totalAction";
 
 export default function ItemInfo({ close, editId }) {
@@ -69,7 +69,7 @@ export default function ItemInfo({ close, editId }) {
     qr: "",
     name: "",
     sredstvo: "",
-    type_id: "",
+    type: "",
     month: "",
     year: "",
     model: "",
@@ -100,7 +100,9 @@ export default function ItemInfo({ close, editId }) {
         .finally(setIsPending(false));
       setLogs(logsData);
 
-      dispatchTotal(initialItemData(item));
+      console.log(item);
+
+      dispatchTotal(changeInitialItemData(item));
 
       dispatchTotal(changeItemData(item));
 

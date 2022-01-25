@@ -13,21 +13,72 @@ import {
   changeItemInfoId,
   toggleItemInfoModal,
   toggleNewItemModal,
+  toggleSaveDialog,
 } from "store/actions/modalAction";
-import { changeTotalData, setFilters } from "store/actions/totalAction";
+import {
+  changeInitialItemData,
+  changeTotalData,
+  setFilters,
+} from "store/actions/totalAction";
+import OnItemInfoFormSubmit from "routes/ItemInfo/onItemInfoFormSubmit";
 
 export default function Total() {
   const {
     data,
-    itemValues,
-    initialItemData,
-    filters: { sredstvo, type, status, person, storage, owner },
+    itemValues: {
+      qr,
+      name,
+      sredstvo,
+      type,
+      month,
+      year,
+      model,
+      sernom,
+      info,
+      status,
+      person,
+      storage,
+      addinfo,
+      owner,
+    },
+    newItemValues: {
+      qr: newItemQR,
+      name: newItemName,
+      sredstvo: newItemSredstvo,
+      type: newItemType,
+      month: newItemMonth,
+      year: newItemYear,
+      model: newItemModel,
+      sernom: newItemSernom,
+      info: newItemInfo,
+      status: newItemStatus,
+      person: newItemPerson,
+      storage: newItemStorage,
+      addinfo: newItemAddinfo,
+      owner: newItemOwner,
+    },
+    filters: {
+      sredstvo: sredstvoFilter,
+      type: typeFilter,
+      status: statusFilter,
+      person: personFilter,
+      storage: storageFilter,
+      owner: ownerFilter,
+    },
   } = useSelector((state) => state.total);
-  const { newItem, itemInfo, itemInfoId } = useSelector((state) => state.modal);
+  const {
+    saveDialog: { visible: dialogVisible },
+    newItem,
+    itemInfo,
+    itemInfoId,
+  } = useSelector((state) => state.modal);
   const { login, role } = useSelector(({ user }) => user.username);
   const [isPending, setIsPending] = useState(true);
 
   const dispatchTotal = useDispatch();
+  const dispatchModal = useDispatch();
+
+  const onFormSubmit = OnItemInfoFormSubmit();
 
   const openItemModal = (id) => {
     document.body.style.overflow = "hidden";
@@ -46,6 +97,24 @@ export default function Total() {
       document.body.style.overflow = "auto";
     else document.body.style.overflow = "hidden";
     dispatchTotal(toggleNewItemModal(!newItem));
+    dispatchTotal(
+      changeInitialItemData({
+        qr: ("00000" + (Number(data[data.length - 1]?.qr) + 1)).slice(-5),
+        name: "",
+        sredstvo: "",
+        type: "",
+        month: "",
+        year: "",
+        model: "",
+        sernom: "",
+        info: "",
+        status: "",
+        person: "",
+        storage: "",
+        addinfo: "",
+        owner: "",
+      })
+    );
   };
 
   const getAllData = async () => {
@@ -70,20 +139,26 @@ export default function Total() {
     getAllData();
   }, []);
 
+  const saveData = (e) => {
+    e.preventDefault();
+    onFormSubmit(closeItemModal);
+    dispatchModal(toggleSaveDialog({ visible: !dialogVisible }));
+  };
+
   return (
     <>
-      <div className="filters-bar">
+      <div className="secondary-navbar">
         <Button
           text="Сбросить фильтры"
           style="filters"
           action={getAllData}
           disabled={
-            sredstvo.length ||
-            type.length ||
-            status.length ||
-            person.length ||
-            storage.length ||
-            owner.length
+            sredstvoFilter.length ||
+            typeFilter.length ||
+            statusFilter.length ||
+            personFilter.length ||
+            storageFilter.length ||
+            ownerFilter.length
               ? false
               : true
           }
@@ -100,8 +175,48 @@ export default function Total() {
         visible={newItem}
         close={toggleNewItemVisible}
         header={"Добавить новый предмет"}
+        comparisonObject={{
+          qr: newItemQR,
+          name: newItemName,
+          sredstvo: newItemSredstvo,
+          type: newItemType,
+          month: newItemMonth,
+          year: newItemYear,
+          model: newItemModel,
+          sernom: newItemSernom,
+          info: newItemInfo,
+          status: newItemStatus,
+          person: newItemPerson,
+          storage: newItemStorage,
+          addinfo: newItemAddinfo,
+          owner: newItemOwner,
+        }}
       >
         <Form close={toggleNewItemVisible} />
+      </Modal>
+      <Modal
+        visible={itemInfo}
+        close={closeItemModal}
+        action={saveData}
+        header={`Изменить информацию о позиции с QR номером: ${itemInfoId}`}
+        comparisonObject={{
+          qr,
+          name,
+          sredstvo,
+          type,
+          month,
+          year,
+          model,
+          sernom,
+          person,
+          storage,
+          status,
+          info,
+          addinfo,
+          owner,
+        }}
+      >
+        <ItemInfo editId={itemInfoId} close={closeItemModal} />
       </Modal>
       <div className="page-content">
         <div className="sidebar">
@@ -138,13 +253,6 @@ export default function Total() {
               </table>
             </>
           )}
-          <Modal
-            visible={itemInfo}
-            close={closeItemModal}
-            header={`Изменить информацию о позиции с QR номером: ${itemInfoId}`}
-          >
-            <ItemInfo editId={itemInfoId} close={closeItemModal} />
-          </Modal>
         </div>
       </div>
     </>
