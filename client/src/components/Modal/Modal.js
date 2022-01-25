@@ -4,7 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import OnItemInfoFormSubmit from "routes/ItemInfo/onItemInfoFormSubmit";
 import { toggleSaveDialog } from "store/actions/modalAction";
 
-export default function Modal({ visible, close, header, children }) {
+export default function Modal({
+  visible,
+  close,
+  header,
+  children,
+  doNotCheckForChanges = false,
+}) {
   const onFormSubmit = OnItemInfoFormSubmit();
   const dispatchModal = useDispatch();
 
@@ -52,6 +58,11 @@ export default function Modal({ visible, close, header, children }) {
         className="md-container modal"
         onClick={(e) => {
           if (
+            e.target.className === "md-container modal" &&
+            doNotCheckForChanges === true
+          ) {
+            close();
+          } else if (
             e.target.className === "md-container modal" &&
             checkForChanges() === false
           ) {

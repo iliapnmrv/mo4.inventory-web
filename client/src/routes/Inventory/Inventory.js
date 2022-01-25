@@ -5,9 +5,16 @@ import Loading from "components/Loading/Loading";
 import Button from "components/Button/Button";
 import $api from "http/index.js";
 import FileUpload from "components/FileUpload/FileUpload";
+import Modal from "components/Modal/Modal";
+import { toggleAnalysisModal } from "store/actions/modalAction";
+import { useDispatch, useSelector } from "react-redux";
+import Analysis from "./Analysis/Analysis";
 
 export default function Inventory() {
   const [isPending, setIsPending] = useState(true);
+  const dispatch = useDispatch();
+
+  const { analysisModal } = useSelector((state) => state.modal);
 
   const [data, setData] = useState([]);
 
@@ -21,26 +28,26 @@ export default function Inventory() {
     fetchData();
   }, []);
 
-  const analyzeInventory = async () => {
-    const invAnalysis = await $api
-      .get(`inventory/analyze`)
-      .then(({ data }) => data);
-    const totalAnalysis = await $api
-      .get(`total/analyze`)
-      .then(({ data }) => data);
-    console.log(totalAnalysis, invAnalysis);
-  };
-
-  const showUsers = async () => {
-    const users = await $api.get(`auth/users`).then(({ data }) => data);
-    console.log(users);
+  const toggleAnalysis = () => {
+    if (document.body.style.overflow === "hidden")
+      document.body.style.overflow = "auto";
+    else document.body.style.overflow = "hidden";
+    console.log(analysisModal);
+    dispatch(toggleAnalysisModal(!analysisModal));
   };
 
   return (
     <>
-      <Button text="Проанализировать" action={showUsers} />
-      <Button text="Проанализировать" action={analyzeInventory} />
+      <Button text="Проанализировать" action={toggleAnalysis} />
       <FileUpload />
+      <Modal
+        visible={analysisModal}
+        close={toggleAnalysis}
+        header="Результаты анализа инвентаризации"
+        doNotCheckForChanges
+      >
+        <Analysis />
+      </Modal>
 
       <div className="flex">
         {isPending ? (

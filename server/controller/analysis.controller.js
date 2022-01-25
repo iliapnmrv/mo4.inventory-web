@@ -4,11 +4,11 @@ import AnalysisService from "../service/analysis-service.js";
 
 
 class analysisController {
-    async getAnalysisAll(req, res) {
+    async getAnalysisAllRawData(req, res) {
         const { authorization } = req.headers
         const totalAnalysisData = await AnalysisService.fetchRequest(`${SERVER}api/analysis/total`, authorization)
         const inventoryAnalysisData = await AnalysisService.fetchRequest(`${SERVER}api/analysis/inventory`, authorization);
-        console.log(inventoryAnalysisData);
+        // console.log(inventoryAnalysisData);
         const basis = inventoryAnalysisData.map((invObj) => {
             return {...invObj, kolvo: 0 }
         });
@@ -21,6 +21,33 @@ class analysisController {
             "inStock": joined,
             "listed": inventoryAnalysisData
         }
+        res.json(response)
+    }
+
+    async getAnalysisAll(req, res) {
+        const { authorization } = req.headers
+        const { listed, inStock } = await AnalysisService.fetchRequest(`${SERVER}api/analysis/rawData`, authorization)
+            // console.log(listed, inStock);
+
+        listed.forEach(o => {
+            delete Object.assign(o, {
+                "listedKolvo": o["kolvo"]
+            })["kolvo"];
+        })
+
+        const mergeByName = (a1, a2) =>
+            a1.map(itm => ({
+                ...a2.find((item) => (item.name === itm.name) && item),
+                ...itm
+            }));
+
+        const response = mergeByName(inStock, listed).map(item => {
+            if (!(item.hasOwnProperty('listedKolvo'))) {
+                return {...item, "listedKolvo": 0 }
+            }
+            return item
+        })
+
         res.json(response)
     }
 

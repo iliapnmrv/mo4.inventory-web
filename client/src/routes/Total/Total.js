@@ -11,7 +11,6 @@ import Button from "components/Button/Button";
 import $api from "http/index.js";
 import {
   changeItemInfoId,
-  toggleFiltersModal,
   toggleItemInfoModal,
   toggleNewItemModal,
 } from "store/actions/modalAction";
@@ -24,9 +23,7 @@ export default function Total() {
     initialItemData,
     filters: { sredstvo, type, status, person, storage, owner },
   } = useSelector((state) => state.total);
-  const { filtersModal, newItem, itemInfo, itemInfoId } = useSelector(
-    (state) => state.modal
-  );
+  const { newItem, itemInfo, itemInfoId } = useSelector((state) => state.modal);
   const { login, role } = useSelector(({ user }) => user.username);
   const [isPending, setIsPending] = useState(true);
 

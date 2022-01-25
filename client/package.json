@@ -21,6 +21,7 @@
         "react-router-dom": "^5.3.0",
         "react-scripts": "^5.0.0",
         "react-select": "^5.1.0",
+        "react-tabs": "^3.2.3",
         "redux": "^4.1.2",
         "redux-persist": "^6.0.0",
         "tar": "^6.1.11",
