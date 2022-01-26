@@ -195,7 +195,7 @@ export default function ItemInfo({ close, editId }) {
       {isPending ? (
         <Loading />
       ) : (
-        <div className="md-content">
+        <>
           <Analysis name={name} />
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="form-inputs">
@@ -427,7 +427,7 @@ export default function ItemInfo({ close, editId }) {
               </div>
             </>
           ) : null}
-        </div>
+        </>
       )}
     </div>
   );

@@ -28,12 +28,12 @@ export default function Dialog({
             </div>
           </div>
           <div className="dialog-buttons">
+            <Button text={DIALOGS[dialogType].confirmButton} action={action} />
             <Button
-              text={DIALOGS[dialogType].confirmButton}
+              text={DIALOGS[dialogType].cancelButton}
+              action={close}
               style="warning"
-              action={action}
             />
-            <Button text={DIALOGS[dialogType].cancelButton} action={close} />
           </div>
         </div>
       </div>

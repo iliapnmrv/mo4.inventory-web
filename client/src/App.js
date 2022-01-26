@@ -19,7 +19,7 @@ import {
   changeTypesData,
 } from "store/actions/infoAction";
 import { changeUserData } from "store/actions/userAction";
-import { toggleRegModal } from "store/actions/authAction";
+import { toggleLoginModal, toggleRegModal } from "store/actions/authAction";
 import Catalogs from "routes/Catalogs/Catalogs";
 
 function App() {
@@ -59,12 +59,12 @@ function App() {
           await AuthService.checkAuth();
         dispatchUser(changeUserData(user));
       } else {
-        dispatchAuth(toggleRegModal(true));
+        dispatchAuth(toggleLoginModal(true));
       }
     };
 
     checkLogin();
-  }, [token]);
+  }, []);
 
   return (
     <Router>

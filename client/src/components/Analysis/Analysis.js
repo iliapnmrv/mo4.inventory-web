@@ -12,7 +12,9 @@ export default function Analysis() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await $api.get(`analysis/${name}`).then(({ data }) => data);
+      const data = await $api
+        .post(`analysis/`, { name: name })
+        .then(({ data }) => data);
       setAvailability(data);
     };
 

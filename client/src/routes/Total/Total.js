@@ -17,6 +17,7 @@ import {
 } from "store/actions/modalAction";
 import {
   changeInitialItemData,
+  changeNewItemData,
   changeTotalData,
   setFilters,
 } from "store/actions/totalAction";
@@ -99,6 +100,24 @@ export default function Total() {
     dispatchTotal(toggleNewItemModal(!newItem));
     dispatchTotal(
       changeInitialItemData({
+        qr: ("00000" + (Number(data[data.length - 1]?.qr) + 1)).slice(-5),
+        name: "",
+        sredstvo: "",
+        type: "",
+        month: "",
+        year: "",
+        model: "",
+        sernom: "",
+        info: "",
+        status: "",
+        person: "",
+        storage: "",
+        addinfo: "",
+        owner: "",
+      })
+    );
+    dispatchTotal(
+      changeNewItemData({
         qr: ("00000" + (Number(data[data.length - 1]?.qr) + 1)).slice(-5),
         name: "",
         sredstvo: "",

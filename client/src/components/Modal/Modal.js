@@ -74,7 +74,7 @@ export default function Modal({
               &times;
             </div>
           </div>
-          {children}
+          <div className="md-content">{children}</div>
         </div>
       </div>
     </>

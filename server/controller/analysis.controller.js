@@ -51,10 +51,11 @@ class analysisController {
     }
 
     async getAnalysisOne(req, res) {
-        const { name } = req.params
+        const { name } = req.body
+        console.log("name", name);
         const { authorization } = req.headers
-        let totalAnalysisData = await AnalysisService.fetchRequest(`${SERVER}api/analysis/total/${name}`, authorization)
-        let [inventoryAnalysisData] = await AnalysisService.fetchRequest(`${SERVER}api/analysis/inventory/${name}`, authorization);
+        let totalAnalysisData = await AnalysisService.postFetchRequest(`${SERVER}api/analysis/total/`, name)
+        let [inventoryAnalysisData] = await AnalysisService.postFetchRequest(`${SERVER}api/analysis/inventory/`, name);
 
         if (!totalAnalysisData.length && !inventoryAnalysisData) {
             res.json("Предмета с таким наименованием не сущетсвует")
@@ -95,13 +96,14 @@ class analysisController {
         res.json(joinedAmount)
     }
     async getTotalOne(req, res) {
-        const { name } = req.params
+        const { name } = req.body
+        console.log("name", name);
         const [total] = await pool.query('SELECT name FROM total WHERE name = ?', [name])
         if (!total.length) res.status(404)
         res.json(total)
     }
     async getInventoryOne(req, res) {
-        const { name } = req.params
+        const { name } = req.body
         const [inv] = await pool.query('SELECT name, kolvo FROM inventory WHERE name = ?', [name])
         if (!inv.length) res.status(404)
         res.json(inv)
