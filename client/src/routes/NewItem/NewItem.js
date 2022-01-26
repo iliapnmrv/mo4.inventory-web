@@ -2,22 +2,17 @@ import React, { useEffect, useState } from "react";
 import Input from "components/Form/Input/Input";
 import SelectInput from "components/Form/Select/Select";
 import useForm from "hooks/useForm";
-import useNotification from "hooks/useNotification";
 import { useDispatch, useSelector } from "react-redux";
 import QR from "components/QR/QR";
 import $api from "http/index.js";
-import { changeTotalData } from "store/actions/totalAction";
+import NewItemSubmit from "./NewItemSubmit";
 
 export default function NewItem({ close }) {
   const { storages, statuses, sredstva, persons, types, owners } = useSelector(
     (state) => state.info
   );
-  const { login, role } = useSelector((state) => state.user.username);
   const { data, initialItemData } = useSelector((state) => state.total);
-  const dispatchTotal = useDispatch();
   const [sernomExists, setSernomExists] = useState(false);
-
-  const dispatch = useNotification();
 
   const {
     values: {
@@ -38,40 +33,31 @@ export default function NewItem({ close }) {
     },
     changeHandler,
     selectChangeHandler,
-  } = useForm({
-    qr: ("00000" + (Number(data[data.length - 1]?.qr) + 1)).slice(-5),
-    name: "",
-    sredstvo: "",
-    type: "",
-    month: "",
-    year: "",
-    model: "",
-    sernom: "",
-    info: "",
-    status: "",
-    person: "",
-    storage: "",
-    addinfo: "",
-    owner: "",
-  });
+  } = useForm(
+    {
+      qr: ("00000" + (Number(data[data.length - 1]?.qr) + 1)).slice(-5),
+      name: "",
+      sredstvo: "",
+      type: "",
+      month: "",
+      year: "",
+      model: "",
+      sernom: "",
+      info: "",
+      status: "",
+      person: "",
+      storage: "",
+      addinfo: "",
+      owner: "",
+    },
+    "newItem"
+  );
+  const onNewItemFormSubmit = NewItemSubmit();
 
-  console.log(initialItemData);
-  console.log({
-    qr,
-    name,
-    sredstvo,
-    type,
-    month,
-    year,
-    model,
-    sernom,
-    info,
-    status,
-    person,
-    storage,
-    addinfo,
-    owner,
-  });
+  const onSubmit = (e) => {
+    e.preventDefault();
+    onNewItemFormSubmit(close);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,86 +69,6 @@ export default function NewItem({ close }) {
     fetchData();
   }, [sernom]);
 
-  const onSubmitForm = async (e) => {
-    e.preventDefault();
-    try {
-      close();
-      const newItemMessage = await $api
-        .post(`total`, {
-          qr,
-          name,
-          sredstvo,
-          type,
-          month,
-          year,
-          model,
-          sernom,
-        })
-        .then(({ data }) => data);
-      const newInfoMessage = await $api
-        .post(`info/${qr}`, {
-          info,
-        })
-        .then(({ data }) => data);
-
-      const newStatusMessage = await $api
-        .post(`status/${qr}`, {
-          status,
-        })
-        .then(({ data }) => data);
-
-      const newPersonMessage = await $api
-        .post(`person/${qr}`, {
-          person,
-        })
-        .then(({ data }) => data);
-
-      const newStorageMessage = await $api
-        .post(`storage/${qr}`, {
-          storage,
-        })
-        .then(({ data }) => data);
-
-      const newAddinfoMessage = await $api
-        .post(`addinfo/${qr}`, {
-          addinfo,
-        })
-        .then(({ data }) => data);
-
-      const newOwnerMessage = await $api
-        .post(`owner/${qr}`, {
-          owner,
-        })
-        .then(({ data }) => data);
-
-      const newLogMessage = await $api
-        .post(`logs`, {
-          qr,
-          user: login,
-          text: "Предмет создан",
-        })
-        .then(({ data }) => data);
-
-      dispatch({
-        type: "SUCCESS",
-        message: newItemMessage,
-        title: "Успешно",
-      });
-
-      let newItem = { qr, name, sredstvo, type, month, year, model, sernom };
-      let newArr = [...data, newItem];
-
-      sortArr(newArr);
-      dispatchTotal(changeTotalData(newArr));
-    } catch (e) {
-      console.error(e.message);
-    }
-  };
-
-  function sortArr(arr) {
-    return arr.sort((a, b) => (a.qr > b.qr ? 1 : -1));
-  }
-
   return (
     <>
       {data[data.length - 1]?.qr && (
@@ -171,7 +77,7 @@ export default function NewItem({ close }) {
         </p>
       )}
       <div className="new_item__form">
-        <form className="form" id="newItem" onSubmit={(e) => onSubmitForm(e)}>
+        <form className="form" id="newItem" onSubmit={onSubmit}>
           <div className="form-inputs">
             <SelectInput
               required
@@ -179,7 +85,6 @@ export default function NewItem({ close }) {
               name="type"
               data={types}
               onSelectChange={selectChangeHandler}
-              onSelectReset={type}
             />
             <SelectInput
               required

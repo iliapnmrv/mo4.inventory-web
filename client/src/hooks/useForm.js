@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux";
 import { changeItemData, changeNewItemData, setFilters } from "store/actions/totalAction";
 
-const useForm = (initial) => {
+const useForm = (initial, formName = "itemData") => {
     const [values, setValues] = useState(initial)
     const dispatchTotal = useDispatch();
 
@@ -19,9 +19,16 @@ const useForm = (initial) => {
                 ...values,
                 [e.name]: e.value
             })
-            dispatchTotal(changeItemData({
-                [e.name]: e.value
-            }))
+            if (formName === "itemData") {
+                dispatchTotal(changeItemData({
+                    [e.name]: e.value
+                }))
+            } else {
+                dispatchTotal(changeNewItemData({
+                    [e.name]: e.value
+                }))
+            }
+
         },
         filtersChangeHandler: e => {
             dispatchTotal(setFilters({

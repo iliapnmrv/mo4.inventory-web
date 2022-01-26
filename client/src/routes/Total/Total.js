@@ -22,6 +22,7 @@ import {
   setFilters,
 } from "store/actions/totalAction";
 import OnItemInfoFormSubmit from "routes/ItemInfo/onItemInfoFormSubmit";
+import NewItemSubmit from "routes/NewItem/NewItemSubmit";
 
 export default function Total() {
   const {
@@ -80,6 +81,7 @@ export default function Total() {
   const dispatchModal = useDispatch();
 
   const onFormSubmit = OnItemInfoFormSubmit();
+  const onNewItemFormSubmit = NewItemSubmit();
 
   const openItemModal = (id) => {
     document.body.style.overflow = "hidden";
@@ -97,6 +99,7 @@ export default function Total() {
     if (document.body.style.overflow === "hidden")
       document.body.style.overflow = "auto";
     else document.body.style.overflow = "hidden";
+
     dispatchTotal(toggleNewItemModal(!newItem));
     dispatchTotal(
       changeInitialItemData({
@@ -163,6 +166,11 @@ export default function Total() {
     onFormSubmit(closeItemModal);
     dispatchModal(toggleSaveDialog({ visible: !dialogVisible }));
   };
+  const saveNewData = (e) => {
+    e.preventDefault();
+    onNewItemFormSubmit(toggleNewItemVisible);
+    dispatchModal(toggleSaveDialog({ visible: !dialogVisible }));
+  };
 
   return (
     <>
@@ -192,6 +200,7 @@ export default function Total() {
       </div>
       <Modal
         visible={newItem}
+        action={saveNewData}
         close={toggleNewItemVisible}
         header={"Добавить новый предмет"}
         comparisonObject={{

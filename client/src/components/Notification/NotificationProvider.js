@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import Notification from "./Notification";
-import "./Notifications.css";
+import "./Notifications.sass";
 
 export const NotificationContext = createContext();
 

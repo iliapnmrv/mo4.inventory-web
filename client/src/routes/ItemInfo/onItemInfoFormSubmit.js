@@ -151,7 +151,7 @@ const OnItemInfoFormSubmit = () => {
       dispatch({
         type: "SUCCESS",
         message: updatedTotal,
-        title: "Успешно",
+        title: "Обновлено",
       });
 
       let newItem = { qr, name, sredstvo, type, month, year, model, sernom };
