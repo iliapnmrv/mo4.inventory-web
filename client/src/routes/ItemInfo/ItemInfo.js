@@ -196,7 +196,7 @@ export default function ItemInfo({ close, editId }) {
         <Loading />
       ) : (
         <>
-          <Analysis name={name} />
+          <Analysis />
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="form-inputs">
               <Input

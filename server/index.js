@@ -4,10 +4,10 @@ import totalRouter from "./routes/total.routes.js";
 import infoRouter from "./routes/info.routes.js";
 import authRouter from "./routes/auth.routes.js";
 import logsRouter from "./routes/logs.routes.js";
+import catalogsRouter from "./routes/catalogs.routes.js";
 import analysisRouter from "./routes/analysis.routes.js";
 
 import cors from 'cors'
-import multer from 'multer'
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv'
 import { CLIENT, CLIENT_MOBILE, SERVER } from "./constants/constants.js";
@@ -33,6 +33,7 @@ app.use(isLoggedin)
 app.use('/api/inventory', inventoryRoutes)
 app.use('/api/total', totalRouter)
 app.use('/api/logs', logsRouter)
+app.use('/api/catalogs', catalogsRouter)
 app.use('/api', infoRouter)
 app.use(errorMiddleware)
 

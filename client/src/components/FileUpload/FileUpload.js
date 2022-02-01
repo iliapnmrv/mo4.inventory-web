@@ -1,14 +1,20 @@
 import axios from "axios";
 import Button from "components/Button/Button";
 import useNotification from "hooks/useNotification";
+import { customAxios } from "http";
+// import $api from "http";
 import { API_URL } from "http";
 import React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import "./FileUpload.sass";
 
 export default function FileUpload() {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
+  const { token } = useSelector(({ user }) => user);
+
+  const api = customAxios(null);
 
   console.log(selectedFile);
   const dispatch = useNotification();
@@ -23,11 +29,8 @@ export default function FileUpload() {
       const fileData = new FormData();
       fileData.append("csv", selectedFile);
 
-      const uploadData = await axios({
-        method: "post",
-        url: `${API_URL}inventory/upload`,
-        data: fileData,
-      })
+      const uploadData = await api
+        .post("inventory/upload", fileData)
         .then(({ data }) => data)
         .catch((err) => {
           console.log(err);

@@ -13,7 +13,8 @@ class inventoryController {
         try {
             await pool.query('TRUNCATE TABLE inventory')
             if (req.file == undefined) {
-                res.status(301).send("Ошибка при загрузке");
+                res.status(501).send("Ошибка при загрузке");
+                return
             }
 
             let filedata = req.file;

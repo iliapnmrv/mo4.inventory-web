@@ -7,13 +7,13 @@ export default function Analysis() {
   const [availability, setAvailability] = useState(null);
 
   const {
-    itemValues: { name },
+    itemValues: { name, model },
   } = useSelector((state) => state.total);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await $api
-        .post(`analysis/`, { name: name })
+        .post(`analysis/`, { name, model })
         .then(({ data }) => data);
       setAvailability(data);
     };

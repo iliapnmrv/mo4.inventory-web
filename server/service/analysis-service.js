@@ -15,7 +15,7 @@ class AnalysisService {
                     'Accept': 'application/json, text/plain, */*',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: body })
+                body: JSON.stringify(body)
             })
             .then(res => res.json())
             .then(data => data)

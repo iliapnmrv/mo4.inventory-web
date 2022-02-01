@@ -23,6 +23,10 @@ import {
 } from "store/actions/totalAction";
 import OnItemInfoFormSubmit from "routes/ItemInfo/onItemInfoFormSubmit";
 import NewItemSubmit from "routes/NewItem/NewItemSubmit";
+import Input from "components/Form/Input/Input";
+// get our fontawesome imports
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Total() {
   const {
@@ -76,6 +80,7 @@ export default function Total() {
   } = useSelector((state) => state.modal);
   const { login, role } = useSelector(({ user }) => user.username);
   const [isPending, setIsPending] = useState(true);
+  const [search, setSearch] = useState("");
 
   const dispatchTotal = useDispatch();
   const dispatchModal = useDispatch();
@@ -172,24 +177,48 @@ export default function Total() {
     dispatchModal(toggleSaveDialog({ visible: !dialogVisible }));
   };
 
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
   return (
     <>
       <div className="secondary-navbar">
-        <Button
-          text="Сбросить фильтры"
-          style="filters"
-          action={getAllData}
-          disabled={
-            sredstvoFilter.length ||
-            typeFilter.length ||
-            statusFilter.length ||
-            personFilter.length ||
-            storageFilter.length ||
-            ownerFilter.length
-              ? false
-              : true
-          }
-        />
+        <div
+          style={{
+            display: "flex",
+            "flex-direction": "row",
+            alignItems: "center",
+          }}
+        >
+          <Button
+            text="Сбросить фильтры"
+            style="filters"
+            action={getAllData}
+            disabled={
+              sredstvoFilter.length ||
+              typeFilter.length ||
+              statusFilter.length ||
+              personFilter.length ||
+              storageFilter.length ||
+              ownerFilter.length
+                ? false
+                : true
+            }
+          />
+          <div className="search-field">
+            <Input
+              placeholder="Поиск по документообороту..."
+              onChange={handleSearch}
+              value={search}
+              name="search"
+              required={false}
+            />
+          </div>
+          <label htmlFor="search" className="search-icon">
+            <FontAwesomeIcon icon={faSearch} />
+          </label>
+        </div>
+
         {role === "admin" && (
           <Button
             text="Новый элемент"
@@ -271,9 +300,26 @@ export default function Total() {
                 </thead>
                 {data.length ? (
                   <tbody>
-                    {data.map((row) => {
-                      return <Item openModal={openItemModal} data={row} />;
-                    })}
+                    {data
+                      .filter((item) => {
+                        return (
+                          item.name
+                            .toLowerCase()
+                            .includes(search.toLowerCase()) ||
+                          item.model
+                            .toLowerCase()
+                            .includes(search.toLowerCase()) ||
+                          item.qr
+                            .toLowerCase()
+                            .includes(search.toLowerCase()) ||
+                          item.sernom
+                            .toLowerCase()
+                            .includes(search.toLowerCase())
+                        );
+                      })
+                      .map((row) => {
+                        return <Item openModal={openItemModal} data={row} />;
+                      })}
                   </tbody>
                 ) : (
                   <div>Данные отсутствуют</div>

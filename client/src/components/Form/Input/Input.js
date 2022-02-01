@@ -2,6 +2,7 @@ import useForm from "hooks/useForm";
 import React from "react";
 
 export default function Input({
+  placeholder = "",
   span,
   type = "text",
   name,
@@ -18,13 +19,15 @@ export default function Input({
   return (
     <>
       <label className="form-item">
-        <span className={required && "required"}>{span}</span>
+        {span && <span className={required && "required"}>{span}</span>}
         <input
+          placeholder={placeholder}
           disabled={disabled}
           required={required}
           max={max}
           type={type}
           name={name}
+          id={name}
           value={value}
           onChange={onChange}
           onBlur={

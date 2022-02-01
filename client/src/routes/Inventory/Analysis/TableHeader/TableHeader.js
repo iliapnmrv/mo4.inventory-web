@@ -5,8 +5,8 @@ export default function TableHeader() {
     <thead>
       <tr key={9999}>
         <th>Наименование</th>
-        <th>В документообороте</th>
-        <th>В инвентаризации</th>
+        <th>В наличии</th>
+        <th>Числится</th>
       </tr>
     </thead>
   );

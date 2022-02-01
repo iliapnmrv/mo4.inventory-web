@@ -12,10 +12,12 @@ export const isLoggedin = (req, res, next) => {
         if (!token) {
             return next(ApiError.UnauthorizedError())
         }
+        console.log(token);
         const userData = tokenService.validateAccessToken(token)
         if (!userData) {
             return next(ApiError.UnauthorizedError())
         }
+        console.log(userData);
         req.user = userData
         next()
 

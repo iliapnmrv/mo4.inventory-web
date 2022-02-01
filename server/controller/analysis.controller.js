@@ -51,11 +51,11 @@ class analysisController {
     }
 
     async getAnalysisOne(req, res) {
-        const { name } = req.body
+        const { name, model } = req.body
         console.log("name", name);
         const { authorization } = req.headers
-        let totalAnalysisData = await AnalysisService.postFetchRequest(`${SERVER}api/analysis/total/`, name)
-        let [inventoryAnalysisData] = await AnalysisService.postFetchRequest(`${SERVER}api/analysis/inventory/`, name);
+        let totalAnalysisData = await AnalysisService.postFetchRequest(`${SERVER}api/analysis/total/`, { name, model })
+        let [inventoryAnalysisData] = await AnalysisService.postFetchRequest(`${SERVER}api/analysis/inventory/`, { name });
 
         if (!totalAnalysisData.length && !inventoryAnalysisData) {
             res.json("Предмета с таким наименованием не сущетсвует")
@@ -83,7 +83,14 @@ class analysisController {
     }
 
     async analyzeTotal(req, res) {
-        const [total] = await pool.query('SELECT name FROM total')
+        const [total] = await pool.query(`
+        SELECT 
+            case
+                when NAME = 'Не в учете'
+                    then (SELECT model)
+                    ELSE name
+            END AS name
+            FROM total`)
         total.forEach((invObj) => {
             invObj.kolvo = 1;
         });
@@ -96,9 +103,19 @@ class analysisController {
         res.json(joinedAmount)
     }
     async getTotalOne(req, res) {
-        const { name } = req.body
-        console.log("name", name);
-        const [total] = await pool.query('SELECT name FROM total WHERE name = ?', [name])
+        const { name, model } = req.body
+        let secondClause = ""
+        if (name == "Не в учете") {
+            secondClause = `AND model = "${model}"`
+        }
+        const [total] = await pool.query(`SELECT 
+        case
+            when name = "Не в учете"
+                then (SELECT model)
+            ELSE name
+        END AS name
+        FROM total WHERE NAME = ? ${secondClause}
+     `, [name])
         if (!total.length) res.status(404)
         res.json(total)
     }

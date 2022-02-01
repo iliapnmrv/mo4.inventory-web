@@ -1,3 +1,4 @@
+import Input from "components/Form/Input/Input";
 import $api from "http";
 import React, { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -6,7 +7,17 @@ import "./Analysis.sass";
 import TableHeader from "./TableHeader/TableHeader";
 
 export default function Analysis() {
-  const [analysis, setAnalysis] = useState([]); // в наличии
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const [analysis, setAnalysis] = useState([]);
+
+  console.log(analysis);
+  console.log(search);
+
   useEffect(() => {
     const getAnalysis = async () => {
       const invAnalysis = await $api.get(`analysis`).then(({ data }) => data);
@@ -20,6 +31,13 @@ export default function Analysis() {
 
   return (
     <>
+      <Input
+        span="Поиск по наименованию"
+        onChange={handleSearch}
+        value={search}
+        name="search"
+        required={false}
+      />
       <Tabs>
         <TabList>
           <Tab>Все данные</Tab>
@@ -33,15 +51,21 @@ export default function Analysis() {
             <TableHeader />
             {analysis.length ? (
               <tbody>
-                {analysis.map((item) => {
-                  return (
-                    <tr>
-                      <td>{item.name}</td>
-                      <td>{item.kolvo}</td>
-                      <td>{item.listedKolvo}</td>
-                    </tr>
-                  );
-                })}
+                {analysis
+                  .filter((item) => {
+                    return item.name
+                      .toLowerCase()
+                      .includes(search.toLowerCase());
+                  })
+                  .map((item) => {
+                    return (
+                      <tr>
+                        <td>{item.name}</td>
+                        <td>{item.kolvo}</td>
+                        <td>{item.listedKolvo}</td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             ) : (
               <div>Данные отсутствуют</div>
@@ -55,6 +79,11 @@ export default function Analysis() {
             {analysis.length ? (
               <tbody>
                 {analysis
+                  .filter((item) => {
+                    return item.name
+                      .toLowerCase()
+                      .includes(search.toLowerCase());
+                  })
                   .filter((item) => item.kolvo < item.listedKolvo)
                   .map((item) => {
                     return (
@@ -78,6 +107,11 @@ export default function Analysis() {
             {analysis.length ? (
               <tbody>
                 {analysis
+                  .filter((item) => {
+                    return item.name
+                      .toLowerCase()
+                      .includes(search.toLowerCase());
+                  })
                   .filter(
                     (item) =>
                       item.kolvo > item.listedKolvo && item.listedKolvo !== 0
@@ -104,6 +138,11 @@ export default function Analysis() {
             {analysis.length ? (
               <tbody>
                 {analysis
+                  .filter((item) => {
+                    return item.name
+                      .toLowerCase()
+                      .includes(search.toLowerCase());
+                  })
                   .filter((item) => item.listedKolvo === 0)
                   .map((item) => {
                     return (
