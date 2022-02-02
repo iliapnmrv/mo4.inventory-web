@@ -23,7 +23,7 @@ export default function ItemInfo({ close, editId }) {
   const { storages, statuses, sredstva, persons, types, owners } = useSelector(
     (state) => state.info
   );
-  const { login, role } = useSelector((state) => state.user.username);
+  const { login, role = "user" } = useSelector((state) => state.user.username);
 
   const { data } = useSelector((state) => state.total);
   const {
@@ -200,7 +200,7 @@ export default function ItemInfo({ close, editId }) {
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="form-inputs">
               <Input
-                disabled={ACCESS_RIGHTS[role].qr}
+                disabled={ACCESS_RIGHTS[role]?.qr}
                 span="Введите номер QR кода"
                 name="qr"
                 type="number"
@@ -208,7 +208,7 @@ export default function ItemInfo({ close, editId }) {
                 onChange={changeHandler}
               />
               <Input
-                disabled={ACCESS_RIGHTS[role].name}
+                disabled={ACCESS_RIGHTS[role]?.name}
                 span="Введите наименование по бухучету"
                 name="name"
                 value={name}
@@ -218,7 +218,7 @@ export default function ItemInfo({ close, editId }) {
             <div className="form-inputs">
               {typesDefault ? (
                 <SelectInput
-                  disabled={ACCESS_RIGHTS[role].type}
+                  disabled={ACCESS_RIGHTS[role]?.type}
                   span="Выберите тип"
                   name="type"
                   data={types}
@@ -228,7 +228,7 @@ export default function ItemInfo({ close, editId }) {
               ) : null}
               {sredstvaDefault ? (
                 <SelectInput
-                  disabled={ACCESS_RIGHTS[role].sredstvo}
+                  disabled={ACCESS_RIGHTS[role]?.sredstvo}
                   span="Выберите средство"
                   name="sredstvo"
                   data={sredstva}
@@ -240,7 +240,7 @@ export default function ItemInfo({ close, editId }) {
               statusesDefault != null &&
               statusesDefault !== "" ? (
                 <SelectInput
-                  disabled={ACCESS_RIGHTS[role].status}
+                  disabled={ACCESS_RIGHTS[role]?.status}
                   span="Выберите статус"
                   name="status"
                   data={statuses}
@@ -250,7 +250,7 @@ export default function ItemInfo({ close, editId }) {
               ) : null}
               {statusesDefault === "Not found" ? (
                 <SelectInput
-                  disabled={ACCESS_RIGHTS[role].status}
+                  disabled={ACCESS_RIGHTS[role]?.status}
                   span="Выберите статус"
                   name="status"
                   data={statuses}
@@ -261,7 +261,7 @@ export default function ItemInfo({ close, editId }) {
               personsDefault != null &&
               personsDefault !== "" ? (
                 <SelectInput
-                  disabled={ACCESS_RIGHTS[role].person}
+                  disabled={ACCESS_RIGHTS[role]?.person}
                   span="Выберите МОЛ"
                   name="person"
                   data={persons}
@@ -271,7 +271,7 @@ export default function ItemInfo({ close, editId }) {
               ) : null}
               {personsDefault === "Not found" ? (
                 <SelectInput
-                  disabled={ACCESS_RIGHTS[role].person}
+                  disabled={ACCESS_RIGHTS[role]?.person}
                   span="Выберите МОЛ"
                   name="person"
                   data={persons}
@@ -284,7 +284,7 @@ export default function ItemInfo({ close, editId }) {
               storagesDefault != null &&
               storagesDefault !== "" ? (
                 <SelectInput
-                  disabled={ACCESS_RIGHTS[role].storage}
+                  disabled={ACCESS_RIGHTS[role]?.storage}
                   span="Выберите местоположение"
                   name="storage"
                   data={storages}
@@ -294,7 +294,7 @@ export default function ItemInfo({ close, editId }) {
               ) : null}
               {storagesDefault === "Not found" ? (
                 <SelectInput
-                  disabled={ACCESS_RIGHTS[role].storage}
+                  disabled={ACCESS_RIGHTS[role]?.storage}
                   span="Выберите местоположение"
                   name="storage"
                   data={storages}
@@ -303,7 +303,7 @@ export default function ItemInfo({ close, editId }) {
               ) : null}
 
               <Input
-                disabled={ACCESS_RIGHTS[role].month}
+                disabled={ACCESS_RIGHTS[role]?.month}
                 span="Месяц ввода"
                 type="number"
                 name="month"
@@ -311,7 +311,7 @@ export default function ItemInfo({ close, editId }) {
                 onChange={changeHandler}
               />
               <Input
-                disabled={ACCESS_RIGHTS[role].year}
+                disabled={ACCESS_RIGHTS[role]?.year}
                 span="Год ввода в эксплуатацию"
                 type="number"
                 name="year"
@@ -324,7 +324,7 @@ export default function ItemInfo({ close, editId }) {
               ownersDefault != null &&
               ownersDefault !== "" ? (
                 <SelectInput
-                  disabled={ACCESS_RIGHTS[role].owner}
+                  disabled={ACCESS_RIGHTS[role]?.owner}
                   span="Выберите владельца"
                   name="owner"
                   data={owners}
@@ -334,7 +334,7 @@ export default function ItemInfo({ close, editId }) {
               ) : null}
               {ownersDefault === "Not found" ? (
                 <SelectInput
-                  disabled={ACCESS_RIGHTS[role].owner}
+                  disabled={ACCESS_RIGHTS[role]?.owner}
                   span="Выберите владельца"
                   name="owner"
                   data={owners}
@@ -342,14 +342,14 @@ export default function ItemInfo({ close, editId }) {
                 />
               ) : null}
               <Input
-                disabled={ACCESS_RIGHTS[role].model}
+                disabled={ACCESS_RIGHTS[role]?.model}
                 span="Модель реальная"
                 name="model"
                 value={model}
                 onChange={changeHandler}
               />
               <Input
-                disabled={ACCESS_RIGHTS[role].sernom}
+                disabled={ACCESS_RIGHTS[role]?.sernom}
                 span="Серийный номер"
                 name="sernom"
                 value={sernom}
@@ -357,14 +357,14 @@ export default function ItemInfo({ close, editId }) {
               />
             </div>
             <Input
-              disabled={ACCESS_RIGHTS[role].info}
+              disabled={ACCESS_RIGHTS[role]?.info}
               span="Примечания"
               name="info"
               value={info}
               onChange={changeHandler}
             />
             <Input
-              disabled={ACCESS_RIGHTS[role].addinfo}
+              disabled={ACCESS_RIGHTS[role]?.addinfo}
               span="Дополнительная информация"
               name="addinfo"
               value={addinfo}

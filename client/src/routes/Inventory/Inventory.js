@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Inventory.css";
-import useNotification from "hooks/useNotification";
+// import useNotification from "hooks/useNotification";
 import Loading from "components/Loading/Loading";
 import Button from "components/Button/Button";
 import $api from "http/index.js";
@@ -17,12 +17,15 @@ export default function Inventory() {
   const { analysisModal } = useSelector((state) => state.modal);
 
   const [data, setData] = useState([]);
+  const [lastInventory, setLastInventory] = useState([]);
+  console.log(lastInventory);
 
   useEffect(() => {
     const fetchData = async () => {
+      await $api.get(`inventory`).then(({ data }) => setData(data));
       await $api
-        .get(`inventory`)
-        .then(({ data }) => setData(data))
+        .get(`inventory/lastInventory`)
+        .then(({ data }) => setLastInventory(data))
         .finally(setIsPending(false));
     };
     fetchData();
@@ -44,7 +47,7 @@ export default function Inventory() {
           action={toggleAnalysis}
           style="filters"
         />
-        <FileUpload />
+        <FileUpload lastInventory={lastInventory} />
       </div>
 
       <Modal

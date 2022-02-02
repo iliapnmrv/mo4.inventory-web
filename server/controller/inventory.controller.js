@@ -1,5 +1,9 @@
 import pool from "../db.js"
+import { readdir } from 'fs/promises';
 import csvtojson from 'csvtojson'
+import { statSync } from "fs";
+import fs from 'fs'
+import path from 'path'
 class inventoryController {
     async getInventory(req, res) {
         const [inv] = await pool.query('SELECT * FROM inventory')
@@ -8,6 +12,20 @@ class inventoryController {
         } else {
             res.json(null)
         }
+    }
+    async getLastInventory(req, res) {
+        const getMostRecentFile = (dir) => {
+            const files = orderReccentFiles(dir);
+            return files.length ? files[0] : undefined;
+        };
+
+        const orderReccentFiles = (dir) => {
+            return fs.readdirSync(dir)
+                .filter((file) => fs.lstatSync(path.join(dir, file)).isFile())
+                .map((file) => ({ file, mtime: fs.lstatSync(path.join(dir, file)).mtime }))
+                .sort((a, b) => b.mtime.getTime() - a.mtime.getTime());
+        };
+        res.json(getMostRecentFile('public/inventory'))
     }
     async uploadInventory(req, res) {
         try {

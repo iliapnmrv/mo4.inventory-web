@@ -1,23 +1,79 @@
 import pool from "../db.js"
+import catalogService from "../service/catalog-service.js"
 
 class catalogsController {
-    async setStatus(req, res) {}
-    async setStorage(req, res) {}
-    async setPerson(req, res) {}
+    async deleteStatus(req, res) {
+        try {
+            const { id } = req.params
+            const statusData = await catalogService.deleteCalatog(id, "status")
+            res.json(statusData).status(200)
+        } catch (e) {
+            res.json(e.message)
+        }
+    }
+    async deleteStorage(req, res) {
+        try {
+            const { id } = req.params
+            const storageData = await catalogService.deleteCalatog(id, "storage")
+            res.json(storageData).status(200)
+        } catch (e) {
+            res.json(e.message)
+        }
+    }
+    async deletePerson(req, res) {
+        try {
+            const { id } = req.params
+            const personData = await catalogService.deleteCalatog(id, "person")
+            res.json(personData).status(200)
+        } catch (e) {
+            res.json(e.message)
+        }
+    }
+    async deleteOwner(req, res) {
+        try {
+            const { id } = req.params
+            const ownerData = await catalogService.deleteCalatog(id, "owner")
+            res.json(ownerData).status(200)
+        } catch (e) {
+            res.json(e.message)
+        }
+    }
+    async setStatus(req, res) {
+        try {
+            const { id } = req.params
+            const { status } = req.body
+            const statusData = await catalogService.setCalatog(id, status, "status")
+            res.json(statusData).status(200)
+        } catch (e) {
+            res.json(e.message)
+        }
+    }
+    async setStorage(req, res) {
+        try {
+            const { id } = req.params
+            const { storage } = req.body
+            const storageData = await catalogService.setCalatog(id, storage, "storage")
+            res.json(storageData).status(200)
+        } catch (e) {
+            res.json(e.message)
+        }
+    }
+    async setPerson(req, res) {
+        try {
+            const { id } = req.params
+            const { person } = req.body
+            const personData = await catalogService.setCalatog(id, person, "person")
+            res.json(personData).status(200)
+        } catch (e) {
+            res.json(e.message)
+        }
+    }
     async setOwner(req, res) {
         try {
             const { id } = req.params
             const { owner } = req.body
-
-            if (owner) {
-                const [newOwner] = await pool.query(
-                    `INSERT INTO owners (owner_qr, owner) 
-                    VALUES (?, ?)
-                    ON DUPLICATE KEY UPDATE owner = ?`, [id, owner, owner]
-                )
-                return res.json(newOwner).status(200)
-            }
-            res.json('Отсутствует информация о владельце').status(200)
+            const ownerData = await catalogService.setCalatog(id, owner, "owner")
+            res.json(ownerData).status(200)
         } catch (e) {
             res.json(e.message)
         }

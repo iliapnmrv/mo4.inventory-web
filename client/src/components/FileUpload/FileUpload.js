@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import "./FileUpload.sass";
 
-export default function FileUpload() {
+export default function FileUpload({ lastInventory }) {
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
   const { token } = useSelector(({ user }) => user);
@@ -79,6 +79,7 @@ export default function FileUpload() {
           type="file"
         />
         <Button text="Загрузить" action={handleSubmit} style="filters" />
+        <span>{lastInventory?.file}</span>
       </div>
     </>
   );
