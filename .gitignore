@@ -9,6 +9,7 @@ uploads/
 
 # server
 /server/db.js
+/server/public/inventory
 /.pnp
 .pnp.js
 
