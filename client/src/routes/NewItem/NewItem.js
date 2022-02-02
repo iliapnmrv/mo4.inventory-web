@@ -100,8 +100,6 @@ export default function NewItem({ close }) {
               data={statuses}
               onSelectChange={selectChangeHandler}
             />
-          </div>
-          <div className="form-inputs">
             <SelectInput
               required
               span="Выберите МОЛ"
@@ -109,6 +107,8 @@ export default function NewItem({ close }) {
               data={persons}
               onSelectChange={selectChangeHandler}
             />
+          </div>
+          <div className="form-inputs">
             <SelectInput
               required
               span="Выберите владельца"
@@ -134,13 +134,6 @@ export default function NewItem({ close }) {
               formName="newItem"
             />
             <Input
-              span="Наименование по бухучету"
-              name="name"
-              value={name}
-              onChange={changeHandler}
-              formName="newItem"
-            />
-            <Input
               span="Месяц ввода"
               type="number"
               name="month"
@@ -149,8 +142,6 @@ export default function NewItem({ close }) {
               onChange={changeHandler}
               formName="newItem"
             />
-          </div>
-          <div className="form-inputs">
             <Input
               span="Год ввода в эксплуатацию"
               type="number"
@@ -160,6 +151,18 @@ export default function NewItem({ close }) {
               onChange={changeHandler}
               formName="newItem"
             />
+          </div>
+
+          <div className="form-inputs">
+            <Input
+              span="Наименование по бухучету"
+              name="name"
+              value={name}
+              onChange={changeHandler}
+              formName="newItem"
+            />
+          </div>
+          <div className="form-inputs">
             <Input
               span="Модель реальная"
               name="model"

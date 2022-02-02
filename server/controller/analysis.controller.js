@@ -90,7 +90,10 @@ class analysisController {
                     then (SELECT model)
                     ELSE name
             END AS name
-            FROM total`)
+        FROM total
+            LEFT JOIN persons
+                ON total.qr = persons.person_qr 
+            WHERE (persons.person = 1 OR persons.person IS NULL)`)
         total.forEach((invObj) => {
             invObj.kolvo = 1;
         });
@@ -108,13 +111,17 @@ class analysisController {
         if (name == "Не в учете") {
             secondClause = `AND model = "${model}"`
         }
-        const [total] = await pool.query(`SELECT 
-        case
-            when name = "Не в учете"
-                then (SELECT model)
-            ELSE name
-        END AS name
-        FROM total WHERE NAME = ? ${secondClause}
+        const [total] = await pool.query(`
+        SELECT 
+            case
+                when name = "Не в учете"
+                    then (SELECT model)
+                ELSE name
+            END AS name
+        FROM TOTAL
+            LEFT JOIN persons
+                ON total.qr = persons.person_qr 
+            WHERE (persons.person = 1 OR persons.person IS NULL) AND (NAME = ? ${secondClause})
      `, [name])
         if (!total.length) res.status(404)
         res.json(total)

@@ -208,10 +208,19 @@ export default function ItemInfo({ close, editId }) {
                 onChange={changeHandler}
               />
               <Input
-                disabled={ACCESS_RIGHTS[role]?.name}
-                span="Введите наименование по бухучету"
-                name="name"
-                value={name}
+                disabled={ACCESS_RIGHTS[role]?.month}
+                span="Месяц ввода"
+                type="number"
+                name="month"
+                value={month}
+                onChange={changeHandler}
+              />
+              <Input
+                disabled={ACCESS_RIGHTS[role]?.year}
+                span="Год ввода в эксплуатацию"
+                type="number"
+                name="year"
+                value={year}
                 onChange={changeHandler}
               />
             </div>
@@ -301,25 +310,6 @@ export default function ItemInfo({ close, editId }) {
                   onSelectChange={selectChangeHandler}
                 />
               ) : null}
-
-              <Input
-                disabled={ACCESS_RIGHTS[role]?.month}
-                span="Месяц ввода"
-                type="number"
-                name="month"
-                value={month}
-                onChange={changeHandler}
-              />
-              <Input
-                disabled={ACCESS_RIGHTS[role]?.year}
-                span="Год ввода в эксплуатацию"
-                type="number"
-                name="year"
-                value={year}
-                onChange={changeHandler}
-              />
-            </div>
-            <div className="form-inputs">
               {ownersDefault !== "Not found" &&
               ownersDefault != null &&
               ownersDefault !== "" ? (
@@ -341,6 +331,18 @@ export default function ItemInfo({ close, editId }) {
                   onSelectChange={selectChangeHandler}
                 />
               ) : null}
+            </div>
+            <div className="form-inputs">
+              <Input
+                disabled={ACCESS_RIGHTS[role]?.name}
+                span="Введите наименование по бухучету"
+                name="name"
+                value={name}
+                onChange={changeHandler}
+              />
+            </div>
+
+            <div className="form-inputs">
               <Input
                 disabled={ACCESS_RIGHTS[role]?.model}
                 span="Модель реальная"
@@ -356,20 +358,25 @@ export default function ItemInfo({ close, editId }) {
                 onChange={changeHandler}
               />
             </div>
-            <Input
-              disabled={ACCESS_RIGHTS[role]?.info}
-              span="Примечания"
-              name="info"
-              value={info}
-              onChange={changeHandler}
-            />
-            <Input
-              disabled={ACCESS_RIGHTS[role]?.addinfo}
-              span="Дополнительная информация"
-              name="addinfo"
-              value={addinfo}
-              onChange={changeHandler}
-            />
+            <div className="form-inputs">
+              <Input
+                disabled={ACCESS_RIGHTS[role]?.info}
+                span="Примечания"
+                name="info"
+                value={info}
+                onChange={changeHandler}
+              />
+            </div>
+            <div className="form-inputs">
+              <Input
+                disabled={ACCESS_RIGHTS[role]?.addinfo}
+                span="Дополнительная информация"
+                name="addinfo"
+                value={addinfo}
+                onChange={changeHandler}
+              />
+            </div>
+
             <div className="buttons">
               <Button
                 text="Сохранить"
