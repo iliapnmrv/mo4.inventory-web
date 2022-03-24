@@ -69,6 +69,7 @@ export default function NewItem({ close }) {
           name: "qr",
         },
       });
+      setLastQR(lastQR[0].qr);
     };
     getLastQR();
   }, []);
@@ -87,7 +88,9 @@ export default function NewItem({ close }) {
 
   return (
     <>
-      {lastQR && <p className="table-info">Последняя позиция QR : {lastQR}</p>}
+      {lastQR ? (
+        <p className="table-info">Последняя позиция QR : {lastQR}</p>
+      ) : null}
       <div className="new_item__form">
         <form className="form" id="newItem" onSubmit={onSubmit}>
           <div className="form-inputs">
