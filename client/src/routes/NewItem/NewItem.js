@@ -13,6 +13,7 @@ export default function NewItem({ close }) {
   );
   const { data, initialItemData } = useSelector((state) => state.total);
   const [sernomExists, setSernomExists] = useState(false);
+  const [lastQR, setLastQR] = useState(0);
 
   const {
     values: {
@@ -35,7 +36,7 @@ export default function NewItem({ close }) {
     selectChangeHandler,
   } = useForm(
     {
-      qr: ("00000" + (Number(data[data.length - 1]?.qr) + 1)).slice(-5),
+      qr: ("00000" + (Number(lastQR) + 1)).slice(-5),
       name: "",
       sredstvo: "",
       type: "",
@@ -60,6 +61,19 @@ export default function NewItem({ close }) {
   };
 
   useEffect(() => {
+    const getLastQR = async () => {
+      const { data: lastQR } = await $api.get("total/getLastQR");
+      changeHandler({
+        target: {
+          value: ("00000" + (Number(lastQR[0].qr) + 1)).slice(-5),
+          name: "qr",
+        },
+      });
+    };
+    getLastQR();
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       const fetchedData = await $api
         .get(`total/checkSerialNum/${sernom}`)
@@ -69,13 +83,11 @@ export default function NewItem({ close }) {
     fetchData();
   }, [sernom]);
 
+  console.log(("00000" + (Number(lastQR) + 1)).slice(-5));
+
   return (
     <>
-      {data[data.length - 1]?.qr && (
-        <p className="table-info">
-          Последняя позиция QR : {data[data.length - 1]?.qr}
-        </p>
-      )}
+      {lastQR && <p className="table-info">Последняя позиция QR : {lastQR}</p>}
       <div className="new_item__form">
         <form className="form" id="newItem" onSubmit={onSubmit}>
           <div className="form-inputs">

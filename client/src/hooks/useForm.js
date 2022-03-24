@@ -9,6 +9,7 @@ const useForm = (initial, formName = "itemData") => {
     return {
         values,
         changeHandler: e => {
+            // console.log(e);
             setValues({
                 ...values,
                 [e.target.name]: e.target.value

@@ -26,6 +26,12 @@ class totalController {
             res.json(null)
         }
     }
+
+    async getLast(req, res) {
+        const [all] = await pool.query(`
+        SELECT MAX(qr) as qr FROM total`)
+        res.json(all)
+    }
     async analyzeTotalOne(req, res) {
         const [inv] = await pool.query('SELECT name FROM total')
         if (inv.length) {
