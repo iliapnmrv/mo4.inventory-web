@@ -81,6 +81,7 @@ export default function Total() {
   const { login, role } = useSelector(({ user }) => user.username);
   const [isPending, setIsPending] = useState(true);
   const [search, setSearch] = useState("");
+  const [showPlaces, setShowPlaces] = useState(false);
 
   const dispatchTotal = useDispatch();
   const dispatchModal = useDispatch();
@@ -218,14 +219,22 @@ export default function Total() {
             <FontAwesomeIcon icon={faSearch} />
           </label>
         </div>
-
-        {role === "admin" && (
-          <Button
-            text="Новый элемент"
-            style="filters"
-            action={toggleNewItemVisible}
-          />
-        )}
+        <div>
+          <label style={{ marginRight: "10px" }}>
+            <input
+              type="checkbox"
+              onChange={() => setShowPlaces(!showPlaces)}
+            />
+            Показать местоположения
+          </label>
+          {role === "admin" && (
+            <Button
+              text="Новый элемент"
+              style="filters"
+              action={toggleNewItemVisible}
+            />
+          )}
+        </div>
       </div>
       <Modal
         visible={newItem}
@@ -293,7 +302,11 @@ export default function Total() {
                     <th>Тип</th>
                     <th>Месяц ввода</th>
                     <th>Год ввода</th>
-                    <th>Наименование по бухучету</th>
+                    <th>
+                      {showPlaces
+                        ? "Местоположение"
+                        : "Наименование по бухучету"}
+                    </th>
                     <th>Модель реальная</th>
                     <th>Серийный номер</th>
                   </tr>
@@ -318,7 +331,13 @@ export default function Total() {
                         );
                       })
                       .map((row) => {
-                        return <Item openModal={openItemModal} data={row} />;
+                        return (
+                          <Item
+                            openModal={openItemModal}
+                            data={row}
+                            showPlaces={showPlaces}
+                          />
+                        );
                       })}
                   </tbody>
                 ) : (

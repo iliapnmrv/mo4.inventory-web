@@ -2,8 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import "./Item.css";
 
-export default function Item({ openModal, data }) {
-  const { sredstva, types } = useSelector((state) => state.info);
+export default function Item({ openModal, data, showPlaces }) {
+  const { sredstva, types, storages } = useSelector((state) => state.info);
+  console.log(data);
   return (
     <>
       <tr data-id={data?.qr} key={data?.qr} onClick={() => openModal(data?.qr)}>
@@ -12,7 +13,7 @@ export default function Item({ openModal, data }) {
         <td>{types[data.type - 1]?.label}</td>
         <td>{data?.month}</td>
         <td>{data?.year}</td>
-        <td>{data?.name}</td>
+        <td>{showPlaces ? storages[data.storage - 1]?.label : data?.name}</td>
         <td>{data?.model}</td>
         <td>{data?.sernom}</td>
       </tr>
