@@ -9,7 +9,7 @@ uploads/
 /client/.env
 
 # server
-/server/db.js
+/server
 /server/public/inventory
 /.pnp
 .pnp.js
