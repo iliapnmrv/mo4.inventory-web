@@ -78,6 +78,8 @@ export default function Total() {
     itemInfo,
     itemInfoId,
   } = useSelector((state) => state.modal);
+
+  console.log(data);
   const { login, role } = useSelector(({ user }) => user.username);
   const [isPending, setIsPending] = useState(true);
   const [search, setSearch] = useState("");
@@ -194,7 +196,10 @@ export default function Total() {
           <Button
             text="Сбросить фильтры"
             style="filters"
-            action={getAllData}
+            action={() => {
+              getAllData();
+              setSearch("");
+            }}
             disabled={
               sredstvoFilter.length ||
               typeFilter.length ||
@@ -327,7 +332,10 @@ export default function Total() {
                             .includes(search.toLowerCase()) ||
                           item.sernom
                             .toLowerCase()
-                            .includes(search.toLowerCase())
+                            .includes(search.toLowerCase()) ||
+                          item?.info
+                            ?.toLowerCase()
+                            ?.includes(search.toLowerCase())
                         );
                       })
                       .map((row) => {

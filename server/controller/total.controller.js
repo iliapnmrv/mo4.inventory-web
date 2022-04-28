@@ -152,6 +152,10 @@ class totalController {
                     ON total.qr = persons.person_qr
                 LEFT JOIN owners
                     ON total.qr = owners.owner_qr
+                LEFT JOIN info
+                    ON total.qr = info.info_qr
+                LEFT JOIN additional_info
+                    ON total.qr = additional_info.addinfo_qr
                 ${whereClause}
                 ORDER BY total.qr ASC
             `)
@@ -176,7 +180,12 @@ class totalController {
 
     async getAll(req, res) {
         const [all] = await pool.query(`
-        SELECT * FROM total ORDER BY total.qr ASC`)
+        SELECT * FROM total 
+            LEFT JOIN info
+                ON total.qr = info.info_qr
+            LEFT JOIN additional_info
+                ON total.qr = additional_info.addinfo_qr 
+        ORDER BY total.qr ASC`)
         res.json(all)
     }
 
