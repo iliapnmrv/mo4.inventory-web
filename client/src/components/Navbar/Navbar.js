@@ -10,7 +10,7 @@ export default function Navbar() {
   const dispatchUser = useDispatch();
   const dispatchAuth = useDispatch();
 
-  const { login, role } = useSelector((state) => state.user.username);
+  const { role } = useSelector((state) => state.user.username);
 
   const handleLogout = () => {
     AuthService.logout();

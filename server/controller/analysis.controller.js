@@ -135,3 +135,9 @@ class analysisController {
 }
 
 export default new analysisController
+
+// SELECT storages.storage
+
+// FROM storage_catalog RIGHT JOIN storages ON storages.storage = storage_catalog.storage_id
+
+// WHERE (((storages.storage) Is Null)total);
