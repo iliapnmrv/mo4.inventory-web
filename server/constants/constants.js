@@ -1,6 +1,4 @@
-export const SERVER = process.env.SERVER
-export const CLIENT = process.env.CLIENT
-export const CLIENT_MOBILE = process.env.CLIENT_MOBILE
+export const SERVER = "http://mo4-it5:8000/"
 
 export const catalogsNames = {
     storages: "storage",

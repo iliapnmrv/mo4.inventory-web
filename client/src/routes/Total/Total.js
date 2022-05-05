@@ -80,7 +80,7 @@ export default function Total() {
   } = useSelector((state) => state.modal);
 
   console.log(data);
-  const { login, role } = useSelector(({ user }) => user.username);
+  const { username } = useSelector(({ user }) => user);
   const [isPending, setIsPending] = useState(true);
   const [search, setSearch] = useState("");
   const [showPlaces, setShowPlaces] = useState(false);
@@ -232,7 +232,7 @@ export default function Total() {
             />
             Показать местоположения
           </label>
-          {role === "admin" && (
+          {username?.role === "admin" && (
             <Button
               text="Новый элемент"
               style="filters"

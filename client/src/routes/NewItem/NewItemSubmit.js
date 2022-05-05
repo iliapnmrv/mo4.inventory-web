@@ -7,7 +7,7 @@ import { changeTotalData } from "store/actions/totalAction";
 const NewItemSubmit = () => {
   const dispatch = useNotification();
   const dispatchTotal = useDispatch();
-  const { login } = useSelector((state) => state.user.username);
+  const { username } = useSelector((state) => state.user);
 
   const {
     data,
@@ -83,7 +83,7 @@ const NewItemSubmit = () => {
       await $api
         .post(`logs`, {
           qr,
-          user: login,
+          user: username?.login,
           text: "Предмет создан",
         })
         .then(({ data }) => data);

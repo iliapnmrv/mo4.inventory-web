@@ -10,7 +10,7 @@ export default function Navbar() {
   const dispatchUser = useDispatch();
   const dispatchAuth = useDispatch();
 
-  const { role } = useSelector((state) => state.user.username);
+  const { username } = useSelector(({ user }) => user);
 
   const handleLogout = () => {
     AuthService.logout();
@@ -27,7 +27,7 @@ export default function Navbar() {
           <li>
             <Link to="/inventory">Инвентаризация</Link>
           </li>
-          {role === "admin" ? (
+          {username?.role === "admin" ? (
             <li>
               <Link to="/catalogs">Справочники</Link>
             </li>

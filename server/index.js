@@ -10,16 +10,15 @@ import analysisRouter from "./routes/analysis.routes.js";
 import cors from 'cors'
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv'
-import { CLIENT, CLIENT_MOBILE, SERVER } from "./constants/constants.js";
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
 import errorMiddleware from "./middlewares/error.middleware.js";
 import { isLoggedin } from "./middlewares/auth.middleware.js";
 
-dotenv.config()
 
 const app = express()
 
 app.use(cors({
-    origin: { CLIENT, CLIENT_MOBILE, SERVER },
+    origin: { CLIENT: process.env.CLIENT, CLIENT_MOBILE: process.env.CLIENT_MOBILE, SERVER: process.env.SERVER },
     credentials: true
 }))
 

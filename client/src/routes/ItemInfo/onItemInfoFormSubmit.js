@@ -7,7 +7,7 @@ import { changeTotalData } from "store/actions/totalAction";
 const OnItemInfoFormSubmit = () => {
   const dispatch = useNotification();
   const dispatchTotal = useDispatch();
-  const { login } = useSelector((state) => state.user.username);
+  const { username } = useSelector((state) => state.user);
 
   const {
     data,
@@ -119,7 +119,7 @@ const OnItemInfoFormSubmit = () => {
 
       const updatedLogs = await $api.post(`logs/`, {
         qr,
-        user: login,
+        user: username?.login,
         text: logs.slice(0, -1),
       });
 

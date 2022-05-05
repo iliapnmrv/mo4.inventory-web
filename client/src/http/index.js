@@ -14,16 +14,14 @@ export const customAxios = (contentType = "") => {
     if (contentType == null) {
         axiosInstance = axios.create({
             baseURL: API_URL,
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-            }
+            withCredentials: true,
         });
     } else {
         axiosInstance = axios.create({
             baseURL: API_URL,
+            withCredentials: true,
             headers: {
                 "Content-Type": contentType,
-                "Access-Control-Allow-Origin": "*",
             },
         });
     }
