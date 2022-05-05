@@ -15,8 +15,6 @@ import Dialog from "components/Dialog/Dialog";
 const getRowId = (row) => row.id;
 
 export default function CatalogsTable({ name, data }) {
-  // localization
-
   const dispatch = useNotification();
 
   const tableMessages = {
@@ -111,7 +109,6 @@ export default function CatalogsTable({ name, data }) {
 
   const deleteItem = async () => {
     const deletedSet = new Set(deleteId);
-    console.log(deletedSet);
     const changedRows = rows.filter((row) => !deletedSet.has(row.id));
     const deletedRow = rows.filter((row) => deletedSet.has(row.id));
     const deleteRes = await $api
