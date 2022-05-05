@@ -15,7 +15,7 @@ router.delete('/status/:id', catalogsController.deleteStatus)
 router.delete('/storage/:id', catalogsController.deleteStorage)
 router.delete('/person/:id', catalogsController.deletePerson)
 router.delete('/owner/:id', catalogsController.deleteOwner)
-router.get('/checkCatalog/:name', catalogsController.checkCatalog)
+router.get('/checkCatalog/:name/:id', catalogsController.checkCatalog)
 
 
 export default router

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Table,
@@ -11,6 +11,8 @@ import { EditingState } from "@devexpress/dx-react-grid";
 import $api from "http";
 import useNotification from "hooks/useNotification";
 import Dialog from "components/Dialog/Dialog";
+import Modal from "components/Modal/Modal";
+import Button from "components/Button/Button";
 
 const getRowId = (row) => row.id;
 
@@ -35,10 +37,15 @@ export default function CatalogsTable({ name, data }) {
   const [tableColumnExtensions] = useState([{ columnName: "id", width: 60 }]);
   const [deleteDialogVisible, setDeleteDialogVisible] = useState(false);
   const [deleteId, setDeleteId] = useState(0);
+  const [deleteModalInfo, setDeleteModalInfo] = useState([]);
   const [editingRowIds, setEditingRowIds] = useState([]);
   const [addedRows, setAddedRows] = useState([]);
   const [rowChanges, setRowChanges] = useState({});
   const [rows, setRows] = useState(data);
+
+  useEffect(() => {
+    setRows(rows);
+  }, [data]);
 
   const changeAddedRows = (value) => {
     const initialized = value.map((row) =>
@@ -46,7 +53,6 @@ export default function CatalogsTable({ name, data }) {
         ? row
         : { [`${name}_id`]: rows.slice(-1)[0].id + 1 }
     );
-    console.log(initialized);
     setAddedRows(initialized);
   };
 
@@ -74,7 +80,6 @@ export default function CatalogsTable({ name, data }) {
         })
         .then(({ data }) => data);
 
-      console.log(addedRes);
       dispatch({
         type: "SUCCESS",
         message: `Создана новая позиция в справочнике`,
@@ -100,8 +105,18 @@ export default function CatalogsTable({ name, data }) {
       }
     }
     if (deleted) {
-      setDeleteDialogVisible(true);
-      setDeleteId(deleted);
+      const { data: catalogsAttached } = await $api.get(
+        `catalogs/checkCatalog/${name}/${
+          rows.filter((row) => row.id === deleted[0])?.[0]?.[`${name}_id`]
+        }`
+      );
+      if (catalogsAttached.length) {
+        setDeleteModalInfo(catalogsAttached);
+      } else {
+        setDeleteDialogVisible(true);
+        setDeleteId(deleted);
+      }
+
       changedRows = rows;
     }
     setRows(changedRows);
@@ -131,6 +146,35 @@ export default function CatalogsTable({ name, data }) {
         timesButton={() => setDeleteDialogVisible(false)}
         dialogType="deleteCatalog"
       />
+      <Modal
+        visible={deleteModalInfo.length}
+        close={() => setDeleteModalInfo([])}
+        header="Данная позиция отмечена в следующих тмц"
+        doNotCheckForChanges
+      >
+        <>
+          <p>
+            Чтобы удалить позицию в справочнике, на нее не должны быть отмечены
+            тмц
+          </p>
+          <table>
+            <thead>
+              <th>№</th>
+              <th>Номер QR</th>
+            </thead>
+            <tbody>
+              {deleteModalInfo.map((info, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{info?.[`${name}_qr`]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <Button text="Понятно" action={() => setDeleteModalInfo([])} />
+        </>
+      </Modal>
       <Paper>
         <Grid rows={rows} columns={columns} getRowId={getRowId}>
           <EditingState

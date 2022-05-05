@@ -31,11 +31,6 @@ export default function Catalogs() {
     getData();
   }, []);
 
-  const checkCatalog = async (name) => {
-    const { data } = $api.get(`catalogs/checkCatalog/${name}`);
-    console.log(data);
-  };
-
   return (
     <>
       <div className="catalogs">
@@ -49,40 +44,24 @@ export default function Catalogs() {
           <TabPanel>
             <div className="header">
               <h2>Статусы</h2>
-              <Button
-                text="Проверить справочник"
-                action={() => checkCatalog("statuses")}
-              />
             </div>
             <CatalogsTable name="status" data={statuses} />
           </TabPanel>
           <TabPanel>
             <div className="header">
               <h2>Пользователи</h2>
-              <Button
-                text="Проверить справочник"
-                action={() => checkCatalog("owners")}
-              />
             </div>
             <CatalogsTable name="owner" data={owners} />
           </TabPanel>
           <TabPanel>
             <div className="header">
               <h2>Места хранения</h2>
-              <Button
-                text="Проверить справочник"
-                action={() => checkCatalog("storages")}
-              />
             </div>
             <CatalogsTable name="storage" data={storages} />
           </TabPanel>
           <TabPanel>
             <div className="header">
               <h2>МОЛы</h2>
-              <Button
-                text="Проверить справочник"
-                action={() => checkCatalog("persons")}
-              />
             </div>
             <CatalogsTable name="person" data={persons} />
           </TabPanel>

@@ -99,13 +99,9 @@ class catalogsController {
 
     async checkCatalog(req, res) {
         try {
-            const { name } = req.params
-            console.log(`SELECT ${name}.${catalogsNames[name]} FROM ${catalogsNames[name]}_catalog RIGHT JOIN ${name} ON ${name}.${catalogsNames[name]} = ${catalogsNames[name]}_catalog.${catalogsNames[name]}_id WHERE (((${name}.${catalogsNames[name]}) Is Null))`);
-            const [all] = await pool.query(`SELECT ${name}.${catalogsNames[name]}
-            FROM ${catalogsNames[name]}_catalog RIGHT JOIN ${name} ON ${name}.${catalogsNames[name]} = ${catalogsNames[name]}_catalog.${catalogsNames[name]}_id
-            WHERE (((${name}.${catalogsNames[name]}) Is Null))`)
-            console.log(312);
-            console.log(all);
+            const { name, id } = req.params
+            console.log(`SELECT ${name}_qr FROM ${catalogsNames[name]} WHERE ${name} = ${id}`);
+            const [all] = await pool.query(`SELECT ${name}_qr FROM ${catalogsNames[name]} WHERE ${name} = ${id}`)
             res.json(all).status(200)
         } catch (e) {
             res.json(e.message)
@@ -114,3 +110,7 @@ class catalogsController {
 }
 
 export default new catalogsController
+
+// SELECT *
+// FROM statuses LEFT JOIN status_catalog ON statuses.status = status_catalog.status_id
+// WHERE (((status_catalog.status_id) Is Null));
