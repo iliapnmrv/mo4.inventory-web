@@ -9,7 +9,7 @@ class CatalogService {
                 VALUES (?, ?)
                 ON DUPLICATE KEY UPDATE ${name}_name = ?`, [id, value, value]
             )
-            return newItem
+            return await pool.query(`GET * FROM ${name}_catalog WHERE ${name}_id = ?`, [id])
         }
         return 'Информация отсутствует'
     }

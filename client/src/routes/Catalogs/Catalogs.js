@@ -42,31 +42,19 @@ export default function Catalogs() {
           </TabList>
           <TabPanel>
             <h2>Статусы</h2>
-            <CatalogsTable
-              name="status"
-              changeData={setStatuses}
-              data={statuses}
-            />
+            <CatalogsTable name="status" data={statuses} />
           </TabPanel>
           <TabPanel>
             <h2>Пользователи</h2>
-            <CatalogsTable name="owner" changeData={setOwners} data={owners} />
+            <CatalogsTable name="owner" data={owners} />
           </TabPanel>
           <TabPanel>
             <h2>Места хранения</h2>
-            <CatalogsTable
-              name="storage"
-              changeData={setStorages}
-              data={storages}
-            />
+            <CatalogsTable name="storage" data={storages} />
           </TabPanel>
           <TabPanel>
             <h2>МОЛы</h2>
-            <CatalogsTable
-              name="person"
-              changeData={setPersons}
-              data={persons}
-            />
+            <CatalogsTable name="person" data={persons} />
           </TabPanel>
         </Tabs>
       </div>

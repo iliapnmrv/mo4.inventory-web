@@ -55,6 +55,11 @@ export const DIALOGS = {
         confirmButton: "Да, удалить",
         cancelButton: "Отменить",
     },
+    deleteCatalog: {
+        header: "Вы уверены, что хотите удалить справочник?",
+        confirmButton: "Да, удалить",
+        cancelButton: "Отменить",
+    },
     save: {
         header: "Вы уверены, что хотите выйти без сохранения?",
         confirmButton: "Да, сохранить",

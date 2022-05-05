@@ -10,10 +10,11 @@ import Paper from "@material-ui/core/Paper";
 import { EditingState } from "@devexpress/dx-react-grid";
 import $api from "http";
 import useNotification from "hooks/useNotification";
+import Dialog from "components/Dialog/Dialog";
 
 const getRowId = (row) => row.id;
 
-export default function CatalogsTable({ name, data, changeData }) {
+export default function CatalogsTable({ name, data }) {
   // localization
 
   const dispatch = useNotification();
@@ -34,15 +35,18 @@ export default function CatalogsTable({ name, data, changeData }) {
     { name: `${name}_name`, title: "Наименование" },
   ]);
   const [tableColumnExtensions] = useState([{ columnName: "id", width: 60 }]);
+  const [deleteDialogVisible, setDeleteDialogVisible] = useState(false);
+  const [deleteId, setDeleteId] = useState(0);
   const [editingRowIds, setEditingRowIds] = useState([]);
   const [addedRows, setAddedRows] = useState([]);
   const [rowChanges, setRowChanges] = useState({});
+  const [rows, setRows] = useState(data);
 
   const changeAddedRows = (value) => {
     const initialized = value.map((row) =>
       Object.keys(row).length
         ? row
-        : { [`${name}_id`]: data.slice(-1)[0].id + 1 }
+        : { [`${name}_id`]: rows.slice(-1)[0].id + 1 }
     );
     console.log(initialized);
     setAddedRows(initialized);
@@ -52,9 +56,9 @@ export default function CatalogsTable({ name, data, changeData }) {
     let changedRows;
     if (added) {
       const startingAddedId =
-        data.length > 0 ? data[data.length - 1].id + 1 : 0;
+        rows.length > 0 ? rows[rows.length - 1].id + 1 : 0;
       changedRows = [
-        ...data,
+        ...rows,
         ...added.map((row, index) => ({
           id: startingAddedId + index,
           ...row,
@@ -71,6 +75,8 @@ export default function CatalogsTable({ name, data, changeData }) {
           [name]: addedData[0][`${name}_name`],
         })
         .then(({ data }) => data);
+
+      console.log(addedRes);
       dispatch({
         type: "SUCCESS",
         message: `Создана новая позиция в справочнике`,
@@ -84,7 +90,6 @@ export default function CatalogsTable({ name, data, changeData }) {
         .map((row) => (changed[row.id] ? { ...row, ...changed[row.id] } : null))
         .filter((n) => n);
       if (changedData.length) {
-        console.log("changedData", changedData[0][`${name}_id`]);
         const changesRes = await $api
           .post(`catalogs/${name}/${changedData[0][`${name}_id`]}`, {
             [name]: changedData[0][`${name}_name`],
@@ -97,43 +102,61 @@ export default function CatalogsTable({ name, data, changeData }) {
       }
     }
     if (deleted) {
-      const deletedSet = new Set(deleted);
-      changedRows = data.filter((row) => !deletedSet.has(row.id));
-      const deletedRow = data.filter((row) => deletedSet.has(row.id));
-      const deleteRes = await $api
-        .delete(`catalogs/${name}/${deletedRow[0][`${name}_id`]}`)
-        .then(({ data }) => data);
-      dispatch({
-        type: "SUCCESS",
-        message: `${deleteRes}`,
-      });
+      setDeleteDialogVisible(true);
+      setDeleteId(deleted);
+      changedRows = rows;
     }
-    changeData(changedRows);
+    setRows(changedRows);
+  };
+
+  const deleteItem = async () => {
+    const deletedSet = new Set(deleteId);
+    console.log(deletedSet);
+    const changedRows = rows.filter((row) => !deletedSet.has(row.id));
+    const deletedRow = rows.filter((row) => deletedSet.has(row.id));
+    const deleteRes = await $api
+      .delete(`catalogs/${name}/${deletedRow[0][`${name}_id`]}`)
+      .then(({ data }) => data);
+    dispatch({
+      type: "SUCCESS",
+      message: `${deleteRes}`,
+    });
+    setDeleteDialogVisible(false);
+    setRows(changedRows);
   };
 
   return (
-    <Paper>
-      <Grid rows={data} columns={columns} getRowId={getRowId}>
-        <EditingState
-          editingRowIds={editingRowIds}
-          onEditingRowIdsChange={setEditingRowIds}
-          rowChanges={rowChanges}
-          onRowChangesChange={setRowChanges}
-          addedRows={addedRows}
-          onAddedRowsChange={changeAddedRows}
-          onCommitChanges={commitChanges}
-        />
-        <Table columnExtensions={tableColumnExtensions} />
-        <TableHeaderRow />
-        <TableEditRow />
-        <TableEditColumn
-          showAddCommand={!addedRows.length}
-          showEditCommand
-          showDeleteCommand
-          width={250}
-          messages={editColumnMessages}
-        />
-      </Grid>
-    </Paper>
+    <>
+      <Dialog
+        visible={deleteDialogVisible}
+        action={() => deleteItem()}
+        close={() => setDeleteDialogVisible(false)}
+        timesButton={() => setDeleteDialogVisible(false)}
+        dialogType="deleteCatalog"
+      />
+      <Paper>
+        <Grid rows={rows} columns={columns} getRowId={getRowId}>
+          <EditingState
+            editingRowIds={editingRowIds}
+            onEditingRowIdsChange={setEditingRowIds}
+            rowChanges={rowChanges}
+            onRowChangesChange={setRowChanges}
+            addedRows={addedRows}
+            onAddedRowsChange={changeAddedRows}
+            onCommitChanges={commitChanges}
+          />
+          <Table columnExtensions={tableColumnExtensions} />
+          <TableHeaderRow />
+          <TableEditRow />
+          <TableEditColumn
+            showAddCommand={!addedRows.length}
+            showEditCommand
+            showDeleteCommand
+            width={250}
+            messages={editColumnMessages}
+          />
+        </Grid>
+      </Paper>
+    </>
   );
 }
