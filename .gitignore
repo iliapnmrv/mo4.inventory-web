@@ -6,8 +6,6 @@ build/
 uploads/
 
 # server
-/server
-/server/public/inventory
 /.pnp
 .pnp.js
 
