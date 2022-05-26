@@ -51,7 +51,12 @@ export default function CatalogsTable({ name, data }) {
     const initialized = value.map((row) =>
       Object.keys(row).length
         ? row
-        : { [`${name}_id`]: rows.slice(-1)[0].id + 1 }
+        : {
+            [`${name}_id`]:
+              +rows.reduce((acc, curr) => (acc.id > curr.id ? acc : curr))[
+                `${name}_id`
+              ] + 1,
+          }
     );
     setAddedRows(initialized);
   };
@@ -60,7 +65,11 @@ export default function CatalogsTable({ name, data }) {
     let changedRows;
     if (added) {
       const startingAddedId =
-        rows.length > 0 ? rows[rows.length - 1].id + 1 : 0;
+        rows.length > 0
+          ? rows.reduce((acc, curr) => (acc.id > curr.id ? acc : curr))[0].id +
+            1
+          : 0;
+
       changedRows = [
         ...rows,
         ...added.map((row, index) => ({
