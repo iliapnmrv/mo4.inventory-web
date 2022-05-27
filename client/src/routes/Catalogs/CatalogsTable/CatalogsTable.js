@@ -66,8 +66,7 @@ export default function CatalogsTable({ name, data }) {
     if (added) {
       const startingAddedId =
         rows.length > 0
-          ? rows.reduce((acc, curr) => (acc.id > curr.id ? acc : curr))[0].id +
-            1
+          ? rows.reduce((acc, curr) => (acc.id > curr.id ? acc : curr)).id + 1
           : 0;
 
       changedRows = [
