@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
-  Grid,
-  Table,
-  TableHeaderRow,
-  TableEditRow,
-  TableEditColumn,
+    Grid,
+    Table,
+    TableHeaderRow,
+    TableEditRow,
+    TableEditColumn,
 } from "@devexpress/dx-react-grid-material-ui";
 import Paper from "@material-ui/core/Paper";
 import { EditingState } from "@devexpress/dx-react-grid";
@@ -17,73 +17,72 @@ import Button from "components/Button/Button";
 const getRowId = (row) => row.id;
 
 export default function CatalogsTable({ name, data }) {
-  const dispatch = useNotification();
+    const dispatch = useNotification();
 
-  const tableMessages = {
-    noData: "Нет данных",
-  };
-  const editColumnMessages = {
-    addCommand: "Добавить",
-    editCommand: "Изменить",
-    deleteCommand: "Удалить",
-    commitCommand: "Сохранить",
-    cancelCommand: "Отменить",
-  };
+    const tableMessages = {
+        noData: "Нет данных",
+    };
+    const editColumnMessages = {
+        addCommand: "Добавить",
+        editCommand: "Изменить",
+        deleteCommand: "Удалить",
+        commitCommand: "Сохранить",
+        cancelCommand: "Отменить",
+    };
 
-  const [columns] = useState([
-    { name: `${name}_id`, title: "ID" },
-    { name: `${name}_name`, title: "Наименование" },
-  ]);
-  const [tableColumnExtensions] = useState([{ columnName: "id", width: 60 }]);
-  const [deleteDialogVisible, setDeleteDialogVisible] = useState(false);
-  const [deleteId, setDeleteId] = useState(0);
-  const [deleteModalInfo, setDeleteModalInfo] = useState([]);
-  const [editingRowIds, setEditingRowIds] = useState([]);
-  const [addedRows, setAddedRows] = useState([]);
-  const [rowChanges, setRowChanges] = useState({});
-  const [rows, setRows] = useState(data);
+    const [columns] = useState([
+        { name: `${name}_id`, title: "ID" },
+        { name: `${name}_name`, title: "Наименование" },
+    ]);
+    const [tableColumnExtensions] = useState([{ columnName: "id", width: 60 }]);
+    const [deleteDialogVisible, setDeleteDialogVisible] = useState(false);
+    const [deleteId, setDeleteId] = useState(0);
+    const [deleteModalInfo, setDeleteModalInfo] = useState([]);
+    const [editingRowIds, setEditingRowIds] = useState([]);
+    const [addedRows, setAddedRows] = useState([]);
+    const [rowChanges, setRowChanges] = useState({});
+    const [rows, setRows] = useState(data);
 
-  useEffect(() => {
-    setRows(rows);
-  }, [data]);
+    useEffect(() => {
+        setRows(rows);
+    }, [data]);
 
-  const changeAddedRows = (value) => {
-    const initialized = value.map((row) =>
-      Object.keys(row).length
-        ? row
-        : {
-            [`${name}_id`]:
-              +rows.reduce((acc, curr) => (acc.id > curr.id ? acc : curr))[
-                `${name}_id`
-              ] + 1,
-          }
-    );
-    setAddedRows(initialized);
-  };
+    const changeAddedRows = (value) => {
+        const initialized = value.map((row) =>
+            Object.keys(row).length ?
+            row : {
+                [`${name}_id`]:
+                    +rows.reduce((acc, curr) => (acc.id > curr.id ? acc : curr))[
+                        `${name}_id`
+                    ] + 1,
+            }
+        );
+        setAddedRows(initialized);
+    };
 
-  const commitChanges = async ({ added, changed, deleted }) => {
-    let changedRows;
-    if (added) {
-      const startingAddedId =
-        rows.length > 0
-          ? rows.reduce((acc, curr) => (acc.id > curr.id ? acc : curr)).id + 1
-          : 0;
+    const commitChanges = async({ added, changed, deleted }) => {
+            let changedRows;
+            if (added) {
+                const startingAddedId =
+                    rows.length > 0 ?
+                    rows.reduce((acc, curr) => (acc.id > curr.id ? acc : curr)).id + 1 :
+                    0;
 
-      changedRows = [
-        ...rows,
-        ...added.map((row, index) => ({
-          id: startingAddedId + index,
-          ...row,
-        })),
-      ];
-      const addedData = [
-        ...added.map((row, index) => ({
-          id: startingAddedId + index,
-          ...row,
-        })),
-      ];
-      const addedRes = await $api
-        .post(`catalogs/${name}/${addedData[0][`${name}_id`]}`, {
+                changedRows = [
+                    ...rows,
+                    ...added.map((row, index) => ({
+                        id: startingAddedId + index,
+                        ...row,
+                    })),
+                ];
+                const addedData = [
+                    ...added.map((row, index) => ({
+                        id: startingAddedId + index,
+                        ...row,
+                    })),
+                ];
+                const addedRes = await $api
+                    .post(`catalogs/${name}/${addedData[0][`${name}_id`]}`, {
           [name]: addedData[0][`${name}_name`],
         })
         .then(({ data }) => data);
@@ -169,12 +168,15 @@ export default function CatalogsTable({ name, data }) {
             <thead>
               <th>№</th>
               <th>Номер QR</th>
+              <th>Наименование</th>
             </thead>
             <tbody>
+              {console.log(deleteModalInfo) }
               {deleteModalInfo.map((info, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{info?.[`${name}_qr`]}</td>
+                  <td>{info?.name}</td>
                 </tr>
               ))}
             </tbody>

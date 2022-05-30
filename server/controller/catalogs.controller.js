@@ -101,8 +101,12 @@ class catalogsController {
     async checkCatalog(req, res) {
         try {
             const { name, id } = req.params
+                // SELECT person_qr, name FROM persons LEFT JOIN total ON persons.person_qr = total.qr WHERE person = 1
             console.log(`SELECT ${name}_qr FROM ${catalogsNames[name]} WHERE ${name} = ${id}`);
-            const [all] = await pool.query(`SELECT ${name}_qr FROM ${catalogsNames[name]} WHERE ${name} = ${id}`)
+            const [all] = await pool.query(`SELECT ${name}_qr, name FROM  ${catalogsNames[name]} 
+            LEFT JOIN total
+                ON ${catalogsNames[name]}.${name}_qr = total.qr 
+                WHERE ${name} = ${id}`)
             res.json(all).status(200)
         } catch (e) {
             res.json(e.message)
