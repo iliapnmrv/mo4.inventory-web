@@ -16,29 +16,17 @@ export default function Catalogs() {
       const statuses = await $api
         .get(`catalogs/statuses`)
         .then(({ data }) => data);
-      setStatuses(
-        statuses.sort((a, b) =>
-          a["status_name"].localeCompare(b["status_name"])
-        )
-      );
+      setStatuses(statuses);
       const owners = await $api.get(`catalogs/owners`).then(({ data }) => data);
-      setOwners(
-        owners.sort((a, b) => a["owner_name"].localeCompare(b["owner_name"]))
-      );
+      setOwners(owners);
       const storages = await $api
         .get(`catalogs/storages`)
         .then(({ data }) => data);
-      setStorages(
-        storages.sort((a, b) =>
-          a["storage_name"].localeCompare(b["storage_name"])
-        )
-      );
+      setStorages(storages);
       const persons = await $api
         .get(`catalogs/persons`)
         .then(({ data }) => data);
-      setPersons(
-        persons.sort((a, b) => a["person_name"].localeCompare(b["person_name"]))
-      );
+      setPersons(persons);
     };
     getData();
   }, []);

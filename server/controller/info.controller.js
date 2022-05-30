@@ -119,27 +119,27 @@ class infoController {
     }
 
     async getSredstva(req, res) {
-        const [all] = await pool.query(`SELECT * FROM sredstva`)
+        const [all] = await pool.query(`SELECT * FROM sredstva ORDER BY sredstvo_name`)
         res.json(all)
     }
     async getTypes(req, res) {
-        const [all] = await pool.query(`SELECT * FROM types`)
+        const [all] = await pool.query(`SELECT * FROM types ORDER BY type_name`)
         res.json(all)
     }
     async getStatuses(req, res) {
-        const [all] = await pool.query(`SELECT * FROM status_catalog`)
+        const [all] = await pool.query(`SELECT * FROM status_catalog ORDER BY status_name`)
         res.json(all)
     }
     async getStorages(req, res) {
-        const [all] = await pool.query(`SELECT * FROM storage_catalog`)
+        const [all] = await pool.query(`SELECT * FROM storage_catalog ORDER BY storage_name`)
         res.json(all)
     }
     async getPersons(req, res) {
-        const [all] = await pool.query(`SELECT * FROM person_catalog`)
+        const [all] = await pool.query(`SELECT * FROM person_catalog ORDER BY person_name`)
         res.json(all)
     }
     async getOwners(req, res) {
-        const [all] = await pool.query(`SELECT * FROM owner_catalog`)
+        const [all] = await pool.query(`SELECT * FROM owner_catalog ORDER BY owner_name`)
         res.json(all)
     }
 }

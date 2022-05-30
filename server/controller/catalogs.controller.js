@@ -81,19 +81,20 @@ class catalogsController {
     }
 
     async getStatuses(req, res) {
-        const [all] = await pool.query(`SELECT * FROM status_catalog`)
+        console.log('status');
+        const [all] = await pool.query(`SELECT * FROM status_catalog ORDER BY status_name`)
         res.json(all)
     }
     async getStorages(req, res) {
-        const [all] = await pool.query(`SELECT * FROM storage_catalog`)
+        const [all] = await pool.query(`SELECT * FROM storage_catalog ORDER BY storage_name`)
         res.json(all)
     }
     async getPersons(req, res) {
-        const [all] = await pool.query(`SELECT * FROM person_catalog`)
+        const [all] = await pool.query(`SELECT * FROM person_catalog ORDER BY person_name`)
         res.json(all)
     }
     async getOwners(req, res) {
-        const [all] = await pool.query(`SELECT * FROM owner_catalog`)
+        const [all] = await pool.query(`SELECT * FROM owner_catalog ORDER BY owner_name`)
         res.json(all)
     }
 
@@ -110,7 +111,3 @@ class catalogsController {
 }
 
 export default new catalogsController
-
-// SELECT *
-// FROM statuses LEFT JOIN status_catalog ON statuses.status = status_catalog.status_id
-// WHERE (((status_catalog.status_id) Is Null));
