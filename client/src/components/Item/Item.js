@@ -9,8 +9,13 @@ export default function Item({ openModal, data, showPlaces }) {
     <>
       <tr data-id={data?.qr} key={data?.qr} onClick={() => openModal(data?.qr)}>
         <td>{data?.qr}</td>
-        <td>{sredstva[data?.sredstvo - 1]?.label}</td>
-        <td>{types[data.type - 1]?.label}</td>
+        <td>
+          {
+            sredstva.filter((sredstvo) => sredstvo.value === data.sredstvo)?.[0]
+              ?.label
+          }
+        </td>
+        <td>{types.filter((type) => type.value === data.type)?.[0]?.label}</td>
         <td>{data?.month}</td>
         <td>{data?.year}</td>
         <td>
