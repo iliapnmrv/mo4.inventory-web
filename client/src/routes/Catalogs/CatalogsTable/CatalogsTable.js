@@ -168,15 +168,14 @@ export default function CatalogsTable({ name, data }) {
             <thead>
               <th>№</th>
               <th>Номер QR</th>
-              <th>Наименование</th>
+              <th>Наименование по бух.учету</th>
             </thead>
             <tbody>
-              {console.log(deleteModalInfo) }
               {deleteModalInfo.map((info, index) => (
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{info?.[`${name}_qr`]}</td>
-                  <td>{info?.name}</td>
+                  <td>{info?.model}</td>
                 </tr>
               ))}
             </tbody>

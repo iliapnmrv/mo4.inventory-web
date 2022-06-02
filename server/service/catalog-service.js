@@ -13,6 +13,7 @@ class CatalogService {
         }
         return 'Информация отсутствует'
     }
+
     async deleteCalatog(id, name) {
         const [deletedItem] = await pool.query(
             `DELETE FROM ${name}_catalog WHERE ${name}_id = ?`, [id]
