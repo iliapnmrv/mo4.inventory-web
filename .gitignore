@@ -5,8 +5,8 @@ node_modules/
 build/
 uploads/
 
-.env.development
-.env.production
+server/.env.development
+server/.env.production
 
 # server
 /.pnp
