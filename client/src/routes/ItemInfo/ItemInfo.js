@@ -19,6 +19,7 @@ import {
 import {
   changeInitialItemData,
   changeItemData,
+  changeNewItemData,
   changeTotalData,
 } from "store/actions/totalAction";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -63,8 +64,8 @@ export default function ItemInfo({ close, editId }) {
       sernom,
       info,
       status,
-      // person,
-      // storage,
+      person,
+      storage,
       addinfo,
       owner,
     },
@@ -161,7 +162,7 @@ export default function ItemInfo({ close, editId }) {
     getNames();
   }, []);
 
-  const { changeInRedux } = useForm();
+  const { changeInRedux, changeNewItemInRedux } = useForm();
 
   const deleteItem = async () => {
     try {
@@ -195,6 +196,45 @@ export default function ItemInfo({ close, editId }) {
 
   const closeDialog = () => {
     dispatchModal(toggleDeleteDialog({ visible: false }));
+  };
+
+  const copyItem = async () => {
+    const getLastQR = async () => {
+      const { data: lastQR } = await $api.get("total/getLastQR");
+      changeHandler({
+        target: {
+          value: ("00000" + (Number(lastQR[0].qr) + 1)).slice(-5),
+          name: "qr",
+        },
+      });
+
+      dispatchTotal(
+        changeNewItemData({
+          qr: ("00000" + (Number(lastQR[0].qr) + 1)).slice(-5),
+        })
+      );
+    };
+    dispatchTotal(
+      changeNewItemData({
+        name,
+        sredstvo,
+        type,
+        month,
+        year,
+        model,
+        sernom,
+        info,
+        status,
+        person,
+        storage,
+        addinfo,
+        owner,
+      })
+    );
+    getLastQR();
+    close();
+    document.body.style.overflow = "hidden";
+    dispatchModal(toggleNewItemModal({ visible: true }));
   };
 
   return (
@@ -419,6 +459,7 @@ export default function ItemInfo({ close, editId }) {
                 type="submit"
                 action={(e) => onSubmit(e)}
               />
+              <Button text="Копирование" type="submit" action={copyItem} />
               {role === "admin" && (
                 <Button
                   text="Удалить"

@@ -79,7 +79,6 @@ export default function Total() {
     itemInfoId,
   } = useSelector((state) => state.modal);
 
-  console.log(data);
   const { username } = useSelector(({ user }) => user);
   const [isPending, setIsPending] = useState(true);
   const [search, setSearch] = useState("");

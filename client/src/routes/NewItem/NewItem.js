@@ -13,6 +13,22 @@ export default function NewItem({ close }) {
   const { storages, statuses, sredstva, persons, types, owners } = useSelector(
     (state) => state.info
   );
+  const {
+    qr: qrRedux,
+    name: nameRedux,
+    sredstvo: sredstvoRedux,
+    type: typeRedux,
+    month: monthRedux,
+    year: yearRedux,
+    model: modelRedux,
+    sernom: sernomRedux,
+    info: infoRedux,
+    status: statusRedux,
+    person: personRedux,
+    storage: storageRedux,
+    addinfo: addinfoRedux,
+    owner: ownerRedux,
+  } = useSelector((state) => state.total.newItemValues);
   const { data, initialItemData } = useSelector((state) => state.total);
   const [sernomExists, setSernomExists] = useState(false);
   const [lastQR, setLastQR] = useState(0);
@@ -39,23 +55,41 @@ export default function NewItem({ close }) {
     selectChangeHandler,
   } = useForm(
     {
-      qr: ("00000" + (Number(lastQR) + 1)).slice(-5),
-      name: "",
-      sredstvo: "",
-      type: "",
-      month: "",
-      year: "",
-      model: "",
-      sernom: "",
-      info: "",
-      status: "",
-      person: "",
-      storage: "",
-      addinfo: "",
-      owner: "",
+      qr: ("00000" + (Number(qrRedux || lastQR) + 1)).slice(-5),
+      name: nameRedux || "",
+      sredstvo: sredstvoRedux || "",
+      type: typeRedux || "",
+      month: monthRedux || "",
+      year: yearRedux || "",
+      model: modelRedux || "",
+      sernom: sernomRedux || "",
+      info: infoRedux || "",
+      status: statusRedux || "",
+      person: personRedux || "",
+      storage: storageRedux || "",
+      addinfo: addinfoRedux || "",
+      owner: ownerRedux || "",
     },
     "newItem"
   );
+
+  console.log({
+    qrRedux,
+    nameRedux,
+    sredstvoRedux,
+    typeRedux,
+    monthRedux,
+    yearRedux,
+    modelRedux,
+    sernomRedux,
+    infoRedux,
+    statusRedux,
+    personRedux,
+    storageRedux,
+    addinfoRedux,
+    ownerRedux,
+  });
+
   const onNewItemFormSubmit = NewItemSubmit();
 
   const { changeNewItemInRedux } = useForm();
@@ -107,6 +141,7 @@ export default function NewItem({ close }) {
               span="Выберите тип устройства"
               name="type"
               data={types}
+              selectValue={typeRedux}
               onSelectChange={selectChangeHandler}
             />
             <SelectInput
@@ -114,6 +149,7 @@ export default function NewItem({ close }) {
               span="Выберите средство"
               name="sredstvo"
               data={sredstva}
+              selectValue={sredstvoRedux}
               onSelectChange={selectChangeHandler}
             />
             <SelectInput
@@ -121,6 +157,7 @@ export default function NewItem({ close }) {
               span="Выберите статус"
               name="status"
               data={statuses}
+              selectValue={statusRedux}
               onSelectChange={selectChangeHandler}
             />
             <SelectInput
@@ -128,6 +165,7 @@ export default function NewItem({ close }) {
               span="Выберите МОЛ"
               name="person"
               data={persons}
+              selectValue={personRedux}
               onSelectChange={selectChangeHandler}
             />
           </div>
@@ -137,6 +175,7 @@ export default function NewItem({ close }) {
               span="Выберите владельца"
               name="owner"
               data={owners}
+              selectValue={ownerRedux}
               onSelectChange={selectChangeHandler}
             />
             <SelectInput
@@ -144,6 +183,7 @@ export default function NewItem({ close }) {
               span="Выберите местоположение"
               name="storage"
               data={storages}
+              selectValue={storageRedux}
               onSelectChange={selectChangeHandler}
             />
           </div>

@@ -24,9 +24,6 @@ export default function SelectInput(props) {
   const [value, setValue] = useState();
   const [multiple, setMultiple] = useState();
 
-  // console.log(multiple);
-  // console.log(selectValue);
-
   const handleSelect = (e) => {
     let out = {
       name: name,
@@ -65,14 +62,14 @@ export default function SelectInput(props) {
           onChange={(e) => {
             multi ? handleMultiple(e) : handleSelect(e);
           }}
-          // value={selectValue}
+          value={data.filter((item) => item.value === selectValue)[0]}
           maxMenuHeight={210}
         />
         <input
           tabIndex={-1}
           autoComplete="off"
           style={{ opacity: 0, height: 0 }}
-          value={value || multiple}
+          value={value || multiple || selectValue}
           required={required ? true : required}
         />
       </label>
