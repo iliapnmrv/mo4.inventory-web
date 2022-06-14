@@ -142,6 +142,10 @@ class infoController {
         const [all] = await pool.query(`SELECT * FROM owner_catalog ORDER BY owner_name`)
         res.json(all)
     }
+    async getNames(req, res) {
+        const [all] = await pool.query(`SELECT DISTINCT name from total ORDER BY name`)
+        res.json(all)
+    }
 }
 
 export default new infoController

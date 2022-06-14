@@ -12,12 +12,17 @@ import Dialog from "components/Dialog/Dialog";
 import OnItemInfoFormSubmit from "./onItemInfoFormSubmit";
 import Analysis from "components/Analysis/Analysis";
 import $api from "http/index.js";
-import { toggleDeleteDialog } from "store/actions/modalAction";
+import {
+  toggleDeleteDialog,
+  toggleNewItemModal,
+} from "store/actions/modalAction";
 import {
   changeInitialItemData,
   changeItemData,
   changeTotalData,
 } from "store/actions/totalAction";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
 export default function ItemInfo({ close, editId }) {
   const { storages, statuses, sredstva, persons, types, owners } = useSelector(
@@ -42,6 +47,7 @@ export default function ItemInfo({ close, editId }) {
   const [personsDefault, setPersonsDefault] = useState();
   const [storagesDefault, setStoragesDefault] = useState();
   const [ownersDefault, setOwnersDefault] = useState();
+  const [names, setNames] = useState([]);
 
   const dispatch = useNotification();
 
@@ -148,7 +154,14 @@ export default function ItemInfo({ close, editId }) {
     setStoragesDefault("");
     setOwnersDefault("");
     getData();
+    const getNames = async () => {
+      const { data: names } = await $api.get("names");
+      setNames(names);
+    };
+    getNames();
   }, []);
+
+  const { changeInRedux } = useForm();
 
   const deleteItem = async () => {
     try {
@@ -333,12 +346,35 @@ export default function ItemInfo({ close, editId }) {
               ) : null}
             </div>
             <div className="form-inputs">
-              <Input
+              <Autocomplete
                 disabled={ACCESS_RIGHTS[role]?.name}
-                span="Введите наименование по бухучету"
-                name="name"
-                value={name}
-                onChange={changeHandler}
+                sx={{
+                  "flex-direction": "column",
+                  display: "flex",
+                  width: "100%",
+                  margin: "10px 20px 10px 0px",
+                }}
+                fullWidth
+                freeSolo
+                disableClearable
+                id="name"
+                inputValue={name}
+                onChange={(event, newValue) => {
+                  changeHandler({ target: { name: "name", value: newValue } });
+                  changeInRedux({
+                    target: { name: "name", value: newValue },
+                  });
+                }}
+                options={names.map((option) => option.name)}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    name="name"
+                    label="Наименование по бухучету"
+                    onChange={changeHandler}
+                    onBlur={changeInRedux}
+                  />
+                )}
               />
             </div>
 

@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import QR from "components/QR/QR";
 import $api from "http/index.js";
 import NewItemSubmit from "./NewItemSubmit";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
 export default function NewItem({ close }) {
   const { storages, statuses, sredstva, persons, types, owners } = useSelector(
@@ -14,6 +16,7 @@ export default function NewItem({ close }) {
   const { data, initialItemData } = useSelector((state) => state.total);
   const [sernomExists, setSernomExists] = useState(false);
   const [lastQR, setLastQR] = useState(0);
+  const [names, setNames] = useState([]);
 
   const {
     values: {
@@ -55,6 +58,8 @@ export default function NewItem({ close }) {
   );
   const onNewItemFormSubmit = NewItemSubmit();
 
+  const { changeNewItemInRedux } = useForm();
+
   const onSubmit = (e) => {
     e.preventDefault();
     onNewItemFormSubmit(close);
@@ -72,6 +77,11 @@ export default function NewItem({ close }) {
       setLastQR(lastQR[0].qr);
     };
     getLastQR();
+    const getNames = async () => {
+      const { data: names } = await $api.get("names");
+      setNames(names);
+    };
+    getNames();
   }, []);
 
   useEffect(() => {
@@ -83,8 +93,6 @@ export default function NewItem({ close }) {
     };
     fetchData();
   }, [sernom]);
-
-  console.log(("00000" + (Number(lastQR) + 1)).slice(-5));
 
   return (
     <>
@@ -169,12 +177,34 @@ export default function NewItem({ close }) {
           </div>
 
           <div className="form-inputs">
-            <Input
-              span="Наименование по бухучету"
-              name="name"
-              value={name}
-              onChange={changeHandler}
-              formName="newItem"
+            <Autocomplete
+              sx={{
+                "flex-direction": "column",
+                display: "flex",
+                width: "100%",
+                margin: "10px 20px 10px 0px",
+              }}
+              fullWidth
+              freeSolo
+              disableClearable
+              id="name"
+              inputValue={name}
+              onChange={(event, newValue) => {
+                changeHandler({ target: { name: "name", value: newValue } });
+                changeNewItemInRedux({
+                  target: { name: "name", value: newValue },
+                });
+              }}
+              options={names.map((option) => option.name)}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  name="name"
+                  label="Наименование по бухучету"
+                  onChange={changeHandler}
+                  onBlur={changeNewItemInRedux}
+                />
+              )}
             />
           </div>
           <div className="form-inputs">
