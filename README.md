@@ -1,1 +1,0 @@
-# inventory made for web
