@@ -82,7 +82,7 @@ export default function Total() {
   const { username } = useSelector(({ user }) => user);
   const [isPending, setIsPending] = useState(true);
   const [search, setSearch] = useState("");
-  const [showPlaces, setShowPlaces] = useState(false);
+  const [showPlaces, setShowPlaces] = useState(true);
 
   const dispatchTotal = useDispatch();
   const dispatchModal = useDispatch();
@@ -226,6 +226,7 @@ export default function Total() {
         <div>
           <label style={{ marginRight: "10px" }}>
             <input
+              checked={showPlaces}
               type="checkbox"
               onChange={() => setShowPlaces(!showPlaces)}
             />
