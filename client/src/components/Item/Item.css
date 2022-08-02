@@ -1,0 +1,28 @@
+tr {
+    position: relative;
+}
+
+.icon {
+    opacity: 0;
+    background-color: white;
+    position: absolute;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: -47px;
+    transform: translateY(-50%);
+    padding: 14px 10px 14px 15px;
+    border-radius: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon:hover {
+    background-color: #cfcfcf36;
+}
+
+tr:hover .icon {
+    opacity: 1;
+}
