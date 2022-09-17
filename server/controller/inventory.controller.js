@@ -64,6 +64,26 @@ class inventoryController {
             console.log(e)
         }
     }
+
+    async uploadResult(req, res) {
+            try {
+                const { inventory } = req.body
+                console.log('inventory', inventory);
+                const [inv] = await pool.query(`
+                INSERT INTO inventory_result
+                    ( id, inventoryNum, name, status, model, serialNum, position, place, trace, createdAt )
+                VALUES
+                    ${inventory
+                    ?.map(
+                        item =>
+                        `(${item.id}, ${item.inventoryNum}, '${item.name}', '${item.status}', '${item.model}', '${item.serialNum}', '${item.position}', '${item.place}', '${item.trace}', '${item.createdAt}')`,
+                    )
+                    .join(',\n')}`)
+                    console.log(inv);
+        } catch (e) {
+            console.error(e);
+        }
+    }
 }
 
 export default new inventoryController
