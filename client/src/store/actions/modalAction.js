@@ -1,4 +1,5 @@
 export const TOGGLE_ANALYSIS_MODAL = "TOGGLE_ANALYSIS_MODAL"
+export const TOGGLE_INVENTORY_RESULTS_MODAL = "TOGGLE_INVENTORY_RESULTS_MODAL"
 export const TOGGLE_NEWITEM_MODAL = "TOGGLE_NEWITEM_MODAL"
 export const TOGGLE_ITEMINFO_MODAL = "TOGGLE_ITEMINFO_MODAL"
 export const TOGGLE_SAVE_DIALOG = "TOGGLE_SAVE_DIALOG"
@@ -8,6 +9,12 @@ export const CHANGE_ITEMINFOID = "CHANGE_ITEMINFOID"
 export const toggleAnalysisModal = (payload) => {
     return {
         type: TOGGLE_ANALYSIS_MODAL,
+        payload
+    }
+}
+export const toggleInventoryResultsModal = (payload) => {
+    return {
+        type: TOGGLE_INVENTORY_RESULTS_MODAL,
         payload
     }
 }

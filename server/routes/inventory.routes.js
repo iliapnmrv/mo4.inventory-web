@@ -16,5 +16,6 @@ router.get('/', inventoryController.getInventory)
 router.get('/lastInventory', inventoryController.getLastInventory)
 router.post('/upload', upload.single("csv"), inventoryController.uploadInventory)
 router.post('/', inventoryController.uploadResult)
+router.get('/results', inventoryController.getInventoryResults)
 
 export default router

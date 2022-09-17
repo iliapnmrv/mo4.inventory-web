@@ -6,15 +6,21 @@ import Button from "components/Button/Button";
 import $api from "http/index.js";
 import FileUpload from "components/FileUpload/FileUpload";
 import Modal from "components/Modal/Modal";
-import { toggleAnalysisModal } from "store/actions/modalAction";
+import {
+  toggleAnalysisModal,
+  toggleInventoryResultsModal,
+} from "store/actions/modalAction";
 import { useDispatch, useSelector } from "react-redux";
 import Analysis from "./Analysis/Analysis";
+import InventoryResults from "./InventoryResults/InventoryResults";
 
 export default function Inventory() {
   const [isPending, setIsPending] = useState(true);
   const dispatch = useDispatch();
 
-  const { analysisModal } = useSelector((state) => state.modal);
+  const { analysisModal, inventoryResultsModal } = useSelector(
+    (state) => state.modal
+  );
 
   const [data, setData] = useState([]);
   const [lastInventory, setLastInventory] = useState([]);
@@ -39,12 +45,24 @@ export default function Inventory() {
     dispatch(toggleAnalysisModal(!analysisModal));
   };
 
+  const toggleInventoryResults = () => {
+    if (document.body.style.overflow === "hidden")
+      document.body.style.overflow = "auto";
+    else document.body.style.overflow = "hidden";
+    dispatch(toggleInventoryResultsModal(!inventoryResultsModal));
+  };
+
   return (
     <>
       <div className="secondary-navbar">
         <Button
           text="Показать данные анализа"
           action={toggleAnalysis}
+          style="filters"
+        />
+        <Button
+          text="Результаты инвентаризации"
+          action={toggleInventoryResults}
           style="filters"
         />
         <FileUpload lastInventory={lastInventory} />
@@ -57,6 +75,15 @@ export default function Inventory() {
         doNotCheckForChanges
       >
         <Analysis />
+      </Modal>
+
+      <Modal
+        visible={inventoryResultsModal}
+        close={toggleInventoryResults}
+        header="Результаты инвентаризации"
+        doNotCheckForChanges
+      >
+        <InventoryResults />
       </Modal>
 
       <div className="flex">
