@@ -1,6 +1,7 @@
 import Input from "components/Form/Input/Input";
 import $api from "http";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.scss";
 import "./InventoryResults.sass";
