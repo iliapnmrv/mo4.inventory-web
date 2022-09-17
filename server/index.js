@@ -27,12 +27,12 @@ app.use(cookieParser())
     // Middlewares
 app.use('/api/auth', authRouter)
 app.use('/api/analysis', analysisRouter)
-
-app.use(isLoggedin)
 app.use('/api/inventory', inventoryRoutes)
 app.use('/api/total', totalRouter)
-app.use('/api/logs', logsRouter)
 app.use('/api/catalogs', catalogsRouter)
+
+app.use(isLoggedin)
+app.use('/api/logs', logsRouter)
 app.use('/api', infoRouter)
 app.use(errorMiddleware)
 

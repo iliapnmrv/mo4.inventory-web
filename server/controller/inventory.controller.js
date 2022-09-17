@@ -7,6 +7,7 @@ import path from 'path'
 class inventoryController {
     async getInventory(req, res) {
         const [inv] = await pool.query('SELECT * FROM inventory')
+        console.log(inv);
         if (inv.length) {
             res.json(inv)
         } else {

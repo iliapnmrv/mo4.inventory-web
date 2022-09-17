@@ -62,6 +62,8 @@ class analysisController {
             return
         }
 
+        console.log(totalAnalysisData, inventoryAnalysisData);
+
         // из документооборота вычитается инвентаризация, 
         // нельзя иметь пустой массив, обязательно создавать пустой объект 
         if (!totalAnalysisData.length) {
@@ -111,14 +113,13 @@ class analysisController {
         if (name == "Не в учете") {
             secondClause = `AND model = "${model}"`
         }
-        const [total] = await pool.query(`
-        SELECT 
+        const [total] = await pool.query(`SELECT 
             case
                 when name = "Не в учете"
                     then (SELECT model)
                 ELSE name
             END AS name
-        FROM TOTAL
+        FROM total
             LEFT JOIN persons
                 ON total.qr = persons.person_qr 
             WHERE (persons.person = 1 OR persons.person IS NULL) AND (NAME = ? ${secondClause})
@@ -128,9 +129,12 @@ class analysisController {
     }
     async getInventoryOne(req, res) {
         const { name } = req.body
+        console.log("name", name);
         const [inv] = await pool.query('SELECT name, kolvo FROM inventory WHERE name = ?', [name])
         if (!inv.length) res.status(404)
-        res.json(inv)
+        res.json(Array.from(inv.reduce(
+            (m, { name, kolvo }) => m.set(name, (m.get(name) || 0) + kolvo), new Map
+        ), ([name, kolvo]) => ({ name, kolvo })))
     }
 }
 

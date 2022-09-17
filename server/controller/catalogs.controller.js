@@ -98,6 +98,11 @@ class catalogsController {
         res.json(all)
     }
 
+    async getTypes(req, res) {
+        const [all] = await pool.query(`SELECT * FROM types ORDER BY type_name`)
+        res.json(all)
+    }
+
     async checkCatalog(req, res) {
         try {
             const { name, id } = req.params

@@ -6,7 +6,7 @@ class infoController {
             const { id } = req.params
             const { info } = req.body
 
-            if (info) {
+            if (info != null) {
                 const [newInfo] = await pool.query(
                     `INSERT INTO info (info_qr, info) 
                     VALUES (?, ?)
@@ -25,7 +25,7 @@ class infoController {
             const { id } = req.params
             const { addinfo } = req.body
 
-            if (addinfo) {
+            if (addinfo != null) {
                 const [newInfo] = await pool.query(
                     `INSERT INTO additional_info (addinfo_qr, addinfo) 
                     VALUES (?, ?)
