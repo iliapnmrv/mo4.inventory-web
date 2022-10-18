@@ -10,7 +10,7 @@ import "./InventoryResults.sass";
 import TableHeader from "./TableHeader/TableHeader";
 import FileSaver from "file-saver";
 import * as XLSX from "xlsx";
-import moment from "moment";
+import * as moment from "moment";
 
 export default function InventoryResults() {
   const [search, setSearch] = useState("");

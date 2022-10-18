@@ -3,7 +3,7 @@ import { store } from "store";
 import { toggleLoginModal } from "store/actions/authAction";
 import { setIsAuthenticated, setToken } from "store/actions/userAction";
 
-export const API_URL = "http://mo4-it5:8000/api/";
+export const API_URL = process.env.REACT_APP_API_URL;
 
 // export const API_URL = "http://localhost:8000/api/"
 

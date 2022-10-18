@@ -36,6 +36,6 @@ app.use('/api/logs', logsRouter)
 app.use('/api', infoRouter)
 app.use(errorMiddleware)
 
-app.listen(8000, () => {
-    console.log("runnin");
+app.listen(process.env.PORT, () => {
+    console.log("runnin on port", process.env.PORT);
 })
