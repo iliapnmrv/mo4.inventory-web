@@ -67,7 +67,7 @@ export default function FileUpload({ lastInventory }) {
             {selectedFile?.name} {fileSize(selectedFile?.size)}
           </span>
         ) : (
-          <span>Нет выбранных файлов</span>
+          <span>Нет файлов</span>
         )}
         <label htmlFor="csv">Загрузить csv файл инвентаризационной описи</label>
 

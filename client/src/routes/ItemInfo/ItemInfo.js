@@ -29,7 +29,7 @@ export default function ItemInfo({ close, editId }) {
   const { storages, statuses, sredstva, persons, types, owners } = useSelector(
     (state) => state.info
   );
-  const { login, role = "user" } = useSelector((state) => state.user.username);
+  const { role = "user" } = useSelector((state) => state.user.username);
 
   const { data } = useSelector((state) => state.total);
   const {

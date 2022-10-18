@@ -11,11 +11,10 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage })
 
-
 router.get('/', inventoryController.getInventory)
 router.get('/lastInventory', inventoryController.getLastInventory)
 router.post('/upload', upload.single("csv"), inventoryController.uploadInventory)
-router.post('/', inventoryController.uploadResult)
 router.get('/results', inventoryController.getInventoryResults)
+router.post('/', inventoryController.uploadResult)
 
 export default router

@@ -69,19 +69,22 @@ class inventoryController {
             try {
                 await pool.query('TRUNCATE TABLE inventory_result')
                 const { inventory } = req.body
-                    // console.log('inventory', inventory.map(item => item.inventoryNum.toString().slice(-5)));
-                const [inv] = await pool.query(`
+                console.log(inventory, inventory.length);
+                if (inventory.length) {
+                    const [inv] = await pool.query(`
                 INSERT INTO inventory_result
                     ( id, inventoryNum, name, status, model, serialNum, position, place, trace )
                 VALUES
                     ${inventory
                     ?.map(
                         item =>
-                        `(${item.id}, ${item.inventoryNum.toString().slice(-5)}, '${item.name}', '${item.status}', '${item.model}', '${item.serialNum}', ${item.position}, '${item.place}', '${item.trace}')`,
+                        `(${item.id}, '${item.inventoryNum.toString().slice(-5)}', '${item.name}', '${item.status}', '${item.model}', '${item.serialNum}', ${item.position}, '${item.place}', '${item.trace}')`,
                     )
                     .join(',\n')}`)
-                    // console.log(inv);
-                res.send(`Инвентаризация загружена на сервер, ${inventory.length} строк`)
+                    // console.log(inv); 
+                }
+               
+                res.json(`Инвентаризация загружена на сервер, ${inventory.length} строк`)
         } catch (e) {
             console.error(e);
             return false
@@ -90,8 +93,8 @@ class inventoryController {
 
     async getInventoryResults(req, res){
         const [inv] = await pool.query(`
-        SELECT *
-            FROM total 
+        SELECT total.name, total.qr, total.model, statuses.status, storages.storage, persons.person, owners.owner, total.month, total.year, total.sernom, total.type, total.sredstvo
+            FROM total
             LEFT JOIN inventory_result ON inventory_result.inventoryNum = total.qr
             LEFT JOIN statuses
                     ON total.qr = statuses.status_qr
@@ -103,7 +106,8 @@ class inventoryController {
                     ON total.qr = owners.owner_qr
             WHERE inventory_result.inventoryNum IS NULL`)
 
-        console.log('inv', inv);
+        // console.log('inv', inv);
+        res.json(inv)
     }
 }
 

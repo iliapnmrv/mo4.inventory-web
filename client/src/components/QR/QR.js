@@ -13,6 +13,7 @@ export default function QR({
   sernom,
   sredstvo,
   type,
+  qrOnly = false,
 }) {
   const [isCopied, setIsCopied] = useState(false);
   const downloadQR = () => {
@@ -82,7 +83,7 @@ export default function QR({
         console.log("Ошибка при копировании");
       });
   };
-  return (
+  return !qrOnly ? (
     <>
       <h3>QR код</h3>
       <div className="qr">
@@ -109,5 +110,14 @@ export default function QR({
         {isCopied && <SuccessCheckmark />}
       </div>
     </>
+  ) : (
+    <QRcode
+      onClick={copyQR}
+      id={"canvas"}
+      includeMargin={true}
+      value={`${sredstvo}${("0" + type).slice(
+        -2
+      )}${month}${year}${qr}\n${name}\n${model}\n${sernom}`}
+    />
   );
 }
