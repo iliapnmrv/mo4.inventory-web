@@ -11,7 +11,7 @@ class AuthService {
                 password
             }).then(({ data }) => data)
             store.dispatch(setToken(registrationData.accessToken))
-            store.dispatch(changeUserData(JSON.stringify(registrationData.user)))
+            store.dispatch(changeUserData(registrationData.user))
             store.dispatch(setIsAuthenticated(true))
             return registrationData
         } catch (e) {
@@ -26,7 +26,7 @@ class AuthService {
                 password
             }).then(({ data }) => data)
             store.dispatch(setToken(loginData.accessToken))
-            store.dispatch(changeUserData(JSON.stringify(loginData.user)))
+            store.dispatch(changeUserData(loginData.user))
             store.dispatch(setIsAuthenticated(true))
             return loginData
         } catch (e) {
