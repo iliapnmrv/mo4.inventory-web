@@ -1,4 +1,4 @@
-export const SERVER = "http://mo4-it5:8000/"
+export const SERVER = process.env.SERVER
 
 export const catalogsNames = {
     storage: "storages",
